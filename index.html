@@ -190,6 +190,12 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 #nucCv,#chemCv{display:block;width:100%;height:560px;background:#090d15;touch-action:pan-y}
 #logicCv,#nnCv{display:block;width:100%;height:520px;background:#090d15;touch-action:pan-y}
 #feedCv{display:block;width:100%;height:480px;background:#090d15;touch-action:pan-y}
+#gridCv{display:block;width:100%;height:460px;background:#090d15;touch-action:pan-y}
+#globeCv{display:block;width:100%;height:520px;background:#090d15;touch-action:none;cursor:grab}
+#globeCv:active{cursor:grabbing}
+#flightCv{display:block;width:100%;height:560px;background:#090d15;touch-action:none}
+.lab-status{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.lab-status.ok{color:var(--helium)}
 .lab-bar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:12px 14px;border-top:1px solid #1d2638}
 .lab-bar button{font:500 13px var(--body);color:var(--ink);background:#121826;border:1px solid #273046;border-radius:4px;padding:7px 12px;cursor:pointer;transition:border-color .15s,background .15s}
 .lab-bar button:hover{border-color:var(--helium)}
@@ -210,6 +216,9 @@ body.in-chapter .clock{opacity:0}
   #nucCv,#chemCv{height:420px}
   #logicCv,#nnCv{height:440px}
   #feedCv{height:520px}
+  #gridCv{height:400px}
+  #globeCv{height:400px}
+  #flightCv{height:460px}
   section.chapter{padding-block:6vh 3vh}
   section.chapter .chapter-head{background:rgba(5,6,10,.72);padding:18px 16px;border-radius:4px}
   .lab-bar{padding:10px 12px;gap:7px 8px}
@@ -723,6 +732,32 @@ body.in-chapter .clock{opacity:0}
     <blockquote>The nitrogen in our DNA, the calcium in our teeth, the iron in our blood, the carbon in our apple pies were made in the interiors of collapsing stars. We are made of starstuff.<cite>Carl Sagan · Cosmos, 1980</cite></blockquote>
   </div></section>
 
+  <section class="chapter" id="brain">
+    <div class="chapter-head">
+      <p class="when">Chapter 5.5 · the toolmaker's brain</p>
+      <h2>The Organ That Went Looking for Trouble</h2>
+      <p>Bipedalism came first and freed the hands. What came next is the part that actually explains everything after it: a brain that grew nearly <b>three times larger</b> than a chimpanzee's, most of the growth concentrated in a prefrontal cortex built for one specific trick — holding an imagined future steady enough to work toward it. A chimp can use a stick to fish termites out of a mound. No chimp has ever sharpened that stick the night before, planning for a mound it hasn't seen yet.</p>
+      <p class="aside">The loop below is the actual mechanism: hand shapes a tool, tool changes what the hand can do, the new capability rewards the brain that planned it, and the next brain grows a little further into that same shape. Nothing here is scripted — it's the same feedback loop, run out over two million years.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">3.3 Mya</span><span class="e">Oldest known stone tools, predating our own genus</span></li>
+        <li><span class="y">2.6 Mya</span><span class="e">Oldowan toolkit: deliberate, repeated flaking</span></li>
+        <li><span class="y">~1 Mya</span><span class="e">Controlled fire, likely earlier in places</span></li>
+        <li><span class="y">~300 kya</span><span class="e">Modern brain size and structure in place</span></li>
+      </ul>
+    </div>
+    <div class="ambient">
+      <canvas id="brainCv" aria-label="Looping animation of a hand shaping a stone tool, a fire being kept, and a brain's cortex slowly growing more folded and complex across each stage"></canvas>
+      <div class="cap">Hand to tool, tool to fire, fire to a longer childhood spent learning instead of just surviving — and each turn, a slightly more folded cortex. An illustration, paced for reading, not a simulation.</div>
+    </div>
+    <p class="fact">Fire did something stone tools couldn't: it pre-digested food. Cooked meat and starches deliver far more usable calories than raw ones, and a body that no longer needed a huge gut to slowly ferment raw food could spend those calories somewhere else instead. Brains are expensive — yours burns about <span class="num">20%</span> of your resting energy at only <span class="num">2%</span> of your body weight. Cooking is, arguably, the reason a brain that costly was ever affordable.</p>
+    <p class="fact">And a longer childhood is the other half of the trade: human infants are born radically unfinished, with skulls still soft enough to fit through the birth canal, and then take over a decade to reach full capability — a decade in which a growing brain can be shaped by watching, copying, and being taught, rather than by instinct alone. That's not a cost this species paid despite the big brain. It's the same adaptation, worn two ways.</p>
+    <a class="gate next" href="#cities">
+      <span class="ch">Chapter 5.6</span>
+      <b>Enter Cities & the Machine Age ↓</b>
+      <span>Give that brain a surplus of food, and it stops solving for survival and starts solving for everything else.</span>
+    </a>
+  </section>
+
   <section class="evo"><div class="card">
     <canvas class="evo-art" id="vigAgri" aria-hidden="true"></canvas>
     <p class="when">t ≈ 12,000 years ago</p>
@@ -730,6 +765,86 @@ body.in-chapter .clock{opacity:0}
     <p class="fact">For nearly all of human existence, change moved at the pace of biology. Then, starting about <span class="num">12,000 years</span> ago, independently in several regions, people began farming. Farming allowed surplus, surplus allowed cities, cities allowed writing, and from there, change stopped being biological and started being cultural, doubling and redoubling on a scale evolution had never moved at before.</p>
     <p class="aside">Agriculture to writing took about 7,000 years. Writing to the printing press took about 4,500. What used to take millennia now takes decades, then years.</p>
   </div></section>
+
+  <section class="chapter" id="cities">
+    <div class="chapter-head">
+      <p class="when">Chapter 5.6 · cities and the machine age</p>
+      <h2>Surplus, Stacked</h2>
+      <p>A farmer who grows more grain than one family can eat has just invented something evolution never needed: spare time in other people's lives. Surplus food freed some hands to build instead of farm, then to write instead of build, then to rule, trade, and worship instead of any of it. Cities are what surplus looks like once it stops being eaten and starts being built with — mud brick in Uruk, stone in Giza, concrete and steel by the time this sentence is on a screen.</p>
+      <p class="aside">Then, around 1776, something new: an engine that turned heat directly into repeated, mechanical motion. For the first time, a device could do the work of dozens of bodies, and it never got tired.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">~9000 BCE</span><span class="e">Jericho, among the first permanent settlements</span></li>
+        <li><span class="y">~3100 BCE</span><span class="e">Writing, in Sumer and Egypt independently</span></li>
+        <li><span class="y">1776</span><span class="e">Watt's steam engine, practical and efficient</span></li>
+        <li><span class="y">1886</span><span class="e">Benz patents the first true automobile, combustion-driven</span></li>
+      </ul>
+    </div>
+    <div class="ambient">
+      <canvas id="citiesCv" aria-label="Looping animation of a skyline rising from a single hut into a dense city, then a steam engine's piston and flywheel driving in a loop"></canvas>
+      <div class="cap">A single hut becomes a skyline · a piston finds its rhythm. The same surplus, spent two different ways: on shelter, and on machines that could out-work a body.</div>
+    </div>
+    <a class="gate next" href="#energy">
+      <span class="ch">Chapter 5.7</span>
+      <b>Enter Powering It All ↓</b>
+      <span>Steam needs a fire underneath it. Everything built since has needed a fire of some kind — the question was only ever which fire.</span>
+    </a>
+  </section>
+
+  <section class="chapter" id="energy">
+    <div class="chapter-head">
+      <p class="when">Chapter 5.7 · powering it all</p>
+      <h2>Every Fire Since the First One</h2>
+      <p>Coal burned to make steam. Oil burned to make motion. Then, in the twentieth century, a stranger fire: the nucleus itself, splitting apart and releasing the binding energy this whole story met back in the Star Forge. Nothing below is scripted — set a demand curve, mix your sources, and watch whether supply actually keeps up, the way a real grid operator has to.</p>
+      <p class="aside">Try demanding a steady load with only solar and wind in the mix, no storage: watch what happens the moment the sun sets. Then add a baseload source back in.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1942</span><span class="e">Chicago Pile-1: the first controlled nuclear chain reaction</span></li>
+        <li><span class="y">1954</span><span class="e">First practical silicon solar cell, Bell Labs</span></li>
+        <li><span class="y">1990s+</span><span class="e">Wind turbines reach utility scale</span></li>
+        <li><span class="y">2022</span><span class="e">First fusion reaction to release more energy than the lasers put in</span></li>
+      </ul>
+    </div>
+    <div class="lab">
+      <canvas id="gridCv" aria-label="Interactive electrical grid simulator: balance a city's power demand against a mix of nuclear, fusion, solar, and wind sources"></canvas>
+      <div class="lab-bar" id="gMixBar"></div>
+      <div class="lab-bar">
+        <label for="gDemand">City demand <input type="range" id="gDemand" min="20" max="100" step="1" value="55"> <b id="gDemandV">—</b></label>
+        <button id="gRun" class="primary">Pause</button>
+        <button id="gStorm">Cloudy &amp; still</button>
+      </div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> each source's real-world capacity factor — nuclear and fusion run flat near full output; solar follows an actual day/night curve; wind is noisy and can drop near zero. Demand you don't cover causes real brownouts on the readout; oversupply is real waste.</li>
+          <li><b>Emergent:</b> nothing forces you toward a "correct" mix. An all-renewable grid with no storage will flicker every night, on its own, because that's what the underlying supply curves do — not because the simulation is punishing you.</li>
+          <li><b>Simplified:</b> no battery storage, no transmission losses, no fuel costs. This is about supply matching demand in real time, not the full economics of a grid.</li>
+        </ul>
+      </details>
+      <a class="gate next" href="#roads">
+        <span class="ch">Chapter 5.8</span>
+        <b>Enter the Information Superhighway ↓</b>
+        <span>Power the machines, then start connecting them to each other.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="chapter" id="roads">
+    <div class="chapter-head">
+      <p class="when">Chapter 5.8 · roads, cars, and the information superhighway</p>
+      <h2>Every Road Is the Same Idea</h2>
+      <p>A road is a promise: that a fixed path, built once, will save more effort than it cost every single time something travels it again. Paved roads, then cars to fill them, then a whole century spent shrinking the distance between any two points on the map. And once physical distance stopped being the bottleneck, something else took its place: how fast information itself could move along its own kind of road.</p>
+      <p class="aside">The telegraph made distance and time nearly independent for the first time in history — a message could arrive faster than any horse, ship, or train could carry it. Everything after is the same trick, done faster.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1908</span><span class="e">Ford's Model T, the automobile made ordinary</span></li>
+        <li><span class="y">1956</span><span class="e">US Interstate Highway System begins</span></li>
+        <li><span class="y">1969</span><span class="e">ARPANET: the internet's first four nodes</span></li>
+        <li><span class="y">1975–77</span><span class="e">The Altair, Apple I, and Apple II — a computer becomes a thing a person can own</span></li>
+      </ul>
+    </div>
+    <div class="ambient">
+      <canvas id="roadsCv" aria-label="Looping animation of headlights streaming along a highway interchange, dissolving into glowing data lines converging on a single personal computer"></canvas>
+      <div class="cap">Traffic becomes signal · a highway interchange becomes a network diagram · and it all converges on a small box that fits on a desk. Same shape, three different centuries.</div>
+    </div>
+  </section>
 
   <section class="evo"><div class="card">
     <canvas class="evo-art" id="vig1980" aria-hidden="true"></canvas>
@@ -864,13 +979,48 @@ body.in-chapter .clock{opacity:0}
     <h2>Attention, and a machine that reads</h2>
     <p class="fact">In 2017, a paper titled "Attention Is All You Need" introduced the <b>transformer</b>: an architecture built almost entirely around learning which parts of its own input to pay attention to. Trained on enormous amounts of human writing, transformers turned out to be extraordinarily good at modeling language, and then, to a surprising degree, at modeling reasoning itself.</p>
     <p class="fact">This sentence, the ones before it in this chapter, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
-    <p class="fact">This sentence, the ones before it in this chapter, and this whole illustrated argument, all of it was written by a system built on exactly the ideas in this chapter: gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
+    <a class="gate next" href="#second">
+      <span class="ch">Chapter 7.5</span>
+      <b>Enter The Second World ↓</b>
+      <span>Before one person's story, the world all those weights and gradients were actually trained on: the second world humanity built, entirely out of information.</span>
+    </a>
+  </div></section>
+
+  <section class="chapter" id="second">
+    <div class="chapter-head">
+      <p class="when">Chapter 7.5 · the second world</p>
+      <h2>A Second Planet, Made of Signal</h2>
+      <p>Somewhere in the last thirty years, humanity finished building a second world. Not a metaphor: an actual place people spend real hours of their real lives inside, with its own economies, its own cities, its own culture — Second Life's persistent virtual land, VRChat's user-built social spaces, the sprawl of platforms where people game, stream, and just exist together without ever sharing physical air. It has no coastline you can draw, but it has a size, and the size is almost impossible to hold in your head at once.</p>
+      <p class="aside">Drag the globe below. Every glowing thread is real internet backbone infrastructure, drawn at roughly the right places; every pulse along it is standing in for a fraction of the traffic actually moving right now, somewhere, between two people who may never otherwise meet.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">2003</span><span class="e">Second Life opens a persistent, user-built virtual world</span></li>
+        <li><span class="y">2017</span><span class="e">VRChat launches; users bring their own avatars and rooms</span></li>
+        <li><span class="y">2020s</span><span class="e">Streaming platforms turn watching someone else play into its own medium</span></li>
+        <li><span class="y">now</span><span class="e">Billions of people online at once, more traffic crossing the planet each day than existed in total a generation ago</span></li>
+      </ul>
+    </div>
+    <div class="lab">
+      <canvas id="globeCv" aria-label="Interactive rotating globe showing world population centers and internet backbone routes, with data pulses traveling between them"></canvas>
+      <div class="lab-bar">
+        <button id="gpDrag" class="primary">Auto-rotate: on</button>
+        <button id="gpLayer" data-layer="routes">Layer: routes</button>
+      </div>
+      <div class="cap">Drag to spin the globe · toggle the layer to switch between backbone routes and city lights. Population and route positions are real; the pulses are illustrative, not live traffic.</div>
+      <details class="lab-note">
+        <summary>What's real and what's illustrated</summary>
+        <ul>
+          <li><b>Real:</b> the coastlines, the approximate positions of major population centers, and the rough paths of real submarine cable routes connecting continents.</li>
+          <li><b>Illustrated:</b> the pulses along each route are a visualization of "data moves here," not a live or accurate traffic count. No live network data is fetched — this runs entirely offline, in your browser.</li>
+        </ul>
+      </details>
+    </div>
+    <p class="fact">Every one of those pulses is somebody: a message, a stream, a match in a game, a world someone spent an evening building out of nothing but polygons and an idea. Chapter 8.5 will come back to this exact map, because this — video, games, forums, music, the accumulated texture of what billions of people chose to make and share — is the material the next kind of mind was actually trained on. Not an abstraction. This.</p>
     <a class="gate next" href="#door">
       <span class="ch">Chapter 8</span>
       <b>Enter The Door ↓</b>
-      <span>Everything so far has been the universe's story. Here it becomes one person's, sitting in front of one of these machines, thirty-four years ago.</span>
+      <span>Zoom all the way in, from billions of people to one: sitting in front of one of these machines, thirty-four years ago.</span>
     </a>
-  </div></section>
+  </section>
 
   <section class="chapter" id="door">
     <div class="chapter-head">
@@ -1046,12 +1196,75 @@ body.in-chapter .clock{opacity:0}
           <li><b>Illustrated:</b> the robot arm, rover, and ship on the right are a dramatization of a real research direction, robots and "world models" trained on video and simulation, rather than a claim that any specific model already pilots real hardware. The capability meter is for feel, not a real benchmark score.</li>
         </ul>
       </details>
-      <a class="gate next" href="#voyagers">
-        <span class="ch">Chapter 9</span>
-        <b>Enter Beyond ↓</b>
-        <span>Follow the thought all the way out: what an intelligence built from gates, weights, and everything humanity ever recorded might do with a universe, and no one left to ask it to come home.</span>
+      <a class="gate next" href="#spacerace">
+        <span class="ch">Chapter 8.6</span>
+        <b>Enter The Space Race ↓</b>
+        <span>Before the speculation, the part that already happened: what this species has actually already managed to build and fly, off the only planet it's ever known.</span>
       </a>
     </div>
+  </section>
+
+  <section class="chapter" id="spacerace">
+    <div class="chapter-head">
+      <p class="when">Chapter 8.6 · the space race</p>
+      <h2>Leaving, on Purpose</h2>
+      <p>Every chapter before this one describes something that happened to matter — fusion, evolution, computation, all of it unfolding because physics and chemistry allowed it to. Spaceflight is different: it's the first time this story includes something the universe didn't set up, that a species built on purpose, against gravity, with nothing but the fire from Chapter 5.7 pointed the wrong way down.</p>
+      <p class="aside">Sixty-odd years separate a beeping metal sphere from a rocket that lands itself. That's not a long time for a species to go from "can we reach orbit at all" to "can we make reaching orbit routine and cheap."</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1957</span><span class="e">Sputnik 1, the first artificial satellite</span></li>
+        <li><span class="y">1969</span><span class="e">Apollo 11: the first footprints on another world</span></li>
+        <li><span class="y">1981–2011</span><span class="e">The Space Shuttle: the first reusable orbital spacecraft</span></li>
+        <li><span class="y">2015–now</span><span class="e">SpaceX lands and reflies an orbital booster; Starship aims to make the whole stack reusable</span></li>
+      </ul>
+    </div>
+    <div class="ambient">
+      <canvas id="spaceraceCv" aria-label="Looping animation tracing NASA's Mercury through Apollo through Shuttle programs, then a modern reusable rocket launching, landing, and launching again"></canvas>
+      <div class="cap">Mercury to Gemini to Apollo to Shuttle · then a booster that comes back down and flies again. Same destination, radically different economics.</div>
+    </div>
+    <p class="fact">NASA's era proved it was possible at any cost: a nation-scale project, hundreds of thousands of people, to put a handful of humans on the Moon and bring them home. What changed since is the constraint that mattered — not "can we," but "can we afford to do this again next week." A reusable booster doesn't need new physics. It needs the same rocket equation everyone always had, solved by someone willing to land the expensive part instead of throwing it away.</p>
+    <a class="gate next" href="#flight">
+      <span class="ch">Live lab</span>
+      <b>Fly It Yourself ↓</b>
+      <span>Real thrust, real momentum, real rotation — and the genuinely hard problem every one of those missions had to solve: closing the distance to something else moving in orbit, without smashing into it.</span>
+    </a>
+  </section>
+
+  <section class="chapter" id="flight">
+    <div class="chapter-head">
+      <p class="when">Live lab · orbital mechanics</p>
+      <h2>Newtonian Flight</h2>
+      <p>No auto-pilot, no assists. Your craft obeys exactly three rules: it keeps moving in whatever direction it's already moving unless you burn thrust to change that, every burn changes velocity rather than position directly, and it keeps rotating once you stop turning unless you cancel the spin yourself. That's the whole of Newtonian flight, and it's also exactly why docking with a station is hard: you cannot simply "drive toward" it. You have to match its velocity, not just its position.</p>
+      <p class="aside">Rotate with the arrow keys or the on-screen wheel, burn forward thrust to add velocity in whatever direction you're currently facing, and try to bring your closing speed to nearly zero right as you reach the station's docking ring. Overshoot, and Newton doesn't forgive you — you'll need to burn again, the other way, and correct.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1687</span><span class="e">Newton's three laws of motion</span></li>
+        <li><span class="y">1966</span><span class="e">Gemini 8: the first docking between two spacecraft</span></li>
+        <li><span class="y">1975</span><span class="e">Apollo–Soyuz: the first international docking</span></li>
+        <li><span class="y">now</span><span class="e">Docking to the ISS happens roughly monthly</span></li>
+      </ul>
+    </div>
+    <div class="lab">
+      <canvas id="flightCv" aria-label="Interactive Newtonian spaceflight simulator: rotate and thrust a spacecraft using real momentum physics to dock with a space station"></canvas>
+      <div class="lab-bar">
+        <button id="flRun" class="primary">Pause</button>
+        <button id="flReset">Reset approach</button>
+        <button id="flRotL" aria-label="Rotate left (hold)">↺ Rotate</button>
+        <button id="flRotR" aria-label="Rotate right (hold)">Rotate ↻</button>
+        <button id="flThrust" aria-label="Thrust forward (hold)">🔥 Thrust</button>
+        <span id="flStatus" class="lab-status">Closing speed: —</span>
+      </div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> real 2D Newtonian mechanics — velocity persists with no friction, thrust adds acceleration along your current heading, rotation persists until you cancel it. Docking succeeds only when both closing speed and relative rotation are near zero at contact, the same two conditions a real docking requires.</li>
+          <li><b>Simplified:</b> flattened to two dimensions, and orbital curvature (the fact that a real station is also falling around a planet) is left out — this is the local, close-range docking problem, not full orbital rendezvous.</li>
+        </ul>
+      </details>
+    </div>
+    <a class="gate next" href="#voyagers">
+      <span class="ch">Chapter 9</span>
+      <b>Enter Beyond ↓</b>
+      <span>That's what this species has already done, by hand, one careful burn at a time. Now follow the thought all the way out — to a pilot that never needs to sleep, and a mission with no return leg planned.</span>
+    </a>
   </section>
 
   <section class="chapter" id="voyagers">
@@ -1126,10 +1339,17 @@ body.in-chapter .clock{opacity:0}
     <li><a href="#dna"><b>Lab</b>DNA Replication</a></li>
     <li><a href="#protein"><b>Lab</b>Protein Synthesis</a></li>
     <li><a href="#climb"><b>Ch.5</b>The Long Climb</a></li>
+    <li><a href="#brain"><b>Ch.5.5</b>The Toolmaker's Brain</a></li>
+    <li><a href="#cities"><b>Ch.5.6</b>Cities &amp; the Machine Age</a></li>
+    <li><a href="#energy"><b>Ch.5.7 · lab</b>Powering It All</a></li>
+    <li><a href="#roads"><b>Ch.5.8</b>Roads &amp; the Information Superhighway</a></li>
     <li><a href="#logic"><b>Ch.6 · lab</b>Logic Made of Sand</a></li>
     <li><a href="#nn"><b>Ch.7 · lab</b>Learning Machines</a></li>
+    <li><a href="#second"><b>Ch.7.5 · lab</b>The Second World</a></li>
     <li><a href="#door"><b>Ch.8</b>The Door</a></li>
     <li><a href="#feed"><b>Ch.8.5 · lab</b>Every Experience, Fed Forward</a></li>
+    <li><a href="#spacerace"><b>Ch.8.6</b>The Space Race</a></li>
+    <li><a href="#flight"><b>Live lab</b>Newtonian Flight</a></li>
     <li><a href="#voyagers"><b>Ch.9</b>Perhaps Another Beginning</a></li>
   </ul>
 </nav>
@@ -1146,7 +1366,7 @@ const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
 const heroSecs = [...document.querySelectorAll('section[data-i]')];
 // the same background keeps going past the hero: it morphs on through the
 // rest of the story's imagery as you reach each of these chapters
-const laterSecs = ['#forge','#galaxies','#solar','#molecules','#dna','#climb','#logic','#nn','#door','#feed','#voyagers']
+const laterSecs = ['#forge','#galaxies','#solar','#molecules','#dna','#climb','#brain','#cities','#energy','#roads','#logic','#nn','#second','#door','#feed','#spacerace','#voyagers']
   .map(sel => document.querySelector(sel)).filter(Boolean);
 const secs = [...heroSecs, ...laterSecs];
 const heroCount = heroSecs.length;
@@ -1282,6 +1502,45 @@ function shapePos(name, p, i, N, t){
       const a = p.ph*3 + t*0.08, wob = 0.03*Math.sin(t*1.4+p.ph*5);
       return {x:Math.cos(a)*(0.42+wob), y:Math.sin(a)*(0.42+wob)};
     }
+    case 'brain': {
+      // branching dendrites radiating from a small core, thickening
+      // toward the centre and fraying into fine tips further out
+      const branches = 9, b = i % branches, along = (i*0.61803398875) % 1;
+      const baseA = (b/branches)*Math.PI*2 + Math.sin(b*3.1)*0.15;
+      const r = 0.06 + 0.42*along;
+      const wig = Math.sin(along*10 + b*2 + t*0.3)*0.05*along;
+      const a = baseA + wig;
+      return {x:Math.cos(a)*r, y:Math.sin(a)*r*0.86};
+    }
+    case 'cities': {
+      // a stepped skyline: columns of varying height, filled bottom-up
+      const cols = 14, col = i % cols;
+      const hs = Math.sin(col*12.9898)*43758.5453, hFrac = hs - Math.floor(hs);
+      const rowsInCol = Math.max(4, Math.round((0.2+hFrac*0.7)*40));
+      const within = Math.floor(i/cols) % rowsInCol;
+      const ry = within/rowsInCol;
+      const gx = (col/(cols-1))*2-1;
+      const flick = Math.sin(t*3 + col*5 + ry*20) > 0.8 ? 0.02 : 0;
+      return {x:gx*0.46, y:(0.40 - ry*0.82) + flick};
+    }
+    case 'turbine': {
+      // curved turbine blades sweeping outward from a reactor core
+      const blades = 6, bl = i % blades, along = (i*0.61803398875) % 1;
+      const a0 = (bl/blades)*Math.PI*2 + t*0.25;
+      const r = 0.06 + 0.4*along;
+      const a = a0 + along*0.9;
+      return {x:Math.cos(a)*r, y:Math.sin(a)*r*0.9};
+    }
+    case 'roadgrid': {
+      // lanes converging toward a vanishing point, interchange-style
+      const lanes = 10, lane = i % lanes;
+      const laneY = -0.72 + lane*0.14;
+      const speed = 0.1 + (lane%3)*0.05;
+      const x = (((i*0.13) + t*speed) % 1)*1.7 - 0.85;
+      const converge = 0.35;
+      const y = laneY*(1 - converge*Math.max(0,x)/0.85);
+      return {x, y};
+    }
     case 'chip': {
       const cols=22, rows=14, idx = i % (cols*rows);
       const gx = (idx%cols)/(cols-1)*2-1, gy = Math.floor(idx/cols)/(rows-1)*2-1;
@@ -1292,6 +1551,14 @@ function shapePos(name, p, i, N, t){
       const rings=5, ringI = i % rings, rad = 0.10 + ringI*0.085, per = Math.max(6, Math.round(8+ringI*6));
       const a = ((i/per)%1)*Math.PI*2 + t*(0.15 - ringI*0.03);
       return {x:Math.cos(a)*rad, y:Math.sin(a)*rad};
+    }
+    case 'globe': {
+      // a Fibonacci-sphere distribution, slowly turning, projected flat
+      const k = i + 0.5;
+      const phi = Math.acos(1 - 2*k/N);
+      const theta = Math.PI*(1+Math.sqrt(5))*k + t*0.15;
+      const sy = Math.sin(phi)*Math.sin(theta), sz = Math.cos(phi);
+      return {x:sy*0.42, y:sz*0.42};
     }
     case 'icons': {
       const ic = ICONS[i % ICONS.length], u2 = (i*0.61803398875) % 1;
@@ -1318,6 +1585,19 @@ function shapePos(name, p, i, N, t){
       const ring = Math.floor(i/3) % 4, a = p.a0*2 + t*0.4;
       return {x:0.42+Math.cos(a)*0.17, y:-0.12+ring*0.14+Math.sin(a)*0.05};
     }
+    case 'station': {
+      // a docking ring, with a scattered handful of particles tracing a
+      // small ship silhouette drifting nearby
+      const onRing = i % 5 !== 0;
+      if (onRing){
+        const a = p.a0*2 + t*0.2;
+        return {x:Math.cos(a)*0.4, y:Math.sin(a)*0.4*0.5};
+      }
+      const SHIPP = [[0.09,0],[-0.05,0.045],[-0.05,-0.045]];
+      const along = (i*0.61803398875) % 1;
+      const [lx,ly] = polyPoint(SHIPP, along);
+      return {x:lx-0.15, y:ly+0.25};
+    }
     case 'ships': {
       // small arrow-shaped craft, scattered outward from the centre and
       // oriented along their own heading, drifting slowly further out
@@ -1334,7 +1614,7 @@ function shapePos(name, p, i, N, t){
   }
   return {x:0,y:0};
 }
-const SHAPES = ['ignite','nucleus','galaxy','earth','molecule','dna','cell','chip','qchip','icons','network','ships'];
+const SHAPES = ['ignite','nucleus','galaxy','earth','molecule','dna','cell','brain','cities','turbine','roadgrid','chip','qchip','globe','icons','network','station','ships'];
 
 function lerpLog(a,b,t){ return Math.exp(Math.log(a)+(Math.log(b)-Math.log(a))*t); }
 const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
@@ -2983,6 +3263,440 @@ mount('vig1980', (ctx,W,H,t) => {
 
 <script>
 /* =====================================================================
+   CHAPTER 5.5 — ambient animation: the toolmaker's brain
+   Not a simulation — a paced illustration of the real feedback loop:
+   a hand shapes a tool, fire is kept, and a cortex grows a little more
+   folded each turn. The dendrite tree is generated once from a fixed
+   seed, then progressively revealed and reset each loop.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('brainCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function smooth(a,b,x){ const t = Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); }
+
+let seed = 41; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+// a fixed branching dendrite tree, grown once from a trunk near the
+// skull's core — never regenerated, only progressively revealed
+const BRANCHES = [];
+(function grow(x,y,ang,len,depth){
+  if(depth > 6 || len < 0.012 || BRANCHES.length > 260) return;
+  const x1 = x + Math.cos(ang)*len, y1 = y + Math.sin(ang)*len;
+  BRANCHES.push({x0:x,y0:y,x1,y1,depth});
+  const n = depth < 2 ? 3 : (rnd() < 0.72 ? 2 : 1);
+  for(let k=0;k<n;k++){
+    const da = (rnd()-0.5)*1.3 + (k-(n-1)/2)*0.55;
+    grow(x1,y1, ang+da, len*(0.66+rnd()*0.13), depth+1);
+  }
+})(0, 0.02, -Math.PI/2, 0.155, 0);
+const TOTAL = BRANCHES.length;
+
+const CYCLE = 11;
+function draw(t){
+  ctx.fillStyle = '#0a0e18'; ctx.fillRect(0,0,W,H);
+  const u = (t % CYCLE)/CYCLE;
+  const cx = W*0.62, cy = H*0.54, S = Math.min(W,H)*0.74;
+
+  const hand  = smooth(0.02,0.14,u) * (1-smooth(0.30,0.40,u));
+  const fire  = smooth(0.32,0.42,u) * (1-smooth(0.64,0.74,u));
+  const grow  = smooth(0.05,0.72,u);
+  const fadeOut = smooth(0.92,1.0,u);
+  const growVis = grow*(1-fadeOut);
+
+  // faint skull/head outline, the frame the branches grow inside
+  ctx.save(); ctx.translate(cx,cy); ctx.scale(S,S);
+  ctx.strokeStyle = 'rgba(140,150,175,.26)'; ctx.lineWidth = 0.01;
+  ctx.beginPath();
+  ctx.ellipse(0,-0.06,0.24,0.30,0,0,Math.PI*2);
+  ctx.moveTo(-0.20,0.12); ctx.quadraticCurveTo(-0.16,0.30,-0.05,0.30);
+  ctx.lineTo(0.05,0.30); ctx.quadraticCurveTo(0.16,0.30,0.20,0.12);
+  ctx.stroke();
+
+  // dendrites, progressively drawn by growth fraction, gently pulsing
+  const nShow = Math.max(0, Math.round(TOTAL*growVis));
+  const pulse = 0.6+0.4*Math.sin(t*2.4);
+  for(let i=0;i<nShow;i++){
+    const b = BRANCHES[i];
+    const fresh = Math.max(0, 1 - (nShow-i)/36);
+    const r = 110+fresh*100|0, g = 200+fresh*35|0, bl = 170+fresh*60|0;
+    ctx.strokeStyle = `rgba(${r},${g},${bl},${(0.32+0.5*pulse)*(0.55+0.45*(1-b.depth/7))})`;
+    ctx.lineWidth = Math.max(0.0025, 0.014 - b.depth*0.0017);
+    ctx.beginPath(); ctx.moveTo(b.x0,b.y0); ctx.lineTo(b.x1,b.y1); ctx.stroke();
+  }
+  ctx.restore();
+
+  // hand + stone tool, lower-left, appears then fades
+  if(hand > 0.02){
+    ctx.save(); ctx.globalAlpha = hand; ctx.translate(W*0.15,H*0.72);
+    const s = Math.min(W,H)*0.10; ctx.scale(s,s);
+    ctx.strokeStyle = '#d9c9a8'; ctx.lineWidth = 0.09; ctx.lineCap = 'round';
+    ctx.beginPath(); ctx.moveTo(-0.3,0.3); ctx.lineTo(0,0);
+    for(let f=0; f<4; f++){ const fa = -0.5+f*0.32; ctx.moveTo(0,0); ctx.lineTo(Math.cos(fa)*0.5, -Math.sin(fa)*0.5-0.1); }
+    ctx.stroke();
+    ctx.save(); ctx.translate(0.46,-0.48); ctx.rotate(Math.sin(t*6)*0.28);
+    ctx.fillStyle = '#8a90a3';
+    ctx.beginPath(); ctx.moveTo(0,-0.16); ctx.lineTo(0.12,0.1); ctx.lineTo(-0.12,0.1); ctx.closePath(); ctx.fill();
+    ctx.restore();
+    ctx.restore();
+  }
+
+  // kept fire, appears mid-cycle
+  if(fire > 0.02){
+    const fx = W*0.17, fy = H*0.60;
+    ctx.save(); ctx.globalAlpha = fire;
+    for(let k=0;k<3;k++){
+      const fl = 0.6+0.4*Math.sin(t*7+k*2), rr = 15-k*3;
+      const g = ctx.createRadialGradient(fx,fy-k*4,0,fx,fy-k*4,rr);
+      g.addColorStop(0,`rgba(255,${180-k*20},60,${0.8*fl})`); g.addColorStop(1,'rgba(255,120,40,0)');
+      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(fx,fy-k*4,rr,0,Math.PI*2); ctx.fill();
+    }
+    ctx.restore();
+  }
+}
+function loop(ms){
+  if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? CYCLE*0.82 : (ms-t0)/1000); }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 5.6 — ambient animation: a hut becomes a skyline, a piston
+   finds its rhythm. Not a simulation — surplus, spent two ways.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('citiesCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function smooth(a,b,x){ const t = Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); }
+
+let seed = 71; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const N = 13;
+const BUILD = Array.from({length:N}, (_,i) => ({ w: 0.055+rnd()*0.05, hMax: 0.20+rnd()*0.62, wseed: rnd() }));
+
+const CYCLE = 14;
+function draw(t){
+  ctx.fillStyle = '#070a12'; ctx.fillRect(0,0,W,H);
+  const u = (t % CYCLE)/CYCLE;
+  const groundY = H*0.82;
+
+  const growth = smooth(0.03,0.60,u);
+  const fadeOut = smooth(0.93,1.0,u);
+  const sceneA = 1 - fadeOut;
+  const machineIn = smooth(0.50,0.62,u) * (1-fadeOut);
+
+  // stars, faint
+  ctx.fillStyle = 'rgba(210,220,240,.3)';
+  for(let i=0;i<24;i++){ const gx=(i*97%100)/100*W, gy=(i*53%100)/100*H*0.55; ctx.fillRect(gx,gy,1,1); }
+
+  // faint road grid under the growing city
+  ctx.save(); ctx.globalAlpha = 0.14*sceneA;
+  ctx.strokeStyle = '#3a4256'; ctx.lineWidth = 1;
+  for(let x=0; x<=W; x+=W/10){ ctx.beginPath(); ctx.moveTo(x, groundY); ctx.lineTo(x*0.6+W*0.2, H); ctx.stroke(); }
+  ctx.beginPath(); ctx.moveTo(0,groundY+6); ctx.lineTo(W,groundY+6); ctx.stroke();
+  ctx.restore();
+
+  // skyline: each building revealed in order as growth advances
+  ctx.save(); ctx.globalAlpha = sceneA;
+  let bx = W*0.04;
+  BUILD.forEach((b,i) => {
+    const reveal = smooth(i/N*0.86, i/N*0.86+0.12, growth);
+    const h = H*b.hMax*reveal;
+    if(h > 0.5){
+      ctx.fillStyle = '#0c1420'; ctx.fillRect(bx, groundY-h, W*b.w, h);
+      ctx.fillStyle = `rgba(255,214,120,${0.45+0.4*Math.sin(t*2+b.wseed*6)})`;
+      for(let wy=groundY-h+8; wy<groundY-6; wy+=11) for(let wx=bx+4; wx<bx+W*b.w-4; wx+=9){
+        if(((wx+wy)|0)%3===0 && reveal>0.6) ctx.fillRect(wx,wy,3,5);
+      }
+    }
+    bx += W*b.w*1.35;
+  });
+  ctx.restore();
+
+  // piston + flywheel, appears once the surplus has built enough to power it
+  if(machineIn > 0.02){
+    const px = W*0.20, py = H*0.24, R = Math.min(W,H)*0.075;
+    ctx.save(); ctx.globalAlpha = machineIn;
+    ctx.strokeStyle = '#c98a5a'; ctx.fillStyle = '#c98a5a'; ctx.lineWidth = 2.4; ctx.lineCap='round';
+    const a = t*3.2;
+    const crankX = px + Math.cos(a)*R, crankY = py + Math.sin(a)*R*0.7;
+    ctx.beginPath(); ctx.ellipse(px,py,R,R*0.7,0,0,Math.PI*2); ctx.stroke();
+    const pistonY = py - R*0.9;
+    const pistonX = px + R*1.7;
+    // connecting rod from crank pin to piston
+    ctx.beginPath(); ctx.moveTo(crankX,crankY); ctx.lineTo(pistonX, pistonY + Math.sin(a)*4); ctx.stroke();
+    ctx.beginPath(); ctx.arc(crankX,crankY,3.5,0,Math.PI*2); ctx.fill();
+    // cylinder + piston head
+    ctx.strokeStyle = 'rgba(200,210,230,.6)'; ctx.lineWidth = 1.4;
+    ctx.strokeRect(pistonX-14, pistonY-16, 28, 32);
+    ctx.fillStyle = '#8a90a3'; ctx.fillRect(pistonX-12, pistonY-6+Math.sin(a)*4, 24, 8);
+    // steam puffs when the piston is near top of stroke
+    if(Math.sin(a) < -0.7){
+      ctx.globalAlpha = machineIn*0.5;
+      ctx.beginPath(); ctx.arc(pistonX, pistonY-22, 6+2*Math.sin(t*5), 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(230,235,245,.5)'; ctx.fill();
+    }
+    ctx.restore();
+  }
+}
+function loop(ms){
+  if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? CYCLE*0.75 : (ms-t0)/1000); }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 5.7 — grid lab: an interactive electrical grid. Nuclear and
+   fusion run near-flat; solar follows a real day/night curve; wind is
+   noisy. Set the mix and demand, and watch whether supply keeps up.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('gridCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+const bar = document.getElementById('gMixBar');
+const demandEl = document.getElementById('gDemand'), demandV = document.getElementById('gDemandV');
+const runBtn = document.getElementById('gRun'), stormBtn = document.getElementById('gStorm');
+let W=0,H=0,DPR=1,visible=false;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function txt(s,x,y,font,col,align){ ctx.font=font; ctx.fillStyle=col; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(s,x,y); }
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const LEVEL_NAMES = ['Off','Low','Med','High'];
+const SOURCES = [
+  {id:'nuclear', label:'Nuclear', col:'#7FA6FF', levels:[0,22,42,60], flat:true},
+  {id:'fusion',  label:'Fusion',  col:'#F6C35B', levels:[0,18,36,55], flat:true},
+  {id:'solar',   label:'Solar',   col:'#6EE39A', levels:[0,22,46,76], kind:'solar'},
+  {id:'wind',    label:'Wind',    col:'#F2607A', levels:[0,18,40,68], kind:'wind'}
+];
+let levelIdx = {nuclear:2, fusion:0, solar:2, wind:1};
+let demand = +demandEl.value || 55;
+let storm = false, run = true;
+let simT = 0, lastMs = null;
+
+function buildBar(){
+  bar.innerHTML = SOURCES.map(s => `<button type="button" data-src="${s.id}">${s.label}: ${LEVEL_NAMES[levelIdx[s.id]]}</button>`).join('');
+  bar.querySelectorAll('button').forEach(b => {
+    b.addEventListener('click', () => {
+      const id = b.dataset.src;
+      levelIdx[id] = (levelIdx[id]+1) % LEVEL_NAMES.length;
+      b.textContent = `${SOURCES.find(s=>s.id===id).label}: ${LEVEL_NAMES[levelIdx[id]]}`;
+      b.classList.toggle('on', levelIdx[id] > 0);
+      if(reduce) draw();
+    });
+  });
+}
+buildBar();
+
+demandEl.addEventListener('input', () => { demand = +demandEl.value; demandV.textContent = demand; if(reduce) draw(); });
+demandV.textContent = demand;
+
+runBtn.addEventListener('click', () => { run = !run; runBtn.textContent = run ? 'Pause' : 'Resume'; lastMs = null; kick(); });
+stormBtn.addEventListener('click', () => { storm = !storm; stormBtn.classList.toggle('on', storm); if(reduce) draw(); });
+
+function dayFactor(st){ const day = (st % 24)/24; return Math.max(0, Math.sin(day*Math.PI*2)); }
+function windFactor(st){ return Math.max(0, Math.min(1, 0.5 + 0.32*Math.sin(st*0.17) + 0.24*Math.sin(st*0.53+1.3) + 0.16*Math.sin(st*1.1+2.7))); }
+function flatFactor(st, ph){ return 0.9 + 0.07*Math.sin(st*0.1+ph); }
+
+function outputs(st){
+  return SOURCES.map(s => {
+    const cap = s.levels[levelIdx[s.id]];
+    let f = 1;
+    if(s.kind === 'solar') f = storm ? 0 : dayFactor(st);
+    else if(s.kind === 'wind') f = storm ? 0 : windFactor(st);
+    else f = flatFactor(st, s.id === 'nuclear' ? 0 : 2.1);
+    return {s, cap, f, out: cap*f};
+  });
+}
+
+function draw(){
+  ctx.fillStyle = '#0a0e16'; ctx.fillRect(0,0,W,H);
+  const OUT = outputs(simT);
+  const supply = OUT.reduce((a,o)=>a+o.out, 0);
+  const ratio = supply / Math.max(1, demand);
+  const brown = Math.max(0, 1-ratio);
+  const flicker = brown > 0.03 ? (0.6 + 0.4*Math.sin(simT*9)) : 1;
+
+  const srcX = W*0.13, hubX = W*0.52, hubY = H*0.42, cityX = W*0.86;
+  const srcYs = SOURCES.map((_,i) => H*(0.14 + i*0.62/(SOURCES.length-1)));
+
+  SOURCES.forEach((s,i) => {
+    const o = OUT[i], on = o.cap > 0;
+    const sy = srcYs[i];
+    ctx.strokeStyle = on ? s.col : 'rgba(120,130,150,.15)';
+    ctx.globalAlpha = on ? 0.25+0.45*o.f : 0.1;
+    ctx.lineWidth = on ? 1 + 2*o.f : 1;
+    ctx.beginPath(); ctx.moveTo(srcX+42, sy); ctx.quadraticCurveTo((srcX+hubX)/2, sy, hubX-28, hubY); ctx.stroke();
+    ctx.globalAlpha = 1;
+    if(on && !reduce){
+      for(let k=0;k<3;k++){
+        const p = ((simT*(0.15+o.f*0.3) + k/3) % 1);
+        const px = srcX+42 + (hubX-28-(srcX+42))*p, py = sy + (hubY-sy)*p*p*(3-2*p);
+        ctx.beginPath(); ctx.arc(px,py,2.2,0,Math.PI*2); ctx.fillStyle = s.col; ctx.fill();
+      }
+    }
+    ctx.beginPath(); ctx.arc(srcX, sy, 15, 0, Math.PI*2);
+    ctx.fillStyle = on ? 'rgba(15,20,30,.9)' : 'rgba(15,20,30,.6)';
+    ctx.fill(); ctx.strokeStyle = on ? s.col : 'rgba(120,130,150,.35)'; ctx.lineWidth = 1.4; ctx.stroke();
+    txt(s.label[0], srcX, sy, '11px monospace', on ? s.col : 'rgba(150,160,180,.5)', 'center');
+    txt(Math.round(o.out), srcX, sy+26, '10px monospace', 'rgba(230,235,245,.6)', 'center');
+  });
+
+  const hubR = 16 + Math.min(24, supply*0.14);
+  const g = ctx.createRadialGradient(hubX,hubY,2,hubX,hubY,hubR*1.6);
+  g.addColorStop(0, `rgba(246,195,91,${0.35*Math.min(1,ratio)})`); g.addColorStop(1,'rgba(246,195,91,0)');
+  ctx.beginPath(); ctx.arc(hubX,hubY,hubR*1.6,0,Math.PI*2); ctx.fillStyle=g; ctx.fill();
+  ctx.strokeStyle = ratio>=1 ? 'rgba(110,227,154,.7)' : 'rgba(242,96,122,.7)'; ctx.lineWidth=1.6;
+  ctx.beginPath(); ctx.arc(hubX,hubY,hubR,0,Math.PI*2); ctx.stroke();
+
+  ctx.strokeStyle = `rgba(127,166,255,${0.15+0.35*Math.min(1,ratio)})`; ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(hubX+hubR*0.8,hubY); ctx.quadraticCurveTo((hubX+cityX)/2, H*0.5, cityX-30, H*0.5); ctx.stroke();
+
+  // city: buildings dim/brighten & flicker with supply vs demand
+  ctx.save();
+  const cityGroundY = H*0.78;
+  for(let i=0;i<7;i++){
+    const bw = W*0.045, bh = H*(0.14+((i*37)%5)*0.07);
+    const bxp = cityX-40 + i*bw*1.25;
+    ctx.fillStyle = '#0c1420'; ctx.fillRect(bxp, cityGroundY-bh, bw, bh);
+    const lit = Math.min(1, ratio) * flicker;
+    ctx.fillStyle = `rgba(255,${200*lit|0},${90*lit|0},${0.15+0.55*lit})`;
+    for(let wy=cityGroundY-bh+8; wy<cityGroundY-6; wy+=10) for(let wx=bxp+3; wx<bxp+bw-3; wx+=8){
+      if(((wx+wy)|0)%3===0) ctx.fillRect(wx,wy,3,4);
+    }
+  }
+  ctx.restore();
+
+  txt(`Supply ${Math.round(supply)}`, 14, H-30, '12px monospace', 'rgba(230,235,245,.65)', 'left');
+  txt(`Demand ${Math.round(demand)}`, 14, H-14, '12px monospace', 'rgba(230,235,245,.65)', 'left');
+  txt(ratio>=1 ? 'Meeting demand' : 'Brownout', W-14, H-14, '600 12px monospace', ratio>=1 ? '#6EE39A' : '#F2607A', 'right');
+  if(storm) txt('Cloudy & still: solar + wind at zero', W-14, H-30, '11px monospace', 'rgba(230,235,245,.5)', 'right');
+}
+
+let raf = null;
+function loop(ms){
+  if(!visible){ raf = null; return; }
+  if(!reduce && run){
+    if(lastMs===null) lastMs = ms;
+    simT += Math.min(0.25, (ms-lastMs)/1000);
+    lastMs = ms;
+    draw();
+  } else if(reduce && lastMs===null){
+    lastMs = ms; draw();
+  }
+  raf = requestAnimationFrame(loop);
+}
+function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
+new IntersectionObserver(es => { for(const e of es){ visible = e.isIntersecting; if(visible){ if(!W) resize(); draw(); kick(); } } }, {threshold:0.05}).observe(cv);
+draw();
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 5.8 — ambient animation: an interchange of headlights
+   dissolving into glowing data lines, converging on a small monitor.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('roadsCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function smooth(a,b,x){ const t = Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); }
+function bez(p0,p1,p2,tt){ const x=(1-tt)*(1-tt)*p0[0]+2*(1-tt)*tt*p1[0]+tt*tt*p2[0]; const y=(1-tt)*(1-tt)*p0[1]+2*(1-tt)*tt*p1[1]+tt*tt*p2[1]; return [x,y]; }
+
+const LANES = 5;
+function lanePath(lane, W, H){
+  const y0 = H*(0.28 + lane*0.11), y1 = H*0.52;
+  return [[0,y0],[W*0.45,y0*0.6+y1*0.4],[W*0.92,y1]];
+}
+const CYCLE = 13;
+const CARS = Array.from({length:20}, (_,i) => ({lane: i%LANES, ph:(i/20), spd:0.25+((i*37)%5)*0.05}));
+
+function draw(t){
+  ctx.fillStyle = '#070a12'; ctx.fillRect(0,0,W,H);
+  const u = (t % CYCLE)/CYCLE;
+  const dataA = smooth(0.40,0.56,u) * (1-smooth(0.93,1,u));
+  const roadA = 1 - dataA;
+
+  const paths = Array.from({length:LANES}, (_,l) => lanePath(l,W,H));
+
+  // road / data lines (same paths, two visual treatments)
+  paths.forEach((p,l) => {
+    ctx.beginPath(); ctx.moveTo(...p[0]); ctx.quadraticCurveTo(p[1][0],p[1][1],p[2][0],p[2][1]);
+    ctx.strokeStyle = `rgba(120,130,150,${0.18*roadA})`; ctx.lineWidth = 3; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(...p[0]); ctx.quadraticCurveTo(p[1][0],p[1][1],p[2][0],p[2][1]);
+    ctx.strokeStyle = `rgba(110,227,154,${0.30*dataA})`; ctx.lineWidth = 1.2; ctx.stroke();
+  });
+
+  // cars (road phase) / pulses (data phase) share the same path positions
+  CARS.forEach(c => {
+    const p = (c.ph + t*c.spd) % 1;
+    const [x,y] = bez(paths[c.lane][0], paths[c.lane][1], paths[c.lane][2], p);
+    if(roadA > 0.02){
+      ctx.globalAlpha = roadA;
+      ctx.fillStyle = '#ffe6b0'; ctx.beginPath(); ctx.arc(x,y,2.2,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+    if(dataA > 0.02){
+      ctx.globalAlpha = dataA;
+      ctx.fillStyle = '#6EE39A'; ctx.beginPath(); ctx.arc(x,y,2,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha = 1;
+    }
+  });
+
+  // monitor / computer icon at the convergence point, fades in with data
+  if(dataA > 0.04){
+    const mx = W*0.92, my = H*0.52;
+    ctx.save(); ctx.globalAlpha = dataA;
+    ctx.strokeStyle = '#8fa3cc'; ctx.lineWidth = 1.6;
+    ctx.strokeRect(mx-22, my-16, 44, 30);
+    const g = ctx.createRadialGradient(mx,my-1,1,mx,my-1,20);
+    g.addColorStop(0, `rgba(110,227,154,${0.5+0.3*Math.sin(t*4)})`); g.addColorStop(1,'rgba(110,227,154,0)');
+    ctx.fillStyle = g; ctx.fillRect(mx-22,my-16,44,30);
+    ctx.fillStyle = '#8fa3cc'; ctx.fillRect(mx-8, my+14, 16, 4);
+    ctx.restore();
+  }
+}
+function loop(ms){
+  if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? CYCLE*0.48 : (ms-t0)/1000); }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
    LIVE LAB — NUCLEAR FORCE
    Ported unchanged in physics from "From Particles to Life"
    (Live lab → Nuclear force). Strong attraction is short-range
@@ -4013,6 +4727,454 @@ addEventListener('resize', paint);
 
 <script>
 /* =====================================================================
+   CHAPTER 7.5 — globe lab: a real orthographic-projection globe.
+   Graticule and city coordinates are accurate; routes and pulses are
+   illustrative, standing in for traffic rather than measuring it.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('globeCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+const dragBtn = document.getElementById('gpDrag'), layerBtn = document.getElementById('gpLayer');
+let W=0,H=0,DPR=1,visible=false;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function txt(s,x,y,font,col,align){ ctx.font=font; ctx.fillStyle=col; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(s,x,y); }
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let autoRotate = !reduce;
+let layer = 'routes';
+dragBtn.textContent = 'Auto-rotate: ' + (autoRotate ? 'on' : 'off');
+dragBtn.classList.toggle('on', autoRotate);
+
+function toXYZ(lat, lon){
+  const la = lat*Math.PI/180, lo = lon*Math.PI/180;
+  return [Math.cos(la)*Math.sin(lo), -Math.sin(la), Math.cos(la)*Math.cos(lo)];
+}
+function rotY(p, a){ const [x,y,z]=p, ca=Math.cos(a), sa=Math.sin(a); return [x*ca+z*sa, y, -x*sa+z*ca]; }
+function rotX(p, a){ const [x,y,z]=p, ca=Math.cos(a), sa=Math.sin(a); return [x, y*ca-z*sa, y*sa+z*ca]; }
+function slerp(a,b,tt){
+  let dot = a[0]*b[0]+a[1]*b[1]+a[2]*b[2]; dot = Math.max(-1,Math.min(1,dot));
+  const om = Math.acos(dot); if(om < 1e-6) return a;
+  const s = Math.sin(om), w1 = Math.sin((1-tt)*om)/s, w2 = Math.sin(tt*om)/s;
+  return [a[0]*w1+b[0]*w2, a[1]*w1+b[1]*w2, a[2]*w1+b[2]*w2];
+}
+
+const CITIES = [
+  ['New York',40.7,-74.0], ['London',51.5,-0.12], ['Tokyo',35.7,139.7],
+  ['São Paulo',-23.5,-46.6], ['Lagos',6.5,3.4], ['Mumbai',19.1,72.9],
+  ['Sydney',-33.9,151.2], ['Beijing',39.9,116.4], ['Moscow',55.8,37.6],
+  ['Cairo',30.0,31.2], ['Los Angeles',34.0,-118.2], ['Singapore',1.35,103.8],
+  ['Nairobi',-1.3,36.8], ['Buenos Aires',-34.6,-58.4]
+].map(([name,lat,lon]) => ({name, lat, lon, v: toXYZ(lat,lon)}));
+
+const byName = n => CITIES.find(c => c.name === n);
+const ROUTES = [
+  ['New York','London'], ['London','Lagos'], ['New York','Los Angeles'],
+  ['Los Angeles','Tokyo'], ['Tokyo','Singapore'], ['Singapore','Mumbai'],
+  ['Mumbai','Cairo'], ['Cairo','Moscow'], ['Moscow','Beijing'],
+  ['São Paulo','New York'], ['Sydney','Singapore'], ['Nairobi','Cairo']
+].map(([a,b],i) => ({a:byName(a), b:byName(b), phase: i/12}));
+
+let angle = 0.4;
+const TILT = -0.30;
+let dragging = false, lastX = 0;
+
+function project(v, cx, cy, R){
+  let p = rotY(v, angle);
+  p = rotX(p, TILT);
+  return {x: cx + p[0]*R, y: cy + p[1]*R, z: p[2]};
+}
+
+function draw(t){
+  ctx.fillStyle = '#070a12'; ctx.fillRect(0,0,W,H);
+  const cx = W*0.5, cy = H*0.52, R = Math.min(W,H)*0.40;
+
+  // faint starfield
+  ctx.fillStyle = 'rgba(210,220,240,.25)';
+  for(let i=0;i<26;i++){ const gx=(i*97%100)/100*W, gy=(i*53%100)/100*H*0.7; ctx.fillRect(gx,gy,1,1); }
+
+  // sphere base
+  const g = ctx.createRadialGradient(cx-R*0.3,cy-R*0.3,R*0.1,cx,cy,R);
+  g.addColorStop(0,'rgba(30,46,74,.9)'); g.addColorStop(1,'rgba(9,13,22,.95)');
+  ctx.beginPath(); ctx.arc(cx,cy,R,0,Math.PI*2); ctx.fillStyle = g; ctx.fill();
+  ctx.strokeStyle = 'rgba(140,160,200,.35)'; ctx.lineWidth = 1; ctx.stroke();
+
+  // graticule: meridians every 30deg, parallels every 30deg
+  ctx.lineWidth = 0.7;
+  for(let lon=-180; lon<180; lon+=30){
+    ctx.beginPath(); let started=false;
+    for(let lat=-90; lat<=90; lat+=5){
+      const p = project(toXYZ(lat,lon), cx,cy,R);
+      if(p.z < -0.02){ started=false; continue; }
+      ctx.strokeStyle = `rgba(120,160,220,${0.16+0.14*Math.max(0,p.z)})`;
+      if(!started){ ctx.moveTo(p.x,p.y); started=true; } else ctx.lineTo(p.x,p.y);
+    }
+    ctx.stroke();
+  }
+  for(let lat=-60; lat<=60; lat+=30){
+    ctx.beginPath(); let started=false;
+    for(let lon=-180; lon<=180; lon+=5){
+      const p = project(toXYZ(lat,lon), cx,cy,R);
+      if(p.z < -0.02){ started=false; continue; }
+      ctx.strokeStyle = `rgba(120,160,220,${0.16+0.14*Math.max(0,p.z)})`;
+      if(!started){ ctx.moveTo(p.x,p.y); started=true; } else ctx.lineTo(p.x,p.y);
+    }
+    ctx.stroke();
+  }
+
+  // routes + pulses
+  if(layer === 'routes'){
+    ROUTES.forEach(rt => {
+      ctx.beginPath(); let started=false;
+      for(let i=0;i<=24;i++){
+        const p3 = slerp(rt.a.v, rt.b.v, i/24);
+        const p = project(p3, cx,cy,R);
+        if(p.z < -0.03){ started=false; continue; }
+        ctx.strokeStyle = `rgba(110,227,154,${0.25+0.3*Math.max(0,p.z)})`;
+        if(!started){ ctx.moveTo(p.x,p.y); started=true; } else ctx.lineTo(p.x,p.y);
+      }
+      ctx.lineWidth = 1;
+      ctx.stroke();
+      const tp = reduce ? rt.phase : ((t*0.08 + rt.phase) % 1);
+      const pulseP = project(slerp(rt.a.v, rt.b.v, tp), cx,cy,R);
+      if(pulseP.z > -0.02){
+        ctx.beginPath(); ctx.arc(pulseP.x,pulseP.y,2.4,0,Math.PI*2);
+        ctx.fillStyle = '#F6C35B'; ctx.fill();
+      }
+    });
+  }
+
+  // cities
+  CITIES.forEach(c => {
+    const p = project(c.v, cx,cy,R);
+    const front = p.z > -0.05;
+    ctx.beginPath(); ctx.arc(p.x,p.y, front ? 2.6 : 1.4, 0, Math.PI*2);
+    ctx.fillStyle = front ? `rgba(255,214,120,${0.5+0.5*Math.max(0,p.z)})` : 'rgba(255,214,120,.15)';
+    ctx.fill();
+  });
+
+  txt(layer === 'routes' ? 'internet backbone routes (illustrative traffic)' : 'population centers',
+    14, H-14, '11px monospace', 'rgba(230,235,245,.5)', 'left');
+
+  if(autoRotate && !dragging) angle += reduce ? 0 : 0.0022;
+}
+
+let raf = null;
+function loop(ms){
+  if(!visible){ raf = null; return; }
+  draw(ms/1000);
+  if(!reduce || dragging || autoRotate) raf = requestAnimationFrame(loop);
+  else raf = requestAnimationFrame(loop); // keep listening for drag input even when reduced
+}
+function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
+
+cv.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if(!dragging) return; angle += (e.clientX-lastX)*0.008; lastX = e.clientX; draw(performance.now()/1000); });
+cv.addEventListener('pointerup', () => dragging = false);
+cv.addEventListener('pointercancel', () => dragging = false);
+cv.addEventListener('pointerleave', () => dragging = false);
+
+dragBtn.addEventListener('click', () => {
+  autoRotate = !autoRotate;
+  dragBtn.textContent = 'Auto-rotate: ' + (autoRotate ? 'on' : 'off');
+  dragBtn.classList.toggle('on', autoRotate);
+  kick();
+});
+layerBtn.addEventListener('click', () => {
+  layer = layer === 'routes' ? 'cities' : 'routes';
+  layerBtn.dataset.layer = layer;
+  layerBtn.textContent = 'Layer: ' + layer;
+  draw(performance.now()/1000);
+});
+
+new IntersectionObserver(es => { for(const e of es){ visible = e.isIntersecting; if(visible){ if(!W) resize(); kick(); } } }, {threshold:0.05}).observe(cv);
+draw(0);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 8.6 — ambient animation: Mercury through Apollo through
+   Shuttle, then a modern booster that lands itself and flies again.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('spaceraceCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function smooth(a,b,x){ const t = Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); }
+
+let seed = 91; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const STARS = Array.from({length:34}, () => ({x:rnd(), y:rnd()*0.7, s:0.5+rnd()}));
+const CYCLE = 13;
+
+function flame(x,y,s,a){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(a);
+  const g = ctx.createLinearGradient(0,0,0,s*18);
+  g.addColorStop(0,'rgba(255,220,150,.95)'); g.addColorStop(1,'rgba(255,110,40,0)');
+  ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-s*3,0); ctx.lineTo(s*3,0); ctx.lineTo(0,s*18); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+
+function draw(t){
+  ctx.fillStyle = '#05060c'; ctx.fillRect(0,0,W,H);
+  const u = (t % CYCLE)/CYCLE;
+  const groundY = H*0.88;
+
+  ctx.fillStyle = 'rgba(220,228,245,.5)';
+  for(const s of STARS) ctx.fillRect(s.x*W, s.y*H, s.s, s.s);
+
+  // planet curve horizon
+  ctx.fillStyle = '#0d1420';
+  ctx.beginPath(); ctx.ellipse(W*0.5, groundY+H*0.5, W*0.9, H*0.55, 0, Math.PI, 0);
+  ctx.fill();
+
+  const capsule = smooth(0,0.06,u) * (1-smooth(0.27,0.32,u));
+  const shuttle = smooth(0.27,0.32,u) * (1-smooth(0.55,0.60,u));
+  const modern  = smooth(0.55,0.60,u) * (1-smooth(0.95,1.0,u));
+  const stationA = smooth(0.35,0.48,u);
+  const satA = smooth(0.14,0.24,u);
+
+  // satellite + station, persist once revealed
+  if(satA > 0.02){
+    ctx.save(); ctx.globalAlpha = satA*0.85; ctx.translate(W*0.78, H*0.18 + Math.sin(t*0.6)*4);
+    ctx.strokeStyle = '#c9daff'; ctx.lineWidth = 1.4;
+    ctx.strokeRect(-10,-10,10,20); ctx.beginPath(); ctx.moveTo(-4,0); ctx.lineTo(4,0); ctx.stroke();
+    ctx.restore();
+  }
+  if(stationA > 0.02){
+    ctx.save(); ctx.globalAlpha = stationA*0.8; ctx.translate(W*0.24, H*0.22);
+    const rr = Math.min(W,H)*0.055;
+    ctx.strokeStyle = '#8fa3cc'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.ellipse(0,0,rr,rr*0.4,t*0.15,0,Math.PI*2); ctx.stroke();
+    ctx.restore();
+  }
+
+  const cx = W*0.52;
+  if(capsule > 0.02){
+    ctx.save(); ctx.globalAlpha = capsule;
+    const y = groundY - (groundY-H*0.15)*smooth(0,1,(u%0.32)/0.06 > 1 ? 1 : (u/0.06));
+    ctx.translate(cx, Math.max(H*0.15,y));
+    ctx.fillStyle = '#d9c9a8';
+    ctx.beginPath(); ctx.moveTo(0,-26); ctx.lineTo(9,4); ctx.lineTo(-9,4); ctx.closePath(); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(9,4); ctx.lineTo(13,16); ctx.lineTo(-13,16); ctx.lineTo(-9,4); ctx.closePath(); ctx.fill();
+    flame(0,16,1,0);
+    ctx.restore();
+  }
+  if(shuttle > 0.02){
+    ctx.save(); ctx.globalAlpha = shuttle;
+    const y = H*0.5 - shuttle*H*0.3;
+    ctx.translate(cx, y);
+    ctx.fillStyle = '#e8e8ec';
+    ctx.beginPath(); ctx.moveTo(0,-30); ctx.lineTo(7,10); ctx.lineTo(-7,10); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#c98a5a';
+    ctx.fillRect(-13,-4,7,26); ctx.fillRect(6,-4,7,26);
+    flame(-9.5,22,0.8,0); flame(9.5,22,0.8,0);
+    ctx.restore();
+  }
+  if(modern > 0.02){
+    ctx.save(); ctx.globalAlpha = modern;
+    const sub = smooth(0,1, u > 0.6 ? (u-0.6)/0.35 : 0);
+    const ascend = sub < 0.5;
+    const p = ascend ? sub*2 : (sub-0.5)*2;
+    const y = ascend ? groundY - p*(groundY-H*0.1) : H*0.1 + p*(groundY-H*0.1)*0.86;
+    ctx.translate(cx + (ascend?0:W*0.14), y);
+    ctx.fillStyle = '#eceef2';
+    ctx.beginPath(); ctx.moveTo(0,-32); ctx.lineTo(6,20); ctx.lineTo(-6,20); ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = '#8fa3cc'; ctx.lineWidth = 1.4;
+    ctx.beginPath(); ctx.moveTo(-6,14); ctx.lineTo(-14,22); ctx.moveTo(6,14); ctx.lineTo(14,22); ctx.stroke();
+    if(ascend || Math.sin(t*10) > -0.4) flame(0,20,1.1,0);
+    ctx.restore();
+  }
+}
+function loop(ms){
+  if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? CYCLE*0.80 : (ms-t0)/1000); }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   LIVE LAB — NEWTONIAN FLIGHT / DOCKING
+   Real 2D mechanics: velocity persists with no friction, thrust adds
+   acceleration along the current heading, rotation persists until
+   cancelled. Docking succeeds only when position, closing speed and
+   relative angle are all within tolerance, held briefly.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('flightCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+const runBtn = document.getElementById('flRun'), resetBtn = document.getElementById('flReset');
+const rotLBtn = document.getElementById('flRotL'), rotRBtn = document.getElementById('flRotR'), thrustBtn = document.getElementById('flThrust');
+const statusEl = document.getElementById('flStatus');
+let W=0,H=0,DPR=1,visible=false;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+
+const ROT_ACCEL = 2.0, THRUST = 46, STATION_ANGLE = Math.PI;
+const DOCK_DIST = 46, DOCK_SPEED = 16, DOCK_ANGLE = 0.35, DOCK_HOLD = 0.5;
+const BOUNCE_DIST = 70;
+
+let run = true;
+let keys = {left:false, right:false, thrust:false};
+let ship, station, dockTimer = 0, docked = false;
+let seed = 5; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const STARS = Array.from({length:60}, () => ({x:rnd(), y:rnd(), s:0.4+rnd()*1.1}));
+
+function reset(){
+  station = {x: () => W*0.62, y: () => H*0.42};
+  ship = {x: W*0.20, y: H*0.72, vx: 6, vy: -3, angle: -0.4, vangle: 0.15};
+  dockTimer = 0; docked = false;
+  statusEl.classList.remove('ok');
+}
+reset();
+addEventListener('resize', () => { if(W && H){ /* keep relative feel; station recomputed each frame */ } });
+
+function normAngle(a){ while(a > Math.PI) a -= Math.PI*2; while(a < -Math.PI) a += Math.PI*2; return a; }
+
+function step(dt){
+  if(docked){
+    // gently let the player keep flying after success; no forced reset
+  }
+  const rot = (keys.right?1:0) - (keys.left?1:0);
+  ship.vangle += rot*ROT_ACCEL*dt;
+  ship.angle += ship.vangle*dt;
+  if(keys.thrust){
+    ship.vx += Math.cos(ship.angle)*THRUST*dt;
+    ship.vy += Math.sin(ship.angle)*THRUST*dt;
+  }
+  ship.x += ship.vx*dt;
+  ship.y += ship.vy*dt;
+
+  const sx = station.x(), sy = station.y();
+  const dx = sx-ship.x, dy = sy-ship.y, dist = Math.hypot(dx,dy);
+  const speed = Math.hypot(ship.vx, ship.vy);
+  const angDiff = Math.abs(normAngle(ship.angle - STATION_ANGLE));
+
+  // gentle bounce when very close, moving fast/misaligned
+  if(dist < BOUNCE_DIST && dist > 4 && (speed > DOCK_SPEED*1.4 || angDiff > DOCK_ANGLE*1.6)){
+    const nx = dx/dist, ny = dy/dist;
+    const radial = ship.vx*nx + ship.vy*ny;
+    if(radial > 4){
+      const damp = 0.45;
+      ship.vx -= (1+damp)*radial*nx;
+      ship.vy -= (1+damp)*radial*ny;
+    }
+  }
+
+  if(dist < DOCK_DIST && speed < DOCK_SPEED && angDiff < DOCK_ANGLE){
+    dockTimer += dt;
+    if(dockTimer >= DOCK_HOLD && !docked){ docked = true; statusEl.classList.add('ok'); }
+  } else {
+    dockTimer = Math.max(0, dockTimer - dt*2);
+    if(dockTimer <= 0) docked = false;
+  }
+
+  const closing = docked ? 0 : speed;
+  statusEl.textContent = docked ? 'Docked. Closing speed: ' + closing.toFixed(1) + ' m/s'
+    : 'Closing speed: ' + closing.toFixed(1) + ' m/s' + (dist < DOCK_DIST*2 ? ' · dist ' + dist.toFixed(0) : '');
+  statusEl.classList.toggle('ok', docked);
+
+  // keep ship loosely on-canvas (wrap softly)
+  if(ship.x < -60) ship.x = W+60; if(ship.x > W+60) ship.x = -60;
+  if(ship.y < -60) ship.y = H+60; if(ship.y > H+60) ship.y = -60;
+}
+
+function drawShip(x,y,a,thrustOn){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(a);
+  ctx.fillStyle = '#ece6d8';
+  ctx.beginPath(); ctx.moveTo(14,0); ctx.lineTo(-9,7); ctx.lineTo(-5,0); ctx.lineTo(-9,-7); ctx.closePath(); ctx.fill();
+  if(thrustOn){
+    const g = ctx.createLinearGradient(-9,0,-24,0);
+    g.addColorStop(0,'rgba(255,190,120,.9)'); g.addColorStop(1,'rgba(255,110,40,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-9,4); ctx.lineTo(-24,0); ctx.lineTo(-9,-4); ctx.closePath(); ctx.fill();
+  }
+  ctx.restore();
+}
+
+function draw(){
+  ctx.fillStyle = '#05060c'; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = 'rgba(220,228,245,.4)';
+  for(const s of STARS) ctx.fillRect(s.x*W, s.y*H, s.s, s.s);
+
+  const sx = station.x(), sy = station.y();
+  ctx.save(); ctx.translate(sx,sy);
+  ctx.strokeStyle = docked ? 'rgba(110,227,154,.85)' : 'rgba(143,163,204,.75)'; ctx.lineWidth = 2.4;
+  ctx.beginPath(); ctx.arc(0,0,DOCK_DIST*0.62,0,Math.PI*2); ctx.stroke();
+  ctx.strokeStyle = 'rgba(246,195,91,.35)'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.arc(0,0,DOCK_DIST,0,Math.PI*2); ctx.stroke();
+  // port marker showing the required orientation
+  ctx.save(); ctx.rotate(STATION_ANGLE);
+  ctx.strokeStyle = '#F6C35B'; ctx.lineWidth=3;
+  ctx.beginPath(); ctx.moveTo(DOCK_DIST*0.62,0); ctx.lineTo(DOCK_DIST*0.9,0); ctx.stroke();
+  ctx.restore();
+  ctx.restore();
+
+  drawShip(ship.x, ship.y, ship.angle, keys.thrust);
+}
+
+let raf = null, lastMs = null;
+function loop(ms){
+  if(!visible){ raf = null; return; }
+  if(run){
+    if(lastMs===null) lastMs = ms;
+    const dt = Math.min(0.05, (ms-lastMs)/1000);
+    lastMs = ms;
+    step(dt);
+  } else lastMs = null;
+  draw();
+  raf = requestAnimationFrame(loop);
+}
+function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
+
+addEventListener('keydown', e => {
+  if(e.key==='ArrowLeft'){ keys.left = true; e.preventDefault(); }
+  else if(e.key==='ArrowRight'){ keys.right = true; e.preventDefault(); }
+  else if(e.key==='ArrowUp'){ keys.thrust = true; e.preventDefault(); }
+  else return;
+});
+addEventListener('keyup', e => {
+  if(e.key==='ArrowLeft') keys.left = false;
+  else if(e.key==='ArrowRight') keys.right = false;
+  else if(e.key==='ArrowUp') keys.thrust = false;
+});
+
+function holdBtn(btn, flag){
+  const on = e => { keys[flag] = true; e.preventDefault(); };
+  const off = () => { keys[flag] = false; };
+  btn.addEventListener('pointerdown', on);
+  btn.addEventListener('pointerup', off);
+  btn.addEventListener('pointerleave', off);
+  btn.addEventListener('pointercancel', off);
+}
+holdBtn(rotLBtn, 'left'); holdBtn(rotRBtn, 'right'); holdBtn(thrustBtn, 'thrust');
+
+runBtn.addEventListener('click', () => { run = !run; runBtn.textContent = run ? 'Pause' : 'Resume'; lastMs = null; kick(); });
+resetBtn.addEventListener('click', () => { reset(); draw(); });
+
+new IntersectionObserver(es => { for(const e of es){ visible = e.isIntersecting; if(visible){ if(!W) resize(); kick(); } } }, {threshold:0.05}).observe(cv);
+draw();
+})();
+</script>
+
+<script>
+/* =====================================================================
    CHAPTER 8 vignettes — one life inside the machine
    ===================================================================== */
 (() => {
@@ -4694,10 +5856,17 @@ const STOPS = [
   {sel:'#solar', label:'Ch.3 · New Worlds'},
   {sel:'#soup', label:'Ch.4 · The Soup'},
   {sel:'#climb', label:'Ch.5 · Long Climb'},
+  {sel:'#brain', label:'Ch.5.5 · Toolmaker\'s Brain'},
+  {sel:'#cities', label:'Ch.5.6 · Cities'},
+  {sel:'#energy', label:'Ch.5.7 · Powering It All'},
+  {sel:'#roads', label:'Ch.5.8 · Roads & Data'},
   {sel:'#logic', label:'Ch.6 · Logic'},
   {sel:'#nn', label:'Ch.7 · Learning'},
+  {sel:'#second', label:'Ch.7.5 · Second World'},
   {sel:'#door', label:'Ch.8 · The Door'},
   {sel:'#feed', label:'Ch.8.5 · Fed Forward'},
+  {sel:'#spacerace', label:'Ch.8.6 · Space Race'},
+  {sel:'#flight', label:'Live Lab · Flight'},
   {sel:'#voyagers', label:'Ch.9 · Beyond'}
 ];
 // each stop that lands on a chapter pulls its own sub-timeline straight from

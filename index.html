@@ -90,6 +90,25 @@ footer{padding-block:0 10vh}
 .vig-controls .hint{font-family:var(--mono);font-size:10px;color:var(--faint);margin-left:2px}
 .evo-art.interactive{cursor:grab}
 .evo-art.interactive:active{cursor:grabbing}
+.game-videos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:22px 0 8px}
+.game-vid{display:block;text-decoration:none;color:inherit;border-radius:4px;transition:transform .15s}
+.game-vid:hover{transform:translateY(-2px)}
+.vid-frame{position:relative;width:100%;padding-top:56.25%;background:#0c1018;border:1px solid #1d2638;border-radius:4px;overflow:hidden;transition:border-color .15s}
+.game-vid:hover .vid-frame,.game-vid:focus-visible .vid-frame{border-color:var(--helium)}
+.vid-frame canvas{position:absolute;inset:0;width:100%;height:100%}
+.vid-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.vid-play span{width:52px;height:52px;border-radius:50%;background:rgba(5,6,10,.55);border:1px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+.vid-play svg{width:18px;height:18px;fill:#fff;margin-left:3px}
+.vid-src{position:absolute;left:8px;bottom:8px;font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65);background:rgba(5,6,10,.55);padding:2px 6px;border-radius:3px}
+.game-vid .cap{margin:8px 0 0;font-size:11.5px;color:var(--muted);font-family:var(--mono);letter-spacing:.02em}
+.game-vid .cap b{color:var(--ink);font-weight:400}
+@media (max-width:640px){ .game-videos{grid-template-columns:1fr} }
+.vr-videos{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:22px 0 8px}
+.vr-vid{border-radius:4px;overflow:hidden;background:#0c1018;border:1px solid #1d2638}
+.vr-vid video{display:block;width:100%;height:auto;aspect-ratio:1/1;background:#000;object-fit:cover}
+.vr-vid .cap{margin:8px 0 0;padding:0 2px 2px;font-size:11.5px;color:var(--muted);font-family:var(--mono);letter-spacing:.02em}
+.vr-vid .cap b{color:var(--ink);font-weight:400}
+@media (max-width:640px){ .vr-videos{grid-template-columns:1fr} .vr-vid video{aspect-ratio:1/1} }
 
 /* chapter 2: the forge */
 section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;scroll-margin-top:16px}
@@ -820,6 +839,37 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
     <p class="fact">At first the worlds inside computers were small: a handful of pixels, a few kilobytes, and somehow that was enough to lose an afternoon in. Then the machines got faster. The colours multiplied, characters got faces, landscapes grew, and sound became atmosphere. Games stopped feeling like levels and started feeling like places. Then they became three-dimensional, then enormous: cities to explore, oceans to cross, civilizations to simulate. The computer no longer just displayed a world. It could calculate one.</p>
     <p class="fact">At first, computer-generated imagery looked strange and artificial. People could tell immediately that something had been built by a computer. But the technology improved, and the distinction slowly disappeared: creatures that had never existed began walking through movie theatres, entire landscapes were constructed from mathematics, buildings were destroyed on screen without ever having been built, and space itself could be recreated, planets invented, impossible creatures brought to life. The screen became a place where almost anything could exist.</p>
     <p class="fact">Television was changing too. What had once been a handful of channels became dozens, then hundreds, then thousands: science, history, comedy, animation, music, documentaries, sports, mysteries, horror, fantasy, news. There was always another program, another story, another world waiting to be discovered. Doron watched all of it happen almost without realizing he was watching history.</p>
+    <p class="aside">Four real games, one from each era on the buttons above, so it's not just an illustration. This viewer won't play embedded video, so each one opens the real thing on YouTube in a new tab:</p>
+    <div class="game-videos">
+      <a class="game-vid" href="https://www.youtube.com/watch?v=dL4bAaT_fXg" target="_blank" rel="noopener">
+        <div class="vid-frame"><canvas data-vid="0" aria-hidden="true"></canvas>
+          <div class="vid-play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="vid-src">YouTube ↗</span>
+        </div>
+        <p class="cap"><b>DOOM</b> · 1993 — the pixel era, id Software</p>
+      </a>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=5Wavn29LMrs" target="_blank" rel="noopener">
+        <div class="vid-frame"><canvas data-vid="1" aria-hidden="true"></canvas>
+          <div class="vid-play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="vid-src">YouTube ↗</span>
+        </div>
+        <p class="cap"><b>Half-Life</b> · 1998 — early 3D, Valve</p>
+      </a>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=KzqS1GxdJYQ" target="_blank" rel="noopener">
+        <div class="vid-frame"><canvas data-vid="2" aria-hidden="true"></canvas>
+          <div class="vid-play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="vid-src">YouTube ↗</span>
+        </div>
+        <p class="cap"><b>Skyrim</b> · 2011 — the open-world era, Bethesda</p>
+      </a>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=6ozy64a-OG4" target="_blank" rel="noopener">
+        <div class="vid-frame"><canvas data-vid="3" aria-hidden="true"></canvas>
+          <div class="vid-play"><span><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+          <span class="vid-src">YouTube ↗</span>
+        </div>
+        <p class="cap"><b>Microsoft Flight Simulator</b> · 2024 — near-photoreal, and still on Doron's own desk today</p>
+      </a>
+    </div>
   </div></section>
 
   <section class="evo"><div class="card">
@@ -846,6 +896,17 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
     <h2>The screen disappeared</h2>
     <p class="fact">Years passed. Graphics got good enough that games could resemble films, and films began borrowing tools from games, motion capture and virtual sets becoming ordinary. The worlds kept getting closer. Then Doron put on a headset, and the screen disappeared. For a moment there was no monitor between him and the computer. He was inside: standing in a world that existed only as calculations, moving through mathematics, entering somewhere instead of watching something.</p>
     <p class="fact">He had spent his life moving toward that moment without knowing it. The 386 had been a tiny window. The Internet had become a vast map. Games had become worlds. Virtual reality had become a doorway. And then, quietly, another door appeared.</p>
+    <p class="aside">Two clips from inside that headset, his own captures, playing right here:</p>
+    <div class="vr-videos">
+      <div class="vr-vid">
+        <video controls playsinline preload="metadata" src="asseto-corsa-vr.mp4"></video>
+        <p class="cap"><b>Assetto Corsa</b> · VR, no assists — racing with nothing between him and the track but the headset</p>
+      </div>
+      <div class="vr-vid">
+        <video controls playsinline preload="metadata" src="g-rebels-vr.mp4"></video>
+        <p class="cap"><b>G-Rebels</b> · VR city — a whole place, standing inside it instead of looking at it</p>
+      </div>
+    </div>
   </div></section>
 
   <section class="evo"><div class="card">
@@ -3544,6 +3605,49 @@ mount('vigTransformer', (ctx,W,H,t) => {
   }
   ctx.fillStyle = '#F6C35B'; ctx.fillRect(xs[focus]-9,y-7,18,14);
 });
+})();
+</script>
+
+<script>
+/* static thumbnail art for the four real-game link cards (no iframes — this
+   viewer's sandbox blocks third-party frames, so these link out instead) */
+(() => {
+"use strict";
+function draw(cv, era){
+  const ctx = cv.getContext('2d');
+  const DPR = Math.min(2, devicePixelRatio||1);
+  const r = cv.getBoundingClientRect();
+  const W = r.width||240, H = r.height||135;
+  cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  if(era===0){
+    ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+    const cols=16, rows=9, cell=Math.min(W/cols,H/rows);
+    for(let r2=0;r2<rows;r2++) for(let c=0;c<cols;c++){
+      if(((r2*7+c*5)%9)<2){ ctx.fillStyle = ((r2+c)%2) ? '#F2607A' : '#8a2a3a'; ctx.fillRect(c*cell,r2*cell,cell-1,cell-1); }
+    }
+  } else if(era===1){
+    const g = ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#1a2440'); g.addColorStop(1,'#0c1018');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(127,166,255,.4)'; ctx.lineWidth=1;
+    for(let i=0;i<6;i++){ ctx.beginPath(); ctx.moveTo(W*0.5,H*0.5); ctx.lineTo((i/5)*W,H); ctx.stroke(); }
+    ctx.fillStyle='#4a6fe0'; ctx.beginPath(); ctx.moveTo(W*0.5,H*0.25); ctx.lineTo(W*0.65,H*0.55); ctx.lineTo(W*0.35,H*0.55); ctx.closePath(); ctx.fill();
+  } else if(era===2){
+    const g = ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'#2a3a5c'); g.addColorStop(1,'#0c1018');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.beginPath(); ctx.arc(W*0.78,H*0.28,10,0,7); ctx.fillStyle='#F6C35B'; ctx.fill();
+    ctx.fillStyle='#1c2740';
+    ctx.beginPath(); ctx.moveTo(0,H); for(let x=0;x<=W;x+=14) ctx.lineTo(x,H*0.55+Math.sin(x*0.05)*10); ctx.lineTo(W,H); ctx.closePath(); ctx.fill();
+  } else {
+    const g = ctx.createRadialGradient(W*0.5,H*0.4,4,W*0.5,H*0.5,W*0.6);
+    g.addColorStop(0,'#3a4a72'); g.addColorStop(1,'#0c1018');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(246,195,91,.5)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.ellipse(W*0.5,H*0.55,W*0.32,H*0.16,0,-0.3,0.7); ctx.stroke();
+  }
+}
+function paint(){ document.querySelectorAll('.vid-frame canvas[data-vid]').forEach(cv => draw(cv, +cv.dataset.vid)); }
+paint();
+addEventListener('resize', paint);
 })();
 </script>
 

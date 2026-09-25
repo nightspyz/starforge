@@ -200,12 +200,14 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 .lab-frame iframe{display:block;width:100%;height:820px;border:0;background:#0e1320}
 #oceanFrame{height:940px}
 #dnaFrame{height:960px}
+#proteinFrame{height:1420px}
 .lab-frame .cap{padding:10px 14px;font-size:12px;color:var(--muted);border-top:1px solid #1d2638}
 @media (max-width:760px){
   .ambient canvas{height:260px}
   .lab-frame iframe{height:1180px}
   #oceanFrame{height:1420px}
   #dnaFrame{height:1960px}
+  #proteinFrame{height:2650px}
 }
 .lab{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.18)}
 #forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
@@ -496,15 +498,20 @@ body.in-chapter .clock{opacity:0}
       <ul class="ch-timeline">
         <li><span class="y">4.6 Bya</span><span class="e">A cloud of gas and dust collapses</span></li>
         <li><span class="y">4.5 Bya</span><span class="e">Dust becomes pebbles, then planets</span></li>
-        <li><span class="y">4.4 Bya</span><span class="e">A molten Earth begins to cool</span></li>
+        <li><span class="y">4.4 Bya</span><span class="e">A molten Earth cools; volcanic outgassing builds a first atmosphere</span></li>
         <li><span class="y">4.0 Bya</span><span class="e">Water vapour condenses into the first rain</span></li>
+        <li><span class="y">~3.8 Bya</span><span class="e">Oceans stabilize; the oldest continental crust dates from about here</span></li>
       </ul>
     </div>
     <div class="realphoto">
       <div class="frame"><img src="protodisk.jpg" alt="A protoplanetary disk seen in silhouette around a young star in the Orion Nebula, imaged by the Hubble Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>A young star, 300,000 to a million years old, still wrapped in the disk of gas and dust it formed from — this is what our own solar system looked like, once.</span><span class="credit">NASA · ESA · C.R. O'Dell</span></p>
     </div>
-    <p class="fact">By about 4.4 billion years ago that disk had cooled into a molten young Earth; by 4.0 billion years ago, water vapour had condensed into the first rain, and kept falling until it had somewhere to pool.</p>
+    <div class="ambient">
+      <canvas id="solarCv" aria-label="Animation of a protoplanetary disk forming planets, then a close-up of young Earth cooling, raining, filling with ocean, gaining an atmosphere, and growing its first land"></canvas>
+      <div class="cap">A collapsing cloud flattens into a disk · dust clumps into planets · then a long close-up on one of them: a molten young Earth cools, the first rain falls, oceans fill the basins, an atmosphere takes hold, and the first land breaks the surface. An illustration, paced for reading, not a physics simulation.</div>
+    </div>
+    <p class="fact">By about 4.4 billion years ago that disk had cooled into a molten young Earth, its interior still outgassing the water vapour, carbon dioxide and nitrogen that became its first atmosphere. By 4.0 billion years ago the surface had cooled enough for that vapour to condense into the first rain, and it kept falling until it had somewhere to pool — the beginning of the oceans. Where exactly the first dry land stood is still debated, but the oldest surviving scraps of continental crust, found today in northern Canada, date from close to this same stretch of time: by about 3.8 billion years ago, Earth already had oceans, an atmosphere, and at least the beginnings of land.</p>
     <div class="lab-frame">
       <iframe id="oceanFrame" src="ocean-lab.html" title="Droplet Tank: an interactive water physics simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
       <div class="cap">Droplet Tank, running unchanged: particle water with adjustable gravity, tilt, surface tension and viscosity — pour, stir, drop a ball in, or turn tension down until the surface stops holding together at all.</div>
@@ -538,7 +545,11 @@ body.in-chapter .clock{opacity:0}
       <iframe id="dnaFrame" src="dna-lab.html" title="DNA Replication Simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
       <div class="cap">DNA Replication Simulator, running unchanged: helicase, primase, Pol III and Pol I, ligase, Okazaki fragments, proofreading, and the end-replication problem. Hover any position to inspect it, or load a sequence of your own.</div>
     </div>
-    <p class="fact">DNA is only an archive, though — a gene has to be read before it means anything. RNA polymerase transcribes it into messenger RNA; a ribosome reads that message three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein, which folds itself into a working machine. Watson and Crick described the double helix in 1953; by 2003 the Human Genome Project had read all three billion of ours, letter by letter.</p>
+    <p class="fact">DNA is only an archive, though — a gene has to be read before it means anything. RNA polymerase transcribes it into messenger RNA; in your cells, that transcript is capped, its introns are spliced out, a poly(A) tail is added, and it's exported through a nuclear pore before a ribosome ever sees it. The ribosome then reads it three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein, which folds itself into a working machine. Watson and Crick described the double helix in 1953; by 2003 the Human Genome Project had read all three billion of ours, letter by letter.</p>
+    <div class="lab-frame">
+      <iframe id="proteinFrame" src="protein-lab.html" title="Protein Synthesis Simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
+      <div class="cap">Protein Synthesis Simulator, running unchanged: transcription, capping, splicing, nuclear export, and a ribosome translating codon by codon into a folding polypeptide. Click a base in an exon to mutate it and watch the protein change.</div>
+    </div>
     <p class="end-note">Four chapters in, and the thread hasn't broken once: the hydrogen in the first star, the iron in its ashes, the water that gathered on a young planet, the amino acids lightning made from it, and now a molecule that reads itself and builds the next generation.</p>
     <a class="gate next" href="#climb">
       <span class="ch">Chapter 6</span>
@@ -2129,12 +2140,66 @@ const dust = Array.from({length:N}, (_,i) => ({
 }));
 // four planets that condense out of the disk at fixed radii
 const PLANETS = [
-  {r:0.30, size:5.5, col:'#c9a27a', name:'rock'},
-  {r:0.48, size:7.5, col:'#e0c9a0', name:'rock'},
-  {r:0.68, size:7.0, col:'#7fb3ff', name:'ocean world'},
-  {r:0.90, size:11, col:'#e8b27a', name:'gas giant'}
+  {r:0.30, size:5.5, light:'#e8c9a2', dark:'#7a5636', name:'rock'},
+  {r:0.48, size:7.5, light:'#f2ddb0', dark:'#8a6a3c', name:'rock'},
+  {r:0.68, size:7.0, light:'#bcdcff', dark:'#3a6fae', name:'ocean world'},
+  {r:0.90, size:11, light:'#ffe2b0', dark:'#a5652f', name:'gas giant'}
 ];
-const CYCLE = 26; // seconds for one full loop: cloud -> disk -> planets -> earth close-up -> reset
+// surface features for the Earth close-up, each pinned to a longitude/latitude on
+// the sphere so rotation can carry them around it (foreshortened near the limb)
+// rather than sliding them flat across the screen
+const CONTINENTS = Array.from({length:5}, (_,i) => ({
+  lon0: (i/5)*Math.PI*2 + rnd()*0.5,
+  lat: -0.55 + rnd()*1.1,
+  baseR: 0.16 + rnd()*0.09,
+  pts: Array.from({length:9}, () => 0.55 + rnd()*0.7)
+}));
+const CLOUDS = Array.from({length:7}, (_,i) => ({
+  lon0: rnd()*Math.PI*2, lat: -0.7 + rnd()*1.4,
+  rx: 0.16 + rnd()*0.16, ry: 0.05 + rnd()*0.05,
+  drift: 0.4 + rnd()*0.5
+}));
+
+// ---- small colour + shading helpers ---------------------------------
+function rgb(str){ // accepts '#rrggbb' or 'rgb(r,g,b)' — mix()/shade() results feed back into each other
+  return str[0]==='#' ? [parseInt(str.slice(1,3),16), parseInt(str.slice(3,5),16), parseInt(str.slice(5,7),16)]
+                       : str.match(/\d+/g).map(Number);
+}
+function mix(h1,h2,t){
+  t = Math.max(0,Math.min(1,t));
+  const a = rgb(h1), b = rgb(h2);
+  return `rgb(${(a[0]+(b[0]-a[0])*t)|0},${(a[1]+(b[1]-a[1])*t)|0},${(a[2]+(b[2]-a[2])*t)|0})`;
+}
+function shade(hStr,f){ // f<0 darkens, f>0 lightens, toward white
+  const c = rgb(hStr);
+  const to = f < 0 ? [0,0,0] : [255,255,255];
+  const t = Math.abs(f);
+  return `rgb(${(c[0]+(to[0]-c[0])*t)|0},${(c[1]+(to[1]-c[1])*t)|0},${(c[2]+(to[2]-c[2])*t)|0})`;
+}
+function smooth(e0,e1,x){ let t = Math.max(0,Math.min(1,(x-e0)/(e1-e0))); return t*t*(3-2*t); }
+// off-centre lit gradient: a single small trick that turns a flat circle into a sphere
+function litSphere(x,y,r,light,dark,lx,ly){
+  const g = ctx.createRadialGradient(x+lx*r,y+ly*r,r*0.04, x,y,r*1.02);
+  g.addColorStop(0, shade(light,0.35));
+  g.addColorStop(0.22, light);
+  g.addColorStop(0.62, dark);
+  g.addColorStop(1, shade(dark,-0.45));
+  return g;
+}
+function drawBlob(x,y,r,scaleX,pts,alpha,color){
+  if(alpha<=0.005) return;
+  ctx.save(); ctx.globalAlpha = alpha; ctx.fillStyle = color;
+  ctx.beginPath();
+  for(let k=0;k<=pts.length;k++){
+    const ang = (k/pts.length)*Math.PI*2, rad = r*pts[k%pts.length];
+    const px = x+Math.cos(ang)*rad*scaleX, py = y+Math.sin(ang)*rad*0.85;
+    k===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+  }
+  ctx.closePath(); ctx.fill(); ctx.restore();
+}
+
+const CYCLE = 26; // seconds for one full loop, re-timed so the payoff arrives sooner:
+                   // ~9s disk/planet formation, the rest one continuous Earth close-up
 
 function draw(t){
   ctx.clearRect(0,0,W,H);
@@ -2142,17 +2207,19 @@ function draw(t){
   const cx = W*0.5, cy = H*0.52, S = Math.min(W,H)*0.46;
   const u = (t % CYCLE) / CYCLE;
 
-  // phases: 0-0.22 diffuse cloud collapsing, 0.22-0.55 spinning disk + planets forming,
-  // 0.55-0.85 four planets orbiting, 0.85-1 zoom into young Earth
-  const collapse = Math.min(1, u/0.22);
-  const diskIn = Math.max(0, Math.min(1, (u-0.15)/0.15));
-  const formed = Math.max(0, Math.min(1, (u-0.30)/0.20));
-  const orbit = Math.max(0, Math.min(1, (u-0.55)/0.05));
-  const zoom = Math.max(0, Math.min(1, (u-0.86)/0.14));
+  // phases: 0-0.12 diffuse cloud collapsing, 0.08-0.26 spinning disk + planets forming,
+  // 0.16-0.30 four planets settle into orbit, then camera pushes in on the ocean world
+  // (0.28-0.40) and holds through one continuous, unbroken Earth close-up to the loop's end
+  const collapse = smooth(0,0.12,u);
+  const diskIn = smooth(0.06,0.20,u);
+  const formed = smooth(0.14,0.28,u);
+  const orbit = smooth(0.22,0.30,u);
+  const zoom = smooth(0.28,0.40,u);
 
   ctx.save();
   if(zoom > 0){
-    // push in on the third planet (the ocean world)
+    // push in on the third planet (the ocean world) — the camera keeps closing the
+    // whole rest of the loop, so nothing here reads as a hard cut between scenes
     const p = PLANETS[2], px = cx + Math.cos(t*0.15)*p.r*S, py = cy + Math.sin(t*0.15)*p.r*S*0.42;
     ctx.translate(W/2, H/2); ctx.scale(1+zoom*30, 1+zoom*30);
     ctx.translate(-px, -py);
@@ -2192,7 +2259,9 @@ function draw(t){
   ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(cx,cy,starR*3.4,0,7); ctx.fill();
   ctx.fillStyle = '#fff3c4'; ctx.beginPath(); ctx.arc(cx,cy,starR,0,7); ctx.fill();
 
-  // planets condensing and orbiting
+  // planets condensing and orbiting — shaded with the same off-centre lit-sphere
+  // gradient as the Earth close-up, so the whole animation reads as one consistent
+  // lighting model rather than flat disks that suddenly become a "real" planet later
   if(formed > 0.02){
     for(let i=0;i<PLANETS.length;i++){
       const p = PLANETS[i], grow = Math.min(1, Math.max(0, (formed*4 - i*0.7)));
@@ -2201,56 +2270,190 @@ function draw(t){
       const x = cx + Math.cos(a)*p.r*S, y = cy + Math.sin(a)*p.r*S*0.42;
       ctx.globalAlpha = (1-zoom) * grow;
       ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.beginPath(); ctx.ellipse(cx,cy,p.r*S,p.r*S*0.42,0,0,7); ctx.stroke();
-      ctx.fillStyle = p.col; ctx.beginPath(); ctx.arc(x,y,p.size*grow*(1+zoom*0.4),0,7); ctx.fill();
+      const pr = p.size*grow*(1+zoom*0.4);
+      ctx.fillStyle = litSphere(x,y,pr,p.light,p.dark,-0.35,-0.35);
+      ctx.beginPath(); ctx.arc(x,y,pr,0,7); ctx.fill();
       if(i === 2 && orbit > 0){                     // faint blue haze = the ocean forming
-        ctx.globalAlpha = (1-zoom)*grow*0.4; ctx.beginPath(); ctx.arc(x,y,p.size*grow*2,0,7);
+        ctx.globalAlpha = (1-zoom)*grow*0.4; ctx.beginPath(); ctx.arc(x,y,pr*2,0,7);
         ctx.fillStyle = 'rgba(127,179,255,.4)'; ctx.fill();
       }
     }
   }
   ctx.restore();
 
-  // zoomed-in young Earth: molten surface cooling, rain condensing
-  if(zoom > 0.15){
-    const a = Math.min(1, (zoom-0.15)/0.85);
-    ctx.globalAlpha = a;
+  // zoomed-in young Earth: one unbroken shot. A single continuous progress variable
+  // (e) drives every colour, opacity and shape smoothly — nothing here pops on or
+  // off at a hard threshold, so cooling, rain, oceans, atmosphere and land are all
+  // just different rates of change along the same curve, always mid-transition.
+  let earthLabel = null, earthLabelA = 0;
+  if(zoom > 0.02){
+    const panelA = smooth(0,0.05,zoom);          // the panel itself appears quickly
+    const e = smooth(0.30,1.0,u);                 // 0..1 across the whole close-up, tied to
+                                                    // loop time (not the camera-push scale) so
+                                                    // the surface keeps evolving after the zoom settles
+    ctx.globalAlpha = panelA;
     ctx.fillStyle = '#090d15'; ctx.fillRect(0,0,W,H);
     const R = Math.min(W,H)*0.34;
-    const molten = Math.max(0, 1 - a*1.3);
-    const grad = ctx.createRadialGradient(W/2,H/2,R*0.1,W/2,H/2,R);
-    grad.addColorStop(0, molten>0.4 ? '#ffb35c' : '#2b6fd6');
-    grad.addColorStop(0.6, molten>0.4 ? '#a4441f' : '#1a3f66');
-    grad.addColorStop(1, '#0c1830');
-    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,7); ctx.fillStyle = grad; ctx.fill();
-    // steam/cloud band
-    ctx.globalAlpha = a*0.5;
-    ctx.strokeStyle = 'rgba(230,235,245,.5)'; ctx.lineWidth = R*0.06;
-    ctx.beginPath(); ctx.arc(W/2,H/2,R*0.92,0.3,2.1); ctx.stroke();
-    // rain: short falling ticks appearing as it cools
-    if(a > 0.55){
-      const ra = (a-0.55)/0.45;
-      ctx.globalAlpha = ra*0.6; ctx.strokeStyle = '#bcd6ff'; ctx.lineWidth = 1.2;
-      for(let i=0;i<26;i++){
-        const ang = (i/26)*Math.PI*2 + t*0.3, rr = R*(0.55+0.35*((i*7)%5)/5);
-        const x = W/2+Math.cos(ang)*rr, y = H/2+Math.sin(ang)*rr;
-        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+1.5,y+5); ctx.stroke();
+
+    // continuous physical curves — all smoothstep, generously overlapped
+    const cool     = smooth(0.00,0.30,e);          // molten red -> rock
+    const atmo     = smooth(0.03,0.55,e);          // outgassing builds the atmosphere early
+    const rain     = smooth(0.10,0.30,e) * (1-smooth(0.30,0.55,e)); // a rising-then-fading bell
+    const ocean    = smooth(0.16,0.60,e);          // basins fill as rain accumulates
+    const clearSky = smooth(0.55,0.95,e);          // skies thin a little once oceans + land settle
+    const land     = smooth(0.62,1.00,e);
+    const cloudAmt = atmo * (1 - clearSky*0.45);
+    const rot = t*0.11;                             // slow continuous rotation
+
+    // light direction (upper-left) drives every shading trick below
+    const lx = -0.38, ly = -0.4;
+
+    ctx.save();
+    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,7); ctx.clip();
+
+    // base surface: molten orange/red blending continuously into rock and ocean blue,
+    // lit off-centre so the flat circle reads as a sphere
+    const moltenLight = '#ffb35c', moltenDark = '#8a2f14';
+    const rockLight = '#9fae8f', rockDark = '#465a3c';
+    const oceanLight = '#5fa6e8', oceanDark = '#173a63';
+    const surfLight = mix(mix(moltenLight,rockLight,cool), oceanLight, ocean);
+    const surfDark  = mix(mix(moltenDark,rockDark,cool), oceanDark, ocean);
+    ctx.fillStyle = litSphere(W/2,H/2,R,surfLight,surfDark,lx,ly);
+    ctx.fillRect(W/2-R,H/2-R,R*2,R*2);
+
+    // ocean surface texture once wet: faint concentric ripple bands, fading in with `ocean`
+    if(ocean > 0.02){
+      ctx.globalAlpha = ocean*0.22; ctx.strokeStyle = '#dff0ff'; ctx.lineWidth = 1;
+      for(let i=0;i<5;i++){ ctx.beginPath(); ctx.arc(W/2,H/2,R*(0.3+i*0.16), t*0.1+i, t*0.1+i+2.4); ctx.stroke(); }
+      ctx.globalAlpha = 1;
+    }
+
+    // first land: silhouettes pinned to fixed longitudes, carried around the sphere by
+    // slow rotation and compressed toward the limb (scaleX ~ cos(longitude)) so they
+    // visibly curve around the globe instead of sliding flat across the screen
+    if(land > 0.01){
+      for(const c of CONTINENTS){
+        const lon = c.lon0 + rot;
+        const cosL = Math.cos(lon);
+        if(cosL < -0.05) continue;                 // over the far limb, out of sight
+        const front = Math.max(0, cosL);
+        const bx = W/2 + Math.sin(lon)*R*0.86, by = H/2 + c.lat*R*0.72;
+        drawBlob(bx, by, c.baseR*R*(0.6+land*0.45), Math.max(0.12,front), c.pts,
+                 land*front*0.92, mix('#3f7d4a', shade('#3f7d4a',-0.5), 1-front));
       }
-      ctx.globalAlpha = ra;
-      ctx.font = '600 13px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#bcd6ff';
-      ctx.fillText('the first rain', W/2, H*0.86);
+    }
+
+    // soft day/night terminator: a gentle linear shadow opposite the light source —
+    // present throughout so the sphere never reads as flatly, uniformly lit
+    const tg = ctx.createLinearGradient(W/2+lx*R*1.4, H/2+ly*R*1.4, W/2-lx*R*1.4, H/2-ly*R*1.4);
+    tg.addColorStop(0,'rgba(5,8,16,0)'); tg.addColorStop(0.62,'rgba(5,8,16,0)'); tg.addColorStop(1,'rgba(4,7,14,.5)');
+    ctx.globalAlpha = 1; ctx.fillStyle = tg; ctx.fillRect(W/2-R,H/2-R,R*2,R*2);
+
+    // clouds: soft elongated blobs pinned to the sphere the same way as land, drifting
+    // with rotation and foreshortening near the limb; density is one continuous curve
+    if(cloudAmt > 0.01){
+      for(const cl of CLOUDS){
+        const lon = cl.lon0 + rot*cl.drift;
+        const cosL = Math.cos(lon);
+        if(cosL < -0.1) continue;
+        const front = Math.max(0, cosL);
+        const bx = W/2 + Math.sin(lon)*R*0.9, by = H/2 + cl.lat*R*0.78;
+        ctx.globalAlpha = cloudAmt*front*0.5;
+        ctx.fillStyle = 'rgba(255,255,255,.9)';
+        ctx.beginPath(); ctx.ellipse(bx,by, cl.rx*R*Math.max(0.15,front), cl.ry*R, 0, 0, 7); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // steam haze while still hot: brightens the whole disc slightly rather than a
+    // separate banner arc, so it blends into the cloud layer instead of stacking on it
+    if(cool < 0.9){
+      ctx.globalAlpha = (1-cool)*0.22;
+      ctx.fillStyle = 'rgba(255,225,190,.5)';
+      ctx.fillRect(W/2-R,H/2-R,R*2,R*2);
+    }
+
+    // rain: soft gradient-faded streaks (not flat dots) during the rising-then-fading
+    // rain curve, drifting slowly rather than snapping in and out
+    if(rain > 0.02){
+      ctx.globalAlpha = rain*0.55;
+      for(let i=0;i<22;i++){
+        const ang = (i/22)*Math.PI*2 + t*0.25, rr = R*(0.5+0.4*((i*7)%5)/5);
+        const x = W/2+Math.cos(ang)*rr, y = H/2+Math.sin(ang)*rr;
+        const lg = ctx.createLinearGradient(x,y,x+1.6,y+7);
+        lg.addColorStop(0,'rgba(220,238,255,0)'); lg.addColorStop(0.5,'rgba(220,238,255,.9)'); lg.addColorStop(1,'rgba(220,238,255,0)');
+        ctx.strokeStyle = lg; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+1.6,y+7); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // limb darkening: the rim of the sphere reads darker/desaturated, the other half
+    // of what sells curvature besides the off-centre key light
+    const lg2 = ctx.createRadialGradient(W/2,H/2,R*0.72,W/2,H/2,R);
+    lg2.addColorStop(0,'rgba(3,5,10,0)'); lg2.addColorStop(1,'rgba(3,5,10,.55)');
+    ctx.fillStyle = lg2; ctx.fillRect(W/2-R,H/2-R,R*2,R*2);
+
+    // outer atmosphere limb glow, continuous with `atmo`
+    if(atmo > 0.02){
+      ctx.globalAlpha = atmo*0.55;
+      ctx.strokeStyle = 'rgba(150,200,255,.6)'; ctx.lineWidth = R*0.06;
+      ctx.beginPath(); ctx.arc(W/2,H/2,R*0.98,0,7); ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    // specular highlight: a small bright glint matching the light direction, gently
+    // pulsing — cheap, but does a lot to sell a lit sphere rather than a painted disc
+    const spx = W/2 + lx*R*0.85, spy = H/2 + ly*R*0.85, pulse = 0.75+0.25*Math.sin(t*0.6);
+    const sg2 = ctx.createRadialGradient(spx,spy,0,spx,spy,R*0.22);
+    sg2.addColorStop(0,`rgba(255,255,255,${0.55*pulse})`); sg2.addColorStop(1,'rgba(255,255,255,0)');
+    ctx.fillStyle = sg2; ctx.beginPath(); ctx.arc(spx,spy,R*0.22,0,7); ctx.fill();
+
+    ctx.restore();
+
+    // outer atmosphere halo just outside the disc
+    if(atmo > 0.02){
+      ctx.globalAlpha = panelA*atmo*0.35;
+      ctx.strokeStyle = 'rgba(140,190,255,.5)'; ctx.lineWidth = R*0.045;
+      ctx.beginPath(); ctx.arc(W/2,H/2,R*1.06,0,7); ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+
+    // a single small, low-contrast caption area that relabels itself smoothly by
+    // fading the current phrase in and out (never two captions stacked, never a hard
+    // pop) — the chapter's prose already narrates the stages, so this just orients
+    const stops = [
+      [0.03, 'a molten young Earth, still cooling'],
+      [0.22, 'steam gives way to the first rain'],
+      [0.40, 'water pools into the first oceans'],
+      [0.62, 'a hazy atmosphere wraps the planet'],
+      [0.86, 'land breaks the surface for the first time']
+    ];
+    let best = 0;
+    for(const [ce, txt] of stops){
+      const wA = Math.max(0, 1 - Math.abs(e-ce)/0.16);
+      if(wA > best){ best = wA; earthLabel = txt; }
+    }
+    earthLabelA = panelA * Math.min(1, best);
+    if(earthLabel && earthLabelA > 0.02){
+      ctx.globalAlpha = earthLabelA*0.85;
+      ctx.font = '500 12px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = 'rgba(190,214,255,.75)';
+      ctx.fillText(earthLabel, W/2, H*0.9);
     }
   }
   ctx.globalAlpha = 1;
 
-  // caption of the current phase
-  const label = zoom > 0.15 ? 'A young Earth cools' : formed > 0.55 ? 'Four worlds settle into orbit'
-    : formed > 0.05 ? 'Dust clumps into planets' : diskIn > 0.3 ? 'The cloud flattens into a spinning disk'
-    : 'A supernova remnant begins to collapse';
-  ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.55)';
-  ctx.fillText(label, 14, H-14);
+  // caption of the current phase before the close-up begins
+  if(!(earthLabel && earthLabelA > 0.02)){
+    const label = formed > 0.55 ? 'Four worlds settle into orbit'
+      : formed > 0.05 ? 'Dust clumps into planets' : diskIn > 0.3 ? 'The cloud flattens into a spinning disk'
+      : 'A supernova remnant begins to collapse';
+    ctx.globalAlpha = 1;
+    ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.55)';
+    ctx.fillText(label, 14, H-14);
+  }
 }
 function loop(ms){
-  if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? 2.4 : (ms-t0)/1000); }
+  if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? 20.5 : (ms-t0)/1000); }
   requestAnimationFrame(loop);
 }
 new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);

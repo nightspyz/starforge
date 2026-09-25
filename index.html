@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="UTF-8">
 <title>As Old as the Universe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -200,12 +201,14 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 .lab-frame iframe{display:block;width:100%;height:820px;border:0;background:#0e1320}
 #oceanFrame{height:940px}
 #dnaFrame{height:960px}
+#proteinFrame{height:1420px}
 .lab-frame .cap{padding:10px 14px;font-size:12px;color:var(--muted);border-top:1px solid #1d2638}
 @media (max-width:760px){
   .ambient canvas{height:260px}
   .lab-frame iframe{height:1180px}
   #oceanFrame{height:1420px}
   #dnaFrame{height:1960px}
+  #proteinFrame{height:2650px}
 }
 .lab{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.18)}
 #forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
@@ -411,7 +414,7 @@ body.in-chapter .clock{opacity:0}
       </ul>
     </div>
     <div class="realphoto">
-      <div class="frame"><img src="star-forge-nebula.jpg" alt="The Cosmic Cliffs: a wall of gas and dust in the Carina Nebula where new stars are being born, imaged by the James Webb Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <div class="frame"><img src="/_blob/e5337b6c3dd152e9dbd63cc9623aadd6" alt="The Cosmic Cliffs: a wall of gas and dust in the Carina Nebula where new stars are being born, imaged by the James Webb Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>A real star-forming region, not an illustration: the edge of a young star cluster carving a cavity into a wall of gas and dust, roughly 7,600 light-years away. Every bright point behind the dust is a star, some newborn.</span><span class="credit">NASA · ESA · CSA · STScI</span></p>
     </div>
     <div class="lab">
@@ -496,15 +499,20 @@ body.in-chapter .clock{opacity:0}
       <ul class="ch-timeline">
         <li><span class="y">4.6 Bya</span><span class="e">A cloud of gas and dust collapses</span></li>
         <li><span class="y">4.5 Bya</span><span class="e">Dust becomes pebbles, then planets</span></li>
-        <li><span class="y">4.4 Bya</span><span class="e">A molten Earth begins to cool</span></li>
+        <li><span class="y">4.4 Bya</span><span class="e">A molten Earth cools; volcanic outgassing builds a first atmosphere</span></li>
         <li><span class="y">4.0 Bya</span><span class="e">Water vapour condenses into the first rain</span></li>
+        <li><span class="y">~3.8 Bya</span><span class="e">Oceans stabilize; the oldest continental crust dates from about here</span></li>
       </ul>
     </div>
     <div class="realphoto">
-      <div class="frame"><img src="protodisk.jpg" alt="A protoplanetary disk seen in silhouette around a young star in the Orion Nebula, imaged by the Hubble Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <div class="frame"><img src="/_blob/a169d4a914681086cbd19276abaf9196" alt="A protoplanetary disk seen in silhouette around a young star in the Orion Nebula, imaged by the Hubble Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>A young star, 300,000 to a million years old, still wrapped in the disk of gas and dust it formed from — this is what our own solar system looked like, once.</span><span class="credit">NASA · ESA · C.R. O'Dell</span></p>
     </div>
-    <p class="fact">By about 4.4 billion years ago that disk had cooled into a molten young Earth; by 4.0 billion years ago, water vapour had condensed into the first rain, and kept falling until it had somewhere to pool.</p>
+    <div class="ambient">
+      <canvas id="solarCv" aria-label="Animation of a protoplanetary disk forming planets, then a close-up of young Earth cooling, raining, filling with ocean, gaining an atmosphere, and growing its first land"></canvas>
+      <div class="cap">A collapsing cloud flattens into a disk · dust clumps into planets · then a long close-up on one of them: a molten young Earth cools, the first rain falls, oceans fill the basins, an atmosphere takes hold, and the first land breaks the surface. An illustration, paced for reading, not a physics simulation.</div>
+    </div>
+    <p class="fact">By about 4.4 billion years ago that disk had cooled into a molten young Earth, its interior still outgassing the water vapour, carbon dioxide and nitrogen that became its first atmosphere. By 4.0 billion years ago the surface had cooled enough for that vapour to condense into the first rain, and it kept falling until it had somewhere to pool — the beginning of the oceans. Where exactly the first dry land stood is still debated, but the oldest surviving scraps of continental crust, found today in northern Canada, date from close to this same stretch of time: by about 3.8 billion years ago, Earth already had oceans, an atmosphere, and at least the beginnings of land.</p>
     <div class="lab-frame">
       <iframe id="oceanFrame" src="ocean-lab.html" title="Droplet Tank: an interactive water physics simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
       <div class="cap">Droplet Tank, running unchanged: particle water with adjustable gravity, tilt, surface tension and viscosity — pour, stir, drop a ball in, or turn tension down until the surface stops holding together at all.</div>
@@ -538,7 +546,11 @@ body.in-chapter .clock{opacity:0}
       <iframe id="dnaFrame" src="dna-lab.html" title="DNA Replication Simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
       <div class="cap">DNA Replication Simulator, running unchanged: helicase, primase, Pol III and Pol I, ligase, Okazaki fragments, proofreading, and the end-replication problem. Hover any position to inspect it, or load a sequence of your own.</div>
     </div>
-    <p class="fact">DNA is only an archive, though — a gene has to be read before it means anything. RNA polymerase transcribes it into messenger RNA; a ribosome reads that message three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein, which folds itself into a working machine. Watson and Crick described the double helix in 1953; by 2003 the Human Genome Project had read all three billion of ours, letter by letter.</p>
+    <p class="fact">DNA is only an archive, though — a gene has to be read before it means anything. RNA polymerase transcribes it into messenger RNA; in your cells, that transcript is capped, its introns are spliced out, a poly(A) tail is added, and it's exported through a nuclear pore before a ribosome ever sees it. The ribosome then reads it three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein, which folds itself into a working machine. Watson and Crick described the double helix in 1953; by 2003 the Human Genome Project had read all three billion of ours, letter by letter.</p>
+    <div class="lab-frame">
+      <iframe id="proteinFrame" src="protein-lab.html" title="Protein Synthesis Simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
+      <div class="cap">Protein Synthesis Simulator, running unchanged: transcription, capping, splicing, nuclear export, and a ribosome translating codon by codon into a folding polypeptide. Click a base in an exon to mutate it and watch the protein change.</div>
+    </div>
     <p class="end-note">Four chapters in, and the thread hasn't broken once: the hydrogen in the first star, the iron in its ashes, the water that gathered on a young planet, the amino acids lightning made from it, and now a molecule that reads itself and builds the next generation.</p>
     <a class="gate next" href="#climb">
       <span class="ch">Chapter 6</span>
@@ -684,7 +696,7 @@ body.in-chapter .clock{opacity:0}
     </div>
     <p class="fact">For most of civilization, work meant a body, an animal, or a waterwheel — there was no other kind of power. Then, in 1776, James Watt patented a steam engine efficient enough to be practical, and for the first time a device could burn coal and turn that heat directly into repeated mechanical motion, doing the work of dozens of bodies and never getting tired. Textile mills, then locomotives, then factories of a kind the world had never had a word for, all ran on the same trick: fire boils water, steam pushes a piston, the piston turns a wheel.</p>
     <div class="realphoto">
-      <div class="frame"><img src="steam-engine.jpg" alt="A historic steam engine, end view, documented by the Historic American Engineering Record" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <div class="frame"><img src="/_blob/c42b012efff751513f370d2ac755b272" alt="A historic steam engine, end view, documented by the Historic American Engineering Record" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>The same idea in iron: heat in, motion out, repeatably, without a body getting tired. Every fire since has been a variation on this.</span><span class="credit">Library of Congress · HAER</span></p>
     </div>
     <p class="fact">Steam had to be built where the coal was; electricity didn't. In 1882 Thomas Edison switched on the Pearl Street Station in lower Manhattan, the first commercial power plant feeding a grid of customers, and within a few decades entire cities had rewired themselves around wires instead of belts and shafts — power generated in one place, carried invisibly, and used in another. Coal kept burning underneath most of it; oil joined in for engines that had to move. Then, in the twentieth century, a genuinely different fire: physicists learned to split the nucleus itself, releasing the same binding energy this whole story first met back in the Star Forge. Chicago Pile-1 achieved the first controlled chain reaction in 1942; by 1951 a reactor in Idaho lit four light bulbs with it; by 1954 the plant at Obninsk, in the USSR, was the first to feed real, sustained nuclear power into a public grid. Today reactors supply a meaningful share of the world's electricity without burning anything at all — the open problem was never really "can it work," it was waste, cost, and public trust.</p>
@@ -708,7 +720,7 @@ body.in-chapter .clock{opacity:0}
     </div>
     <p class="fact">Power the machines, then start connecting them. A road is a promise: a fixed path, built once, saves more effort than it cost every time something travels it again. The telegraph made distance and time nearly independent for the first time in history, and every network since, highways, then wires, then the internet, has been the same trick done faster.</p>
     <div class="realphoto">
-      <div class="frame"><img src="cloverleaf.jpg" alt="Aerial photograph of a cloverleaf highway interchange" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <div class="frame"><img src="/_blob/36cc072055aa2694af6b7129a948d565" alt="Aerial photograph of a cloverleaf highway interchange" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>Traffic, from above, already looks like a circuit diagram. The internet reused the shape before it reused the word "network."</span><span class="credit">Library of Congress</span></p>
     </div>
     <p class="fact">By 1980, the species that four billion years of accident and selection produced had split the atom, left footprints on the Moon, and sent two spacecraft, <i>Voyager 1</i> and <i>2</i>, past the edge of the solar system carrying a golden record of Earth's sounds. And on desks in offices and living rooms, a new kind of object was spreading: small, humming boxes that could be given instructions and would follow them faithfully, without getting tired. Nobody watching one in 1980 knew yet what it would grow into. What it built next was a second kind of mind, made of nothing but on and off.</p>
@@ -745,7 +757,7 @@ body.in-chapter .clock{opacity:0}
       </details>
     </div>
     <div class="realphoto">
-      <div class="frame"><img src="eniac.jpg" alt="Historic photograph of the ENIAC, one of the first general-purpose electronic computers" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <div class="frame"><img src="/_blob/00a486c5e52aa64ecbd1e679613732ab" alt="Historic photograph of the ENIAC, one of the first general-purpose electronic computers" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>ENIAC, 1945: about 17,000 vacuum tubes, one whole room, a tube failure roughly once a day. In 1947 at Bell Labs, the same switch was rebuilt from a crystal of doped silicon — no filament, no glass, and room to shrink almost without limit. By 1971 an entire simple computer's logic, 2,300 transistors, fit on one chip. Moore's 1965 observation, that the count would keep doubling, held for fifty years; today a fingernail-sized chip carries tens of billions.</span><span class="credit">Library of Congress</span></p>
     </div>
     <p class="fact">Text, color, sound: all of it is a number underneath, and every number is a pattern of on and off. Gates only do what they're told, though. The next step was a circuit that could rewire itself from its own mistakes.</p>
@@ -788,7 +800,7 @@ body.in-chapter .clock{opacity:0}
       </ul>
     </div>
     <div class="realphoto">
-      <div class="frame"><img src="earth.jpg" alt="Earth seen from orbit, oceans and clouds over the Atlantic" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <div class="frame"><img src="/_blob/1126af33369b1b25fdb34e395eb43f31" alt="Earth seen from orbit, oceans and clouds over the Atlantic" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
       <p class="cap"><span>The first planet, at night, lit by the second one: every glow down there is people, awake, doing something that runs partly on signal now.</span><span class="credit">NASA · Earth Observatory</span></p>
     </div>
     <div class="lab">
@@ -919,11 +931,11 @@ body.in-chapter .clock{opacity:0}
     <p class="aside">Two clips from inside that headset, his own captures, playing right here:</p>
     <div class="vr-videos">
       <div class="vr-vid">
-        <video controls playsinline preload="metadata" src="asseto-corsa-vr.mp4"></video>
+        <video controls playsinline preload="metadata" src="/_blob/3861388310a14fd045a1c6b56b9dc46d"></video>
         <p class="cap"><b>Assetto Corsa</b> · VR, no assists — racing with nothing between him and the track but the headset</p>
       </div>
       <div class="vr-vid">
-        <video controls playsinline preload="metadata" src="g-rebels-vr.mp4"></video>
+        <video controls playsinline preload="metadata" src="/_blob/17642501ee2f07192c8f2ccc7d36ddf6"></video>
         <p class="cap"><b>G-Rebels</b> · VR city — a whole place, standing inside it instead of looking at it</p>
       </div>
     </div>
@@ -976,8 +988,8 @@ body.in-chapter .clock{opacity:0}
       </ul>
     </div>
     <div class="realphoto two">
-      <div class="cell"><div class="frame"><img src="apollo-flag.jpg" alt="The American flag planted on the lunar surface during the Apollo 11 mission" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div></div>
-      <div class="cell"><div class="frame"><img src="falcon9-launch.jpg" alt="A SpaceX Falcon 9 rocket ascending under power shortly after liftoff" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div></div>
+      <div class="cell"><div class="frame"><img src="/_blob/4c81d4cad92b8d22ef9120e779f39773" alt="The American flag planted on the lunar surface during the Apollo 11 mission" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div></div>
+      <div class="cell"><div class="frame"><img src="/_blob/6e675d111ca3a40e54aa9c95ecfa9509" alt="A SpaceX Falcon 9 rocket ascending under power shortly after liftoff" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div></div>
       <p class="cap" style="grid-column:1/-1"><span>1969: a footprint that will likely outlast the species that left it, undisturbed by wind or rain. 2024: the part that used to be thrown away, coming back down on purpose. Same destination, radically different economics.</span><span class="credit">NASA · Apollo 11 / Kennedy Space Center</span></p>
     </div>
     <p class="fact">NASA's era proved it was possible at any cost: a nation-scale project, hundreds of thousands of people, to put a handful of humans on the Moon and bring them home. What changed since is the constraint that mattered — not "can we," but "can we afford to do this again next week." A reusable booster doesn't need new physics. It needs the same rocket equation everyone always had, solved by someone willing to land the expensive part instead of throwing it away.</p>
@@ -2134,7 +2146,23 @@ const PLANETS = [
   {r:0.68, size:7.0, col:'#7fb3ff', name:'ocean world'},
   {r:0.90, size:11, col:'#e8b27a', name:'gas giant'}
 ];
-const CYCLE = 26; // seconds for one full loop: cloud -> disk -> planets -> earth close-up -> reset
+// a handful of stable, seeded continent silhouettes for the Earth close-up's landmass stage
+const CONTINENTS = Array.from({length:4}, (_,i) => ({
+  cx0: -0.55 + i*0.38 + (rnd()-0.5)*0.22,
+  cy0: -0.35 + rnd()*0.7,
+  baseR: 0.11 + rnd()*0.07,
+  pts: Array.from({length:9}, () => 0.55 + rnd()*0.65)
+}));
+function drawBlob(x,y,r,pts,alpha,color){
+  ctx.beginPath();
+  for(let k=0;k<=pts.length;k++){
+    const ang = (k/pts.length)*Math.PI*2, rad = r*pts[k%pts.length];
+    const px = x+Math.cos(ang)*rad, py = y+Math.sin(ang)*rad*0.85;
+    k===0 ? ctx.moveTo(px,py) : ctx.lineTo(px,py);
+  }
+  ctx.closePath(); ctx.globalAlpha = alpha; ctx.fillStyle = color; ctx.fill();
+}
+const CYCLE = 34; // seconds for one full loop: cloud -> disk -> planets -> earth close-up (cools, rains, oceans, atmosphere, land) -> reset
 
 function draw(t){
   ctx.clearRect(0,0,W,H);
@@ -2142,13 +2170,14 @@ function draw(t){
   const cx = W*0.5, cy = H*0.52, S = Math.min(W,H)*0.46;
   const u = (t % CYCLE) / CYCLE;
 
-  // phases: 0-0.22 diffuse cloud collapsing, 0.22-0.55 spinning disk + planets forming,
-  // 0.55-0.85 four planets orbiting, 0.85-1 zoom into young Earth
-  const collapse = Math.min(1, u/0.22);
-  const diskIn = Math.max(0, Math.min(1, (u-0.15)/0.15));
-  const formed = Math.max(0, Math.min(1, (u-0.30)/0.20));
-  const orbit = Math.max(0, Math.min(1, (u-0.55)/0.05));
-  const zoom = Math.max(0, Math.min(1, (u-0.86)/0.14));
+  // phases: 0-0.17 diffuse cloud collapsing, 0.12-0.39 spinning disk + planets forming,
+  // 0.42-0.46 four planets orbiting, 0.66-1 an extended Earth close-up: cools, rains,
+  // fills with ocean, wraps in atmosphere, grows its first land
+  const collapse = Math.min(1, u/0.17);
+  const diskIn = Math.max(0, Math.min(1, (u-0.12)/0.12));
+  const formed = Math.max(0, Math.min(1, (u-0.24)/0.15));
+  const orbit = Math.max(0, Math.min(1, (u-0.42)/0.04));
+  const zoom = Math.max(0, Math.min(1, (u-0.66)/0.34));
 
   ctx.save();
   if(zoom > 0){
@@ -2210,44 +2239,83 @@ function draw(t){
   }
   ctx.restore();
 
-  // zoomed-in young Earth: molten surface cooling, rain condensing
-  if(zoom > 0.15){
-    const a = Math.min(1, (zoom-0.15)/0.85);
-    ctx.globalAlpha = a;
+  // zoomed-in young Earth: molten surface cools, rains, fills with ocean,
+  // wraps in atmosphere, and grows its first land — five beats across a
+  // long, unhurried close-up rather than one quick pulse
+  let earthLabel = null;
+  if(zoom > 0.03){
+    const a = Math.min(1, zoom/0.97);           // gentle fade-in over the whole close-up
+    const panelA = Math.min(1, zoom/0.06);       // but the panel itself appears quickly
+    ctx.globalAlpha = panelA;
     ctx.fillStyle = '#090d15'; ctx.fillRect(0,0,W,H);
     const R = Math.min(W,H)*0.34;
-    const molten = Math.max(0, 1 - a*1.3);
+    const molten = Math.max(0, 1 - a/0.3);        // fully cooled to ocean-blue by a=0.3
     const grad = ctx.createRadialGradient(W/2,H/2,R*0.1,W/2,H/2,R);
     grad.addColorStop(0, molten>0.4 ? '#ffb35c' : '#2b6fd6');
     grad.addColorStop(0.6, molten>0.4 ? '#a4441f' : '#1a3f66');
     grad.addColorStop(1, '#0c1830');
-    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,7); ctx.fillStyle = grad; ctx.fill();
-    // steam/cloud band
-    ctx.globalAlpha = a*0.5;
+    ctx.save();
+    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,7); ctx.clip();
+    ctx.fillStyle = grad; ctx.fillRect(W/2-R,H/2-R,R*2,R*2);
+    // ocean surface texture once cooled: faint concentric ripple bands
+    if(molten < 0.5){
+      const oceanA = Math.min(1, (0.5-molten)/0.5);
+      ctx.globalAlpha = panelA*oceanA*0.22; ctx.strokeStyle = '#bcd6ff'; ctx.lineWidth = 1;
+      for(let i=0;i<5;i++){ ctx.beginPath(); ctx.arc(W/2,H/2,R*(0.3+i*0.16), t*0.1+i, t*0.1+i+2.4); ctx.stroke(); }
+    }
+    // the first landmasses: a few stable green-brown silhouettes breaking the surface
+    if(a > 0.62){
+      const landA = Math.min(1, (a-0.62)/0.3);
+      for(const c of CONTINENTS){
+        if(Math.hypot(c.cx0,c.cy0) > 0.85) continue;
+        const bx = W/2 + c.cx0*R, by = H/2 + c.cy0*R;
+        drawBlob(bx, by, c.baseR*R*(0.55+landA*0.45), c.pts, panelA*landA*0.9, '#3f7d4a');
+      }
+    }
+    ctx.restore();
+    // steam/cloud band while still molten
+    ctx.globalAlpha = panelA*0.5*Math.max(0.15, molten);
     ctx.strokeStyle = 'rgba(230,235,245,.5)'; ctx.lineWidth = R*0.06;
     ctx.beginPath(); ctx.arc(W/2,H/2,R*0.92,0.3,2.1); ctx.stroke();
-    // rain: short falling ticks appearing as it cools
-    if(a > 0.55){
-      const ra = (a-0.55)/0.45;
-      ctx.globalAlpha = ra*0.6; ctx.strokeStyle = '#bcd6ff'; ctx.lineWidth = 1.2;
+    // atmosphere: a soft outer limb glow plus two slow drifting cloud arcs
+    if(a > 0.44){
+      const atmoA = Math.min(1, (a-0.44)/0.28);
+      ctx.globalAlpha = panelA*atmoA*0.5;
+      ctx.strokeStyle = 'rgba(140,190,255,.55)'; ctx.lineWidth = R*0.05;
+      ctx.beginPath(); ctx.arc(W/2,H/2,R*1.05,0,7); ctx.stroke();
+      ctx.globalAlpha = panelA*atmoA*0.4; ctx.strokeStyle = 'rgba(255,255,255,.65)'; ctx.lineWidth = R*0.028;
+      ctx.beginPath(); ctx.arc(W/2,H/2,R*0.74, t*0.12, t*0.12+1.3); ctx.stroke();
+      ctx.beginPath(); ctx.arc(W/2,H/2,R*0.58, -t*0.09+2.1, -t*0.09+3.6); ctx.stroke();
+    }
+    // rain: short falling ticks, a brief early-cooling beat
+    if(a > 0.16 && a < 0.40){
+      const ra = a < 0.28 ? (a-0.16)/0.12 : Math.max(0, 1-(a-0.28)/0.12);
+      ctx.globalAlpha = panelA*ra*0.6; ctx.strokeStyle = '#bcd6ff'; ctx.lineWidth = 1.2;
       for(let i=0;i<26;i++){
         const ang = (i/26)*Math.PI*2 + t*0.3, rr = R*(0.55+0.35*((i*7)%5)/5);
         const x = W/2+Math.cos(ang)*rr, y = H/2+Math.sin(ang)*rr;
         ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+1.5,y+5); ctx.stroke();
       }
-      ctx.globalAlpha = ra;
-      ctx.font = '600 13px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#bcd6ff';
-      ctx.fillText('the first rain', W/2, H*0.86);
     }
+    // one caption at a time, staged across the close-up
+    earthLabel = a < 0.16 ? 'A young Earth cools' : a < 0.34 ? 'The first rain'
+      : a < 0.50 ? 'Oceans fill the basins' : a < 0.68 ? 'An atmosphere takes hold'
+      : 'The first land breaks the surface';
+    ctx.globalAlpha = panelA;
+    ctx.font = '600 13px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#bcd6ff';
+    ctx.fillText(earthLabel, W/2, H*0.86);
   }
   ctx.globalAlpha = 1;
 
-  // caption of the current phase
-  const label = zoom > 0.15 ? 'A young Earth cools' : formed > 0.55 ? 'Four worlds settle into orbit'
-    : formed > 0.05 ? 'Dust clumps into planets' : diskIn > 0.3 ? 'The cloud flattens into a spinning disk'
-    : 'A supernova remnant begins to collapse';
-  ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.55)';
-  ctx.fillText(label, 14, H-14);
+  // caption of the current phase (the Earth close-up already labels itself, centred)
+  if(!earthLabel){
+    const label = formed > 0.55 ? 'Four worlds settle into orbit'
+      : formed > 0.05 ? 'Dust clumps into planets' : diskIn > 0.3 ? 'The cloud flattens into a spinning disk'
+      : 'A supernova remnant begins to collapse';
+    ctx.globalAlpha = 1;
+    ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.55)';
+    ctx.fillText(label, 14, H-14);
+  }
 }
 function loop(ms){
   if(visible){ if(t0===null) t0 = ms; draw(matchMedia('(prefers-reduced-motion: reduce)').matches ? 2.4 : (ms-t0)/1000); }
@@ -5818,3 +5886,5 @@ document.addEventListener('visibilitychange', () => {
 next();
 })();
 </script>
+
+</body></html>

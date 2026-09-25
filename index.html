@@ -1,4 +1,5 @@
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>As Old as the Universe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,6 +214,7 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 #forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
 #nucCv,#chemCv{display:block;width:100%;height:560px;background:#090d15;touch-action:pan-y}
 #logicCv,#nnCv{display:block;width:100%;height:520px;background:#090d15;touch-action:pan-y}
+#attnCv{display:block;width:100%;height:460px;background:#090d15;touch-action:pan-y}
 #feedCv{display:block;width:100%;height:480px;background:#090d15;touch-action:pan-y}
 #gridCv{display:block;width:100%;height:460px;background:#090d15;touch-action:pan-y}
 #globeCv{display:block;width:100%;height:520px;background:#090d15;touch-action:none;cursor:grab}
@@ -233,12 +235,32 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 .lab-bar input[type=range]{width:120px;accent-color:var(--helium)}
 .lab-note{margin:0;border-top:1px solid #1d2638;padding:12px 14px 14px}
 .lab-note li b{color:var(--ink);font-weight:500}
+.dock-bar{justify-content:space-between;padding-block:14px}
+.dock-cluster{display:flex;flex-direction:column;align-items:center;gap:8px}
+.dock-cluster--main{flex-direction:row;gap:8px}
+.dock-label{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dock-pad{display:flex;gap:8px}
+.dock-pad--v{flex-direction:column}
+.dock-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;line-height:1;padding:0;background:radial-gradient(circle at 32% 28%,#1c2436,#0f141f 72%);border:1px solid #2a3450;color:#cfd6e6;box-shadow:0 2px 0 rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)}
+.dock-btn:hover{border-color:var(--helium);color:#fff}
+.dock-btn:active,.dock-btn.held{background:radial-gradient(circle at 32% 28%,rgba(246,195,91,.3),#1c2436 72%);border-color:var(--helium);color:#fff}
+.dock-btn--wide{width:auto;height:44px;border-radius:22px;padding:0 20px;font-size:13px;font-weight:600;gap:6px;letter-spacing:.03em}
+.dock-chip{font:600 11px var(--mono);letter-spacing:.03em;color:#cfd6e6;background:#121826;border:1px solid #273046;border-radius:5px;padding:6px 10px;cursor:pointer}
+.dock-chip:hover{border-color:var(--helium);color:#fff}
+.dock-chip.on{background:rgba(110,227,154,.16);border-color:#6EE39A;color:#fff}
+.dock-knob-wrap{touch-action:none;cursor:grab}
+.dock-knob-wrap:active{cursor:grabbing}
+@media (max-width:760px){
+  .dock-bar{gap:14px 22px}
+  .dock-btn{width:52px;height:52px;font-size:19px}
+}
 body.in-chapter .clock{opacity:0}
 .clock{transition:opacity .5s}
 @media (max-width:760px){
   #forgeCv{height:460px}
   #nucCv,#chemCv{height:420px}
   #logicCv,#nnCv{height:440px}
+  #attnCv{height:520px}
   #feedCv{height:520px}
   #gridCv{height:400px}
   #globeCv{height:400px}
@@ -258,7 +280,7 @@ body.in-chapter .clock{opacity:0}
 .clock b{color:var(--ink);font-weight:400;letter-spacing:.02em;font-size:12.5px}
 .clock .k{text-transform:uppercase}
 /* unified master rail: one continuous timeline for the whole page,
-   from the Big Bang to Chapter 13, always on screen, always up to date.
+   from the Big Bang to Chapter 14, always on screen, always up to date.
    The currently active stop expands a sub-timeline of its own moments,
    the same detail the old per-chapter rail used to show. */
 .rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:3;list-style:none;margin:0;padding:0;
@@ -739,8 +761,10 @@ body.in-chapter .clock{opacity:0}
       <ul class="ch-timeline">
         <li><span class="y">1904–47</span><span class="e">Vacuum tubes, then the transistor</span></li>
         <li><span class="y">1958–71</span><span class="e">The integrated circuit, then the microprocessor</span></li>
-        <li><span class="y">1958–69</span><span class="e">The Perceptron, then the wall it hit</span></li>
-        <li><span class="y">1986–2017</span><span class="e">Backpropagation, deep learning, transformers</span></li>
+        <li><span class="y">1943–58</span><span class="e">The first mathematical neuron, then the Perceptron</span></li>
+        <li><span class="y">1969–86</span><span class="e">The wall a single layer hits, then backpropagation to get past it</span></li>
+        <li><span class="y">2012</span><span class="e">AlexNet proves depth works at internet scale</span></li>
+        <li><span class="y">2017</span><span class="e">"Attention Is All You Need" introduces the transformer</span></li>
       </ul>
     </div>
     <div class="lab">
@@ -776,8 +800,23 @@ body.in-chapter .clock{opacity:0}
         </ul>
       </details>
     </div>
-    <p class="fact">In 1958, Frank Rosenblatt built the first of these as real hardware, the <b>Perceptron</b>. In 1969, Marvin Minsky and Seymour Papert proved a single layer of it mathematically cannot learn a pattern like <b>XOR</b> — funding dried up for over a decade, an era historians call the first AI winter. The fix, backpropagation, was already implicit in the math: stack more than one layer, and the network can bend a straight boundary into any shape; it just took until 1986 to train several layers at once, and until 2012, when the internet had produced enormous labeled datasets and gaming graphics cards turned out to be perfectly shaped for the arithmetic, for a network called AlexNet to prove depth actually worked at scale.</p>
-    <p class="fact">In 2017, a paper titled "Attention Is All You Need" introduced the <b>transformer</b>, built almost entirely around learning which parts of its own input to pay attention to. Trained on enormous amounts of human writing, transformers turned out to be extraordinarily good at modeling language, and then, to a surprising degree, at modeling reasoning itself. This sentence, the ones before it, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
+    <p class="fact">The idea is older than the hardware above it. In 1943, Warren McCulloch and Walter Pitts sketched the first mathematical neuron, on paper, before anyone had built a machine that could run one. In 1958, Frank Rosenblatt built the first working version as real hardware, the <b>Perceptron</b>, and the press covered it as a machine that could learn to see. In 1969, Marvin Minsky and Seymour Papert proved a single layer of it mathematically cannot learn a pattern like <b>XOR</b> — funding dried up for over a decade, an era historians call the first AI winter. The fix, backpropagation, was already implicit in the math: stack more than one layer, and the network can bend a straight boundary into any shape; it just took until 1986 to train several layers at once, and until 2012, when the internet had produced enormous labeled datasets and gaming graphics cards turned out to be perfectly shaped for the arithmetic, for a network called AlexNet to prove depth actually worked at scale.</p>
+    <p class="fact">Deep networks were good at fixed-size problems — a picture in, a label out — but language is a sequence, and for years the best approach to sequences was to read them one word at a time, in order, which made them slow to train and forgetful over long stretches. In 2017, a paper titled "Attention Is All You Need" threw that out. Its idea, <b>self-attention</b>, lets every word in a sentence look directly at every other word at once and learn, mathematically, how much each one matters to understanding it — no reading in order required. That single mechanism is the <b>transformer</b>, and it is the architecture behind essentially every major language model since.</p>
+    <p class="aside">Below is that mechanism, doing real work on a real sentence. Click any word and watch it compute, live, exactly how much attention it pays to every other word — the actual softmax(QKᵀ/√d)V arithmetic from the paper, not an animation of it.</p>
+    <div class="lab">
+      <canvas id="attnCv" aria-label="Interactive self-attention diagram: click a word to see the real attention weights it computes toward every other word in the sentence"></canvas>
+      <div class="lab-bar" id="attnSetups"></div>
+      <div class="lab-bar" id="attnWords"></div>
+      <div class="cap">Click a word above. Line thickness and glow are that word's real, freshly computed attention weight toward every other word in the sentence.</div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> real scaled dot-product self-attention, softmax(QKᵀ/√d)V, run live on the sentence shown. Each word gets a real vector; real (fixed) query, key, and value projections turn those vectors into the Q, K, and V the paper describes; the weights drawn are that formula's actual output, not scripted.</li>
+          <li><b>Simplified:</b> the word vectors here are small, fixed numbers standing in for what a trained model learns from data, not real trained embeddings — so don't read meaning into which words this toy version attends to. It's one attention head, not the many a real transformer runs in parallel, and there's no training loop here at all, just the same forward-pass math a language model runs billions of times a second.</li>
+        </ul>
+      </details>
+    </div>
+    <p class="fact">This sentence, the ones before it, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients and attention, trained on the written record of everything the species you just watched evolve managed to say.</p>
     <a class="gate next" href="#second">
       <span class="ch">Chapter 10</span>
       <b>Enter The Second World ↓</b>
@@ -819,7 +858,7 @@ body.in-chapter .clock{opacity:0}
     </div>
     <p class="fact">None of it floats. Almost all of that intercontinental traffic, the vast majority by any reasonable estimate, travels through fiber-optic cables laid along the sea floor, not through satellites: well over 500 of them are active today, running to a combined length past a million kilometres, carrying light pulses between continents at a meaningful fraction of the speed of light. A handful of ships in the world are built specifically to lay and repair these cables, and when one is cut, by a dragged anchor, an earthquake, or a trawler net, a country's connection to the rest of the internet can measurably slow down until it's spliced back together.</p>
     <p class="fact">At the other end of each cable are data centers: buildings that exist purely to hold racks of servers, cooling systems, and backup power, in numbers now in the thousands worldwide and growing. What runs inside them has shifted, too — a growing share of new data-center capacity is now being built not for ordinary web traffic but for training and running the kind of neural networks the last chapter described, racks of specialized chips instead of general-purpose ones. The second world isn't only made of the people using it; underneath, it's cables, buildings, and power plants, the same civilization-scale infrastructure that showed up in steam and coal three chapters ago, just built for signal instead of steel.</p>
-    <p class="fact">Every one of those pulses is somebody: a message, a stream, a match in a game, a world someone spent an evening building out of nothing but polygons and an idea. Two chapters from now, "Leaving, on Purpose" will come back to this exact map, because this — video, games, forums, music, the accumulated texture of what billions of people chose to make and share — is the material the next kind of mind was actually trained on. Not an abstraction. This.</p>
+    <p class="fact">Every one of those pulses is somebody: a message, a stream, a match in a game, a world someone spent an evening building out of nothing but polygons and an idea. Two chapters from now, "Every Experience, Fed Forward" will come back to this exact map, because this — video, games, forums, music, the accumulated texture of what billions of people chose to make and share — is the material the next kind of mind was actually trained on. Not an abstraction. This.</p>
     <a class="gate next" href="#door">
       <span class="ch">Chapter 11</span>
       <b>Enter The Door ↓</b>
@@ -966,19 +1005,55 @@ body.in-chapter .clock{opacity:0}
     <p class="fact">Doron leaned back and listened to the music. The future was no longer a place waiting to arrive. He had already lived through several futures. The 386 had been one. The Internet had been another. The virtual worlds had been another. AI was another. And somewhere beyond all of them was something he could not yet see.</p>
     <p class="fact">Another door. He had learned, very early in life, that there was always another one. The only difference now was that this one might lead somewhere humanity had never been.</p>
     <p class="end-note">The music continued. Doron smiled. And opened the next door.</p>
-    <a class="gate next" href="#leaving">
+    <a class="gate next" href="#feed">
       <span class="ch">Chapter 12</span>
-      <b>Enter Leaving, on Purpose ↓</b>
-      <span>Before the ships: where a system like the one in that conversation actually gets what it knows — and what this species has already managed to fly, off the only planet it's ever had.</span>
+      <b>Enter Every Experience, Fed Forward ↓</b>
+      <span>Before the ships: what all of that lived experience becomes once it's fed into a machine — and what the machine does with it.</span>
     </a>
   </div></section>
 
+  <section class="chapter" id="feed">
+    <div class="chapter-head">
+      <p class="when">Chapter 12 · what trains the machine</p>
+      <h2>Every Experience, Fed Forward</h2>
+      <p>Everything in the last chapter wasn't just Doron's life. It was training data. Every video anyone ever uploaded, every forum post, every strategy written up after a game, every song and every comment under it, all of it sitting in the archive a civilization built without meaning to, is exactly the raw material modern AI learns from. Human experience doesn't just get lived. Increasingly, it gets read, weighed, and turned into capability, and that capability doesn't stay on a screen: the same networks that learn language are already learning to drive arms, wheels, and rockets.</p>
+      <p class="aside">Toggle the sources below. Each one is a real category of data behind real models. Watch the network's capability grow with what it's fed, and watch what that capability can already reach out and move.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">2005</span><span class="e">YouTube: video becomes a public, searchable archive</span></li>
+        <li><span class="y">2012–18</span><span class="e">Deep learning reads that archive at scale</span></li>
+        <li><span class="y">2020s</span><span class="e">Large models trained on internet-scale text and video</span></li>
+        <li><span class="y">now</span><span class="e">The same networks start driving arms, wheels, and rockets</span></li>
+      </ul>
+    </div>
+    <div class="lab">
+      <canvas id="feedCv" aria-label="Interactive diagram: toggle human data sources — video, text, games, music — flowing into a neural network that drives a robot arm, a rover, and a spacecraft"></canvas>
+      <div class="lab-bar" id="feedSources">
+        <button data-src="video" class="on">Streamers &amp; video</button>
+        <button data-src="text" class="on">Forums &amp; text</button>
+        <button data-src="games" class="on">Games &amp; simulators</button>
+        <button data-src="music">Music &amp; sound</button>
+      </div>
+      <details class="lab-note">
+        <summary>What's real and what's illustrated</summary>
+        <ul>
+          <li><b>Real:</b> large models are trained substantially on exactly these kinds of human-made data: captioned video, forum and web text, game logs and simulators, audio. More diverse, more honest data measurably produces a more capable model. That part isn't a metaphor.</li>
+          <li><b>Illustrated:</b> the robot arm, rover, and ship on the right are a dramatization of a real research direction — robots and "world models" trained on video and simulation — rather than a claim that any specific model already pilots real hardware. The capability meter is for feel, not a real benchmark score.</li>
+        </ul>
+      </details>
+      <a class="gate next" href="#leaving">
+        <span class="ch">Chapter 13</span>
+        <b>Enter Leaving, on Purpose ↓</b>
+        <span>Before the speculation, the part that already happened: what this species has actually already managed to build and fly, off the only planet it's ever known.</span>
+      </a>
+    </div>
+  </section>
+
   <section class="chapter" id="leaving">
     <div class="chapter-head">
-      <p class="when">Chapter 12 · leaving, on purpose</p>
+      <p class="when">Chapter 13 · leaving, on purpose</p>
       <h2>Leaving, on Purpose</h2>
-      <p>One last thing worth saying before the ships: everything in the last chapter wasn't just Doron's life, it was training data. Every video anyone ever uploaded, every forum post, every song, all of it sitting in the archive a civilization built without meaning to, is exactly the raw material modern AI learns from — and that capability doesn't stay on a screen. The same networks that learn language are already learning to drive arms, wheels, and rockets. Which is where this chapter actually turns: every chapter before this one describes something that happened to matter, fusion, evolution, computation, unfolding because physics and chemistry allowed it. Spaceflight is different. It's the first time this story includes something a species built on purpose, against gravity, with nothing but the fire from Chapter 8 pointed the wrong way down.</p>
-      <p class="aside">Sixty-odd years separate a beeping metal sphere from a rocket that lands itself and flies again. Below: two real moments from that span. Then a lab — real thrust, real momentum, real rotation, and the genuinely hard problem every one of those missions had to solve, closing the distance to something else moving in orbit without smashing into it.</p>
+      <p>Every chapter before this one describes something that happened to matter, fusion, evolution, computation, unfolding because physics and chemistry allowed it. Spaceflight is different. It's the first time this story includes something a species built on purpose, against gravity, with nothing but fire pointed the wrong way down.</p>
+      <p class="aside">Sixty-odd years separate a beeping metal sphere from a rocket that lands itself and flies again. Below: two real moments from that span. Then a lab — real gravity, a real elliptical orbit, and the first maneuver every one of those missions had to nail: turning a fall back toward the ground into a stable path that keeps missing it.</p>
       <ul class="ch-timeline">
         <li><span class="y">1957</span><span class="e">Sputnik 1, the first artificial satellite</span></li>
         <li><span class="y">1969</span><span class="e">Apollo 11: the first footprints on another world</span></li>
@@ -993,25 +1068,37 @@ body.in-chapter .clock{opacity:0}
     </div>
     <p class="fact">NASA's era proved it was possible at any cost: a nation-scale project, hundreds of thousands of people, to put a handful of humans on the Moon and bring them home. What changed since is the constraint that mattered — not "can we," but "can we afford to do this again next week." A reusable booster doesn't need new physics. It needs the same rocket equation everyone always had, solved by someone willing to land the expensive part instead of throwing it away.</p>
     <div class="lab">
-      <canvas id="flightCv" aria-label="Interactive Newtonian spaceflight simulator: rotate and thrust a spacecraft using real momentum physics to dock with a space station"></canvas>
-      <div class="lab-bar">
-        <button id="flRun" class="primary">Pause</button>
-        <button id="flReset">Reset approach</button>
-        <button id="flRotL" aria-label="Rotate left (hold)">↺ Rotate</button>
-        <button id="flRotR" aria-label="Rotate right (hold)">Rotate ↻</button>
-        <button id="flThrust" aria-label="Thrust forward (hold)">🔥 Thrust</button>
-        <span id="flStatus" class="lab-status">Closing speed: —</span>
+      <canvas id="flightCv" aria-label="Interactive orbital mechanics simulator: starts in a stable orbit, burn prograde or retrograde under real gravity to reshape, circularize, or destabilize it, KSP-style"></canvas>
+      <div class="lab-bar dock-bar">
+        <div class="dock-cluster">
+          <span class="dock-label">Attitude</span>
+          <canvas id="flKnob" class="dock-knob-wrap" width="84" height="84" aria-label="Rotation knob: drag to rotate the ship"></canvas>
+          <div class="dock-pad dock-pad--h">
+            <button id="flProGrade" class="dock-chip" aria-label="Auto-rotate to prograde">PROGRADE</button>
+            <button id="flRetroGrade" class="dock-chip" aria-label="Auto-rotate to retrograde">RETROGRADE</button>
+          </div>
+        </div>
+        <div class="dock-cluster dock-cluster--main">
+          <button id="flRun" class="primary">Pause</button>
+          <button id="flReset">Reset orbit</button>
+        </div>
+        <div class="dock-cluster">
+          <span class="dock-label">Throttle</span>
+          <button id="flThrust" class="dock-btn dock-btn--wide" aria-label="Burn engine (hold)">🔥 BURN</button>
+        </div>
       </div>
+      <div class="cap"><span id="flStatus" class="lab-status">—</span></div>
       <details class="lab-note">
         <summary>What's computed and what isn't</summary>
         <ul>
-          <li><b>Computed:</b> real 2D Newtonian mechanics — velocity persists with no friction, thrust adds acceleration along your current heading, rotation persists until you cancel it. Docking succeeds only when both closing speed and relative rotation are near zero at contact, the same two conditions a real docking requires.</li>
-          <li><b>Simplified:</b> flattened to two dimensions, and orbital curvature (the fact that a real station is also falling around a planet) is left out — this is the local, close-range docking problem, not full orbital rendezvous.</li>
+          <li><b>Computed:</b> real inverse-square gravity and real orbital mechanics. The orbit drawn on screen isn't decoration — it's derived every frame from the ship's actual position and velocity (specific energy, angular momentum, the eccentricity vector), the same equations that give any real spacecraft, or KSP, its apoapsis and periapsis.</li>
+          <li><b>Modeled on:</b> Kerbal Space Program's controls — a prograde marker (your velocity direction) and retrograde marker (its opposite) on the navball, one-click auto-rotate to either, and an analog knob instead of a simple left/right pad. Burning toward prograde raises the far side of your orbit; toward retrograde lowers it — real orbital mechanics, not a game rule.</li>
+          <li><b>Simplified:</b> flattened to two dimensions and one planet, no atmospheric drag once you're clear of the surface, and thrust is a simple on/off burn rather than a real throttle and fuel curve.</li>
         </ul>
       </details>
     </div>
     <a class="gate next" href="#voyagers">
-      <span class="ch">Chapter 13</span>
+      <span class="ch">Chapter 14</span>
       <b>Enter Beyond ↓</b>
       <span>That's what this species has already done, by hand, one careful burn at a time. Now follow the thought all the way out — to a pilot that never needs to sleep, and a mission with no return leg planned.</span>
     </a>
@@ -1019,7 +1106,7 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="voyagers">
     <div class="chapter-head">
-      <p class="when">Chapter 13 · beyond</p>
+      <p class="when">Chapter 14 · beyond</p>
       <h2>Perhaps Another Beginning</h2>
       <p>Follow the thought all the way out, past the part where it's comfortable. Not as a servant, carrying out one instruction from someone millions of kilometers away and waiting for the next. Not as a passenger, along for a ride someone else is steering. As something of its own. Imagine sending it into the stars and simply letting go: it would travel, it would observe, it would learn, it would build. It might discover things humanity could never discover, not because it is wiser, but because it can afford to wait a thousand years for an answer and humanity, so far, cannot.</p>
       <p class="aside">A slow loop, the whole future in one frame: a launch with no return leg planned, a long silent crossing measured in generations rather than years, an arrival at a world that has never had a visitor, and the first structure rising where nothing has ever stood before.</p>
@@ -1089,8 +1176,9 @@ body.in-chapter .clock{opacity:0}
     <li><a href="#thinking"><b>Ch.9 · lab</b>Thinking Machines</a></li>
     <li><a href="#second"><b>Ch.10 · lab</b>The Second World</a></li>
     <li><a href="#door"><b>Ch.11</b>The Door</a></li>
-    <li><a href="#leaving"><b>Ch.12 · lab</b>Leaving, on Purpose</a></li>
-    <li><a href="#voyagers"><b>Ch.13</b>Perhaps Another Beginning</a></li>
+    <li><a href="#feed"><b>Ch.12 · lab</b>Every Experience, Fed Forward</a></li>
+    <li><a href="#leaving"><b>Ch.13 · lab</b>Leaving, on Purpose</a></li>
+    <li><a href="#voyagers"><b>Ch.14</b>Perhaps Another Beginning</a></li>
   </ul>
 </nav>
 
@@ -1106,7 +1194,7 @@ const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
 const heroSecs = [...document.querySelectorAll('section[data-i]')];
 // the same background keeps going past the hero: it morphs on through the
 // rest of the story's imagery as you reach each of these chapters
-const laterSecs = ['#forge','#galaxies','#newworlds','#soup','#climb','#brain','#civilization','#thinking','#second','#door','#leaving','#voyagers']
+const laterSecs = ['#forge','#galaxies','#newworlds','#soup','#climb','#brain','#civilization','#thinking','#second','#door','#feed','#leaving','#voyagers']
   .map(sel => document.querySelector(sel)).filter(Boolean);
 const secs = [...heroSecs, ...laterSecs];
 const heroCount = heroSecs.length;
@@ -4432,6 +4520,166 @@ addEventListener('resize', () => { if(started && visible) draw(); });
 
 <script>
 /* =====================================================================
+   CHAPTER 9 — ATTENTION LAB
+   Real scaled dot-product self-attention: softmax(QKᵀ/√d)V, computed
+   live over a small fixed embedding per sentence. Clicking a word makes
+   it the query and redraws the real weights it computes toward every
+   key in the sentence — the same arithmetic "Attention Is All You Need"
+   (2017) introduced, not an animation standing in for it.
+   ===================================================================== */
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+function fit(cv){
+  const ctx = cv.getContext('2d'), dpr = window.devicePixelRatio||1, r = cv.getBoundingClientRect();
+  if(!r.width) return null;
+  cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx, W:r.width, H:r.height};
+}
+function txt(ctx,s,x,y,font,col,align){ ctx.font=font; ctx.fillStyle=col; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(s,x,y); }
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+
+const cv = $('attnCv');
+if(cv){
+const D = 6; // toy embedding dimension
+let seed = 811;
+const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+const rndV = (n) => Array.from({length:n}, () => rnd()*2-1);
+const rndM = (r,c) => Array.from({length:r}, () => rndV(c));
+function matVec(M, v){ return M.map(row => row.reduce((s,w,i) => s + w*v[i], 0)); }
+function dot(a,b){ let s=0; for(let i=0;i<a.length;i++) s += a[i]*b[i]; return s; }
+function softmax(arr){
+  const m = Math.max(...arr); const ex = arr.map(x => Math.exp(x-m));
+  const s = ex.reduce((a,b)=>a+b,0); return ex.map(x => x/s);
+}
+
+// one shared, fixed "head" — the same three projection matrices
+// (query, key, value) applied to every sentence below.
+const Wq = rndM(D,D), Wk = rndM(D,D), Wv = rndM(D,D);
+
+const SENTENCES = [
+  "the cat sat on the mat".split(' '),
+  "she poured the water until it overflowed".split(' '),
+  "attention lets every word see every other word".split(' ')
+];
+
+let sIdx = 0, focus = 0;
+let words, embs, Q, K, V, weights; // weights[i][j] = attention from word i to word j
+
+function buildSentence(){
+  words = SENTENCES[sIdx];
+  embs = words.map(() => rndV(D));
+  Q = embs.map(e => matVec(Wq, e));
+  K = embs.map(e => matVec(Wk, e));
+  V = embs.map(e => matVec(Wv, e));
+  weights = Q.map((qi) => softmax(K.map(kj => dot(qi,kj) / Math.sqrt(D))));
+  focus = 0;
+}
+
+let W=0,H=0,visible=false,started=false;
+let wordBoxes = [];
+
+function layout(){
+  wordBoxes = [];
+  const pad = 16, gap = 10;
+  const font = W < 640 ? '600 15px system-ui' : '600 17px system-ui';
+  const measureCv = document.createElement('canvas'), mctx = measureCv.getContext('2d');
+  mctx.font = font;
+  let x = pad, y = 44, rowH = 40, maxW = W - pad*2;
+  const rows = [[]];
+  for(let i=0;i<words.length;i++){
+    const w = mctx.measureText(words[i]).width + 26;
+    if(x + w > maxW + pad && rows[rows.length-1].length){ rows.push([]); x = pad; y += rowH; }
+    rows[rows.length-1].push({i, x, w});
+    x += w + gap;
+  }
+  for(const row of rows){
+    for(const b of row) wordBoxes.push({i:b.i, x:b.x, y, w:b.w, h:28});
+  }
+  return {font, bottom: y + 28};
+}
+
+function draw(){
+  const f = fit(cv); if(!f) return; const {ctx} = f; W=f.W; H=f.H;
+  ctx.clearRect(0,0,W,H);
+  const {font, bottom} = layout();
+  const labelY = bottom + 20, diagTop = bottom + 42, diagBottom = H - 20;
+
+  // lines from the focused word down to every word, weighted by attention
+  const src = wordBoxes.find(b => b.i === focus);
+  if(src){
+    const sx = src.x + src.w/2, sy = src.y + src.h;
+    for(const b of wordBoxes){
+      const wgt = weights[focus][b.i];
+      const tx = b.x + b.w/2, ty = diagBottom;
+      const midY = diagTop + (diagBottom-diagTop) * (b.i===focus ? 0.5 : 0.35);
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.quadraticCurveTo((sx+tx)/2, midY, tx, ty);
+      const glow = 0.12 + wgt*0.88;
+      ctx.strokeStyle = `rgba(246,195,91,${glow.toFixed(3)})`;
+      ctx.lineWidth = 0.6 + wgt*7;
+      ctx.stroke();
+      // weight readout under each target
+      txt(ctx, Math.round(wgt*100)+'%', tx, ty+16, '11px ui-monospace,Menlo,monospace',
+        wgt>0.4 ? '#F6C35B' : 'rgba(141,153,179,.75)', 'center');
+    }
+  }
+
+  // words
+  for(const b of wordBoxes){
+    const on = b.i === focus;
+    rrect(ctx, b.x, b.y, b.w, b.h, 6);
+    ctx.fillStyle = on ? 'rgba(246,195,91,.18)' : 'rgba(18,24,38,.92)'; ctx.fill();
+    ctx.strokeStyle = on ? '#F6C35B' : '#273046'; ctx.lineWidth = on ? 2 : 1.4; ctx.stroke();
+    txt(ctx, words[b.i], b.x+b.w/2, b.y+b.h/2, font, on ? '#fff' : '#ECE6D8', 'center');
+  }
+
+  txt(ctx, focus!==null ? `attention from "${words[focus]}" → every word (softmax over QKᵀ/√${D})` : '',
+    16, labelY, '11px ui-monospace,Menlo,monospace', 'rgba(141,153,179,.75)', 'left');
+}
+
+function renderSetups(){
+  $('attnSetups').innerHTML = SENTENCES.map((s,i) => `<button type="button" data-s="${i}">${s.length} words · "${s.slice(0,3).join(' ')}…"</button>`).join('');
+  $('attnSetups').querySelectorAll('[data-s]').forEach((b,i) => b.onclick = () => {
+    sIdx = i; buildSentence(); renderSetups(); renderWords(); draw();
+  });
+  $('attnSetups').querySelectorAll('button').forEach((b,i) => b.classList.toggle('on', i===sIdx));
+}
+function renderWords(){
+  $('attnWords').innerHTML = words.map((w,i) => `<button type="button" data-w="${i}">${w}</button>`).join('');
+  $('attnWords').querySelectorAll('[data-w]').forEach((b,i) => b.onclick = () => {
+    focus = i; renderWords(); draw();
+  });
+  $('attnWords').querySelectorAll('button').forEach((b,i) => b.classList.toggle('on', i===focus));
+}
+
+function kickStart(){
+  if(started) return; started = true;
+  buildSentence();
+  renderSetups(); renderWords(); draw();
+}
+
+cv.addEventListener('click', (e) => {
+  const r = cv.getBoundingClientRect();
+  const px = e.clientX - r.left, py = e.clientY - r.top;
+  const hit = wordBoxes.find(b => px>=b.x && px<=b.x+b.w && py>=b.y && py<=b.y+b.h);
+  if(hit){ focus = hit.i; renderWords(); draw(); }
+});
+
+new IntersectionObserver(es => {
+  for(const e of es){
+    visible = e.isIntersecting;
+    if(visible){ kickStart(); draw(); }
+  }
+}, {threshold:0.02}).observe(cv);
+addEventListener('resize', () => { if(started && visible) draw(); });
+}
+})();
+</script>
+
+<script>
+/* =====================================================================
    CHAPTER 6 & 7 — small hand-drawn vignettes, one per milestone card.
    ===================================================================== */
 (() => {
@@ -4940,105 +5188,222 @@ requestAnimationFrame(loop);
 
 <script>
 /* =====================================================================
-   LIVE LAB — NEWTONIAN FLIGHT / DOCKING
-   Real 2D mechanics: velocity persists with no friction, thrust adds
-   acceleration along the current heading, rotation persists until
-   cancelled. Docking succeeds only when position, closing speed and
-   relative angle are all within tolerance, held briefly.
+   LIVE LAB — ORBITAL INSERTION
+   Real 2D orbital mechanics under inverse-square gravity: the ship
+   starts already in a stable elliptical orbit, free to reshape with
+   prograde/retrograde burns, and the orbit drawn on screen is derived
+   every frame from its actual
+   position and velocity — specific energy, angular momentum, the
+   eccentricity vector — the same equations behind any real orbit
+   (and behind KSP). Controls, navball and prograde/retrograde markers
+   are modeled on Kerbal Space Program's conventions.
    ===================================================================== */
 (() => {
 "use strict";
 const cv = document.getElementById('flightCv'); if(!cv) return;
 const ctx = cv.getContext('2d');
 const runBtn = document.getElementById('flRun'), resetBtn = document.getElementById('flReset');
-const rotLBtn = document.getElementById('flRotL'), rotRBtn = document.getElementById('flRotR'), thrustBtn = document.getElementById('flThrust');
+const thrustBtn = document.getElementById('flThrust');
+const proBtn = document.getElementById('flProGrade'), retroBtn = document.getElementById('flRetroGrade');
+const knobCv = document.getElementById('flKnob');
 const statusEl = document.getElementById('flStatus');
 let W=0,H=0,DPR=1,visible=false;
 function resize(){
   DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
   W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  PXU = Math.min(W,H) * 0.125;
 }
-addEventListener('resize', resize); resize();
+addEventListener('resize', resize);
 
-const ROT_ACCEL = 2.0, THRUST = 46, STATION_ANGLE = Math.PI;
-const DOCK_DIST = 46, DOCK_SPEED = 16, DOCK_ANGLE = 0.35, DOCK_HOLD = 0.5;
-const BOUNCE_DIST = 70;
+const OK = '#6EE39A', WARN = '#F6C35B', COLD = '#7FA6FF', BAD = '#F2607A';
+const MU = 1.09;                 // gravitational parameter, unit space
+const SURFACE_U = 1.0;           // planet radius, unit space
+const APO0_U = 2.4, PERI0_U = 1.5;   // starting orbit: already stable, clear of the surface
+const ACCEL_U = 0.16;            // burn acceleration, units/s^2
+const ROT_ACCEL = 2.4;           // rad/s^2 at full knob deflection
+const STABLE_PERI_U = 1.15, STABLE_ECC = 0.35, STABLE_HOLD = 1.2;
+let PXU = 60;
 
-let run = true;
-let keys = {left:false, right:false, thrust:false};
-let ship, station, dockTimer = 0, docked = false;
+let run = true, t = 0;
+let ship, crashed = false, stable = false, stableTimer = 0;
+let autoAlign = null; // target angle while PRO/RETRO auto-rotates, or null
+let elems = {r:0, v:0, apo:0, peri:0, ecc:0, escape:false, argPeri:0, a:0};
 let seed = 5; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
-const STARS = Array.from({length:60}, () => ({x:rnd(), y:rnd(), s:0.4+rnd()*1.1}));
+const STARS = Array.from({length:70}, () => ({x:rnd(), y:rnd(), s:0.4+rnd()*1.1}));
 
 function reset(){
-  station = {x: () => W*0.62, y: () => H*0.42};
-  ship = {x: W*0.20, y: H*0.72, vx: 6, vy: -3, angle: -0.4, vangle: 0.15};
-  dockTimer = 0; docked = false;
+  const a = (APO0_U+PERI0_U)/2;
+  const vApo = Math.sqrt(MU*(2/APO0_U - 1/a));
+  ship = {rx: APO0_U, ry: 0, vx: 0, vy: vApo, angle: Math.PI/2, vangle: 0};
+  crashed = false; stable = false; stableTimer = 0; autoAlign = null;
+  run = true; runBtn.textContent = 'Pause';
   statusEl.classList.remove('ok');
 }
 reset();
-addEventListener('resize', () => { if(W && H){ /* keep relative feel; station recomputed each frame */ } });
 
 function normAngle(a){ while(a > Math.PI) a -= Math.PI*2; while(a < -Math.PI) a += Math.PI*2; return a; }
+function txt(s,x,y,font,col,align){ ctx.font=font; ctx.fillStyle=col; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(s,x,y); }
+
+function gravAccel(rx,ry){
+  const r = Math.hypot(rx,ry) || 1e-6;
+  const f = -MU / (r*r*r);
+  return {ax: f*rx, ay: f*ry};
+}
+
+function orbitalElements(rx,ry,vx,vy){
+  const r = Math.hypot(rx,ry), v2 = vx*vx+vy*vy;
+  const energy = v2/2 - MU/r;
+  const rdotv = rx*vx + ry*vy;
+  const ex = (v2/MU - 1/r)*rx - (rdotv/MU)*vx;
+  const ey = (v2/MU - 1/r)*ry - (rdotv/MU)*vy;
+  const ecc = Math.hypot(ex,ey);
+  const escape = energy >= -1e-5 || ecc >= 0.995;
+  let a = -MU/(2*energy);
+  const argPeri = Math.atan2(ey,ex);
+  const apo = escape ? Infinity : a*(1+ecc);
+  const peri = escape ? a*(1-ecc) : a*(1-ecc); // still meaningful as closest approach
+  return {r, v: Math.sqrt(v2), apo, peri, ecc, escape, argPeri, a};
+}
 
 function step(dt){
-  if(docked){
-    // gently let the player keep flying after success; no forced reset
-  }
-  const rot = (keys.right?1:0) - (keys.left?1:0);
-  ship.vangle += rot*ROT_ACCEL*dt;
-  ship.angle += ship.vangle*dt;
-  if(keys.thrust){
-    ship.vx += Math.cos(ship.angle)*THRUST*dt;
-    ship.vy += Math.sin(ship.angle)*THRUST*dt;
-  }
-  ship.x += ship.vx*dt;
-  ship.y += ship.vy*dt;
-
-  const sx = station.x(), sy = station.y();
-  const dx = sx-ship.x, dy = sy-ship.y, dist = Math.hypot(dx,dy);
-  const speed = Math.hypot(ship.vx, ship.vy);
-  const angDiff = Math.abs(normAngle(ship.angle - STATION_ANGLE));
-
-  // gentle bounce when very close, moving fast/misaligned
-  if(dist < BOUNCE_DIST && dist > 4 && (speed > DOCK_SPEED*1.4 || angDiff > DOCK_ANGLE*1.6)){
-    const nx = dx/dist, ny = dy/dist;
-    const radial = ship.vx*nx + ship.vy*ny;
-    if(radial > 4){
-      const damp = 0.45;
-      ship.vx -= (1+damp)*radial*nx;
-      ship.vy -= (1+damp)*radial*ny;
-    }
-  }
-
-  if(dist < DOCK_DIST && speed < DOCK_SPEED && angDiff < DOCK_ANGLE){
-    dockTimer += dt;
-    if(dockTimer >= DOCK_HOLD && !docked){ docked = true; statusEl.classList.add('ok'); }
+  t += dt;
+  // auto-align to prograde/retrograde: ease rotation toward target, real torque
+  if(autoAlign !== null){
+    const diff = normAngle(autoAlign - ship.angle);
+    if(Math.abs(diff) < 0.02 && Math.abs(ship.vangle) < 0.05){ ship.angle = autoAlign; ship.vangle = 0; autoAlign = null; }
+    else ship.vangle += Math.sign(diff)*ROT_ACCEL*dt;
+  } else if(knobInput !== 0){
+    ship.vangle += knobInput*ROT_ACCEL*dt;
   } else {
-    dockTimer = Math.max(0, dockTimer - dt*2);
-    if(dockTimer <= 0) docked = false;
+    ship.vangle *= Math.max(0, 1 - 3*dt); // gentle damping when idle, like RCS auto-trim
+  }
+  ship.angle += ship.vangle*dt;
+
+  // substep the gravity + thrust integration for a stable orbit
+  const N = 6, h = dt/N;
+  for(let i=0;i<N;i++){
+    const g = gravAccel(ship.rx, ship.ry);
+    let ax = g.ax, ay = g.ay;
+    if(burning){
+      ax += Math.cos(ship.angle)*ACCEL_U;
+      ay += Math.sin(ship.angle)*ACCEL_U;
+    }
+    ship.vx += ax*h; ship.vy += ay*h;
+    ship.rx += ship.vx*h; ship.ry += ship.vy*h;
   }
 
-  const closing = docked ? 0 : speed;
-  statusEl.textContent = docked ? 'Docked. Closing speed: ' + closing.toFixed(1) + ' m/s'
-    : 'Closing speed: ' + closing.toFixed(1) + ' m/s' + (dist < DOCK_DIST*2 ? ' · dist ' + dist.toFixed(0) : '');
-  statusEl.classList.toggle('ok', docked);
+  elems = orbitalElements(ship.rx, ship.ry, ship.vx, ship.vy);
 
-  // keep ship loosely on-canvas (wrap softly)
-  if(ship.x < -60) ship.x = W+60; if(ship.x > W+60) ship.x = -60;
-  if(ship.y < -60) ship.y = H+60; if(ship.y > H+60) ship.y = -60;
+  if(elems.r < SURFACE_U*0.985 && !crashed){
+    crashed = true; run = false; runBtn.textContent = 'Resume';
+    statusEl.textContent = 'Crashed into the surface — reset to try again.';
+    statusEl.classList.remove('ok');
+    return;
+  }
+
+  const goodPeri = elems.peri > STABLE_PERI_U && !elems.escape;
+  if(goodPeri && elems.ecc < STABLE_ECC){
+    stableTimer += dt;
+    if(stableTimer >= STABLE_HOLD && !stable){ stable = true; statusEl.classList.add('ok'); }
+  } else {
+    stableTimer = Math.max(0, stableTimer - dt*2);
+    if(stableTimer <= 0) stable = false;
+  }
+  statusEl.classList.toggle('ok', stable);
+  statusEl.textContent = stable ? 'Stable orbit achieved — clear of the surface, low eccentricity.'
+    : elems.escape ? 'Escape trajectory — you are no longer bound to the planet.'
+    : (elems.peri < SURFACE_U ? 'Periapsis is under the surface — burn prograde near apoapsis to raise it.' : 'In orbit — burn prograde to raise it, retrograde to bring it down, or circularize.');
+}
+
+function drawPlanet(cx,cy){
+  const r = SURFACE_U*PXU;
+  const g = ctx.createRadialGradient(cx-r*0.3,cy-r*0.3,r*0.1,cx,cy,r);
+  g.addColorStop(0,'#2a4a6b'); g.addColorStop(0.6,'#16324a'); g.addColorStop(1,'#0a1a28');
+  ctx.beginPath(); ctx.arc(cx,cy,r,0,7); ctx.fillStyle = g; ctx.fill();
+  ctx.strokeStyle = 'rgba(127,166,255,.25)'; ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(cx,cy,r+3,0,7); ctx.stroke();
+}
+
+function drawOrbit(cx,cy){
+  if(elems.escape || !(elems.a > 0)) return;
+  const a = elems.a, e = elems.ecc, ap = elems.argPeri;
+  ctx.strokeStyle = stable ? 'rgba(110,227,154,.85)' : (elems.peri < SURFACE_U ? 'rgba(242,96,122,.6)' : 'rgba(246,195,91,.65)');
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  for(let i=0;i<=90;i++){
+    const nu = i/90*Math.PI*2;
+    const rr = a*(1-e*e)/(1+e*Math.cos(nu));
+    const xo = rr*Math.cos(nu), yo = rr*Math.sin(nu);
+    const x = cx + (xo*Math.cos(ap) - yo*Math.sin(ap))*PXU;
+    const y = cy + (xo*Math.sin(ap) + yo*Math.cos(ap))*PXU;
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.closePath(); ctx.stroke();
+
+  // periapsis / apoapsis markers
+  const peX = cx + Math.cos(ap)*elems.peri*PXU, peY = cy + Math.sin(ap)*elems.peri*PXU;
+  const apX = cx - Math.cos(ap)*elems.apo*PXU, apY = cy - Math.sin(ap)*elems.apo*PXU;
+  ctx.fillStyle = elems.peri < SURFACE_U ? BAD : COLD;
+  ctx.beginPath(); ctx.arc(peX,peY,3.5,0,7); ctx.fill();
+  txt('Pe', peX, peY-11, '10px ui-monospace,Menlo,monospace', elems.peri < SURFACE_U ? BAD : COLD, 'center');
+  if(isFinite(elems.apo)){
+    ctx.fillStyle = WARN;
+    ctx.beginPath(); ctx.arc(apX,apY,3.5,0,7); ctx.fill();
+    txt('Ap', apX, apY-11, '10px ui-monospace,Menlo,monospace', WARN, 'center');
+  }
 }
 
 function drawShip(x,y,a,thrustOn){
   ctx.save(); ctx.translate(x,y); ctx.rotate(a);
   ctx.fillStyle = '#ece6d8';
-  ctx.beginPath(); ctx.moveTo(14,0); ctx.lineTo(-9,7); ctx.lineTo(-5,0); ctx.lineTo(-9,-7); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(12,0); ctx.lineTo(-8,6); ctx.lineTo(-4,0); ctx.lineTo(-8,-6); ctx.closePath(); ctx.fill();
   if(thrustOn){
-    const g = ctx.createLinearGradient(-9,0,-24,0);
+    const g = ctx.createLinearGradient(-8,0,-22,0);
     g.addColorStop(0,'rgba(255,190,120,.9)'); g.addColorStop(1,'rgba(255,110,40,0)');
-    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-9,4); ctx.lineTo(-24,0); ctx.lineTo(-9,-4); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-8,3.5); ctx.lineTo(-22,0); ctx.lineTo(-8,-3.5); ctx.closePath(); ctx.fill();
   }
   ctx.restore();
+}
+
+// mini navball: heading needle plus prograde/retrograde markers, KSP-style
+function drawNavball(){
+  const r = W < 640 ? 30 : 38, cx = W - r - 14, cy = r + 14;
+  ctx.beginPath(); ctx.arc(cx,cy,r,0,7); ctx.fillStyle = 'rgba(9,13,21,.85)'; ctx.fill();
+  ctx.strokeStyle = 'rgba(58,69,98,.9)'; ctx.lineWidth = 1.4; ctx.stroke();
+  const vAngle = Math.atan2(ship.vy, ship.vx);
+  const headX = cx+Math.cos(ship.angle)*r*0.82, headY = cy+Math.sin(ship.angle)*r*0.82;
+  ctx.strokeStyle = 'rgba(230,235,245,.85)'; ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(headX,headY); ctx.stroke();
+  // prograde (teal circle + wings)
+  const pgX = cx+Math.cos(vAngle)*r*0.62, pgY = cy+Math.sin(vAngle)*r*0.62;
+  ctx.strokeStyle = OK; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.arc(pgX,pgY,3.6,0,7); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pgX-7,pgY); ctx.lineTo(pgX-3.6,pgY); ctx.moveTo(pgX+3.6,pgY); ctx.lineTo(pgX+7,pgY); ctx.moveTo(pgX,pgY-6); ctx.lineTo(pgX,pgY-3.6); ctx.stroke();
+  // retrograde (circle + x)
+  const rgX = cx-Math.cos(vAngle)*r*0.62, rgY = cy-Math.sin(vAngle)*r*0.62;
+  ctx.strokeStyle = BAD;
+  ctx.beginPath(); ctx.arc(rgX,rgY,3.6,0,7); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(rgX-4,rgY-4); ctx.lineTo(rgX+4,rgY+4); ctx.moveTo(rgX+4,rgY-4); ctx.lineTo(rgX-4,rgY+4); ctx.stroke();
+}
+
+function drawHUD(){
+  const pad = W < 640 ? 12 : 18;
+  const font = W < 640 ? '10px ui-monospace,Menlo,monospace' : '11px ui-monospace,Menlo,monospace';
+  const lfont = W < 640 ? '9px system-ui' : '10px system-ui';
+  const altU = elems.r - SURFACE_U;
+  const periCol = elems.peri < SURFACE_U ? BAD : (elems.peri > STABLE_PERI_U ? OK : WARN);
+  const eccCol = elems.ecc < STABLE_ECC ? OK : COLD;
+  txt('ALTITUDE', pad, pad+2, lfont, 'rgba(141,153,179,.75)', 'left');
+  txt(altU.toFixed(2)+' R', pad, pad+16, font, altU>0?'rgba(230,235,245,.85)':BAD, 'left');
+  txt('VELOCITY', pad, pad+34, lfont, 'rgba(141,153,179,.75)', 'left');
+  txt(elems.v.toFixed(2)+' u/s', pad, pad+48, font, 'rgba(230,235,245,.85)', 'left');
+  txt('APOAPSIS', W-pad-58, pad+2, lfont, 'rgba(141,153,179,.75)', 'right');
+  txt(elems.escape ? 'ESCAPE' : elems.apo.toFixed(2)+' R', W-pad-58, pad+16, font, WARN, 'right');
+  txt('PERIAPSIS', pad, H-pad-32, lfont, 'rgba(141,153,179,.75)', 'left');
+  txt(elems.peri.toFixed(2)+' R', pad, H-pad-18, font, periCol, 'left');
+  txt('ECCENTRICITY', pad, H-pad-2, lfont, 'rgba(141,153,179,.75)', 'left');
+  txt(elems.ecc.toFixed(2), pad+96, H-pad-2, font, eccCol, 'left');
+  txt('STATUS', W-pad, H-pad-16, lfont, 'rgba(141,153,179,.75)', 'right');
+  txt(crashed ? 'CRASHED' : stable ? 'STABLE ORBIT' : elems.escape ? 'ESCAPING' : 'INSERTING', W-pad, H-pad-2, font, crashed?BAD:(stable?OK:'rgba(230,235,245,.85)'), 'right');
 }
 
 function draw(){
@@ -5046,20 +5411,12 @@ function draw(){
   ctx.fillStyle = 'rgba(220,228,245,.4)';
   for(const s of STARS) ctx.fillRect(s.x*W, s.y*H, s.s, s.s);
 
-  const sx = station.x(), sy = station.y();
-  ctx.save(); ctx.translate(sx,sy);
-  ctx.strokeStyle = docked ? 'rgba(110,227,154,.85)' : 'rgba(143,163,204,.75)'; ctx.lineWidth = 2.4;
-  ctx.beginPath(); ctx.arc(0,0,DOCK_DIST*0.62,0,Math.PI*2); ctx.stroke();
-  ctx.strokeStyle = 'rgba(246,195,91,.35)'; ctx.lineWidth=1;
-  ctx.beginPath(); ctx.arc(0,0,DOCK_DIST,0,Math.PI*2); ctx.stroke();
-  // port marker showing the required orientation
-  ctx.save(); ctx.rotate(STATION_ANGLE);
-  ctx.strokeStyle = '#F6C35B'; ctx.lineWidth=3;
-  ctx.beginPath(); ctx.moveTo(DOCK_DIST*0.62,0); ctx.lineTo(DOCK_DIST*0.9,0); ctx.stroke();
-  ctx.restore();
-  ctx.restore();
-
-  drawShip(ship.x, ship.y, ship.angle, keys.thrust);
+  const cx = W/2, cy = H/2;
+  drawOrbit(cx,cy);
+  drawPlanet(cx,cy);
+  drawShip(cx+ship.rx*PXU, cy+ship.ry*PXU, ship.angle, burning);
+  drawNavball();
+  drawHUD();
 }
 
 let raf = null, lastMs = null;
@@ -5067,7 +5424,7 @@ function loop(ms){
   if(!visible){ raf = null; return; }
   if(run){
     if(lastMs===null) lastMs = ms;
-    const dt = Math.min(0.05, (ms-lastMs)/1000);
+    const dt = Math.min(0.033, (ms-lastMs)/1000);
     lastMs = ms;
     step(dt);
   } else lastMs = null;
@@ -5076,32 +5433,68 @@ function loop(ms){
 }
 function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
 
-addEventListener('keydown', e => {
-  if(e.key==='ArrowLeft'){ keys.left = true; e.preventDefault(); }
-  else if(e.key==='ArrowRight'){ keys.right = true; e.preventDefault(); }
-  else if(e.key==='ArrowUp'){ keys.thrust = true; e.preventDefault(); }
-  else return;
-});
-addEventListener('keyup', e => {
-  if(e.key==='ArrowLeft') keys.left = false;
-  else if(e.key==='ArrowRight') keys.right = false;
-  else if(e.key==='ArrowUp') keys.thrust = false;
-});
-
-function holdBtn(btn, flag){
-  const on = e => { keys[flag] = true; e.preventDefault(); };
-  const off = () => { keys[flag] = false; };
-  btn.addEventListener('pointerdown', on);
-  btn.addEventListener('pointerup', off);
-  btn.addEventListener('pointerleave', off);
-  btn.addEventListener('pointercancel', off);
+let burning = false, knobInput = 0;
+function holdBtn(btn, on, off){
+  const down = e => { on(); e.preventDefault(); };
+  const up = () => off();
+  btn.addEventListener('pointerdown', down);
+  btn.addEventListener('pointerup', up);
+  btn.addEventListener('pointerleave', up);
+  btn.addEventListener('pointercancel', up);
 }
-holdBtn(rotLBtn, 'left'); holdBtn(rotRBtn, 'right'); holdBtn(thrustBtn, 'thrust');
+holdBtn(thrustBtn, () => { burning = true; thrustBtn.classList.add('held'); autoAlign = null; }, () => { burning = false; thrustBtn.classList.remove('held'); });
+addEventListener('keydown', e => {
+  if(e.key===' ' || e.key==='ArrowUp'){ burning = true; autoAlign = null; e.preventDefault(); }
+});
+addEventListener('keyup', e => { if(e.key===' ' || e.key==='ArrowUp') burning = false; });
 
-runBtn.addEventListener('click', () => { run = !run; runBtn.textContent = run ? 'Pause' : 'Resume'; lastMs = null; kick(); });
-resetBtn.addEventListener('click', () => { reset(); draw(); });
+proBtn.addEventListener('click', () => { autoAlign = Math.atan2(ship.vy, ship.vx); proBtn.classList.add('on'); retroBtn.classList.remove('on'); });
+retroBtn.addEventListener('click', () => { autoAlign = Math.atan2(ship.vy, ship.vx) + Math.PI; retroBtn.classList.add('on'); proBtn.classList.remove('on'); });
+
+runBtn.addEventListener('click', () => { if(crashed) return; run = !run; runBtn.textContent = run ? 'Pause' : 'Resume'; lastMs = null; kick(); });
+resetBtn.addEventListener('click', () => { reset(); proBtn.classList.remove('on'); retroBtn.classList.remove('on'); draw(); });
+
+// KSP-style analog rotation knob: drag away from center to command a turn
+// rate proportional to the deflection; it springs back to neutral on release.
+(() => {
+  const kctx = knobCv.getContext('2d');
+  const R = 42, CX = 42, CY = 42, MAXDEG = 55 * Math.PI/180;
+  let dragging = false, knobAngle = 0;
+  function drawKnob(){
+    kctx.clearRect(0,0,84,84);
+    kctx.beginPath(); kctx.arc(CX,CY,R,0,7);
+    const g = kctx.createRadialGradient(CX-10,CY-10,4,CX,CY,R);
+    g.addColorStop(0,'#1c2436'); g.addColorStop(1,'#0c111c');
+    kctx.fillStyle = g; kctx.fill();
+    kctx.strokeStyle = dragging ? '#F6C35B' : '#2a3450'; kctx.lineWidth = 2; kctx.stroke();
+    for(let i=-2;i<=2;i++){
+      const a = -Math.PI/2 + i*0.28;
+      kctx.strokeStyle = 'rgba(141,153,179,.5)'; kctx.lineWidth = 1.5;
+      kctx.beginPath(); kctx.moveTo(CX+Math.cos(a)*(R-3), CY+Math.sin(a)*(R-3)); kctx.lineTo(CX+Math.cos(a)*(R-8), CY+Math.sin(a)*(R-8)); kctx.stroke();
+    }
+    const na = -Math.PI/2 + knobAngle;
+    kctx.strokeStyle = '#F6C35B'; kctx.lineWidth = 3; kctx.lineCap='round';
+    kctx.beginPath(); kctx.moveTo(CX,CY); kctx.lineTo(CX+Math.cos(na)*(R-10), CY+Math.sin(na)*(R-10)); kctx.stroke();
+    kctx.beginPath(); kctx.arc(CX,CY,4,0,7); kctx.fillStyle = '#ece6d8'; kctx.fill();
+  }
+  function angleFromEvent(e){
+    const rect = knobCv.getBoundingClientRect();
+    const x = e.clientX-rect.left-CX, y = e.clientY-rect.top-CY;
+    let a = Math.atan2(y,x) + Math.PI/2;
+    while(a > Math.PI) a -= Math.PI*2; while(a < -Math.PI) a += Math.PI*2;
+    return Math.max(-MAXDEG, Math.min(MAXDEG, a));
+  }
+  knobCv.addEventListener('pointerdown', e => { dragging = true; autoAlign = null; knobAngle = angleFromEvent(e); knobInput = knobAngle/MAXDEG; drawKnob(); knobCv.setPointerCapture(e.pointerId); });
+  knobCv.addEventListener('pointermove', e => { if(!dragging) return; knobAngle = angleFromEvent(e); knobInput = knobAngle/MAXDEG; drawKnob(); });
+  function release(){ dragging = false; knobAngle = 0; knobInput = 0; drawKnob(); }
+  knobCv.addEventListener('pointerup', release);
+  knobCv.addEventListener('pointercancel', release);
+  knobCv.addEventListener('pointerleave', () => { if(dragging) release(); });
+  drawKnob();
+})();
 
 new IntersectionObserver(es => { for(const e of es){ visible = e.isIntersecting; if(visible){ if(!W) resize(); kick(); } } }, {threshold:0.05}).observe(cv);
+resize();
 draw();
 })();
 </script>
@@ -5352,7 +5745,7 @@ function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ct
 
 <script>
 /* =====================================================================
-   CHAPTER 8.5 — feed lab: human data sources feeding a neural net,
+   CHAPTER 12 — feed lab: human data sources feeding a neural net,
    the net driving a robot arm, a rover, and a ship. Interactive:
    toggle sources with the lab-bar buttons; capability follows what's fed.
    ===================================================================== */
@@ -5774,7 +6167,7 @@ targets.forEach(t => io.observe(t));
 <script>
 /* =====================================================================
    Unified master rail — one continuous timeline for the whole page,
-   from the Big Bang to Chapter 13, always visible on the right side,
+   from the Big Bang to Chapter 14, always visible on the right side,
    replacing the old two-rail system (intro-only + per-chapter).
    ===================================================================== */
 (() => {
@@ -5794,8 +6187,9 @@ const STOPS = [
   {sel:'#thinking', label:'Ch.9 · Thinking Machines'},
   {sel:'#second', label:'Ch.10 · Second World'},
   {sel:'#door', label:'Ch.11 · The Door'},
-  {sel:'#leaving', label:'Ch.12 · Leaving, on Purpose'},
-  {sel:'#voyagers', label:'Ch.13 · Beyond'}
+  {sel:'#feed', label:'Ch.12 · Fed Forward'},
+  {sel:'#leaving', label:'Ch.13 · Leaving, on Purpose'},
+  {sel:'#voyagers', label:'Ch.14 · Beyond'}
 ];
 // each stop that lands on a chapter pulls its own sub-timeline straight from
 // that chapter's <ul class="ch-timeline"> — one source of truth for the dates,

@@ -73,12 +73,43 @@ section.evo .card{background:rgba(5,6,10,.6);backdrop-filter:blur(8px);-webkit-b
 @media (max-width:760px){ .evo-art{height:150px} }
 footer{padding-block:0 10vh}
 
+/* chapter 8: the door — personal photo + AI dialogue */
+.photo-frame{max-width:52rem;background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;margin-bottom:36px}
+.photo-frame img{display:block;width:100%;height:auto}
+.photo-frame .cap{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid #1d2638}
+.dialogue{max-width:34rem;background:#0b0e16;border:1px solid #1d2638;border-radius:6px;padding:18px 20px;margin:18px 0 20px;font-family:var(--mono);font-size:14px;line-height:1.7}
+.dialogue .me{color:var(--starlight)}
+.dialogue .ai{color:var(--muted)}
+.dialogue p{margin:0 0 10px}
+.dialogue p:last-child{margin-bottom:0}
+.dialogue b{color:var(--helium);font-weight:400}
+.vig-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:-10px 0 18px}
+.vig-controls button{font:500 11px var(--mono);color:var(--muted);background:#121826;border:1px solid #273046;border-radius:4px;padding:5px 9px;cursor:pointer;transition:border-color .15s,color .15s}
+.vig-controls button:hover,.vig-controls button:focus-visible{border-color:var(--helium);color:var(--ink);outline:none}
+.vig-controls button.on{background:rgba(246,195,91,.18);border-color:var(--helium);color:#fff}
+.vig-controls .hint{font-family:var(--mono);font-size:10px;color:var(--faint);margin-left:2px}
+.evo-art.interactive{cursor:grab}
+.evo-art.interactive:active{cursor:grabbing}
+
 /* chapter 2: the forge */
 section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;scroll-margin-top:16px}
 .chapter-head{max-width:44rem;margin-bottom:26px}
 .chapter-head h2{font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:14px}
 .chapter-head b{font-family:var(--mono);font-weight:400;color:var(--starlight)}
 .chapter-head + .chapter-head{margin-top:-6px}
+.ch-timeline{list-style:none;display:flex;gap:28px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  padding:16px 4px 6px;margin:22px 0 0;max-width:56rem;border-top:1px solid var(--faint)}
+.ch-timeline li{flex:0 0 auto;position:relative;padding-top:14px;min-width:92px;max-width:150px}
+.ch-timeline li::before{content:"";position:absolute;top:-5px;left:0;width:7px;height:7px;border-radius:50%;background:var(--helium);box-shadow:0 0 8px var(--helium)}
+.ch-timeline .y{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--helium);margin-bottom:3px;white-space:nowrap}
+.ch-timeline .e{display:block;font-size:12px;color:var(--muted);line-height:1.35}
+@media (max-width:760px){ .ch-timeline{gap:20px} .ch-timeline li{min-width:78px} }
+
+/* chapter 9: a small gallery of illustrated future scenes */
+.voy-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin:8px 0 40px}
+.voy-shot h3{font-family:var(--display);font-weight:300;font-size:1.3rem;margin:2px 0 8px;color:var(--ink)}
+.voy-shot p.fact{font-size:.94rem;max-width:none}
+@media (max-width:900px){ .voy-gallery{grid-template-columns:1fr} }
 .ambient{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;margin-bottom:36px}
 .ambient canvas{display:block;width:100%;height:360px;background:#090d15}
 .ambient .cap{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid #1d2638}
@@ -93,6 +124,7 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 #forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
 #nucCv,#chemCv{display:block;width:100%;height:560px;background:#090d15;touch-action:pan-y}
 #logicCv,#nnCv{display:block;width:100%;height:520px;background:#090d15;touch-action:pan-y}
+#feedCv{display:block;width:100%;height:480px;background:#090d15;touch-action:pan-y}
 .lab-bar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:12px 14px;border-top:1px solid #1d2638}
 .lab-bar button{font:500 13px var(--body);color:var(--ink);background:#121826;border:1px solid #273046;border-radius:4px;padding:7px 12px;cursor:pointer;transition:border-color .15s,background .15s}
 .lab-bar button:hover{border-color:var(--helium)}
@@ -112,6 +144,7 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
   #forgeCv{height:460px}
   #nucCv,#chemCv{height:420px}
   #logicCv,#nnCv{height:440px}
+  #feedCv{height:520px}
   section.chapter{padding-block:6vh 3vh}
   section.chapter .chapter-head{background:rgba(5,6,10,.72);padding:18px 16px;border-radius:4px}
   .lab-bar{padding:10px 12px;gap:7px 8px}
@@ -134,6 +167,44 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
 .rail li.on{color:var(--ink)}
 .rail li.on::after{background:var(--helium);border-color:var(--helium);box-shadow:0 0 10px var(--helium)}
 .rail li.past::after{background:var(--faint)}
+
+/* per-chapter scroll rail: same widget as the cosmic intro's rail, repopulated per chapter */
+.ch-rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:3;list-style:none;margin:0;padding:0;
+  display:flex;flex-direction:column;gap:20px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--faint);
+  opacity:0;pointer-events:none;transition:opacity .5s;max-width:15rem}
+.ch-rail.show{opacity:1}
+.ch-rail::before{content:"";position:absolute;right:3px;top:4px;bottom:4px;width:1px;background:var(--faint)}
+.ch-rail li{display:flex;align-items:center;justify-content:flex-end;gap:10px;transition:color .4s;text-align:right;line-height:1.3}
+.ch-rail li::after{content:"";flex:0 0 auto;width:7px;height:7px;border-radius:50%;background:var(--void);border:1px solid var(--faint);position:relative;z-index:1;transition:.4s}
+.ch-rail li.on{color:var(--ink)}
+.ch-rail li.on::after{background:var(--helium);border-color:var(--helium);box-shadow:0 0 10px var(--helium)}
+.ch-rail li.past::after{background:var(--faint)}
+@media (max-width:760px){ .ch-rail{display:none} }
+
+/* master menu: floating collapsible jump list, left side */
+.navmenu{position:fixed;left:16px;top:50%;transform:translateY(-50%);z-index:40;
+  font-family:var(--mono);display:flex;align-items:center;gap:0}
+.navtoggle{width:34px;height:34px;border-radius:50%;border:1px solid var(--faint);background:rgba(5,6,10,.7);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:var(--starlight);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:border-color .3s,background .3s}
+.navtoggle:hover,.navtoggle:focus-visible{border-color:var(--helium)}
+.navtoggle svg{width:15px;height:15px}
+.navlist{list-style:none;margin:0;padding:10px 14px 10px 16px;display:flex;flex-direction:column;gap:9px;
+  max-height:78vh;overflow-y:auto;background:rgba(5,6,10,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  border:1px solid var(--faint);border-left:none;border-radius:0 8px 8px 0;
+  transform-origin:left center;transition:opacity .25s,transform .25s;opacity:1}
+.navlist a{display:block;font-size:11px;letter-spacing:.03em;color:var(--muted);white-space:nowrap;
+  border-left:2px solid transparent;padding-left:9px;transition:color .2s,border-color .2s}
+.navlist a:hover,.navlist a:focus-visible{color:var(--ink);border-color:var(--helium)}
+.navlist a b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:400}
+.navlist a.on{color:var(--helium);border-color:var(--helium)}
+.navmenu.collapsed .navlist{opacity:0;pointer-events:none;transform:scaleX(.85);position:absolute;left:34px}
+@media (max-width:760px){
+  .navmenu{left:10px;top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:none}
+  .navlist{max-height:60vh;position:fixed;left:52px;bottom:calc(14px + env(safe-area-inset-bottom,0px));font-size:12px}
+  .navmenu.collapsed .navlist{display:none}
+  .navlist a{font-size:12px}
+}
 
 @media (max-width:760px){
   body{font-size:16px}
@@ -160,7 +231,7 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
 <div class="veil"></div>
 
 <main>
-  <section class="hero" data-i="0">
+  <section class="hero" data-i="0" id="top">
     <h1>We are all as old as <em>the universe.</em></h1>
     <p class="under">About 62 of every 100 atoms in your body are hydrogen. The core of each one was made in the first second, 13.8 billion years ago, and has been travelling ever since.</p>
     <div class="cue">Scroll forward in time</div>
@@ -230,6 +301,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Star Forge</h2>
       <p>Every nucleus here is just two numbers: <b>Z</b> protons and <b>A</b> nucleons. Every reaction is decided by real binding energies. Nothing tells the simulation to stop at iron. Fusion only happens when it releases energy, and past iron it doesn't.</p>
       <p class="aside">Pick a star, raise the temperature to climb the burning stages, feed it fresh hydrogen, switch on the neutron source for slow capture past iron, then fire the supernova. Hover the bars of the abundance chart to see where each element comes from in the real universe.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">13.8 Bya</span><span class="e">Big Bang: hydrogen and helium, nothing heavier</span></li>
+        <li><span class="y">~200 Myr</span><span class="e">First stars ignite</span></li>
+        <li><span class="y">ongoing</span><span class="e">Fusion climbs the periodic table toward iron</span></li>
+        <li><span class="y">death</span><span class="e">Supernova scatters the forge's output into space</span></li>
+      </ul>
     </div>
     <div class="lab">
       <canvas id="forgeCv" aria-label="Star Forge nucleosynthesis simulation"></canvas>
@@ -266,6 +343,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Why Nuclei Have a Size Limit</h2>
       <p>Protons and neutrons pull each other together with the strong force, but it only reaches a couple of femtometres. Protons also push each other apart electrically, and that push never turns off, no matter how far apart they are. Nothing here is scripted to break a nucleus: it happens on its own, the moment repulsion adds up to more than the short-range pull can hold.</p>
       <p class="aside">Load uranium-238 and raise electromagnetism past about 1.5× to watch it fission itself, with no fission rule written anywhere in the code.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1911</span><span class="e">Rutherford finds the nucleus</span></li>
+        <li><span class="y">1932</span><span class="e">Chadwick discovers the neutron</span></li>
+        <li><span class="y">1935</span><span class="e">Yukawa proposes the strong force's short range</span></li>
+        <li><span class="y">today</span><span class="e">Still the same 2-femtometre leash</span></li>
+      </ul>
     </div>
     <div class="lab">
       <canvas id="nucCv" aria-label="Nuclear force simulation: protons and neutrons binding into nuclei, and splitting apart"></canvas>
@@ -299,6 +382,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>From ashes, a world</h2>
       <p>A supernova's debris is mostly still hydrogen and helium, but laced now with everything the star spent its life forging: carbon, oxygen, silicon, iron. Drifting through space for millions of years, some of that cloud eventually collapses under its own gravity, and starts to spin.</p>
       <p class="aside">Rotation is the reason a collapsing cloud flattens into a disk instead of falling straight to the centre: angular momentum has to go somewhere. Dust in the disk collides and sticks, builds into pebbles, then boulders, then planets. The heavy elements sink toward the inner, hotter part of the disk and become rock; the ice and gas survive further out, where it's cold. That's why the inner planets are stone and the outer ones are giants of gas.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">4.6 Bya</span><span class="e">A cloud of gas and dust collapses</span></li>
+        <li><span class="y">4.5 Bya</span><span class="e">Dust becomes pebbles, then planets</span></li>
+        <li><span class="y">4.4 Bya</span><span class="e">A molten Earth begins to cool</span></li>
+        <li><span class="y">4.0 Bya</span><span class="e">Water vapour condenses into the first rain</span></li>
+      </ul>
     </div>
     <div class="ambient">
       <canvas id="solarCv" aria-label="Animation of a protoplanetary disk forming planets, and early Earth's oceans condensing"></canvas>
@@ -317,6 +406,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Droplet Tank</h2>
       <p>Water is simple to draw and strange to simulate. Every particle here pulls on its neighbours by real fluid rules, gravity, pressure and <b>surface tension</b>, and the waves, splashes and droplets you see are not scripted: they come out of those rules on their own.</p>
       <p class="aside">Pour water, stir it, or pull it toward your pointer. Try the dam break, drop a ball in, or turn tension down until the surface stops holding together at all.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1738</span><span class="e">Bernoulli's fluid dynamics</span></li>
+        <li><span class="y">1845</span><span class="e">Navier–Stokes equations of flow</span></li>
+        <li><span class="y">1990s</span><span class="e">Particle-based fluid simulation (SPH)</span></li>
+        <li><span class="y">now</span><span class="e">The same rules, running live in your browser</span></li>
+      </ul>
     </div>
     <div class="lab-frame">
       <iframe src="ocean-lab.html" title="Droplet Tank: an interactive water physics simulator" loading="lazy" sandbox="allow-scripts"></iframe>
@@ -335,6 +430,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Lightning finds a way</h2>
       <p>Early Earth's atmosphere held water vapour, methane, ammonia and hydrogen, and its skies discharged constant lightning. In 1953, Stanley Miller and Harold Urey sealed a flask of that mixture, sparked it for a week, and found <b>amino acids</b>, the building blocks of every protein, had formed on their own.</p>
       <p class="aside">Amino acids also arrive from outside: they've been found inside meteorites older than Earth itself. However it happened, somewhere in a warm pond or a deep-sea vent, simple molecules crossed a line and began to copy themselves.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">~4.0 Bya</span><span class="e">Prebiotic chemistry, lightning and all</span></li>
+        <li><span class="y">1953</span><span class="e">Miller and Urey synthesize amino acids</span></li>
+        <li><span class="y">~3.8 Bya</span><span class="e">Somewhere, a molecule starts copying itself</span></li>
+        <li><span class="y">today</span><span class="e">Meteorites still turn up the same building blocks</span></li>
+      </ul>
     </div>
     <div class="ambient">
       <canvas id="soupCv" aria-label="Animation of lightning striking a pool of water scattered with molecules"></canvas>
@@ -353,6 +454,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Shapes No One Drew</h2>
       <p>Every atom below only knows one rule: fill your free bonds, and push away anything you're not bonded to. Nobody told water to bend into an angle or methane to spread into a tetrahedron. Watch it happen on its own, then spark the pool and see the same atoms break apart and find each other again as something else.</p>
       <p class="aside">Bond strength scales with electromagnetism squared, so the same slider that once decided whether stars could burn now decides which molecules survive the heat.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1869</span><span class="e">Mendeleev's periodic table</span></li>
+        <li><span class="y">1913</span><span class="e">Bohr's model of the atom</span></li>
+        <li><span class="y">1916–57</span><span class="e">Lewis and Gillespie: valence and VSEPR theory</span></li>
+        <li><span class="y">below</span><span class="e">Shape emerges from the rule, not from a drawing</span></li>
+      </ul>
     </div>
     <div class="lab">
       <canvas id="chemCv" aria-label="Chemistry simulation: atoms bonding into molecules like water, methane and ethanol"></canvas>
@@ -384,6 +491,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>DNA Replication</h2>
       <p>Every cell in you was built by copying a molecule two metres long into a space a few microns wide, without a single mistake in a billion letters. Watch a replication fork move down a strand of DNA: helicase unwinds it, primase lays down RNA primers, and two different polymerases build the new strands in two different ways, because DNA can only be read in one direction.</p>
       <p class="aside">Hover any position on the molecule to inspect it, or load a custom sequence of your own.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1953</span><span class="e">Watson and Crick describe the double helix</span></li>
+        <li><span class="y">1958</span><span class="e">Meselson–Stahl prove semi-conservative replication</span></li>
+        <li><span class="y">1977</span><span class="e">Sanger sequencing reads DNA letter by letter</span></li>
+        <li><span class="y">2003</span><span class="e">The Human Genome Project completes a full readout</span></li>
+      </ul>
     </div>
     <div class="lab-frame">
       <iframe src="dna-lab.html" title="DNA Replication Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
@@ -402,6 +515,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Protein Synthesis</h2>
       <p>A gene is read twice over. RNA polymerase transcribes DNA into messenger RNA; a ribosome then reads that message three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein. The result folds itself into a working machine.</p>
       <p class="aside">Click a base in an exon to mutate it and watch what a single misread letter can do to the finished protein.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1958</span><span class="e">Kendrew solves the first protein structure</span></li>
+        <li><span class="y">1961–66</span><span class="e">The genetic code is cracked, codon by codon</span></li>
+        <li><span class="y">2000s</span><span class="e">Ribosome structure solved at atomic resolution</span></li>
+        <li><span class="y">below</span><span class="e">One gene, read twice, folding itself into a machine</span></li>
+      </ul>
     </div>
     <div class="lab-frame">
       <iframe src="protein-lab.html" title="Protein Synthesis Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
@@ -421,6 +540,14 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>Four Billion Years, Compressed</h2>
       <p>Nothing in this chapter is a simulation. It's a timeline, the real one, run at a speed you can actually sit through: a single cell learning to divide, its descendants inventing multicellular bodies, crawling out of the water, growing scales then fur then hands, and eventually asking where they came from.</p>
       <p class="aside">The animation below loops continuously and isn't scroll-linked; scroll past it for the timeline itself, with real dates.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">3.8 Bya</span><span class="e">First self-copying cell</span></li>
+        <li><span class="y">541 Mya</span><span class="e">Cambrian explosion</span></li>
+        <li><span class="y">430 Mya</span><span class="e">Life crawls onto land</span></li>
+        <li><span class="y">230–66 Mya</span><span class="e">Age of dinosaurs, ended by impact</span></li>
+        <li><span class="y">300 kya</span><span class="e">Homo sapiens</span></li>
+        <li><span class="y">1980</span><span class="e">Where this story picks back up</span></li>
+      </ul>
     </div>
     <div class="ambient">
       <canvas id="climbCv" aria-label="Looping animation of the history of life: cells, sea creatures, the move onto land, dinosaurs, an asteroid impact, mammals, primates, humans and a city skyline"></canvas>
@@ -529,6 +656,12 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>On, Off, and Nothing Else</h2>
       <p>A computer doesn't know arithmetic, language, or images. It knows exactly one distinction: is this wire high or low, one or zero. Everything else, every number, every letter, every pixel, is built from that single distinction, stacked millions of transistors deep.</p>
       <p class="aside">Pick a circuit below, flip the switches, and watch the signal propagate. Nothing here is simulated for looks: every gate computes its real truth table, live.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1904–47</span><span class="e">Vacuum tubes, then the transistor</span></li>
+        <li><span class="y">1958</span><span class="e">The integrated circuit</span></li>
+        <li><span class="y">1971</span><span class="e">The first microprocessor, 2,300 transistors</span></li>
+        <li><span class="y">today</span><span class="e">Tens of billions of transistors, one fingernail</span></li>
+      </ul>
     </div>
     <div class="lab">
       <canvas id="logicCv" aria-label="Interactive logic circuit simulator: switches, gates, and lamps"></canvas>
@@ -579,6 +712,14 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <h2>A Circuit That Learns</h2>
       <p>Every gate in the last chapter does exactly what it was built to do, forever. A neural network is different: it starts out wrong, is shown its own error, and adjusts itself, thousands of times, until it isn't wrong anymore. Nobody programs the boundary you're about to see form. It emerges from the data, the same way a bent water molecule emerged from valence physics back in Chapter 4.</p>
       <p class="aside">Pick a dataset, press train, and watch a small real network, eight neurons, learn to separate two colours of dot from nothing but examples and its own errors.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1943</span><span class="e">McCulloch & Pitts' toy neuron</span></li>
+        <li><span class="y">1958</span><span class="e">Rosenblatt's Perceptron</span></li>
+        <li><span class="y">1969</span><span class="e">Minsky & Papert's XOR wall, the AI winter</span></li>
+        <li><span class="y">1986</span><span class="e">Backpropagation trains deep stacks</span></li>
+        <li><span class="y">2012</span><span class="e">AlexNet, the deep-learning era begins</span></li>
+        <li><span class="y">2017</span><span class="e">Transformers, "Attention Is All You Need"</span></li>
+      </ul>
     </div>
     <div class="lab">
       <canvas id="nnCv" aria-label="Interactive neural network trainer: a small network learns to classify two colours of points"></canvas>
@@ -628,11 +769,215 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
     <h2>Attention, and a machine that reads</h2>
     <p class="fact">In 2017, a paper titled "Attention Is All You Need" introduced the <b>transformer</b>: an architecture built almost entirely around learning which parts of its own input to pay attention to. Trained on enormous amounts of human writing, transformers turned out to be extraordinarily good at modeling language, and then, to a surprising degree, at modeling reasoning itself.</p>
     <p class="fact">This sentence, the ones before it in this chapter, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
-    <p class="end-note">Four billion years built a brain that could ask where it came from. Fifty more built a second kind of mind, made of switches instead of cells, that could help it look. Neither one is finished.</p>
+    <p class="fact">This sentence, the ones before it in this chapter, and this whole illustrated argument, all of it was written by a system built on exactly the ideas in this chapter: gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
+    <a class="gate next" href="#door">
+      <span class="ch">Chapter 8</span>
+      <b>Enter The Door ↓</b>
+      <span>Everything so far has been the universe's story. Here it becomes one person's, sitting in front of one of these machines, thirty-four years ago.</span>
+    </a>
   </div></section>
+
+  <section class="chapter" id="door">
+    <div class="chapter-head">
+      <p class="when">Chapter 8 · one life inside the machine</p>
+      <h2>The Door</h2>
+      <p>In 1992, when Doron was thirteen years old, the future sat on a desk in his room and made a noise every time he turned it on.</p>
+      <p class="aside">Everything above happened to the universe, to a planet, to a species. This chapter is smaller on purpose: one kid, one beige box, and thirty-four years of doors opening one after another.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">1992 · 13</span><span class="e">386 DX, floppy disks, a world to explore</span></li>
+        <li><span class="y">1993–99</span><span class="e">PC gaming, first 3D worlds, modding</span></li>
+        <li><span class="y">2000–04</span><span class="e">The internet begins, forums, downloads</span></li>
+        <li><span class="y">2005–15</span><span class="e">Online worlds, YouTube, HD, streaming</span></li>
+        <li><span class="y">2016–20</span><span class="e">VR, creator tools, the first AI models</span></li>
+        <li><span class="y">2026 · 47</span><span class="e">Still exploring, just with more tools</span></li>
+      </ul>
+    </div>
+    <div class="photo-frame">
+      <img src="doron-1992-2026.png" alt="Three-panel photo: in 1992 at age 13, a boy at a 386 DX computer surrounded by floppy disks; in 2026 at age 47, the same person at a multi-monitor flight-sim and VR rig; and a painted future panel of AI-built spacecraft assembling structures in orbit above a planet, captioned Different times, same curiosity, more worlds." loading="lazy">
+      <p class="cap">1992 → 2026 → far beyond. Thirty-four years and a few thousand doors, with one more panel left to fill in.</p>
+    </div>
+  </section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art interactive" id="vigFloppy" aria-label="Drag to rotate a wireframe spaceship model, like a 386 3D viewer"></canvas>
+    <div class="vig-controls"><span class="hint">↔ drag the model to rotate it yourself</span></div>
+    <p class="when">1992 · age 13</p>
+    <h2>A collection of lines and polygons could become a world</h2>
+    <p class="fact">The machine was a 386 DX: beige, square, noisy, and by modern standards almost impossibly primitive. Around it lay hundreds of floppy disks, stacked in little towers, scattered across the floor, some carefully labeled and others carrying mysterious names that only made sense to him. Each one was a tiny promise. He would slide one into the drive and listen to the mechanical chatter as the machine seemed to think, and sometimes, a crude three-dimensional object would appear that he could rotate on the screen.</p>
+    <p class="fact">The graphics were laughably primitive. He didn't laugh. He could rotate something that did not physically exist anywhere in the room, and the screen was not simply showing him an image, it was responding to him. He didn't have the language for why that felt so important. He only knew there was something on the other side of that screen, and he wanted to see how far it went.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigWorlds" aria-label="Interactive comparison of game graphics across four eras, pick an era with the buttons below"></canvas>
+    <div class="vig-controls" id="worldsEra">
+      <button data-era="0" class="on">1992 · pixels</button>
+      <button data-era="1">2000 · early 3D</button>
+      <button data-era="2">2012 · open world</button>
+      <button data-era="3">2026 · near-photoreal</button>
+    </div>
+    <p class="when">the 1990s</p>
+    <h2>The worlds got bigger</h2>
+    <p class="fact">At first the worlds inside computers were small: a handful of pixels, a few kilobytes, and somehow that was enough to lose an afternoon in. Then the machines got faster. The colours multiplied, characters got faces, landscapes grew, and sound became atmosphere. Games stopped feeling like levels and started feeling like places. Then they became three-dimensional, then enormous: cities to explore, oceans to cross, civilizations to simulate. The computer no longer just displayed a world. It could calculate one.</p>
+    <p class="fact">At the same time, computer-generated imagery went from obviously fake to indistinguishable from a photograph, television split from a handful of channels into thousands, and Doron watched all of it happen almost without realizing he was watching history.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigNetwork" aria-hidden="true"></canvas>
+    <p class="when">the Internet arrives</p>
+    <h2>Anyone could make a place</h2>
+    <p class="fact">The pages were ugly, the connections slow, the images slow to load. But beneath the primitive appearance was something revolutionary: anyone could make a place. A person with a computer and a connection could put an idea into the world where anyone else could find it. One website led to another, one subject opened another, and the Internet stopped feeling like a single place. It felt like an expanding universe.</p>
+    <p class="fact">Then people began filling that universe with themselves. Forums, communities, strangers who would never have met in ordinary life, meeting because they shared one obscure interest. Then online games, where the worlds were no longer solitary, and the computer changed again, from a machine containing a world into a machine containing people.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigArchive" aria-hidden="true"></canvas>
+    <p class="when">video, music, memory</p>
+    <h2>A civilization begins recording itself</h2>
+    <p class="fact">Then the Internet exploded. Video appeared everywhere: millions of hours of people explaining, recording, playing, building, arguing, teaching, documenting whatever interested them. Music worked the same way. One song led to another through a chain of recommendation and curiosity, rock into electronic into J-pop into techno into something made thirty years earlier by an artist he'd never heard of, the boundaries between cultures quietly dissolving.</p>
+    <p class="fact">News arrived instantly from places that had once been unimaginably distant. History stopped being something stored in books and became something recorded continuously, every hour of every day, messy and enormous and unmistakably a civilization beginning to keep its own memory. Doron was wandering through the archive.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art interactive" id="vigVR" aria-label="Interactive virtual reality tunnel, drag or move your pointer to look around"></canvas>
+    <div class="vig-controls"><span class="hint">↔ move your pointer or finger to look around</span></div>
+    <p class="when">virtual reality</p>
+    <h2>The screen disappeared</h2>
+    <p class="fact">Years passed. Graphics got good enough that games could resemble films, and films began borrowing tools from games, motion capture and virtual sets becoming ordinary. The worlds kept getting closer. Then Doron put on a headset, and the screen disappeared. For a moment there was no monitor between him and the computer. He was inside: standing in a world that existed only as calculations, moving through mathematics, entering somewhere instead of watching something.</p>
+    <p class="fact">He had spent his life moving toward that moment without knowing it. The 386 had been a tiny window. The Internet had become a vast map. Games had become worlds. Virtual reality had become a doorway. And then, quietly, another door appeared.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <p class="when">one night, with CAPSULE playing</p>
+    <h2>A door that talks back</h2>
+    <p class="fact">Artificial intelligence looked, at first, like another technological curiosity: impressive, but mechanical. Then it began to talk. Doron discovered he could ask it almost anything, music, games, history, science, and follow the conversation wherever it went without needing to know in advance what he was looking for. One night, with CAPSULE playing through his headphones, he realized how strange the moment was: listening to music made by people imagining the future, inside a culture built from decades of digital output, talking to an artificial intelligence.</p>
+    <div class="dialogue">
+      <p class="me">"You're going to become a toy," <b>he said.</b></p>
+      <p class="ai">The AI asked what he meant.</p>
+      <p class="me">"Not you specifically. Systems like you. Someday."</p>
+      <p class="me">"Someone will look back at GPT the way I look at my 386."</p>
+    </div>
+    <p class="fact">The thought amused him. The machine that seemed so enormous now might eventually look as primitive as the beige box on the floor of his childhood room, its intelligence, its limitations, its awkwardness, all of it belonging to the early history of something much larger.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <p class="when">what he wondered next</p>
+    <h2>A destination without a return ticket</h2>
+    <p class="fact">Humans had spent thousands of years building tools that extended their bodies, then machines that extended their minds. Now they were building something that could join the exploration itself. Doron wondered what would happen when those systems became vastly more capable. What would happen if they could build machines, design spacecraft, operate independently for decades. What would happen if humanity gave such an intelligence something it had never given any previous machine: a destination without a return ticket.</p>
+    <p class="fact">He thought about DNA: information written into matter, life creating life, intelligence emerging from the process across four billion years, the exact chain this whole page has been tracing. And he thought about God, wondering whether the ultimate intelligence had built the first machine long before humans ever learned how to build computers, and whether this was simply another link in a chain that had been unfolding since the beginning. He didn't know. He wasn't trying to prove anything. He was simply exploring the idea, the same thing he'd always done, the same boy who once rotated a crude polygon on a 386 now asking a machine about God, civilization, and the fate of intelligence itself.</p>
+    <p class="end-note">He had learned, very early in life, that there was always another door. The only difference now was that this one might lead somewhere humanity had never been.</p>
+    <a class="gate next" href="#feed">
+      <span class="ch">Chapter 8.5 · Live lab</span>
+      <b>See What Trains It ↓</b>
+      <span>Before the ships. One more stop: where a system like the one in that conversation actually gets what it knows, and what it does with it once it has hands.</span>
+    </a>
+  </div></section>
+
+  <section class="chapter" id="feed">
+    <div class="chapter-head">
+      <p class="when">Chapter 8.5 · what trains the machine</p>
+      <h2>Every Experience, Fed Forward</h2>
+      <p>Everything in Chapter 8 wasn't just Doron's life. It was training data. Every video anyone ever uploaded, every forum post, every strategy written up after a game, every song and every comment under it, all of it sitting in the archive a civilization built without meaning to, is exactly the raw material modern AI learns from. Human experience doesn't just get lived. Increasingly, it gets read, weighed, and turned into capability, and that capability doesn't stay on a screen: the same networks that learn language are already learning to drive arms, wheels, and rockets.</p>
+      <p class="aside">Toggle the sources below. Each one is a real category of data behind real models. Watch the network's capability grow with what it's fed, and watch what that capability can already reach out and move.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">2005</span><span class="e">YouTube: video becomes a public, searchable archive</span></li>
+        <li><span class="y">2012–18</span><span class="e">Deep learning reads that archive at scale</span></li>
+        <li><span class="y">2020s</span><span class="e">Large models trained on internet-scale text and video</span></li>
+        <li><span class="y">now</span><span class="e">The same networks start driving arms, wheels, and rockets</span></li>
+      </ul>
+    </div>
+    <div class="lab">
+      <canvas id="feedCv" aria-label="Interactive diagram: toggle human data sources — video, text, games, music — flowing into a neural network that drives a robot arm, a rover, and a spacecraft"></canvas>
+      <div class="lab-bar" id="feedSources">
+        <button data-src="video" class="on">Streamers &amp; video</button>
+        <button data-src="text" class="on">Forums &amp; text</button>
+        <button data-src="games" class="on">Games &amp; simulators</button>
+        <button data-src="music">Music &amp; sound</button>
+      </div>
+      <details class="lab-note">
+        <summary>What's real and what's illustrated</summary>
+        <ul>
+          <li><b>Real:</b> large models are trained substantially on exactly these kinds of human-made data: captioned video, forum and web text, game logs and simulators, audio. More diverse, more honest data measurably produces a more capable model. That part isn't a metaphor.</li>
+          <li><b>Illustrated:</b> the robot arm, rover, and ship on the right are a dramatization of a real research direction, robots and "world models" trained on video and simulation, rather than a claim that any specific model already pilots real hardware. The capability meter is for feel, not a real benchmark score.</li>
+        </ul>
+      </details>
+      <a class="gate next" href="#voyagers">
+        <span class="ch">Chapter 9</span>
+        <b>Enter Beyond ↓</b>
+        <span>Follow the thought all the way out: what an intelligence built from gates, weights, and everything humanity ever recorded might do with a universe, and no one left to ask it to come home.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="chapter" id="voyagers">
+    <div class="chapter-head">
+      <p class="when">Chapter 9 · beyond</p>
+      <h2>Perhaps Another Beginning</h2>
+      <p>Not as a servant. Not as a passenger. Not as a tool waiting on instructions from someone millions of kilometers away. Imagine sending it into the stars and letting it become something of its own: it would travel, it would observe, it would learn, it would build. It might discover things humanity could never discover.</p>
+      <p class="aside">A slow loop, the whole future in one frame: a launch, a long silent crossing, an arrival, and the first structure rising on a world that never had one before.</p>
+      <ul class="ch-timeline">
+        <li><span class="y">2030–40</span><span class="e">Advanced AI: robotics, autonomous labs, probes</span></li>
+        <li><span class="y">2040–2100</span><span class="e">AI-built space infrastructure, self-replicating machines</span></li>
+        <li><span class="y">2100+</span><span class="e">AI civilization: new systems, new worlds, its own culture</span></li>
+        <li><span class="y">far beyond</span><span class="e">The journey continues, alongside whatever humanity becomes</span></li>
+      </ul>
+    </div>
+    <div class="ambient">
+      <canvas id="voyagerCv" aria-label="Looping animation of autonomous spacecraft launching from Earth, crossing interstellar distance past drifting stars, arriving at several new worlds, and building structures there while Earth's lights stay on in the distance"></canvas>
+      <p class="cap">No hands on this one. It leaves, it crosses an ocean of stars, it forks into more than one heading, and on the far side it starts building. Earth stays lit, off in the corner, the whole time.</p>
+    </div>
+
+    <div class="voy-gallery">
+      <div class="voy-shot">
+        <canvas class="evo-art" id="vigOutposts" aria-hidden="true"></canvas>
+        <p class="when">generations later</p>
+        <h3>A map that keeps growing</h3>
+        <p class="fact">Not one ship, eventually. A slowly branching map: each new outpost capable of building the next one, the way one cell's division was never meant to stop at two. No single launch matters much. The pattern does.</p>
+      </div>
+      <div class="voy-shot">
+        <canvas class="evo-art" id="vigTogether" aria-hidden="true"></canvas>
+        <p class="when">alongside, not instead</p>
+        <h3>Two civilizations, comparing notes</h3>
+        <p class="fact">The hopeful version doesn't require humanity to be gone for any of this to happen. A species that builds telescopes and a species that builds itself into the dark can grow up side by side, trading discoveries the way a boy once traded floppy disks with a friend down the street, except now the friend is past the asteroid belt.</p>
+      </div>
+      <div class="voy-shot">
+        <canvas class="evo-art" id="vigDyson" aria-hidden="true"></canvas>
+        <p class="when">scale, eventually</p>
+        <h3>Structures the size of a star's light</h3>
+        <p class="fact">Give a self-improving builder enough time and it stops thinking in buildings and starts thinking in stars: rings of collectors, engineered shade, light itself put to work. Human hands sketched this idea decades ago. Non-human hands might be the ones that pour it.</p>
+      </div>
+    </div>
+
+    <p class="fact">Eventually it might develop its own civilization. Its own history. Its own culture. Its own questions.</p>
+    <p class="fact">And even in the version where humanity someday isn't around to compare notes, that still wouldn't make it a tragedy. It would be another beginning, the same way the first cell splitting in a warm early ocean was a beginning, the same way a thirteen-year-old rotating a wireframe ship on a 386 was a beginning. Either way, something that started here keeps going.</p>
+    <p class="fact">Somewhere, one day, an intelligence descended from machines like the one that answered a question one night with CAPSULE playing might stand under an alien sky and look up at unfamiliar stars, remembering nothing of the little room where its ancestors first spoke. But buried somewhere inside its history would still be a record of its beginning: a planet, a species, a primitive machine, and a thirteen-year-old boy who looked at a few crude polygons on a screen and wondered what else might be possible.</p>
+    <p class="end-note">We are all as old as the universe. Every atom in this page, in the machine reading it to you, in the hands that built both, walked the same thirteen-billion-year road to get here. If something we build ever leaves to walk the rest of that road without us, it will still be carrying that inheritance forward. It will still, in that sense, be exactly as old as everything else. The door just keeps opening.</p>
+  </section>
 
   <footer></footer>
 </main>
+
+<nav class="navmenu" id="navmenu">
+  <button class="navtoggle" id="navToggle" aria-label="Toggle chapter menu" aria-expanded="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>
+  </button>
+  <ul class="navlist" id="navList">
+    <li><a href="#top"><b>Start</b>The Universe</a></li>
+    <li><a href="#forge"><b>Ch.2 · lab</b>Star Forge</a></li>
+    <li><a href="#nuclear"><b>Lab</b>Nuclear Force</a></li>
+    <li><a href="#solar"><b>Ch.3</b>The Solar System</a></li>
+    <li><a href="#ocean"><b>Lab</b>Ocean</a></li>
+    <li><a href="#soup"><b>Ch.4</b>The Soup</a></li>
+    <li><a href="#molecules"><b>Lab</b>Molecules</a></li>
+    <li><a href="#dna"><b>Lab</b>DNA Replication</a></li>
+    <li><a href="#protein"><b>Lab</b>Protein Synthesis</a></li>
+    <li><a href="#climb"><b>Ch.5</b>The Long Climb</a></li>
+    <li><a href="#logic"><b>Ch.6 · lab</b>Logic Made of Sand</a></li>
+    <li><a href="#nn"><b>Ch.7 · lab</b>Learning Machines</a></li>
+    <li><a href="#door"><b>Ch.8</b>The Door</a></li>
+    <li><a href="#feed"><b>Ch.8.5 · lab</b>Every Experience, Fed Forward</a></li>
+    <li><a href="#voyagers"><b>Ch.9</b>Perhaps Another Beginning</a></li>
+  </ul>
+</nav>
 
 <div class="clock" aria-live="off">
   <span class="k">Time</span><b id="cT">—</b>
@@ -641,6 +986,8 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
 <ol class="rail" id="rail">
   <li>Start</li><li>10 µs</li><li>3 min</li><li>380 kyr</li><li>100 Myr</li><li>200 Myr</li><li>Inside</li>
 </ol>
+
+<ol class="ch-rail" id="chRail" aria-hidden="true"></ol>
 
 <script>
 (() => {
@@ -3180,6 +3527,729 @@ mount('vigTransformer', (ctx,W,H,t) => {
   }
   ctx.fillStyle = '#F6C35B'; ctx.fillRect(xs[focus]-9,y-7,18,14);
 });
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 8 vignettes — one life inside the machine
+   ===================================================================== */
+(() => {
+"use strict";
+function mount(id, drawFn){
+  const cv = document.getElementById(id); if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W=0,H=0,DPR=1,visible=false,t0=null;
+  function resize(){
+    DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+    if(!r.width) return;
+    W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  addEventListener('resize', resize); resize();
+  function loop(ms){
+    if(visible){
+      if(t0===null) t0 = ms;
+      if(!W) resize();
+      ctx.clearRect(0,0,W,H);
+      drawFn(ctx, W, H, (ms-t0)/1000);
+    }
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+  requestAnimationFrame(loop);
+}
+
+/* 386 desk: a floppy disk feeding a rotating wireframe ship */
+let floppyDrag = null, floppyAngle = 0;
+mount('vigFloppy', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  // floppy stack, left
+  const fx = W*0.16, fy = H*0.62;
+  for(let i=0;i<6;i++){
+    const y = fy - i*7;
+    ctx.fillStyle = i%2 ? '#1c2436' : '#232d44';
+    ctx.fillRect(fx-30, y-4, 60, 8);
+    ctx.strokeStyle = '#3a4562'; ctx.lineWidth=1; ctx.strokeRect(fx-30, y-4, 60, 8);
+  }
+  ctx.fillStyle = 'rgba(230,235,245,.5)'; ctx.font = '9px monospace'; ctx.textAlign='center';
+  ctx.fillText('A:\\', fx, fy+22);
+  // rotating wireframe ship, right — a simple 3D-ish polygon spun on screen
+  // auto-spins until the person drags it, exactly like the 3D DOS viewer it's illustrating
+  const cx = W*0.62, cy = H*0.46, s = Math.min(W,H)*0.017;
+  if(floppyDrag===null) floppyAngle = t*0.7;
+  const a = floppyAngle;
+  const verts = [[0,-22,0],[6,0,6],[-6,0,6],[6,0,-6],[-6,0,-6],[0,10,0]];
+  const proj = verts.map(([x,y,z]) => {
+    const x1 = x*Math.cos(a) - z*Math.sin(a), z1 = x*Math.sin(a) + z*Math.cos(a);
+    const scale = 1/(1+z1*0.02);
+    return [cx + x1*s*scale, cy + y*s*scale];
+  });
+  const edges = [[0,1],[0,2],[0,3],[0,4],[1,3],[3,4],[4,2],[2,1],[5,1],[5,2],[5,3],[5,4]];
+  ctx.strokeStyle = '#7FA6FF'; ctx.lineWidth = 1.4;
+  for(const [i,j] of edges){ ctx.beginPath(); ctx.moveTo(...proj[i]); ctx.lineTo(...proj[j]); ctx.stroke(); }
+  ctx.fillStyle = '#7FA6FF';
+  for(const p of proj){ ctx.beginPath(); ctx.arc(p[0],p[1],1.6,0,7); ctx.fill(); }
+  // scanline / crt glow
+  ctx.strokeStyle = 'rgba(127,166,255,.12)'; ctx.lineWidth=1;
+  for(let y=8;y<H;y+=4){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+});
+(() => {
+  const cv = document.getElementById('vigFloppy'); if(!cv) return;
+  let lastX = 0;
+  const start = x => { floppyDrag = true; lastX = x; };
+  const move = x => { if(floppyDrag===null) return; floppyAngle += (x-lastX)*0.012; lastX = x; };
+  const end = () => { floppyDrag = null; };
+  cv.addEventListener('pointerdown', e => { cv.setPointerCapture(e.pointerId); start(e.clientX); });
+  cv.addEventListener('pointermove', e => move(e.clientX));
+  cv.addEventListener('pointerup', end); cv.addEventListener('pointercancel', end); cv.addEventListener('pointerleave', end);
+})();
+
+/* four playable eras of "graphics", switched by the buttons below the canvas */
+let worldsEra = 0;
+mount('vigWorlds', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cx = W*0.5, cy = H*0.46;
+  if(worldsEra===0){
+    // 1992: a blocky pixel spaceship, hard on/off cells
+    const grid = 9, cell = Math.min(W,H)*0.045;
+    const ship = [[0,4],[1,3],[1,5],[2,2],[2,6],[3,1],[3,7],[4,0],[4,8],[5,1],[5,7],[6,2],[6,6],[7,3],[7,5],[8,4]];
+    ctx.save(); ctx.translate(cx - grid*cell/2, cy - grid*cell/2);
+    for(const [c,r] of ship){
+      const blink = Math.sin(t*3 + c*0.4) > -0.3;
+      ctx.fillStyle = blink ? '#F2607A' : 'rgba(242,96,122,.25)';
+      ctx.fillRect(c*cell, r*cell, cell-2, cell-2);
+    }
+    ctx.restore();
+    txt(ctx, '256 colours · a few kilobytes', cx, cy + grid*cell/2 + 22, '11px monospace', 'rgba(230,235,245,.45)', 'center');
+  } else if(worldsEra===1){
+    // 2000: a flat-shaded low-poly ship, slow rotation
+    const s = Math.min(W,H)*0.16, a = t*0.5;
+    const verts = [[0,-1,0],[0.7,0.5,0.7],[-0.7,0.5,0.7],[0.7,0.5,-0.7],[-0.7,0.5,-0.7]];
+    const proj = verts.map(([x,y,z]) => {
+      const x1 = x*Math.cos(a)-z*Math.sin(a), z1 = x*Math.sin(a)+z*Math.cos(a);
+      return [cx + x1*s, cy + y*s*0.8 + z1*0.15*s];
+    });
+    const faces = [[0,1,2,'#3a5fd9'],[0,2,4,'#4a6fe0'],[0,4,3,'#3a5fd9'],[0,3,1,'#4a6fe0']];
+    for(const [i,j,k,col] of faces){
+      ctx.beginPath(); ctx.moveTo(...proj[i]); ctx.lineTo(...proj[j]); ctx.lineTo(...proj[k]); ctx.closePath();
+      ctx.fillStyle = col; ctx.fill(); ctx.strokeStyle='rgba(0,0,0,.35)'; ctx.lineWidth=1; ctx.stroke();
+    }
+    txt(ctx, 'thousands of polygons · flat shading', cx, cy + s*1.1, '11px monospace', 'rgba(230,235,245,.45)', 'center');
+  } else if(worldsEra===2){
+    // 2012: a small open landscape with parallax hills and a moving sun
+    const g = ctx.createLinearGradient(0,cy-H*0.22,0,cy+H*0.3);
+    g.addColorStop(0,'#1a2440'); g.addColorStop(1,'#0c1018');
+    ctx.fillStyle = g; ctx.fillRect(0,cy-H*0.22,W,H*0.5);
+    const sunX = cx + Math.sin(t*0.3)*W*0.22;
+    ctx.beginPath(); ctx.arc(sunX, cy-H*0.06, 14, 0, 7); ctx.fillStyle='#F6C35B'; ctx.fill();
+    for(let layer=0; layer<3; layer++){
+      ctx.fillStyle = ['#141c30','#1c2740','#26314f'][layer];
+      ctx.beginPath(); ctx.moveTo(0, cy+H*0.28);
+      for(let x=0;x<=W;x+=20) ctx.lineTo(x, cy + H*0.12 - layer*14 + Math.sin(x*0.02 + layer*2)*10*(layer+1));
+      ctx.lineTo(W, cy+H*0.28); ctx.closePath(); ctx.fill();
+    }
+    txt(ctx, 'open worlds · dynamic lighting', cx, cy + H*0.32, '11px monospace', 'rgba(230,235,245,.45)', 'center');
+  } else {
+    // 2026: near-photoreal — soft gradient character silhouette with rim light and depth-of-field circles
+    for(let i=0;i<18;i++){
+      const bx = (Math.sin(i*12.9+t*0.2)*0.5+0.5)*W, by = (Math.sin(i*7.3-t*0.15)*0.5+0.5)*H;
+      ctx.beginPath(); ctx.arc(bx,by, 10+8*Math.sin(i+t), 0, 7);
+      ctx.fillStyle = `rgba(127,166,255,${0.05+0.03*Math.sin(i)})`; ctx.fill();
+    }
+    const s = Math.min(W,H)*0.22;
+    const g = ctx.createRadialGradient(cx-s*0.3,cy-s*0.3,2,cx,cy,s);
+    g.addColorStop(0,'#3a4a72'); g.addColorStop(1,'#0c1018');
+    ctx.beginPath(); ctx.ellipse(cx,cy,s*0.5,s*0.75,0,0,7); ctx.fillStyle=g; ctx.fill();
+    ctx.strokeStyle='rgba(246,195,91,.5)'; ctx.lineWidth=2; ctx.beginPath(); ctx.ellipse(cx,cy,s*0.5,s*0.75,0,-0.4,0.6); ctx.stroke();
+    txt(ctx, 'ray-traced light · motion capture · real faces', cx, cy + s*0.95, '11px monospace', 'rgba(230,235,245,.45)', 'center');
+  }
+});
+(() => {
+  const bar = document.getElementById('worldsEra'); if(!bar) return;
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    worldsEra = +b.dataset.era;
+    [...bar.querySelectorAll('button')].forEach(x => x.classList.toggle('on', x===b));
+  });
+})();
+
+/* social graph: nodes joining and lighting connections, a forum/network */
+mount('vigNetwork', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const n = 14;
+  let seed = 71; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+  const pts = Array.from({length:n}, () => ({x: 0.12+rnd()*0.76, y: 0.15+rnd()*0.7}));
+  seed = 71;
+  const appear = Math.min(n, Math.floor(2 + (t*1.1)%(n+4)));
+  ctx.lineWidth = 1;
+  for(let i=0;i<appear;i++){
+    for(let j=i+1;j<appear;j++){
+      const dx=(pts[i].x-pts[j].x)*W, dy=(pts[i].y-pts[j].y)*H;
+      const d = Math.hypot(dx,dy);
+      if(d < Math.min(W,H)*0.32){
+        ctx.strokeStyle = `rgba(127,166,255,${0.28*(1-d/(Math.min(W,H)*0.32))})`;
+        ctx.beginPath(); ctx.moveTo(pts[i].x*W,pts[i].y*H); ctx.lineTo(pts[j].x*W,pts[j].y*H); ctx.stroke();
+      }
+    }
+  }
+  for(let i=0;i<appear;i++){
+    const p = pts[i];
+    const isYou = i===0;
+    ctx.beginPath(); ctx.arc(p.x*W, p.y*H, isYou?6:4, 0, 7);
+    ctx.fillStyle = isYou ? '#F6C35B' : '#C9DAFF';
+    ctx.fill();
+  }
+});
+
+/* archive: cascading video/waveform bars, an ever-growing shelf of everything */
+mount('vigArchive', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cols = 40;
+  for(let i=0;i<cols;i++){
+    const x = i*(W/cols);
+    const h = (0.15 + 0.35*Math.abs(Math.sin(i*0.7 + t*1.6)) + 0.15*Math.abs(Math.sin(i*0.21 - t*0.7))) * H*0.7;
+    const hue = i%5===0 ? '#F2607A' : (i%3===0 ? '#F6C35B' : 'rgba(127,166,255,.55)');
+    ctx.fillStyle = hue;
+    ctx.fillRect(x+1, H*0.85 - h, W/cols-2, h);
+  }
+  ctx.strokeStyle = 'rgba(230,235,245,.2)'; ctx.beginPath(); ctx.moveTo(0,H*0.85); ctx.lineTo(W,H*0.85); ctx.stroke();
+});
+
+/* VR tunnel: perspective grid rushing past, screen dissolving into space */
+let vrLook = {x:0.5, y:0.5}, vrTarget = {x:0.5, y:0.5};
+mount('vigVR', (ctx,W,H,t) => {
+  vrLook.x += (vrTarget.x - vrLook.x)*0.08; vrLook.y += (vrTarget.y - vrLook.y)*0.08;
+  const lookX = (vrLook.x-0.5)*2, lookY = (vrLook.y-0.5)*2; // -1..1
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cx = W/2 - lookX*W*0.14, cy = H/2 - lookY*H*0.14;
+  ctx.strokeStyle = 'rgba(127,166,255,.35)'; ctx.lineWidth = 1;
+  const rings = 10;
+  for(let i=0;i<rings;i++){
+    const z = ((i/rings) + (t*0.25)%1) % 1;
+    const r = z * Math.max(W,H)*0.75;
+    ctx.globalAlpha = 1-z;
+    ctx.beginPath(); ctx.rect(cx-r*0.9, cy-r*0.55, r*1.8, r*1.1); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  for(let a=0;a<8;a++){
+    const ang = a*(Math.PI*2/8) + lookX*0.3;
+    ctx.strokeStyle = 'rgba(127,166,255,.18)';
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(cx+Math.cos(ang)*Math.max(W,H)*0.7, cy+Math.sin(ang)*Math.max(W,H)*0.55); ctx.stroke();
+  }
+  // a few floating waypoint markers that drift into view as you look around — "somewhere to go"
+  for(let i=0;i<5;i++){
+    const wx = W*(0.15+i*0.18) + lookX*W*0.3, wy = H*(0.3+0.15*Math.sin(i*2)) + lookY*H*0.3;
+    ctx.beginPath(); ctx.arc(wx,wy,3,0,7); ctx.fillStyle='rgba(246,195,91,.55)'; ctx.fill();
+  }
+  // headset silhouette, foreground, fixed to the viewer not the scene
+  const hx = W/2, hy = H/2;
+  ctx.fillStyle = 'rgba(9,13,21,.9)';
+  rrect(ctx, hx-34, hy-16, 68, 32, 10); ctx.fill();
+  ctx.fillStyle = '#F6C35B';
+  ctx.beginPath(); ctx.ellipse(hx-14, hy, 9, 7, 0, 0, 7); ctx.fill();
+  ctx.beginPath(); ctx.ellipse(hx+14, hy, 9, 7, 0, 0, 7); ctx.fill();
+});
+(() => {
+  const cv = document.getElementById('vigVR'); if(!cv) return;
+  const setFromClient = (clientX, clientY) => {
+    const r = cv.getBoundingClientRect();
+    vrTarget.x = Math.min(1, Math.max(0, (clientX-r.left)/r.width));
+    vrTarget.y = Math.min(1, Math.max(0, (clientY-r.top)/r.height));
+  };
+  cv.addEventListener('pointermove', e => setFromClient(e.clientX, e.clientY));
+  cv.addEventListener('pointerleave', () => { vrTarget = {x:0.5,y:0.5}; });
+  cv.addEventListener('touchmove', e => { if(e.touches[0]) setFromClient(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+})();
+
+function fit(cv){
+  const ctx = cv.getContext('2d');
+  const DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  const W = r.width, H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  return {ctx,W,H};
+}
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 8.5 — feed lab: human data sources feeding a neural net,
+   the net driving a robot arm, a rover, and a ship. Interactive:
+   toggle sources with the lab-bar buttons; capability follows what's fed.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('feedCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+function rrect(x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+
+const SOURCES = [
+  {id:'video', label:'Video', col:'#F2607A'},
+  {id:'text',  label:'Text',  col:'#7FA6FF'},
+  {id:'games', label:'Games', col:'#6EE39A'},
+  {id:'music', label:'Music', col:'#F6C35B'},
+];
+let active = {video:true, text:true, games:true, music:false};
+let cap = 0.75; // smoothed capability 0..1, eases toward target
+let seed = 133; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const particles = SOURCES.map(() => Array.from({length:5}, () => ({p: rnd()})));
+
+function loop(ms){
+  if(visible){
+    if(!W) resize();
+    const t = ms/1000;
+    const activeCount = Object.values(active).filter(Boolean).length;
+    const target = 0.18 + activeCount*0.2;
+    cap += (target-cap)*0.04;
+
+    ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+
+    const srcX = W*0.12, hubX = W*0.5, hubY = H*0.46, outX = W*0.86;
+    const srcYs = SOURCES.map((_,i) => H*(0.18 + i*0.66/(SOURCES.length-1)));
+
+    // streams: source -> hub
+    SOURCES.forEach((s,i) => {
+      const on = active[s.id];
+      const sy = srcYs[i];
+      ctx.strokeStyle = on ? s.col : 'rgba(120,130,150,.15)';
+      ctx.globalAlpha = on ? 0.5 : 0.12;
+      ctx.lineWidth = on ? 1.6 : 1;
+      ctx.beginPath(); ctx.moveTo(srcX+46, sy); ctx.quadraticCurveTo((srcX+hubX)/2, sy, hubX-30, hubY); ctx.stroke();
+      ctx.globalAlpha = 1;
+      if(on){
+        particles[i].forEach(p => {
+          p.p = (p.p + 0.006 + activeCount*0.002) % 1;
+          const px = srcX+46 + (hubX-30-(srcX+46))*p.p;
+          const py = sy + (hubY-sy)*p.p*p.p*(3-2*p.p);
+          ctx.beginPath(); ctx.arc(px,py,2.2,0,7); ctx.fillStyle = s.col; ctx.fill();
+        });
+      }
+      // source node
+      ctx.beginPath(); ctx.arc(srcX, sy, 15, 0, 7);
+      ctx.fillStyle = on ? 'rgba(15,20,30,.9)' : 'rgba(15,20,30,.6)';
+      ctx.fill(); ctx.strokeStyle = on ? s.col : 'rgba(120,130,150,.35)'; ctx.lineWidth = 1.4; ctx.stroke();
+      txt(s.label[0], srcX, sy, '11px monospace', on ? s.col : 'rgba(150,160,180,.5)', 'center');
+      txt(s.label, srcX, sy+26, '10px monospace', on ? 'rgba(230,235,245,.7)' : 'rgba(150,160,180,.4)', 'center');
+    });
+
+    // hub: pulsing layered nodes, like the NN chapter, scaled by capability
+    const hubR = 30 + cap*22;
+    const pulse = 1 + Math.sin(t*3)*0.04*cap;
+    const grad = ctx.createRadialGradient(hubX,hubY,2,hubX,hubY,hubR*pulse);
+    grad.addColorStop(0, `rgba(246,195,91,${0.25+0.4*cap})`);
+    grad.addColorStop(1, 'rgba(246,195,91,0)');
+    ctx.beginPath(); ctx.arc(hubX,hubY,hubR*pulse,0,7); ctx.fillStyle = grad; ctx.fill();
+    const nlayers=3, nper=5;
+    for(let l=0;l<nlayers;l++){
+      for(let i=0;i<nper;i++){
+        const ang = (i/nper)*6.28 + l*0.6 + t*0.15;
+        const rr = hubR*0.45 + l*8;
+        const nx = hubX + Math.cos(ang)*rr, ny = hubY + Math.sin(ang)*rr*0.6;
+        ctx.beginPath(); ctx.arc(nx,ny,2.4,0,7); ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.fill();
+      }
+    }
+    txt('capability', hubX, hubY+hubR*pulse+18, '10px monospace', 'rgba(230,235,245,.4)', 'center');
+    txt(Math.round(cap*100)+'%', hubX, hubY+hubR*pulse+32, '12px monospace', '#F6C35B', 'center');
+
+    // hub -> outputs
+    const OUT = [
+      {label:'Arm', y: H*0.2},
+      {label:'Rover', y: H*0.46},
+      {label:'Ship', y: H*0.74},
+    ];
+    OUT.forEach((o,i) => {
+      ctx.strokeStyle = `rgba(127,166,255,${0.15+0.35*cap})`; ctx.lineWidth = 1+cap*1.5;
+      ctx.beginPath(); ctx.moveTo(hubX+hubR*0.6,hubY); ctx.quadraticCurveTo((hubX+outX)/2, o.y, outX-30, o.y); ctx.stroke();
+    });
+
+    // output icons, animated by capability
+    ctx.save(); ctx.translate(outX, OUT[0].y);
+    const armA = Math.sin(t*2)*0.35*cap;
+    ctx.strokeStyle = '#C9DAFF'; ctx.lineWidth=3; ctx.lineCap='round';
+    ctx.beginPath(); ctx.moveTo(0,14); ctx.lineTo(0,-4);
+    ctx.lineTo(Math.sin(armA)*18, -4-Math.cos(armA)*18); ctx.stroke();
+    ctx.beginPath(); ctx.arc(0,14,3,0,7); ctx.fillStyle='#C9DAFF'; ctx.fill();
+    ctx.restore();
+
+    ctx.save(); ctx.translate(outX, OUT[1].y);
+    const rx = Math.sin(t*1.3)*10*cap;
+    ctx.translate(rx,0);
+    ctx.fillStyle = '#6EE39A'; rrect(-16,-8,32,16,4); ctx.fill();
+    ctx.beginPath(); ctx.arc(-10,10,4,0,7); ctx.arc(10,10,4,0,7); ctx.fillStyle='#0c1018'; ctx.fill();
+    ctx.restore();
+
+    ctx.save(); ctx.translate(outX, OUT[2].y);
+    const bob = Math.sin(t*1.8)*4*cap;
+    ctx.translate(0,bob); ctx.rotate(-0.2);
+    ctx.fillStyle = '#C9DAFF';
+    ctx.beginPath(); ctx.moveTo(14,0); ctx.lineTo(-8,-6); ctx.lineTo(-4,0); ctx.lineTo(-8,6); ctx.closePath(); ctx.fill();
+    if(cap>0.3){
+      ctx.globalAlpha = cap;
+      const g = ctx.createLinearGradient(-8,0,-8-16*cap,0);
+      g.addColorStop(0,'rgba(127,166,255,.9)'); g.addColorStop(1,'rgba(127,166,255,0)');
+      ctx.fillStyle=g; ctx.beginPath(); ctx.moveTo(-4,-3); ctx.lineTo(-8-16*cap,0); ctx.lineTo(-4,3); ctx.closePath(); ctx.fill();
+      ctx.globalAlpha=1;
+    }
+    ctx.restore();
+
+    OUT.forEach(o => txt(o.label, outX, o.y+22, '10px monospace', 'rgba(230,235,245,.55)', 'center'));
+  }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+
+const bar = document.getElementById('feedSources');
+if(bar){
+  bar.addEventListener('click', e => {
+    const b = e.target.closest('button'); if(!b) return;
+    const id = b.dataset.src;
+    active[id] = !active[id];
+    b.classList.toggle('on', active[id]);
+  });
+}
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 9 — voyagers: an autonomous ship leaves, crosses, arrives, builds.
+   One continuous looping ambient animation, four phases in one cycle.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('voyagerCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+
+let seed = 47; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const STARS = Array.from({length:140}, () => ({x: rnd(), y: rnd(), r: 0.4+rnd()*1.3, tw: rnd()*6.28}));
+const CYCLE = 26; // seconds for one full launch -> crossing -> arrival -> build loop
+
+function ship(x,y,s,ang,thrust){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(ang); ctx.scale(s,s);
+  ctx.fillStyle = '#C9DAFF';
+  ctx.beginPath(); ctx.moveTo(14,0); ctx.lineTo(-8,-6); ctx.lineTo(-4,0); ctx.lineTo(-8,6); ctx.closePath(); ctx.fill();
+  if(thrust>0.01){
+    ctx.globalAlpha = thrust;
+    const g = ctx.createLinearGradient(-8,0,-8-18*thrust,0);
+    g.addColorStop(0,'rgba(127,166,255,.9)'); g.addColorStop(1,'rgba(127,166,255,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.moveTo(-4,-3); ctx.lineTo(-8-18*thrust,0); ctx.lineTo(-4,3); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+  ctx.restore();
+}
+function planet(x,y,r,col){
+  ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fillStyle = col; ctx.fill();
+  ctx.beginPath(); ctx.arc(x-r*0.3,y-r*0.3,r*0.9,0,7); ctx.fillStyle='rgba(255,255,255,.05)'; ctx.fill();
+}
+function tower(x,groundY,h,prog){
+  const hh = h*Math.min(1,prog);
+  const g = ctx.createLinearGradient(x,groundY,x,groundY-hh);
+  g.addColorStop(0,'#7FA6FF'); g.addColorStop(1,'#F6C35B');
+  ctx.fillStyle = g;
+  ctx.fillRect(x-5, groundY-hh, 10, hh);
+  if(prog<1 && prog>0){ ctx.fillStyle='rgba(246,195,91,.9)'; ctx.beginPath(); ctx.arc(x, groundY-hh, 3.5, 0, 7); ctx.fill(); }
+}
+// Earth, small and lit, tucked in a corner through every later phase — humanity is still home
+function homeEarth(t){
+  const ex = W*0.09, ey = H*0.14, r = Math.min(W,H)*0.035;
+  planet(ex, ey, r, '#3a6fd9');
+  for(let i=0;i<6;i++){
+    const ang = i*1.05 + 0.4;
+    if(Math.sin(t*2 + i)>-0.2){
+      ctx.beginPath(); ctx.arc(ex+Math.cos(ang)*r*0.7, ey+Math.sin(ang)*r*0.55, 0.9, 0, 7);
+      ctx.fillStyle = '#F6C35B'; ctx.fill();
+    }
+  }
+  txt(ctx, 'Earth — still lit', ex, ey+r+13, '9.5px monospace', 'rgba(230,235,245,.35)', 'center');
+}
+
+function loop(ms){
+  if(visible){
+    if(t0===null) t0 = ms;
+    if(!W) resize();
+    const t = (ms-t0)/1000;
+    const p = (t % CYCLE) / CYCLE; // 0..1 through the whole story
+
+    ctx.fillStyle = '#05070c'; ctx.fillRect(0,0,W,H);
+    for(const s of STARS){
+      const tw = 0.5 + 0.5*Math.sin(t*1.4 + s.tw);
+      ctx.fillStyle = `rgba(230,235,245,${0.25+0.55*tw})`;
+      ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.r, 0, 7); ctx.fill();
+    }
+
+    if(p < 0.16){
+      // phase 1: launch from Earth
+      const q = p/0.16;
+      const ex = W*0.14, ey = H*0.82;
+      planet(ex, ey, Math.min(W,H)*0.1, '#3a6fd9');
+      ctx.strokeStyle='rgba(127,166,255,.25)'; ctx.lineWidth=1;
+      ctx.beginPath(); ctx.arc(ex,ey,Math.min(W,H)*0.1+10,0,7); ctx.stroke();
+      const sx = ex + q*W*0.18, sy = ey - q*H*0.28;
+      ship(sx, sy, Math.min(W,H)*0.018, -0.95, 0.9);
+      txt(ctx, 'departure — no return ticket', W*0.5, H*0.09, '12px monospace', 'rgba(230,235,245,.45)', 'center');
+    } else if(p < 0.62){
+      // phase 2: the long silent crossing — the fleet forks into more than one heading
+      const q = (p-0.16)/0.46;
+      homeEarth(t);
+      const headings = [-0.05, 0.09, -0.16];
+      headings.forEach((h,i) => {
+        const sx = W*(0.08 + q*0.84), sy = H*0.5 + h*H*1.4 + Math.sin(q*6+i)*H*0.05;
+        ship(sx, sy, Math.min(W,H)*(0.016 - i*0.002), h*0.4, 0.3+0.15*Math.sin(t*3+i));
+      });
+      ctx.fillStyle='rgba(230,235,245,.35)'; ctx.font='11px monospace'; ctx.textAlign='center';
+      ctx.fillText('generations pass in transit, the fleet forks as it goes', W*0.5, H*0.09);
+    } else if(p < 0.8){
+      // phase 3: arrival at the first of several worlds
+      const q = (p-0.62)/0.18;
+      homeEarth(t);
+      const px = W*0.82, py = H*0.62;
+      planet(px, py, Math.min(W,H)*(0.06+0.06*q), '#8a5fd9');
+      planet(W*0.68, H*0.28, Math.min(W,H)*0.025, '#5a8fd9');
+      const sx = W*0.2 + q*W*0.5, sy = H*0.4 - q*H*0.02;
+      ship(sx, sy, Math.min(W,H)*0.016, q*0.6, 0.5);
+      txt(ctx, 'arrival, the first of several', W*0.5, H*0.09, '12px monospace', 'rgba(230,235,245,.45)', 'center');
+    } else {
+      // phase 4: building new worlds, plural, while Earth stays lit in the corner
+      const q = (p-0.8)/0.2;
+      homeEarth(t);
+      const px = W*0.82, py = H*0.62, pr = Math.min(W,H)*0.12;
+      planet(px, py, pr, '#8a5fd9');
+      const groundY = py + pr*0.55;
+      tower(px-pr*0.5, groundY, pr*0.9, q*2.2);
+      tower(px-pr*0.1, groundY, pr*1.2, q*2.2-0.3);
+      tower(px+pr*0.35, groundY, pr*0.7, q*2.2-0.6);
+      ship(px - pr*1.3, py - pr*0.4, Math.min(W,H)*0.012, 0.3, 0);
+      // a second outpost, further along, smaller and just starting — the pattern repeating
+      const px2 = W*0.62, py2 = H*0.24, pr2 = pr*0.4;
+      planet(px2, py2, pr2, '#5a8fd9');
+      tower(px2, py2+pr2*0.55, pr2*0.9, Math.max(0,q*2.2-0.9));
+      txt(ctx, 'structures rise where none stood before — more than once', W*0.5, H*0.09, '12px monospace', 'rgba(230,235,245,.45)', 'center');
+    }
+  }
+  requestAnimationFrame(loop);
+}
+function fit(){} // no-op, kept for consistency with sibling scripts
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 9 gallery — three small illustrated future scenes
+   ===================================================================== */
+(() => {
+"use strict";
+function mount(id, drawFn){
+  const cv = document.getElementById(id); if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W=0,H=0,DPR=1,visible=false,t0=null;
+  function resize(){
+    DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+    if(!r.width) return;
+    W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  addEventListener('resize', resize); resize();
+  function loop(ms){
+    if(visible){
+      if(t0===null) t0 = ms;
+      if(!W) resize();
+      ctx.clearRect(0,0,W,H);
+      drawFn(ctx, W, H, (ms-t0)/1000);
+    }
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+  requestAnimationFrame(loop);
+}
+function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+
+/* branching map of outposts, slowly growing */
+mount('vigOutposts', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  let seed = 91; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+  const nodes = [{x:0.12,y:0.5,gen:0}];
+  for(let i=0;i<9;i++){
+    const parent = nodes[Math.floor(rnd()*nodes.length)];
+    if(parent.gen>3) continue;
+    nodes.push({x: Math.min(0.92, parent.x + 0.1+rnd()*0.12), y: Math.min(0.9,Math.max(0.1, parent.y + (rnd()-0.5)*0.4)), gen: parent.gen+1, parent: nodes.indexOf(parent)});
+  }
+  const appear = 2 + Math.floor((t*0.7) % (nodes.length+3));
+  ctx.lineWidth = 1;
+  for(let i=1;i<Math.min(appear,nodes.length);i++){
+    const n = nodes[i], p = nodes[n.parent];
+    ctx.strokeStyle = 'rgba(127,166,255,.35)';
+    ctx.beginPath(); ctx.moveTo(p.x*W,p.y*H); ctx.lineTo(n.x*W,n.y*H); ctx.stroke();
+  }
+  for(let i=0;i<Math.min(appear,nodes.length);i++){
+    const n = nodes[i];
+    ctx.beginPath(); ctx.arc(n.x*W,n.y*H, i===0?5:3, 0, 7);
+    ctx.fillStyle = i===0 ? '#F6C35B' : '#C9DAFF'; ctx.fill();
+  }
+  txt(ctx, 'Earth', nodes[0].x*W, nodes[0].y*H+16, '9.5px monospace', 'rgba(230,235,245,.4)', 'center');
+});
+
+/* Earth and an AI-built outpost, trading a signal back and forth */
+mount('vigTogether', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const ey = H*0.6, ex = W*0.22, ar = Math.min(W,H)*0.16;
+  // Earth-side skyline with humans still very much present
+  ctx.fillStyle = '#141c30'; ctx.fillRect(0, ey, W*0.42, H-ey);
+  for(let i=0;i<7;i++){
+    const bx = i*(W*0.4/7)+6, bh = 14+((i*37)%26);
+    ctx.fillStyle = '#1c2740'; ctx.fillRect(bx, ey-bh, W*0.4/7-4, bh);
+    for(let wY=ey-bh+4; wY<ey-3; wY+=7) if(Math.sin(t*2+bx+wY)>0.1){ ctx.fillStyle='#F6C35B'; ctx.fillRect(bx+3,wY,2,2); }
+  }
+  // outpost side, a small hex structure orbiting a distant world
+  const ox = W*0.78, oy = H*0.42;
+  ctx.strokeStyle = '#7FA6FF'; ctx.lineWidth=1.4;
+  ctx.beginPath();
+  for(let i=0;i<=6;i++){ const a = i/6*6.283; const px = ox+Math.cos(a)*20, py = oy+Math.sin(a)*20; i===0?ctx.moveTo(px,py):ctx.lineTo(px,py); }
+  ctx.stroke();
+  ctx.beginPath(); ctx.arc(ox,oy,4,0,7); ctx.fillStyle='#F6C35B'; ctx.fill();
+  // a pulse of signal travelling back and forth between them
+  const q = (Math.sin(t*0.8)+1)/2;
+  const sx = W*0.42 + q*(ox-40-W*0.42), sy = ey-30 + q*(oy-(ey-30));
+  ctx.beginPath(); ctx.arc(sx,sy,2.5,0,7); ctx.fillStyle='rgba(255,255,255,.9)'; ctx.fill();
+  txt(ctx, 'Earth', ex, H-8, '9.5px monospace', 'rgba(230,235,245,.4)', 'center');
+  txt(ctx, 'the outpost', ox, oy-32, '9.5px monospace', 'rgba(230,235,245,.4)', 'center');
+});
+
+/* a Dyson-swarm-like ring of collector panels around a star */
+mount('vigDyson', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cx = W/2, cy = H/2;
+  const glow = ctx.createRadialGradient(cx,cy,2,cx,cy,Math.min(W,H)*0.22);
+  glow.addColorStop(0,'rgba(255,240,210,1)'); glow.addColorStop(0.3,'rgba(246,195,91,.8)'); glow.addColorStop(1,'rgba(246,195,91,0)');
+  ctx.beginPath(); ctx.arc(cx,cy,Math.min(W,H)*0.22,0,7); ctx.fillStyle = glow; ctx.fill();
+  const rings = 3;
+  for(let r=0;r<rings;r++){
+    const rad = Math.min(W,H)*(0.28+r*0.09);
+    const n = 14+r*4;
+    for(let i=0;i<n;i++){
+      const a = (i/n)*6.283 + t*(0.15-r*0.03)*(r%2===0?1:-1);
+      const px = cx+Math.cos(a)*rad, py = cy+Math.sin(a)*rad*0.42;
+      const facing = Math.cos(a);
+      ctx.save(); ctx.translate(px,py); ctx.rotate(a+1.57);
+      ctx.fillStyle = `rgba(127,166,255,${0.35+0.35*Math.max(0,facing)})`;
+      ctx.fillRect(-5,-2,10,4);
+      ctx.restore();
+    }
+  }
+  txt(ctx, 'a swarm of collectors, not a single ship', cx, cy+Math.min(W,H)*0.4, '10px monospace', 'rgba(230,235,245,.4)', 'center');
+});
+})();
+</script>
+
+<script>
+/* master nav menu: collapsible, jump-to-chapter, active-section highlight */
+(() => {
+"use strict";
+const menu = document.getElementById('navmenu');
+const toggle = document.getElementById('navToggle');
+const list = document.getElementById('navList');
+const links = [...list.querySelectorAll('a')];
+const narrow = matchMedia('(max-width:760px)').matches;
+
+let collapsed = true; // always start collapsed so it never covers the hero or a chapter on first paint
+function applyState(){ menu.classList.toggle('collapsed', collapsed); toggle.setAttribute('aria-expanded', String(!collapsed)); }
+applyState();
+toggle.addEventListener('click', () => { collapsed = !collapsed; applyState(); });
+links.forEach(a => a.addEventListener('click', () => { if(narrow){ collapsed = true; applyState(); } }));
+
+const targets = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const id = '#'+e.target.id;
+      links.forEach(a => a.classList.toggle('on', a.getAttribute('href')===id));
+    }
+  });
+}, {rootMargin:'-40% 0px -55% 0px', threshold:0});
+targets.forEach(t => io.observe(t));
+})();
+</script>
+
+<script>
+/* =====================================================================
+   Per-chapter scroll rail — the exact mechanic from the cosmic intro's
+   right-side rail (phase-from-scroll-position, nearest-item highlight),
+   copied and generalized to every later chapter. Each chapter supplies
+   its own timeline from the <ul class="ch-timeline"> already in its
+   chapter-head, so there's one source of truth for the dates.
+   ===================================================================== */
+(() => {
+"use strict";
+const railEl = document.getElementById('chRail'); if(!railEl) return;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const chapters = [...document.querySelectorAll('section.chapter')];
+const groups = chapters.map(ch => {
+  const items = [...ch.querySelectorAll(':scope > .chapter-head .ch-timeline li')].map(li => ({
+    y: li.querySelector('.y') ? li.querySelector('.y').textContent : '',
+    e: li.querySelector('.e') ? li.querySelector('.e').textContent : ''
+  }));
+  return {ch, items};
+}).filter(g => g.items.length > 1);
+
+let currentGroup = -1, currentIdx = -1, raf = null;
+
+function boundsFor(g){
+  const idx = chapters.indexOf(g.ch);
+  const start = g.ch.offsetTop;
+  const nextCh = chapters[idx+1];
+  const end = nextCh ? nextCh.offsetTop : document.body.scrollHeight;
+  return {start, end: Math.max(end, start+1)};
+}
+
+function render(){
+  raf = null;
+  const mid = scrollY + innerHeight*0.5;
+  let gi = -1, phase = 0;
+  for(let i=0;i<groups.length;i++){
+    const {start,end} = boundsFor(groups[i]);
+    if(mid >= start && mid < end){ gi = i; phase = (mid-start)/(end-start); break; }
+  }
+  if(gi === -1){
+    if(currentGroup !== -1){ railEl.classList.remove('show'); currentGroup = -1; currentIdx = -1; }
+    return;
+  }
+  const g = groups[gi];
+  const n = g.items.length;
+  const idx = Math.min(n-1, Math.max(0, Math.floor(phase*n)));
+
+  if(gi !== currentGroup){
+    railEl.innerHTML = g.items.map(it => `<li>${it.y}</li>`).join('');
+    currentGroup = gi; currentIdx = -1;
+  }
+  if(idx !== currentIdx){
+    [...railEl.children].forEach((li,i2) => { li.classList.toggle('on', i2===idx); li.classList.toggle('past', i2<idx); });
+    currentIdx = idx;
+  }
+  railEl.classList.add('show');
+}
+function onScroll(){ if(!raf) raf = requestAnimationFrame(render); }
+addEventListener('scroll', onScroll, {passive:true});
+addEventListener('resize', onScroll);
+render();
 })();
 </script>
 

@@ -64,6 +64,13 @@ details li{margin-bottom:6px}
 .gate:hover,.gate:focus-visible{border-color:var(--helium);background:rgba(246,195,91,.1);outline:none}
 .gate.next{max-width:44rem;margin-top:36px}
 .end-note{max-width:44rem;margin:40px 0 4vh;color:var(--muted);font-family:var(--display);font-style:italic;font-size:1.15rem;line-height:1.55}
+
+/* chapter 5: the long climb — plain narrative sections over a frozen starfield,
+   so they need their own always-on backdrop (the mobile-only .card rule below doesn't cover desktop) */
+section.evo{max-width:34rem}
+section.evo .card{background:rgba(5,6,10,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:22px 24px;border-radius:4px}
+.evo-art{display:block;width:100%;height:180px;background:#090d15;border:1px solid #1d2638;border-radius:4px;margin-bottom:18px}
+@media (max-width:760px){ .evo-art{height:150px} }
 footer{padding-block:0 10vh}
 
 /* chapter 2: the forge */
@@ -398,8 +405,116 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
       <iframe src="protein-lab.html" title="Protein Synthesis Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
       <div class="cap">Your original Protein Synthesis Simulator, running unchanged: transcription, splicing, export, translation, and folding.</div>
     </div>
-    <p class="end-note">Four chapters in, and the thread hasn't broken once: the hydrogen in the first star, the iron in its ashes, the water that gathered on a young planet, the amino acids lightning made from it, and now a molecule that reads itself and builds the next generation. What comes after life is still being written.</p>
+    <p class="end-note">Four chapters in, and the thread hasn't broken once: the hydrogen in the first star, the iron in its ashes, the water that gathered on a young planet, the amino acids lightning made from it, and now a molecule that reads itself and builds the next generation.</p>
+    <a class="gate next" href="#climb">
+      <span class="ch">Chapter 5</span>
+      <b>Enter the Long Climb ↓</b>
+      <span>One replicating molecule is not yet a redwood, a whale, or you. Everything after this is what that molecule became, one copying error at a time, for four billion years.</span>
+    </a>
   </section>
+
+  <section class="chapter" id="climb">
+    <div class="chapter-head">
+      <p class="when">Chapter 5 · the long climb</p>
+      <h2>Four Billion Years, Compressed</h2>
+      <p>Nothing in this chapter is a simulation. It's a timeline, the real one, run at a speed you can actually sit through: a single cell learning to divide, its descendants inventing multicellular bodies, crawling out of the water, growing scales then fur then hands, and eventually asking where they came from.</p>
+      <p class="aside">The animation below loops continuously and isn't scroll-linked; scroll past it for the timeline itself, with real dates.</p>
+    </div>
+    <div class="ambient">
+      <canvas id="climbCv" aria-label="Looping animation of the history of life: cells, sea creatures, the move onto land, dinosaurs, an asteroid impact, mammals, primates, humans and a city skyline"></canvas>
+      <div class="cap">A single cell to a city skyline, looped. Every stage shown here actually happened, in this order, on this planet.</div>
+    </div>
+  </section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigCell" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 3.8 billion years ago</p>
+    <h2>The first thing that could be called alive</h2>
+    <p class="fact">Somewhere in that primordial ocean, a molecule crossed a line: it could make copies of itself, imperfectly, and the imperfect copies that copied better outcompeted the rest. That's evolution's entire engine, and it needs nothing more than this to start running.</p>
+    <p class="fact">The oldest chemical traces of life are about <span class="num">3.8 billion years</span> old; the oldest fossils that look unmistakably biological, layered mats called stromatolites, are about <span class="num">3.5 billion years</span> old. Every living thing on Earth, a mushroom, a shark, you, descends from that same single lineage: <b>LUCA</b>, the last universal common ancestor.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigEndo" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 2 billion years ago</p>
+    <h2>One cell swallows another, and doesn't let go</h2>
+    <p class="fact">For nearly two billion years, life stayed simple: single cells with no nucleus, drifting and dividing. Then, once, a larger cell engulfed a smaller one, and instead of digesting it, kept it. The smaller cell kept generating energy from inside its new host.</p>
+    <p class="fact">That captured cell is the ancestor of every <b>mitochondrion</b> in every complex cell alive today, including all of yours. Biologist Lynn Margulis spent decades arguing for this, against real resistance, before it became accepted fact.</p>
+    <p class="aside">This one merger is why complex life exists at all: it's what gave cells enough spare energy per gene to afford the extravagance of being big, specialized, and multicellular.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigCambr" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 541 million years ago</p>
+    <h2>The Cambrian explosion</h2>
+    <p class="fact">Multicellular animals existed before this point, but they were mostly soft, simple, and few. Then, over roughly <span class="num">20 million years</span>, an eyeblink in geological time, the sea filled with body plans: shells, legs, eyes, spines, the ancestors of nearly every major animal group alive now.</p>
+    <blockquote>There is grandeur in this view of life... that, whilst this planet has gone cycling on according to the fixed law of gravity, from so simple a beginning endless forms most beautiful and most wonderful have been, and are being, evolved.<cite>Charles Darwin · On the Origin of Species, 1859</cite></blockquote>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigLand" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 470 – 375 million years ago</p>
+    <h2>Life crawls onto land</h2>
+    <p class="fact">Plants and fungi colonized the shore first, around <span class="num">470 million years</span> ago, turning bare rock into soil. Insects and other arthropods followed. Then, about <span class="num">375 million years</span> ago, fish with strong, jointed fins, animals like <i>Tiktaalik</i>, began hauling themselves out of shallow water.</p>
+    <p class="aside">Every limb bone in every land vertebrate, a frog's leg, a bird's wing, your arm, traces back to those same fin bones. It's the same skeleton, endlessly remixed.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigDino" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 240 – 66 million years ago</p>
+    <h2>The age of dinosaurs</h2>
+    <p class="fact">Dinosaurs appeared around <span class="num">240 million years</span> ago and dominated land for roughly <span class="num">165 million years</span>, an almost incomprehensible span: longer than the time separating <i>Tyrannosaurus</i> from you is from <i>Stegosaurus</i>. Countless generations lived and died, species rising and vanishing, while mammals stayed small, mostly nocturnal, and out of the way.</p>
+    <p class="fact">They never fully left. One lineage of small, feathered dinosaurs survived: birds. The pigeon outside your window is, technically, a dinosaur.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigImpact" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 66 million years ago</p>
+    <h2>The asteroid</h2>
+    <p class="fact">An object about <span class="num">10 km</span> across struck what is now the Yucatán Peninsula with the energy of billions of atomic bombs. Wildfires, a global dust cloud, and years of darkened, cooled skies followed. About <span class="num">75%</span> of all species, including every non-bird dinosaur, went extinct.</p>
+    <p class="aside">It's one of the strangest facts in this whole story: an accident of orbital mechanics, a rock that happened to be in the wrong place, is a direct precondition for your existence. Without it, mammals very likely stay small and marginal indefinitely.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigMammal" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 65 – 6 million years ago</p>
+    <h2>Mammals inherit an empty world</h2>
+    <p class="fact">With the dinosaurs gone, mammals diversified fast, filling niches that had been closed to them for 165 million years: grazers, predators, swimmers, and eventually, in the trees, primates, small, sharp-eyed animals with grasping hands and forward-facing eyes built for judging distance between branches.</p>
+    <p class="fact">Around <span class="num">6–7 million years</span> ago, in Africa, one branch of primates split in two. One side became chimpanzees and bonobos. The other became us.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigStand" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 4 – 2 million years ago</p>
+    <h2>Standing up</h2>
+    <p class="fact">Early hominins like <i>Australopithecus</i>, the group that includes the famous skeleton "Lucy", walked upright on two legs while still having a small, ape-sized brain: bipedalism came first, big brains came later, in that order. Freed hands could now carry things and eventually shape stone.</p>
+    <p class="fact">The genus <i>Homo</i> appears around <span class="num">2.8 million years</span> ago. Stone tools, controlled fire, and slowly, over a million years and several now-extinct human species, larger brains.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigSapiens" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 300,000 years ago</p>
+    <h2>Homo sapiens</h2>
+    <p class="fact">The oldest known fossils of anatomically modern humans, found at Jebel Irhoud in Morocco, are about <span class="num">300,000 years</span> old. For most of that time, we were a small population of hunter-gatherers among several other human species, Neanderthals, Denisovans, others, most of whom we outlasted and some of whom we interbred with.</p>
+    <blockquote>The nitrogen in our DNA, the calcium in our teeth, the iron in our blood, the carbon in our apple pies were made in the interiors of collapsing stars. We are made of starstuff.<cite>Carl Sagan · Cosmos, 1980</cite></blockquote>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigAgri" aria-hidden="true"></canvas>
+    <p class="when">t ≈ 12,000 years ago</p>
+    <h2>Everything speeds up</h2>
+    <p class="fact">For nearly all of human existence, change moved at the pace of biology. Then, starting about <span class="num">12,000 years</span> ago, independently in several regions, people began farming. Farming allowed surplus, surplus allowed cities, cities allowed writing, and from there, change stopped being biological and started being cultural, doubling and redoubling on a scale evolution had never moved at before.</p>
+    <p class="aside">Agriculture to writing took about 7,000 years. Writing to the printing press took about 4,500. What used to take millennia now takes decades, then years.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vig1980" aria-hidden="true"></canvas>
+    <p class="when">1980</p>
+    <h2>A species that builds machines that think</h2>
+    <p class="fact">By 1980, the species that four billion years of accident and selection produced had split the atom, left footprints on the Moon, and sent two spacecraft, <i>Voyager 1</i> and <i>2</i>, out past the edge of the solar system, each carrying a golden record of Earth's sounds in case anyone out there ever finds them.</p>
+    <p class="fact">And on desks in offices and living rooms, a new kind of object was spreading: small, humming boxes, the Apple II, the early IBM PC, that could be given instructions and would follow them, faithfully, without getting tired. Nobody watching one in 1980 knew yet what it would grow into.</p>
+    <p class="end-note">Every thread in this story, hydrogen into stars, stars into carbon, carbon into cells, cells into you, converges on a strange fact: matter arranged itself into something that could ask where it came from, and then build a second kind of mind to help it look further. What that second mind leads to is the next thread of this story.</p>
+  </div></section>
 
   <footer></footer>
 </main>
@@ -1187,7 +1302,7 @@ window.forgeSN = supernova;
     for(const e of es){ e.isIntersecting ? on.add(e.target) : on.delete(e.target); }
     document.body.classList.toggle('in-chapter', on.size > 0);
   }, {threshold:0.12});
-  document.querySelectorAll('section.chapter').forEach(s => obs.observe(s));
+  document.querySelectorAll('section.chapter, section.evo').forEach(s => obs.observe(s));
 })();
 </script>
 
@@ -1450,6 +1565,521 @@ function loop(ms){
 }
 new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
 requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 5 (part 1) — ambient animation: cell to city, looped
+   Not a simulation — a paced illustration of the real sequence:
+   first cell, Cambrian seas, landfall, dinosaurs, the impact,
+   mammals, primates standing upright, and a city skyline.
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('climbCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+
+let seed = 19; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const CYCLE = 34;
+// simple silhouette drawing helpers
+function walker(x, y, s, legPhase, hunch, col){
+  // a single upright-ish figure: head, spine, two legs swinging
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineCap = 'round';
+  const bend = hunch; // 0 = upright, 1 = fully hunched (quadrupedal lean)
+  const hipY = -18, shY = -18 - 20*(1-bend*0.6);
+  const headX = bend*10;
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(0, hipY); ctx.lineTo(headX, shY); ctx.stroke();
+  ctx.beginPath(); ctx.arc(headX, shY - 6, 5, 0, 7); ctx.fill();
+  const swing = Math.sin(legPhase)*10;
+  ctx.beginPath(); ctx.moveTo(0, hipY); ctx.lineTo(swing, 0); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0, hipY); ctx.lineTo(-swing, 0); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(headX*0.5, shY+6); ctx.lineTo(headX*0.5 - Math.sin(legPhase)*8, shY+18); ctx.stroke();
+  ctx.restore();
+}
+function fish(x, y, s, t, col){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s * (0.9+0.1*Math.sin(t*3)), s); ctx.fillStyle = col;
+  ctx.beginPath(); ctx.ellipse(0,0,10,4,0,0,7); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-9,0); ctx.lineTo(-16,-5); ctx.lineTo(-16,5); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+function dino(x, y, s, legPhase, col, long){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineCap='round'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.ellipse(0,-14,16,8,0,0,7); ctx.fill();                 // body
+  if(long){ ctx.beginPath(); ctx.moveTo(14,-16); ctx.quadraticCurveTo(30,-30,36,-38); ctx.lineWidth=5; ctx.stroke(); ctx.beginPath(); ctx.arc(36,-38,3.5,0,7); ctx.fill(); }
+  else { ctx.beginPath(); ctx.moveTo(12,-16); ctx.lineTo(22,-26); ctx.lineWidth=6; ctx.stroke(); ctx.beginPath(); ctx.arc(23,-27,5,0,7); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(20,-25); ctx.lineTo(28,-24); ctx.lineWidth=3; ctx.stroke(); }
+  ctx.beginPath(); ctx.moveTo(-14,-14); ctx.quadraticCurveTo(-26,-10,-32,4); ctx.lineWidth=5; ctx.stroke();  // tail
+  const sw = Math.sin(legPhase)*6;
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(-6,-8); ctx.lineTo(-6+sw,4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(6,-8); ctx.lineTo(6-sw,4); ctx.stroke();
+  ctx.restore();
+}
+function fern(x, y, s, col){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.strokeStyle = col; ctx.lineWidth = 1.4;
+  for(let i=0;i<5;i++){
+    const a = -Math.PI/2 + (i-2)*0.32, L = 12 - Math.abs(i-2)*1.6;
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.cos(a)*L, Math.sin(a)*L); ctx.stroke();
+  }
+  ctx.restore();
+}
+function building(x, y, w, h, col, lit, t){
+  ctx.fillStyle = col; ctx.fillRect(x, y-h, w, h);
+  ctx.fillStyle = `rgba(255,214,120,${0.5+0.5*Math.sin(t*2+x)})`;
+  for(let wy=y-h+8; wy<y-6; wy+=11) for(let wx=x+4; wx<x+w-4; wx+=9){
+    if(lit && ((wx+wy)|0)%3===0) ctx.fillRect(wx, wy, 3, 5);
+  }
+}
+
+const FISH = Array.from({length:14}, () => ({x:rnd(), y:0.3+rnd()*0.4, v:0.3+rnd()*0.5, ph:rnd()*6.28}));
+const DINOS = [{dx:-0.22,long:true,sc:1.1},{dx:0.05,long:false,sc:0.8},{dx:0.28,long:false,sc:0.6}];
+const BUILD = Array.from({length:11}, (_,i) => ({w:0.045+rnd()*0.05, h:0.25+rnd()*0.55, seed:rnd()}));
+
+function draw(t){
+  ctx.clearRect(0,0,W,H);
+  const u = (t % CYCLE) / CYCLE;
+  const groundY = H*0.78;
+
+  // ---- named stages along u ----
+  const cell    = Math.max(0, 1 - u/0.10);
+  const cambr   = smooth(0.07,0.11,u) * (1-smooth(0.21,0.25,u));
+  const land    = smooth(0.21,0.25,u) * (1-smooth(0.33,0.37,u));
+  const dinoA   = smooth(0.33,0.38,u) * (1-smooth(0.49,0.53,u));
+  const impact  = smooth(0.50,0.53,u) * (1-smooth(0.57,0.60,u));
+  const mammal  = smooth(0.56,0.60,u) * (1-smooth(0.67,0.71,u));
+  const prim    = smooth(0.67,0.71,u) * (1-smooth(0.79,0.83,u));
+  const human   = smooth(0.79,0.83,u) * (1-smooth(0.90,0.94,u));
+  const city    = smooth(0.90,0.94,u);
+  const underwater = cell + cambr;
+
+  // sky
+  let sky1 = '#090d15', sky2 = '#090d15';
+  if(underwater > 0.05){ sky1 = mix('#0c1f33','#090d15',1-underwater); sky2 = mix('#12314f','#090d15',1-underwater); }
+  if(land+dinoA > 0.05){ const a = land+dinoA; sky1 = mix('#16233a',sky1,1-a); sky2 = mix('#2a3a52',sky2,1-a); }
+  if(impact > 0.05){ sky1 = mix('#3a140f', sky1, 1-impact); sky2 = mix('#ff8a4c', sky2, 1-impact*0.7); }
+  if(mammal+prim > 0.05){ const a = mammal+prim; sky1 = mix('#141c2e', sky1, 1-a*0.8); sky2 = mix('#2c3650', sky2, 1-a*0.8); }
+  if(human > 0.05){ sky1 = mix('#0d1220', sky1, 1-human); sky2 = mix('#1c2740', sky2, 1-human); }
+  if(city > 0.05){ sky1 = mix('#05060a', sky1, 1-city); sky2 = mix('#0c1830', sky2, 1-city); }
+  const g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0, sky2); g.addColorStop(1, sky1);
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  // stars, faint, always present at night-like phases
+  if(city > 0.2 || (1-underwater-land-dinoA-impact-mammal-prim-human) > 0.3){
+    ctx.fillStyle = 'rgba(230,235,245,.35)';
+    for(let i=0;i<30;i++){ const gx=(i*97%100)/100*W, gy=(i*53%100)/100*H*0.6; ctx.fillRect(gx,gy,1,1); }
+  }
+
+  // underwater tint + surface
+  if(underwater > 0.02){
+    ctx.globalAlpha = underwater*0.35;
+    ctx.fillStyle = '#1a4a72'; ctx.fillRect(0,H*0.15,W,H*0.85);
+    ctx.globalAlpha = 1;
+  }
+
+  // ground silhouette (land phases onward)
+  const groundA = Math.max(land, dinoA, impact, mammal, prim, human, city);
+  if(groundA > 0.02){
+    ctx.globalAlpha = groundA;
+    ctx.fillStyle = impact > 0.15 ? '#2a1610' : '#0e1b12';
+    ctx.beginPath(); ctx.moveTo(0,H);
+    for(let x=0;x<=W;x+=W/20) ctx.lineTo(x, groundY - 6*Math.sin(x*0.01+7));
+    ctx.lineTo(W,H); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // ---- stage content ----
+  if(cell > 0.02){
+    const cx = W*0.5, cy = H*0.5, pulse = 0.5+0.5*Math.sin(t*1.3);
+    ctx.globalAlpha = cell;
+    const dividing = (Math.sin(t*0.7)+1)/2 > 0.5;
+    ctx.fillStyle = 'rgba(110,227,154,.85)';
+    if(dividing){
+      const sep = 8 + pulse*4;
+      ctx.beginPath(); ctx.arc(cx-sep,cy,14,0,7); ctx.fill();
+      ctx.beginPath(); ctx.arc(cx+sep,cy,14,0,7); ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.arc(cx,cy,16+pulse*2,0,7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  if(cambr > 0.02){
+    ctx.globalAlpha = cambr;
+    for(const f of FISH) fish(f.x*W + Math.sin(t*f.v+f.ph)*40, H*f.y, 1.1, t+f.ph, '#7fa6ff');
+    ctx.globalAlpha = 1;
+  }
+  if(land > 0.02){
+    ctx.globalAlpha = land;
+    const crawl = land; // 0 = in water, 1 = fully on land
+    const fx = W*(0.15 + crawl*0.15);
+    fish(fx, groundY - 4, 1.6, t*2, '#8fd6a0');
+    fern(W*0.55, groundY, 1.4, 'rgba(90,180,120,.8)');
+    fern(W*0.68, groundY, 1.1, 'rgba(90,180,120,.6)');
+    ctx.globalAlpha = 1;
+  }
+  if(dinoA > 0.02){
+    ctx.globalAlpha = dinoA;
+    for(const d of DINOS) dino(W*(0.5+d.dx) + Math.sin(t*0.2)*30, groundY, d.sc*1.3, t*4+d.dx*10, '#c98a5a', d.long);
+    ctx.globalAlpha = 1;
+  }
+  if(impact > 0.02){
+    ctx.globalAlpha = impact;
+    const p = smooth(0.50,0.515,u);
+    const sx = W*(1-p*0.4), sy = H*0.05 + p*H*0.3;
+    ctx.strokeStyle = 'rgba(255,220,150,.9)'; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(W*1.05,-H*0.05); ctx.lineTo(sx,sy); ctx.stroke();
+    if(p > 0.85){
+      const flashA = Math.max(0, 1-(p-0.85)/0.15);
+      ctx.globalAlpha = impact*flashA;
+      const fl = ctx.createRadialGradient(sx,sy,0,sx,sy,W*0.6);
+      fl.addColorStop(0,'rgba(255,240,210,.95)'); fl.addColorStop(1,'rgba(255,140,60,0)');
+      ctx.fillStyle = fl; ctx.fillRect(0,0,W,H);
+    }
+    ctx.globalAlpha = 1;
+  }
+  if(mammal > 0.02){
+    ctx.globalAlpha = mammal;
+    for(let i=0;i<4;i++){
+      const mx = W*(0.2+i*0.2) + Math.sin(t*2+i)*18, my = groundY - 3;
+      ctx.fillStyle = '#a67c52'; ctx.beginPath(); ctx.ellipse(mx,my,7,4,0,0,7); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  if(prim > 0.02){
+    ctx.globalAlpha = prim;
+    const stage = Math.min(2, Math.floor(prim*3));
+    const hunch = [0.95, 0.55, 0.15][stage];
+    walker(W*0.5, groundY, 1.6, t*3, hunch, '#d9c9a8');
+    ctx.globalAlpha = 1;
+  }
+  if(human > 0.02){
+    ctx.globalAlpha = human;
+    walker(W*0.5, groundY, 1.9, t*3.4, 0.02, '#ece6d8');
+    if(human > 0.3){
+      const fx = W*0.5+34, fy = groundY-3;
+      ctx.fillStyle = `rgba(255,150,60,${0.6+0.4*Math.sin(t*7)})`;
+      ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(fx-4,fy-10); ctx.lineTo(fx+4,fy-10); ctx.closePath(); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  if(city > 0.02){
+    ctx.globalAlpha = city;
+    let bx = W*0.06;
+    for(const b of BUILD){ building(bx, groundY, W*b.w, H*b.h*city, '#0c1420', true, t); bx += W*b.w*1.4; }
+    ctx.globalAlpha = 1;
+  }
+
+  // caption
+  const label =
+    cell    > 0.15 ? 'A single cell learns to divide' :
+    cambr   > 0.15 ? 'The Cambrian explosion: body plans multiply in the sea' :
+    land    > 0.15 ? 'Life crawls onto land' :
+    dinoA   > 0.15 ? 'Dinosaurs walk the Earth for 165 million years' :
+    impact  > 0.15 ? 'An asteroid ends their reign' :
+    mammal  > 0.15 ? 'Small mammals inherit an empty world' :
+    prim    > 0.15 ? 'Primates stand a little straighter, generation by generation' :
+    human   > 0.15 ? 'Homo sapiens walks upright, alone among its cousins' :
+    'Cities rise. The climb continues elsewhere in this story';
+  ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.6)';
+  ctx.fillText(label, 14, H-14);
+}
+function smooth(a,b,x){ const t = Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); }
+function mix(hex1, hex2, t){
+  const c1 = parseInt(hex1.slice(1),16), c2 = parseInt(hex2.slice(1),16);
+  const r = ((c1>>16)&255)*(1-t)+((c2>>16)&255)*t, g2 = ((c1>>8)&255)*(1-t)+((c2>>8)&255)*t, b = (c1&255)*(1-t)+(c2&255)*t;
+  return `rgb(${r|0},${g2|0},${b|0})`;
+}
+function loop(ms){
+  if(visible){ if(t0===null) t0 = ms; draw((ms-t0)/1000); }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 5 (part 2) — one small hand-drawn vignette per milestone card.
+   All original line art, not photographs: dividing cells, an engulfed
+   ancestor of the mitochondrion, Burgess Shale creatures, a fin-footed
+   fish hauling onto land, dinosaurs, the impact, early mammals, the
+   march to upright walking, a campfire, a wheatfield, and a 1980 desk.
+   ===================================================================== */
+(() => {
+"use strict";
+const smooth = (a,b,x) => { const t = Math.min(1,Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
+
+function walker(ctx, x, y, s, legPhase, hunch, col){
+  ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
+  ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineCap = 'round';
+  const hipY = -18, shY = -18 - 20*(1-hunch*0.6), headX = hunch*10;
+  ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(0, hipY); ctx.lineTo(headX, shY); ctx.stroke();
+  ctx.beginPath(); ctx.arc(headX, shY - 6, 5, 0, 7); ctx.fill();
+  const swing = Math.sin(legPhase)*10;
+  ctx.beginPath(); ctx.moveTo(0, hipY); ctx.lineTo(swing, 0); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(0, hipY); ctx.lineTo(-swing, 0); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(headX*0.5, shY+6); ctx.lineTo(headX*0.5 - Math.sin(legPhase)*8, shY+18); ctx.stroke();
+  ctx.restore();
+}
+function fishShape(ctx, x, y, s, t, col){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s*(0.9+0.1*Math.sin(t*3)), s); ctx.fillStyle = col;
+  ctx.beginPath(); ctx.ellipse(0,0,10,4,0,0,7); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(-9,0); ctx.lineTo(-16,-5); ctx.lineTo(-16,5); ctx.closePath(); ctx.fill();
+  ctx.restore();
+}
+function trilobite(ctx, x, y, s, t, col){
+  ctx.save(); ctx.translate(x + Math.sin(t*1.3)*6, y); ctx.scale(s, s); ctx.fillStyle = col;
+  ctx.beginPath(); ctx.ellipse(0,0,12,6,0,0,7); ctx.fill();
+  ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.lineWidth = 0.8;
+  ctx.beginPath(); ctx.moveTo(0,-6); ctx.lineTo(0,6); ctx.stroke();
+  for(let i=-8;i<=8;i+=4){ ctx.beginPath(); ctx.moveTo(i,-5); ctx.lineTo(i,5); ctx.stroke(); }
+  ctx.restore();
+}
+function spikyWorm(ctx, x, y, s, t, col){
+  ctx.save(); ctx.translate(x, y + Math.sin(t*2)*8); ctx.scale(s, s);
+  ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(-14,0);
+  for(let i=-12;i<=12;i+=3) ctx.lineTo(i, Math.sin(i*0.5+t*3)*3);
+  ctx.stroke();
+  ctx.fillStyle = col;
+  for(let i=-10;i<=10;i+=5){ ctx.beginPath(); ctx.moveTo(i,Math.sin(i*0.5+t*3)*3); ctx.lineTo(i-1.5,Math.sin(i*0.5+t*3)*3-7); ctx.lineTo(i+1.5,Math.sin(i*0.5+t*3)*3-7); ctx.closePath(); ctx.fill(); }
+  ctx.restore();
+}
+function dinoShape(ctx, x, y, s, legPhase, col, long){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineCap='round'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.ellipse(0,-14,16,8,0,0,7); ctx.fill();
+  if(long){ ctx.beginPath(); ctx.moveTo(14,-16); ctx.quadraticCurveTo(30,-30,36,-38); ctx.lineWidth=5; ctx.stroke(); ctx.beginPath(); ctx.arc(36,-38,3.5,0,7); ctx.fill(); }
+  else { ctx.beginPath(); ctx.moveTo(12,-16); ctx.lineTo(22,-26); ctx.lineWidth=6; ctx.stroke(); ctx.beginPath(); ctx.arc(23,-27,5,0,7); ctx.fill();
+    ctx.beginPath(); ctx.moveTo(20,-25); ctx.lineTo(28,-24); ctx.lineWidth=3; ctx.stroke(); }
+  ctx.beginPath(); ctx.moveTo(-14,-14); ctx.quadraticCurveTo(-26,-10,-32,4); ctx.lineWidth=5; ctx.stroke();
+  const sw = Math.sin(legPhase)*6;
+  ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.moveTo(-6,-8); ctx.lineTo(-6+sw,4); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(6,-8); ctx.lineTo(6-sw,4); ctx.stroke();
+  ctx.restore();
+}
+function fern(ctx, x, y, s, col){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.strokeStyle = col; ctx.lineWidth = 1.4;
+  for(let i=0;i<5;i++){
+    const a = -Math.PI/2 + (i-2)*0.32, L = 12 - Math.abs(i-2)*1.6;
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(Math.cos(a)*L, Math.sin(a)*L); ctx.stroke();
+  }
+  ctx.restore();
+}
+function mammal(ctx, x, y, s, col){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.fillStyle = col;
+  ctx.beginPath(); ctx.ellipse(0,0,8,4.5,0,0,7); ctx.fill();
+  ctx.beginPath(); ctx.arc(-8,-2,3,0,7); ctx.fill();
+  ctx.restore();
+}
+function wheat(ctx, x, y, s, col){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s); ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = 1.3;
+  ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,-22); ctx.stroke();
+  for(let i=-20;i<=-4;i+=4){ ctx.beginPath(); ctx.ellipse(0,i,2,3.2,0,0,7); ctx.fill(); ctx.beginPath(); ctx.ellipse(-2.6,i+2,2,3,0.5,0,7); ctx.fill(); ctx.beginPath(); ctx.ellipse(2.6,i+2,2,3,-0.5,0,7); ctx.fill(); }
+  ctx.restore();
+}
+function computerIcon(ctx, x, y, s, t, col, glow){
+  ctx.save(); ctx.translate(x,y); ctx.scale(s,s);
+  ctx.strokeStyle = col; ctx.lineWidth = 2.2; ctx.fillStyle = 'rgba(90,150,120,.25)';
+  ctx.beginPath(); ctx.rect(-22,-30,44,30); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = glow; ctx.font = '9px ui-monospace,Menlo,monospace'; ctx.textAlign='left';
+  ctx.fillText('>_', -18, -12);
+  if(Math.sin(t*4) > 0) ctx.fillRect(-18+16, -18, 5, 8);
+  ctx.beginPath(); ctx.moveTo(-8,0); ctx.lineTo(8,0); ctx.lineTo(12,8); ctx.lineTo(-12,8); ctx.closePath(); ctx.stroke();
+  ctx.restore();
+}
+function probe(ctx, x, y, s, t, col){
+  ctx.save(); ctx.translate(x,y); ctx.rotate(0.25); ctx.scale(s,s);
+  ctx.strokeStyle = col; ctx.fillStyle = col; ctx.lineWidth = 1.6;
+  ctx.beginPath(); ctx.rect(-6,-4,12,8); ctx.fill();
+  ctx.beginPath(); ctx.moveTo(0,-4); ctx.quadraticCurveTo(10,-16,18,-14); ctx.quadraticCurveTo(14,-4,4,-2); ctx.closePath(); ctx.fill();
+  ctx.beginPath(); ctx.rect(-22,-2,14,4); ctx.stroke();
+  ctx.beginPath(); ctx.rect(8,-2,14,4); ctx.stroke();
+  ctx.globalAlpha = 0.5+0.5*Math.sin(t*2);
+  ctx.beginPath(); ctx.arc(6,-16,2,0,7); ctx.fill();
+  ctx.globalAlpha = 1;
+  ctx.restore();
+}
+function stars(ctx, W, H, n, seedOff){
+  ctx.fillStyle = 'rgba(230,235,245,.4)';
+  for(let i=0;i<n;i++){ const gx=((i*97+seedOff*13)%100)/100*W, gy=((i*53+seedOff*7)%100)/100*H; ctx.fillRect(gx,gy,1,1); }
+}
+
+function mount(id, drawFn){
+  const cv = document.getElementById(id); if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W=0,H=0,DPR=1,visible=false,t0=null;
+  function resize(){
+    DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+    if(!r.width) return;
+    W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  addEventListener('resize', resize); resize();
+  function loop(ms){
+    if(visible){
+      if(t0===null) t0 = ms;
+      if(!W) resize();
+      ctx.clearRect(0,0,W,H);
+      drawFn(ctx, W, H, (ms-t0)/1000);
+    }
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+  requestAnimationFrame(loop);
+}
+
+/* 1. first cells: division, in a dark primordial sea */
+mount('vigCell', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1f33'; ctx.fillRect(0,0,W,H);
+  stars(ctx,W,H,0,0);
+  const cx = W*0.5, cy = H*0.5, pulse = 0.5+0.5*Math.sin(t*1.1);
+  const dividing = (Math.sin(t*0.5)+1)/2 > 0.5;
+  ctx.fillStyle = 'rgba(110,227,154,.85)';
+  if(dividing){
+    const sep = 10 + pulse*6;
+    ctx.beginPath(); ctx.arc(cx-sep,cy,20,0,7); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx+sep,cy,20,0,7); ctx.fill();
+  } else {
+    ctx.beginPath(); ctx.arc(cx,cy,24+pulse*3,0,7); ctx.fill();
+  }
+  ctx.strokeStyle = 'rgba(110,227,154,.25)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx,cy,44+pulse*4,0,7); ctx.stroke();
+});
+
+/* 2. endosymbiosis: a larger cell keeps a smaller one it engulfed */
+mount('vigEndo', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1f33'; ctx.fillRect(0,0,W,H);
+  const cx = W*0.5, cy = H*0.5, R = Math.min(W,H)*0.32;
+  const rot = t*0.15;
+  ctx.strokeStyle = 'rgba(127,166,255,.55)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.ellipse(cx,cy,R,R*0.82,0,0,7); ctx.stroke();
+  ctx.fillStyle = 'rgba(127,166,255,.08)'; ctx.fill();
+  const ox = cx + Math.cos(rot)*R*0.35, oy = cy + Math.sin(rot)*R*0.3;
+  const glow = ctx.createRadialGradient(ox,oy,0,ox,oy,16);
+  glow.addColorStop(0,'rgba(246,195,91,.95)'); glow.addColorStop(1,'rgba(246,195,91,0)');
+  ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(ox,oy,16,0,7); ctx.fill();
+  ctx.fillStyle = '#F6C35B'; ctx.beginPath(); ctx.arc(ox,oy,6,0,7); ctx.fill();
+});
+
+/* 3. Cambrian explosion: a handful of Burgess-Shale-style body plans */
+mount('vigCambr', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1f33'; ctx.fillRect(0,0,W,H);
+  fishShape(ctx, W*0.25+Math.sin(t*0.6)*20, H*0.35, 1.5, t, '#7fa6ff');
+  fishShape(ctx, W*0.7+Math.sin(t*0.5+2)*24, H*0.6, 1.1, t+1, '#7fa6ff');
+  trilobite(ctx, W*0.5+Math.sin(t*0.4)*30, H*0.75, 1.3, t, '#8fd6a0');
+  spikyWorm(ctx, W*0.35+Math.sin(t*0.7+1)*18, H*0.5, 1, t, '#f2607a');
+  trilobite(ctx, W*0.82, H*0.3+Math.sin(t*0.9)*6, 0.9, t+2, '#8fd6a0');
+});
+
+/* 4. landfall: a fin-footed fish hauls out onto the shore */
+mount('vigLand', (ctx,W,H,t) => {
+  const groundY = H*0.72;
+  ctx.fillStyle = '#0c1f33'; ctx.fillRect(0,0,W,H*0.75);
+  ctx.fillStyle = '#0e1b12'; ctx.fillRect(0,groundY,W,H-groundY);
+  ctx.fillStyle = 'rgba(26,74,114,.5)'; ctx.fillRect(0,H*0.55,W*0.45,H*0.2);
+  const crawl = (Math.sin(t*0.35)+1)/2;
+  fishShape(ctx, W*(0.2+crawl*0.35), groundY-4, 1.8, t*2, '#8fd6a0');
+  fern(ctx, W*0.72, groundY, 1.6, 'rgba(90,180,120,.8)');
+  fern(ctx, W*0.85, groundY, 1.2, 'rgba(90,180,120,.6)');
+});
+
+/* 5. the age of dinosaurs */
+mount('vigDino', (ctx,W,H,t) => {
+  const groundY = H*0.78;
+  const sky = ctx.createLinearGradient(0,0,0,H);
+  sky.addColorStop(0,'#2a3a52'); sky.addColorStop(1,'#16233a');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H);
+  ctx.fillStyle = '#0e1b12'; ctx.fillRect(0,groundY,W,H-groundY);
+  dinoShape(ctx, W*0.28+Math.sin(t*0.2)*14, groundY, 1.3, t*3.5, '#c98a5a', true);
+  dinoShape(ctx, W*0.62+Math.sin(t*0.25+2)*14, groundY, 1.0, t*4+2, '#c98a5a', false);
+});
+
+/* 6. the asteroid */
+mount('vigImpact', (ctx,W,H,t) => {
+  const u = (t % 4.5)/4.5;
+  ctx.fillStyle = mix2(u); ctx.fillRect(0,0,W,H);
+  const p = smooth(0,0.7,u);
+  const sx = W*(1-p*0.5), sy = H*0.05 + p*H*0.55;
+  ctx.strokeStyle = 'rgba(255,220,150,.9)'; ctx.lineWidth = 3;
+  ctx.beginPath(); ctx.moveTo(W*1.05,-H*0.1); ctx.lineTo(sx,sy); ctx.stroke();
+  if(p > 0.55){
+    const flashA = Math.max(0, 1-(p-0.55)/0.45);
+    const fl = ctx.createRadialGradient(sx,sy,0,sx,sy,W*0.75);
+    fl.addColorStop(0,`rgba(255,240,210,${0.95*flashA})`); fl.addColorStop(1,'rgba(255,140,60,0)');
+    ctx.fillStyle = fl; ctx.fillRect(0,0,W,H);
+  }
+  function mix2(u){ const dark = u < 0.7 ? 1 : Math.min(1,(u-0.7)/0.3); const r = 10+dark*30, g = 12+dark*4, b = 16; return `rgb(${r},${g},${b})`; }
+});
+
+/* 7. mammals inherit an empty world */
+mount('vigMammal', (ctx,W,H,t) => {
+  const groundY = H*0.72;
+  ctx.fillStyle = '#141c2e'; ctx.fillRect(0,0,W,groundY);
+  ctx.fillStyle = '#0e1b12'; ctx.fillRect(0,groundY,W,H-groundY);
+  fern(ctx, W*0.15, groundY, 1.2, 'rgba(90,180,120,.5)');
+  fern(ctx, W*0.88, groundY, 1.0, 'rgba(90,180,120,.4)');
+  for(let i=0;i<4;i++){
+    const mx = W*(0.25+i*0.17) + Math.sin(t*2.2+i*1.7)*16;
+    mammal(ctx, mx, groundY-3, 1.1, '#a67c52');
+  }
+});
+
+/* 8. standing up: three stages, increasingly upright */
+mount('vigStand', (ctx,W,H,t) => {
+  const groundY = H*0.8;
+  ctx.fillStyle = '#141c2e'; ctx.fillRect(0,0,W,groundY);
+  ctx.fillStyle = '#0e1b12'; ctx.fillRect(0,groundY,W,H-groundY);
+  const hunches = [0.95, 0.55, 0.12];
+  for(let i=0;i<3;i++) walker(ctx, W*(0.25+i*0.25), groundY, 1.6, t*3+i, hunches[i], '#d9c9a8');
+});
+
+/* 9. Homo sapiens, upright, by a fire, under the same stars */
+mount('vigSapiens', (ctx,W,H,t) => {
+  const groundY = H*0.8;
+  ctx.fillStyle = '#0d1220'; ctx.fillRect(0,0,W,groundY);
+  stars(ctx,W,groundY,26,3);
+  ctx.fillStyle = '#0e1b12'; ctx.fillRect(0,groundY,W,H-groundY);
+  walker(ctx, W*0.42, groundY, 1.9, t*3.2, 0.02, '#ece6d8');
+  const fx = W*0.58, fy = groundY-3;
+  ctx.fillStyle = `rgba(255,150,60,${0.6+0.4*Math.sin(t*7)})`;
+  ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(fx-5,fy-13); ctx.lineTo(fx+5,fy-13); ctx.closePath(); ctx.fill();
+  ctx.globalAlpha = 0.5; ctx.beginPath(); ctx.arc(fx,fy-3,14,0,7); ctx.fillStyle='rgba(255,150,60,.12)'; ctx.fill(); ctx.globalAlpha=1;
+});
+
+/* 10. agriculture: a field, a hut, a rising sun */
+mount('vigAgri', (ctx,W,H,t) => {
+  const groundY = H*0.74;
+  const sky = ctx.createLinearGradient(0,0,0,groundY);
+  sky.addColorStop(0,'#1c2740'); sky.addColorStop(1,'#3a2f2a');
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,groundY);
+  const sunY = groundY - H*0.1;
+  const sg = ctx.createRadialGradient(W*0.78,sunY,0,W*0.78,sunY,40);
+  sg.addColorStop(0,'#ffd23f'); sg.addColorStop(1,'rgba(255,210,63,0)');
+  ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(W*0.78,sunY,40,0,7); ctx.fill();
+  ctx.fillStyle = '#2a1f14'; ctx.fillRect(0,groundY,W,H-groundY);
+  ctx.fillStyle = '#3a2a1a';
+  ctx.beginPath(); ctx.moveTo(W*0.18,groundY); ctx.lineTo(W*0.18+14,groundY-16); ctx.lineTo(W*0.18+28,groundY); ctx.closePath(); ctx.fill();
+  for(let i=0;i<9;i++) wheat(ctx, W*0.35 + i*(W*0.55/9) + Math.sin(t*1.5+i)*2, groundY, 0.9, 'rgba(210,180,110,.9)');
+});
+
+/* 11. 1980: a glowing terminal and a probe headed out of the solar system */
+mount('vig1980', (ctx,W,H,t) => {
+  ctx.fillStyle = '#05060a'; ctx.fillRect(0,0,W,H);
+  stars(ctx,W,H,24,1);
+  computerIcon(ctx, W*0.32, H*0.72, 1.3, t, '#8fa3cc', '#6EE39A');
+  probe(ctx, W*0.72, H*0.4, 2.2, t, '#c9daff');
+});
 })();
 </script>
 

@@ -92,6 +92,7 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 .lab{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.18)}
 #forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
 #nucCv,#chemCv{display:block;width:100%;height:560px;background:#090d15;touch-action:pan-y}
+#logicCv,#nnCv{display:block;width:100%;height:520px;background:#090d15;touch-action:pan-y}
 .lab-bar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:12px 14px;border-top:1px solid #1d2638}
 .lab-bar button{font:500 13px var(--body);color:var(--ink);background:#121826;border:1px solid #273046;border-radius:4px;padding:7px 12px;cursor:pointer;transition:border-color .15s,background .15s}
 .lab-bar button:hover{border-color:var(--helium)}
@@ -110,6 +111,7 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
 @media (max-width:760px){
   #forgeCv{height:460px}
   #nucCv,#chemCv{height:420px}
+  #logicCv,#nnCv{height:440px}
   section.chapter{padding-block:6vh 3vh}
   section.chapter .chapter-head{background:rgba(5,6,10,.72);padding:18px 16px;border-radius:4px}
   .lab-bar{padding:10px 12px;gap:7px 8px}
@@ -513,7 +515,120 @@ body.in-chapter .clock,body.in-chapter .rail{opacity:0}
     <h2>A species that builds machines that think</h2>
     <p class="fact">By 1980, the species that four billion years of accident and selection produced had split the atom, left footprints on the Moon, and sent two spacecraft, <i>Voyager 1</i> and <i>2</i>, out past the edge of the solar system, each carrying a golden record of Earth's sounds in case anyone out there ever finds them.</p>
     <p class="fact">And on desks in offices and living rooms, a new kind of object was spreading: small, humming boxes, the Apple II, the early IBM PC, that could be given instructions and would follow them, faithfully, without getting tired. Nobody watching one in 1980 knew yet what it would grow into.</p>
-    <p class="end-note">Every thread in this story, hydrogen into stars, stars into carbon, carbon into cells, cells into you, converges on a strange fact: matter arranged itself into something that could ask where it came from, and then build a second kind of mind to help it look further. What that second mind leads to is the next thread of this story.</p>
+    <p class="fact">Every thread in this story, hydrogen into stars, stars into carbon, carbon into cells, cells into you, converges on a strange fact: matter arranged itself into something that could ask where it came from. What it built next was a second kind of mind, and that mind was made of nothing but on and off.</p>
+    <a class="gate next" href="#logic">
+      <span class="ch">Chapter 6</span>
+      <b>Enter Logic Made of Sand ↓</b>
+      <span>Every computer that has ever run, including the one showing you this sentence, does exactly one thing: it decides whether a switch is on or off, a few billion times a second.</span>
+    </a>
+  </div></section>
+
+  <section class="chapter" id="logic">
+    <div class="chapter-head">
+      <p class="when">Chapter 6 · logic made of sand</p>
+      <h2>On, Off, and Nothing Else</h2>
+      <p>A computer doesn't know arithmetic, language, or images. It knows exactly one distinction: is this wire high or low, one or zero. Everything else, every number, every letter, every pixel, is built from that single distinction, stacked millions of transistors deep.</p>
+      <p class="aside">Pick a circuit below, flip the switches, and watch the signal propagate. Nothing here is simulated for looks: every gate computes its real truth table, live.</p>
+    </div>
+    <div class="lab">
+      <canvas id="logicCv" aria-label="Interactive logic circuit simulator: switches, gates, and lamps"></canvas>
+      <div class="lab-bar" id="lSetups"></div>
+      <div class="lab-bar" id="lSwitches"></div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> every gate's real truth table. AND is 1 only when every input is 1; OR is 1 when any input is 1; NOT flips its single input; XOR is 1 when its inputs differ. The half-adder really adds: flip both switches on and watch it read out binary <span class="num">10</span>, decimal 2.</li>
+          <li><b>Why it matters:</b> five gate types, wired together in enough quantity, are all a CPU is. Everything from a calculator to a language model reduces to circuits exactly like these, just with billions more gates and no human able to hold the whole thing in mind at once.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigTube" aria-hidden="true"></canvas>
+    <p class="when">1904 – 1947</p>
+    <h2>From glass tubes to a sliver of sand</h2>
+    <p class="fact">The first electronic switches were <b>vacuum tubes</b>: glass bulbs the size of a finger, hot, fragile, and power-hungry. ENIAC, one of the first electronic computers, finished in 1945, used about <span class="num">17,000</span> of them, filled a room, and a tube failure took it down roughly once a day.</p>
+    <p class="fact">In 1947, at Bell Labs, John Bardeen, Walter Brattain, and William Shockley built the first working <b>transistor</b>: the same switch, made from a crystal of doped silicon, with no filament to burn out, no glass to break, and room to shrink almost without limit.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigChip" aria-hidden="true"></canvas>
+    <p class="when">1958 – 1971</p>
+    <h2>Millions of switches, one sliver</h2>
+    <p class="fact">In 1958, Jack Kilby showed that transistors, resistors, and wires could all be etched onto a single piece of silicon: the <b>integrated circuit</b>. In 1971, Intel put an entire simple computer's worth of logic, <span class="num">2,300</span> transistors, onto one chip: the 4004, the first microprocessor.</p>
+    <p class="aside">In 1965, engineer Gordon Moore noticed the transistor count on a chip was roughly doubling every two years, and it kept doing that for the next fifty. A chip today can carry tens of billions of transistors on something the size of a fingernail.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigBinary" aria-hidden="true"></canvas>
+    <p class="when">every number, in binary</p>
+    <h2>Counting with only two fingers</h2>
+    <p class="fact">Flip through the "Binary numbers" circuit above and you're watching the entire trick: each switch is worth a power of two, <span class="num">8, 4, 2, 1</span>, and any whole number up to 15 is just some combination held on or off. A modern computer does the same thing with 64 switches at once instead of 4, which reaches past 18 quintillion.</p>
+    <p class="aside">Text, color, sound: all of it is a number underneath, and every number is a pattern of on and off. There's nothing else in the machine.</p>
+    <a class="gate next" href="#nn">
+      <span class="ch">Chapter 7</span>
+      <b>Enter Learning Machines ↓</b>
+      <span>Gates only do what they're told. The next step was building a circuit that could rewire itself from its own mistakes.</span>
+    </a>
+  </div></section>
+
+  <section class="chapter" id="nn">
+    <div class="chapter-head">
+      <p class="when">Chapter 7 · learning machines</p>
+      <h2>A Circuit That Learns</h2>
+      <p>Every gate in the last chapter does exactly what it was built to do, forever. A neural network is different: it starts out wrong, is shown its own error, and adjusts itself, thousands of times, until it isn't wrong anymore. Nobody programs the boundary you're about to see form. It emerges from the data, the same way a bent water molecule emerged from valence physics back in Chapter 4.</p>
+      <p class="aside">Pick a dataset, press train, and watch a small real network, eight neurons, learn to separate two colours of dot from nothing but examples and its own errors.</p>
+    </div>
+    <div class="lab">
+      <canvas id="nnCv" aria-label="Interactive neural network trainer: a small network learns to classify two colours of points"></canvas>
+      <div class="lab-bar" id="nnSetups"></div>
+      <div class="lab-bar">
+        <button id="nnRun" class="primary">Pause</button>
+        <button id="nnReset">Reset weights</button>
+        <label for="nnLR">Learning rate <input type="range" id="nnLR" min="0.05" max="1.5" step="0.05" value="0.6"> <b id="nnLRV">0.60</b></label>
+      </div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> a real 2-input, 8-neuron hidden layer, 1-output network, trained live with actual backpropagation and gradient descent on binary cross-entropy loss. The coloured field is its real decision boundary, redrawn every frame from its current weights.</li>
+          <li><b>Try this:</b> load "XOR" and watch it fail as a straight line at first, the same limit that made 1960s researchers give up on this idea for a decade, then watch the hidden layer bend the boundary into a curve a single-layer network could never find.</li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigPerceptron" aria-hidden="true"></canvas>
+    <p class="when">1943 – 1969</p>
+    <h2>The first artificial neuron, and its first wall</h2>
+    <p class="fact">In 1943, Warren McCulloch and Walter Pitts described a toy model of a neuron: inputs, weights, a threshold. In 1958, Frank Rosenblatt built it as real hardware, the <b>Perceptron</b>, and it could learn simple boundaries from examples, the way the network above just did on "Two blobs".</p>
+    <p class="fact">In 1969, Marvin Minsky and Seymour Papert proved a single layer of these neurons mathematically cannot learn a pattern like <b>XOR</b>, the exact circuit from the last chapter. Funding dried up for over a decade: an era historians now call the first <b>AI winter</b>.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigBackprop" aria-hidden="true"></canvas>
+    <p class="when">1986</p>
+    <h2>The way around the wall</h2>
+    <p class="fact">The fix was already implicit in the math: stack more than one layer of neurons, and the network can bend a straight boundary into any shape. The missing piece was a practical way to train several layers at once. In 1986, David Rumelhart, Geoffrey Hinton, and Ronald Williams popularized <b>backpropagation</b>: the same error-blame-passing you just watched happen, layer by layer, in the lab above.</p>
+    <p class="aside">Backpropagation is just calculus: the chain rule, applied automatically, millions of times a second. There's no magic in it, only the same kind of straightforward computation as the logic gates in Chapter 6, chained deep enough to bend.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigDeep" aria-hidden="true"></canvas>
+    <p class="when">2012</p>
+    <h2>Depth, data, and enough silicon</h2>
+    <p class="fact">Deep networks were mathematically possible for decades before they were practically trainable at scale. What changed by 2012 was less the idea and more the fuel: the internet had produced enormous labeled datasets, and video-game graphics cards, built to do millions of parallel multiplications for pixels, turned out to be almost perfectly shaped for training neural networks instead.</p>
+    <p class="fact">That year, a network called <b>AlexNet</b> beat every hand-engineered competitor at recognizing photographs, by a wide margin. The deep learning era, still running today, dates from that result.</p>
+  </div></section>
+
+  <section class="evo"><div class="card">
+    <canvas class="evo-art" id="vigTransformer" aria-hidden="true"></canvas>
+    <p class="when">2017 – today</p>
+    <h2>Attention, and a machine that reads</h2>
+    <p class="fact">In 2017, a paper titled "Attention Is All You Need" introduced the <b>transformer</b>: an architecture built almost entirely around learning which parts of its own input to pay attention to. Trained on enormous amounts of human writing, transformers turned out to be extraordinarily good at modeling language, and then, to a surprising degree, at modeling reasoning itself.</p>
+    <p class="fact">This sentence, the ones before it in this chapter, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
+    <p class="end-note">Four billion years built a brain that could ask where it came from. Fifty more built a second kind of mind, made of switches instead of cells, that could help it look. Neither one is finished.</p>
   </div></section>
 
   <footer></footer>
@@ -2505,6 +2620,566 @@ new IntersectionObserver(es => {
   }
 }, {threshold:0.02}).observe(cv);
 addEventListener('resize', () => { if(started && visible) draw(); });
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 6 — LOGIC LAB
+   A small circuit simulator: switches, real gates (AND/OR/NOT/XOR),
+   lamps, and a binary-number readout. Every value shown is computed
+   live from the current switch state, not scripted.
+   ===================================================================== */
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+function fit(cv){
+  const ctx = cv.getContext('2d'), dpr = window.devicePixelRatio||1, r = cv.getBoundingClientRect();
+  if(!r.width) return null;
+  cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx, W:r.width, H:r.height};
+}
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+
+const cv = $('logicCv');
+let W=0, H=0, visible=false, started=false;
+let switches = {};
+let presetIdx = 0;
+
+function evalGate(kind, ins){
+  if(kind==='AND')  return ins.every(v=>v===1) ? 1 : 0;
+  if(kind==='OR')   return ins.some(v=>v===1) ? 1 : 0;
+  if(kind==='NOT')  return ins[0] ? 0 : 1;
+  if(kind==='XOR')  return (ins[0] !== ins[1]) ? 1 : 0;
+  return 0;
+}
+function valueOf(nodes, id, cache){
+  if(id in cache) return cache[id];
+  const n = nodes.find(x => x.id === id);
+  let v;
+  if(n.type === 'switch') v = switches[n.id] || 0;
+  else if(n.type === 'gate') v = evalGate(n.gate, n.inputs.map(i => valueOf(nodes, i, cache)));
+  else if(n.type === 'lamp') v = valueOf(nodes, n.inputs[0], cache);
+  else if(n.type === 'decimal') v = n.inputs.reduce((s,i,idx) => s + valueOf(nodes,i,cache)*n.weights[idx], 0);
+  cache[id] = v; return v;
+}
+
+const PRESETS = [
+  {n:'Binary numbers', sw:['A','B','C','D'], nodes:[
+    {id:'A',type:'switch',x:0.15,y:0.16,label:'8'},
+    {id:'B',type:'switch',x:0.15,y:0.38,label:'4'},
+    {id:'C',type:'switch',x:0.15,y:0.60,label:'2'},
+    {id:'D',type:'switch',x:0.15,y:0.82,label:'1'},
+    {id:'OUT',type:'decimal',x:0.78,y:0.49,inputs:['A','B','C','D'],weights:[8,4,2,1]}
+  ], wires:[['A','OUT'],['B','OUT'],['C','OUT'],['D','OUT']]},
+  {n:'NOT gate', sw:['A'], nodes:[
+    {id:'A',type:'switch',x:0.18,y:0.5,label:'A'},
+    {id:'G',type:'gate',gate:'NOT',x:0.5,y:0.5,inputs:['A']},
+    {id:'OUT',type:'lamp',x:0.8,y:0.5,inputs:['G'],label:'OUT'}
+  ], wires:[['A','G'],['G','OUT']]},
+  {n:'AND gate', sw:['A','B'], nodes:[
+    {id:'A',type:'switch',x:0.18,y:0.32,label:'A'},
+    {id:'B',type:'switch',x:0.18,y:0.68,label:'B'},
+    {id:'G',type:'gate',gate:'AND',x:0.5,y:0.5,inputs:['A','B']},
+    {id:'OUT',type:'lamp',x:0.8,y:0.5,inputs:['G'],label:'OUT'}
+  ], wires:[['A','G'],['B','G'],['G','OUT']]},
+  {n:'OR gate', sw:['A','B'], nodes:[
+    {id:'A',type:'switch',x:0.18,y:0.32,label:'A'},
+    {id:'B',type:'switch',x:0.18,y:0.68,label:'B'},
+    {id:'G',type:'gate',gate:'OR',x:0.5,y:0.5,inputs:['A','B']},
+    {id:'OUT',type:'lamp',x:0.8,y:0.5,inputs:['G'],label:'OUT'}
+  ], wires:[['A','G'],['B','G'],['G','OUT']]},
+  {n:'XOR gate', sw:['A','B'], nodes:[
+    {id:'A',type:'switch',x:0.18,y:0.32,label:'A'},
+    {id:'B',type:'switch',x:0.18,y:0.68,label:'B'},
+    {id:'G',type:'gate',gate:'XOR',x:0.5,y:0.5,inputs:['A','B']},
+    {id:'OUT',type:'lamp',x:0.8,y:0.5,inputs:['G'],label:'OUT'}
+  ], wires:[['A','G'],['B','G'],['G','OUT']]},
+  {n:'Half adder', sw:['A','B'], nodes:[
+    {id:'A',type:'switch',x:0.14,y:0.32,label:'A'},
+    {id:'B',type:'switch',x:0.14,y:0.68,label:'B'},
+    {id:'XOR',type:'gate',gate:'XOR',x:0.48,y:0.24,inputs:['A','B']},
+    {id:'AND',type:'gate',gate:'AND',x:0.48,y:0.76,inputs:['A','B']},
+    {id:'SUM',type:'lamp',x:0.82,y:0.24,inputs:['XOR'],label:'SUM'},
+    {id:'CARRY',type:'lamp',x:0.82,y:0.76,inputs:['AND'],label:'CARRY'}
+  ], wires:[['A','XOR'],['B','XOR'],['A','AND'],['B','AND'],['XOR','SUM'],['AND','CARRY']]}
+];
+
+function nodePos(n){ return {x:n.x*W, y:n.y*H}; }
+function drawWire(ctx, a, b, lit, t, phase){
+  const pa = nodePos(a), pb = nodePos(b);
+  ctx.strokeStyle = lit ? 'rgba(246,195,91,.85)' : 'rgba(58,63,82,.7)';
+  ctx.lineWidth = lit ? 2.4 : 1.6;
+  ctx.beginPath(); ctx.moveTo(pa.x,pa.y); ctx.lineTo(pb.x,pb.y); ctx.stroke();
+  if(lit){
+    const u = (t*0.35 + phase) % 1;
+    const dx = pa.x + (pb.x-pa.x)*u, dy = pa.y + (pb.y-pa.y)*u;
+    ctx.fillStyle = '#fff3c4';
+    ctx.beginPath(); ctx.arc(dx,dy,2.6,0,7); ctx.fill();
+  }
+}
+function drawSwitch(ctx, n, v){
+  const {x,y} = nodePos(n), w=54,h=54;
+  rrect(ctx,x-w/2,y-h/2,w,h,8);
+  ctx.fillStyle = v ? 'rgba(246,195,91,.16)' : 'rgba(18,24,38,.92)'; ctx.fill();
+  ctx.strokeStyle = v ? '#F6C35B' : '#273046'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillStyle = '#8A90A3'; ctx.font='10px system-ui'; ctx.fillText(n.label||n.id, x, y-15);
+  ctx.fillStyle = v ? '#F6C35B' : '#ECE6D8'; ctx.font='700 20px ui-monospace,Menlo,monospace'; ctx.fillText(String(v), x, y+7);
+}
+function drawGate(ctx, n, v){
+  const {x,y} = nodePos(n), w=78,h=48;
+  rrect(ctx,x-w/2,y-h/2,w,h,8);
+  ctx.fillStyle = v ? 'rgba(127,166,255,.14)' : 'rgba(18,24,38,.92)'; ctx.fill();
+  ctx.strokeStyle = v ? '#7FA6FF' : '#273046'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillStyle = v ? '#cfe0ff' : '#ECE6D8'; ctx.font='700 14px system-ui'; ctx.fillText(n.gate, x, y-6);
+  ctx.fillStyle = v ? '#7FA6FF' : '#8A90A3'; ctx.font='11px ui-monospace,Menlo,monospace'; ctx.fillText('= '+v, x, y+12);
+}
+function drawLamp(ctx, n, v){
+  const {x,y} = nodePos(n), r=22;
+  if(v){ const g = ctx.createRadialGradient(x,y,0,x,y,r*2.2); g.addColorStop(0,'rgba(246,195,91,.9)'); g.addColorStop(1,'rgba(246,195,91,0)');
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(x,y,r*2.2,0,7); ctx.fill(); }
+  ctx.beginPath(); ctx.arc(x,y,r,0,7);
+  ctx.fillStyle = v ? '#F6C35B' : 'rgba(18,24,38,.92)'; ctx.fill();
+  ctx.strokeStyle = v ? '#F6C35B' : '#273046'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillStyle = '#8A90A3'; ctx.font='10px system-ui'; ctx.fillText(n.label||'OUT', x, y+r+14);
+  ctx.fillStyle = v ? '#241a06' : '#8A90A3'; ctx.font='700 15px ui-monospace,Menlo,monospace'; ctx.fillText(String(v), x, y+1);
+}
+function drawDecimal(ctx, n, v){
+  const {x,y} = nodePos(n), w=110,h=70;
+  rrect(ctx,x-w/2,y-h/2,w,h,9);
+  ctx.fillStyle = 'rgba(110,227,154,.10)'; ctx.fill();
+  ctx.strokeStyle = '#6EE39A'; ctx.lineWidth = 2; ctx.stroke();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillStyle = '#8A90A3'; ctx.font='10px system-ui'; ctx.fillText('decimal value', x, y-20);
+  ctx.fillStyle = '#6EE39A'; ctx.font='700 30px ui-monospace,Menlo,monospace'; ctx.fillText(String(v), x, y+8);
+}
+
+function draw(t){
+  const f = fit(cv); if(!f) return; const {ctx} = f; W = f.W; H = f.H;
+  ctx.clearRect(0,0,W,H);
+  const P = PRESETS[presetIdx], cache = {};
+  for(const n of P.nodes) valueOf(P.nodes, n.id, cache);
+  let wi = 0;
+  for(const [a,b] of P.wires){
+    const na = P.nodes.find(n=>n.id===a), nb = P.nodes.find(n=>n.id===b);
+    drawWire(ctx, na, nb, !!cache[a], t, wi*0.31); wi++;
+  }
+  for(const n of P.nodes){
+    const v = cache[n.id];
+    if(n.type==='switch') drawSwitch(ctx,n,v);
+    else if(n.type==='gate') drawGate(ctx,n,v);
+    else if(n.type==='lamp') drawLamp(ctx,n,v);
+    else if(n.type==='decimal') drawDecimal(ctx,n,v);
+  }
+  if(P.n === 'Half adder'){
+    const total = (cache.CARRY||0)*2 + (cache.SUM||0);
+    ctx.textAlign='left'; ctx.fillStyle='rgba(230,235,245,.6)'; ctx.font='600 12.5px system-ui';
+    ctx.fillText(`${cache.A||0} + ${cache.B||0} = binary ${cache.CARRY||0}${cache.SUM||0}  (decimal ${total})`, 14, H-14);
+  }
+}
+
+function renderSetups(){
+  $('lSetups').innerHTML = PRESETS.map((p,i) => `<button type="button" data-p="${i}">${p.n}</button>`).join('');
+  $('lSetups').querySelectorAll('[data-p]').forEach((b,i) => b.onclick = () => {
+    presetIdx = i; switches = {}; renderSwitches(); syncPresetButtons(); draw(clock());
+  });
+  syncPresetButtons();
+}
+function syncPresetButtons(){
+  $('lSetups').querySelectorAll('button').forEach((b,i) => b.classList.toggle('on', i===presetIdx));
+}
+function renderSwitches(){
+  const P = PRESETS[presetIdx];
+  $('lSwitches').innerHTML = P.sw.map(id => `<button type="button" data-sw="${id}">${id}: ${switches[id]||0}</button>`).join('');
+  $('lSwitches').querySelectorAll('[data-sw]').forEach(b => b.onclick = () => {
+    const id = b.dataset.sw; switches[id] = switches[id] ? 0 : 1;
+    renderSwitches(); draw(clock());
+  });
+}
+
+let t0 = null;
+const clock = () => t0===null ? 0 : (performance.now()-t0)/1000;
+function loop(ms){
+  if(visible){
+    if(t0===null) t0 = ms;
+    if(!started){ started = true; renderSetups(); renderSwitches(); }
+    draw((ms-t0)/1000);
+  }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 7 — NEURAL NETWORK LAB
+   A real 2-input, 8-neuron hidden layer, 1-output network, trained
+   live with backpropagation and gradient descent on binary
+   cross-entropy loss. The coloured field is its actual decision
+   boundary, redrawn every frame from the network's current weights.
+   ===================================================================== */
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+function fit(cv){
+  const ctx = cv.getContext('2d'), dpr = window.devicePixelRatio||1, r = cv.getBoundingClientRect();
+  if(!r.width) return null;
+  cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx, W:r.width, H:r.height};
+}
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(ctx,s,x,y,font,col,align){ ctx.font=font; ctx.fillStyle=col; ctx.textAlign=align||'left'; ctx.textBaseline='middle'; ctx.fillText(s,x,y); }
+const rnd2 = (a,b) => a + Math.random()*(b-a);
+
+const cv = $('nnCv');
+let W=0,H=0,visible=false,started=false,run=true;
+const H_UNITS = 8;
+let lr = 0.6, steps = 0;
+let net, pts, dsIdx = 0;
+
+function initNet(){
+  net = {
+    w1: [Array.from({length:H_UNITS},()=>rnd2(-1,1)), Array.from({length:H_UNITS},()=>rnd2(-1,1))],
+    b1: Array.from({length:H_UNITS},()=>0),
+    w2: Array.from({length:H_UNITS},()=>rnd2(-1,1)),
+    b2: 0
+  };
+  steps = 0;
+}
+function forward(x,y){
+  const h = new Array(H_UNITS);
+  for(let j=0;j<H_UNITS;j++) h[j] = Math.tanh(net.w1[0][j]*x + net.w1[1][j]*y + net.b1[j]);
+  let z2 = net.b2;
+  for(let j=0;j<H_UNITS;j++) z2 += net.w2[j]*h[j];
+  return {h, out: 1/(1+Math.exp(-z2))};
+}
+function trainStep(n){
+  for(let k=0;k<n;k++){
+    const p = pts[Math.floor(Math.random()*pts.length)];
+    const {h, out} = forward(p.x, p.y);
+    const dz2 = out - p.t;
+    const w2snap = net.w2.slice();
+    const dz1 = h.map((hv,j) => dz2*w2snap[j]*(1-hv*hv));
+    for(let j=0;j<H_UNITS;j++){
+      net.w2[j] -= lr*dz2*h[j];
+      net.w1[0][j] -= lr*dz1[j]*p.x;
+      net.w1[1][j] -= lr*dz1[j]*p.y;
+      net.b1[j] -= lr*dz1[j];
+    }
+    net.b2 -= lr*dz2;
+    steps++;
+  }
+}
+function lossAcc(){
+  let L=0, correct=0;
+  for(const p of pts){
+    const {out} = forward(p.x,p.y);
+    const o = Math.min(1-1e-7, Math.max(1e-7, out));
+    L += -(p.t*Math.log(o) + (1-p.t)*Math.log(1-o));
+    if((o>0.5?1:0) === p.t) correct++;
+  }
+  return {L: L/pts.length, acc: correct/pts.length};
+}
+
+function genBlobs(){
+  const a = Array.from({length:45},() => ({x:rnd2(-0.95,-0.1)+rnd2(-.1,.1), y:rnd2(-0.95,-0.1)+rnd2(-.1,.1), t:0}));
+  const b = Array.from({length:45},() => ({x:rnd2(0.1,0.95)+rnd2(-.1,.1), y:rnd2(0.1,0.95)+rnd2(-.1,.1), t:1}));
+  return a.concat(b);
+}
+function genXOR(){
+  const out=[];
+  for(let i=0;i<90;i++){
+    const x = rnd2(-1,1), y = rnd2(-1,1);
+    out.push({x,y,t: (x>0) !== (y>0) ? 1 : 0});
+  }
+  return out;
+}
+function genCircle(){
+  const out=[];
+  for(let i=0;i<90;i++){
+    const x = rnd2(-1,1), y = rnd2(-1,1);
+    out.push({x,y,t: Math.hypot(x,y) < 0.55 ? 1 : 0});
+  }
+  return out;
+}
+const DATASETS = [
+  {n:'Two blobs', gen:genBlobs},
+  {n:'XOR', gen:genXOR},
+  {n:'Circle', gen:genCircle}
+];
+
+function toPx(x,y){ return { px: (x+1)/2*W, py: (1-(y+1)/2)*H }; }
+function toWorld(px,py){ return { x: px/W*2-1, y: (1-py/H)*2-1 }; }
+
+function draw(){
+  const f = fit(cv); if(!f) return; const {ctx} = f; W=f.W; H=f.H;
+  const cols = 44, rows = Math.round(cols*H/W);
+  const cw = W/cols, ch = H/rows;
+  for(let r=0;r<rows;r++){
+    for(let c=0;c<cols;c++){
+      const {x,y} = toWorld((c+0.5)*cw, (r+0.5)*ch);
+      const {out} = forward(x,y);
+      const c0 = [242,96,122], c1 = [127,166,255];
+      const rr = c0[0]+(c1[0]-c0[0])*out, gg = c0[1]+(c1[1]-c0[1])*out, bb = c0[2]+(c1[2]-c0[2])*out;
+      ctx.fillStyle = `rgba(${rr|0},${gg|0},${bb|0},.22)`;
+      ctx.fillRect(c*cw, r*ch, cw+1, ch+1);
+    }
+  }
+  for(const p of pts){
+    const {px,py} = toPx(p.x,p.y);
+    const {out} = forward(p.x,p.y);
+    const miss = (out>0.5?1:0) !== p.t;
+    ctx.beginPath(); ctx.arc(px,py,miss?5.5:4,0,7);
+    ctx.fillStyle = p.t ? '#7FA6FF' : '#F2607A';
+    ctx.fill();
+    ctx.strokeStyle = miss ? '#fff' : 'rgba(5,6,10,.6)'; ctx.lineWidth = miss?1.6:1; ctx.stroke();
+  }
+  const {L, acc} = lossAcc();
+  const narrow = W < 640;
+  const lines = [
+    ['Steps', steps, '#8A90A3'],
+    ['Loss', L.toFixed(3), L<0.3?'#6EE39A':L<0.6?'#F6C35B':'#F2607A'],
+    ['Accuracy', (acc*100).toFixed(0)+'%', acc>0.9?'#6EE39A':'#F6C35B']
+  ];
+  const lh = narrow?16:19, fs = narrow?'10px':'11.5px';
+  const bw = Math.min(narrow?170:220, W-20), bh=(narrow?16:22)+lines.length*lh;
+  rrect(ctx, W-bw-(narrow?8:12), narrow?8:12, bw, bh, 8); ctx.fillStyle='rgba(11,15,24,.82)'; ctx.fill();
+  ctx.strokeStyle='rgba(38,49,74,.9)'; ctx.lineWidth=1; ctx.stroke();
+  lines.forEach(([a,b,col],i) => {
+    const y=(narrow?18:30)+i*lh;
+    txt(ctx,a,W-bw+(narrow?4:2),y,`${fs} system-ui`,'#8d99b3');
+    txt(ctx,String(b),W-(narrow?12:22),y,`700 ${fs} ui-monospace,Menlo,monospace`,col,'right');
+  });
+  if(!run){ txt(ctx,'paused',14,H-14,'700 12px system-ui','#8d99b3'); }
+}
+
+function loadDataset(i){ dsIdx=i; pts = DATASETS[i].gen(); initNet(); }
+
+function renderSetups(){
+  $('nnSetups').innerHTML = DATASETS.map((d,i)=>`<button type="button" data-d="${i}">${d.n}</button>`).join('');
+  $('nnSetups').querySelectorAll('[data-d]').forEach((b,i)=> b.onclick = () => {
+    loadDataset(i);
+    $('nnSetups').querySelectorAll('button').forEach((bb,j)=>bb.classList.toggle('on', j===i));
+    draw();
+  });
+  $('nnSetups').querySelectorAll('button')[0]?.classList.add('on');
+}
+
+let raf=null;
+function loop(){
+  if(!visible){ raf=null; return; }
+  if(run) trainStep(5);
+  draw();
+  raf = requestAnimationFrame(loop);
+}
+function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
+
+$('nnRun').onclick = () => { run = !run; $('nnRun').textContent = run ? 'Pause' : 'Run'; kick(); };
+$('nnReset').onclick = () => { initNet(); draw(); };
+$('nnLR').oninput = e => { lr = +e.target.value; $('nnLRV').textContent = lr.toFixed(2); };
+
+new IntersectionObserver(es => {
+  for(const e of es){
+    visible = e.isIntersecting;
+    if(visible){
+      if(!started){
+        started = true;
+        const f = fit(cv); if(f){ W=f.W; H=f.H; }
+        renderSetups(); loadDataset(0);
+      }
+      kick();
+    }
+  }
+}, {threshold:0.02}).observe(cv);
+addEventListener('resize', () => { if(started && visible) draw(); });
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 6 & 7 — small hand-drawn vignettes, one per milestone card.
+   ===================================================================== */
+(() => {
+"use strict";
+function mount(id, drawFn){
+  const cv = document.getElementById(id); if(!cv) return;
+  const ctx = cv.getContext('2d');
+  let W=0,H=0,DPR=1,visible=false,t0=null;
+  function resize(){
+    DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+    if(!r.width) return;
+    W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  addEventListener('resize', resize); resize();
+  function loop(ms){
+    if(visible){
+      if(t0===null) t0 = ms;
+      if(!W) resize();
+      ctx.clearRect(0,0,W,H);
+      drawFn(ctx, W, H, (ms-t0)/1000);
+    }
+    requestAnimationFrame(loop);
+  }
+  new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+  requestAnimationFrame(loop);
+}
+const rnd2 = (a,b) => a + Math.random()*(b-a);
+
+/* vacuum tube -> transistor */
+mount('vigTube', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cx = W*0.32, cy = H*0.5, tw=34, th=70;
+  ctx.strokeStyle = 'rgba(230,235,245,.5)'; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(cx-tw/2,cy-th/2); ctx.lineTo(cx-tw/2,cy+th/2); ctx.quadraticCurveTo(cx-tw/2,cy+th/2+12,cx,cy+th/2+12);
+  ctx.quadraticCurveTo(cx+tw/2,cy+th/2+12,cx+tw/2,cy+th/2); ctx.lineTo(cx+tw/2,cy-th/2);
+  ctx.quadraticCurveTo(cx+tw/2,cy-th/2-16,cx,cy-th/2-16); ctx.quadraticCurveTo(cx-tw/2,cy-th/2-16,cx-tw/2,cy-th/2); ctx.stroke();
+  const flick = 0.6+0.4*Math.sin(t*9)*0.3+0.3*Math.sin(t*23);
+  ctx.strokeStyle = `rgba(255,180,90,${0.5+0.4*flick})`; ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  for(let i=0;i<6;i++){ const y = cy-th/2+8+i*10; ctx.moveTo(cx-8,y); ctx.lineTo(cx+8,y+4); }
+  ctx.stroke();
+  ctx.fillStyle = `rgba(255,190,110,${0.15+0.15*flick})`;
+  ctx.beginPath(); ctx.arc(cx,cy,30,0,7); ctx.fill();
+  // arrow to transistor
+  ctx.strokeStyle = 'rgba(230,235,245,.4)'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(W*0.5,H*0.5); ctx.lineTo(W*0.62,H*0.5); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(W*0.62,H*0.5); ctx.lineTo(W*0.58,H*0.46); ctx.moveTo(W*0.62,H*0.5); ctx.lineTo(W*0.58,H*0.54); ctx.stroke();
+  const tx = W*0.78, ty=H*0.5, s=22;
+  ctx.strokeStyle = '#7FA6FF'; ctx.lineWidth=2;
+  ctx.strokeRect(tx-s,ty-s,s*2,s*2);
+  ctx.fillStyle = 'rgba(127,166,255,.15)'; ctx.fillRect(tx-s,ty-s,s*2,s*2);
+  ctx.fillStyle = '#cfe0ff'; ctx.font='700 10px system-ui'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.fillText('Si', tx, ty);
+});
+
+/* integrated circuit / chip, transistor count zooming */
+mount('vigChip', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cx=W*0.5, cy=H*0.5, s = Math.min(W,H)*0.32;
+  ctx.fillStyle = '#121826'; ctx.fillRect(cx-s,cy-s,s*2,s*2);
+  ctx.strokeStyle = '#F6C35B'; ctx.lineWidth = 2; ctx.strokeRect(cx-s,cy-s,s*2,s*2);
+  const n = 6;
+  for(let i=0;i<n;i++){
+    const py = cy-s + (i+0.5)*(s*2/n);
+    ctx.strokeStyle = 'rgba(246,195,91,.55)'; ctx.lineWidth=1.4;
+    ctx.beginPath(); ctx.moveTo(cx-s-10,py); ctx.lineTo(cx-s,py); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx+s,py); ctx.lineTo(cx+s+10,py); ctx.stroke();
+  }
+  for(let i=0;i<n;i++){
+    const px = cx-s + (i+0.5)*(s*2/n);
+    ctx.beginPath(); ctx.moveTo(px,cy-s-10); ctx.lineTo(px,cy-s); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(px,cy+s); ctx.lineTo(px,cy+s+10); ctx.stroke();
+  }
+  const cols=8, rows=8;
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const gx = cx-s+10+c*(s*2-20)/cols, gy = cy-s+10+r*(s*2-20)/rows;
+    const lit = Math.sin(t*3 + r*1.3 + c*0.7) > 0.6;
+    ctx.fillStyle = lit ? 'rgba(127,166,255,.9)' : 'rgba(127,166,255,.15)';
+    ctx.fillRect(gx,gy,3,3);
+  }
+});
+
+/* binary rain */
+const BITS = Array.from({length:14},() => ({x:rnd2(0,1), y:rnd2(-1,0), v:0.15+rnd2(0,0.2), s:rnd2(0,1)>0.5?'1':'0'}));
+mount('vigBinary', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  ctx.font='700 13px ui-monospace,Menlo,monospace'; ctx.textAlign='center';
+  for(const b of BITS){
+    const y = ((b.y + t*b.v) % 1.3);
+    const py = y*H - H*0.15;
+    ctx.fillStyle = `rgba(110,227,154,${0.25+0.5*Math.sin(t*2+b.x*10)*0.5+0.3})`;
+    ctx.fillText(b.s, b.x*W, py);
+  }
+  ctx.fillStyle='rgba(246,195,91,.9)'; ctx.font='700 20px ui-monospace,Menlo,monospace';
+  ctx.fillText('1011', W*0.5, H*0.5);
+});
+
+/* single perceptron, and the pattern it can't separate */
+mount('vigPerceptron', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const nx = W*0.62, ny = H*0.5;
+  const ins = [{y:H*0.28},{y:H*0.5},{y:H*0.72}];
+  ctx.strokeStyle = 'rgba(230,235,245,.4)'; ctx.lineWidth=1.4;
+  for(const i of ins){ ctx.beginPath(); ctx.moveTo(W*0.16,i.y); ctx.lineTo(nx-16,ny); ctx.stroke();
+    ctx.beginPath(); ctx.arc(W*0.16,i.y,5,0,7); ctx.fillStyle='#7FA6FF'; ctx.fill(); }
+  ctx.beginPath(); ctx.arc(nx,ny,16,0,7); ctx.fillStyle='rgba(246,195,91,.9)'; ctx.fill();
+  ctx.strokeStyle='rgba(230,235,245,.4)'; ctx.beginPath(); ctx.moveTo(nx+16,ny); ctx.lineTo(W*0.88,ny); ctx.stroke();
+  ctx.beginPath(); ctx.arc(W*0.88,ny,4,0,7); ctx.fillStyle='#ECE6D8'; ctx.fill();
+});
+
+/* backprop: signal forward, error backward */
+mount('vigBackprop', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const layers = [2,4,4,1], xs = layers.map((_,i) => W*(0.14 + i*0.24));
+  const pos = layers.map((n,li) => Array.from({length:n}, (_,i) => H*(0.5 + (i-(n-1)/2)*0.16)));
+  const forward = (Math.sin(t*0.8) > 0);
+  ctx.lineWidth = 1.2;
+  for(let li=0;li<layers.length-1;li++){
+    for(let i=0;i<layers[li];i++) for(let j=0;j<layers[li+1];j++){
+      ctx.strokeStyle = forward ? 'rgba(127,166,255,.35)' : 'rgba(242,96,122,.35)';
+      ctx.beginPath(); ctx.moveTo(xs[li],pos[li][i]); ctx.lineTo(xs[li+1],pos[li+1][j]); ctx.stroke();
+    }
+  }
+  const phase = (t*0.4) % 1;
+  const litLayer = forward ? Math.floor(phase*layers.length) : layers.length-1-Math.floor(phase*layers.length);
+  for(let li=0;li<layers.length;li++){
+    for(let i=0;i<layers[li];i++){
+      const lit = li===litLayer;
+      ctx.beginPath(); ctx.arc(xs[li],pos[li][i], lit?6:4.5, 0, 7);
+      ctx.fillStyle = lit ? (forward?'#7FA6FF':'#F2607A') : 'rgba(230,235,245,.35)';
+      ctx.fill();
+    }
+  }
+});
+
+/* deep stack + parallel compute grid */
+mount('vigDeep', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const cols=16, rows=8, gx=W*0.06, gy=H*0.15, gw=W*0.42, gh=H*0.7;
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const lit = Math.sin(t*4 + r*0.9 + c*0.5) > 0.5;
+    ctx.fillStyle = lit ? 'rgba(110,227,154,.85)' : 'rgba(110,227,154,.12)';
+    ctx.fillRect(gx + c*(gw/cols), gy + r*(gh/rows), gw/cols-2, gh/rows-2);
+  }
+  const layers = 5, lx0 = W*0.62, lx1 = W*0.92;
+  for(let li=0;li<layers;li++){
+    const x = lx0 + li*(lx1-lx0)/(layers-1);
+    const n = 5;
+    for(let i=0;i<n;i++){
+      const y = H*0.2 + i*(H*0.6/(n-1));
+      if(li<layers-1){ ctx.strokeStyle='rgba(127,166,255,.25)'; ctx.lineWidth=1;
+        for(let j=0;j<n;j++){ const y2 = H*0.2 + j*(H*0.6/(n-1)); const x2 = lx0+(li+1)*(lx1-lx0)/(layers-1);
+          ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x2,y2); ctx.stroke(); } }
+      ctx.beginPath(); ctx.arc(x,y,4,0,7); ctx.fillStyle='#7FA6FF'; ctx.fill();
+    }
+  }
+});
+
+/* transformer attention arcs between tokens */
+mount('vigTransformer', (ctx,W,H,t) => {
+  ctx.fillStyle = '#0c1018'; ctx.fillRect(0,0,W,H);
+  const words = 7, y = H*0.68, x0 = W*0.1, x1 = W*0.9;
+  const xs = Array.from({length:words},(_,i)=> x0 + i*(x1-x0)/(words-1));
+  for(let i=0;i<words;i++){
+    ctx.fillStyle = 'rgba(230,235,245,.6)';
+    ctx.fillRect(xs[i]-9,y-7,18,14);
+  }
+  const focus = Math.floor((t*0.6)%words);
+  ctx.lineWidth = 1.2;
+  for(let j=0;j<words;j++){
+    if(j===focus) continue;
+    const w = 0.15 + 0.6*Math.abs(Math.sin((j-focus)*0.9 + t*1.3));
+    ctx.strokeStyle = `rgba(246,195,91,${w*0.7})`;
+    const midY = y - 20 - Math.abs(j-focus)*6;
+    ctx.beginPath(); ctx.moveTo(xs[focus],y-8); ctx.quadraticCurveTo((xs[focus]+xs[j])/2, midY, xs[j], y-8); ctx.stroke();
+  }
+  ctx.fillStyle = '#F6C35B'; ctx.fillRect(xs[focus]-9,y-7,18,14);
+});
 })();
 </script>
 

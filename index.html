@@ -1,4 +1,3 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="UTF-8">
 <title>As Old as the Universe</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -123,6 +122,25 @@ footer{padding-block:0 10vh}
 .photo-frame{max-width:52rem;background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;margin-bottom:36px}
 .photo-frame img{display:block;width:100%;height:auto}
 .photo-frame .cap{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid #1d2638}
+
+/* real sourced photographs, standing in for a canvas illustration where a
+   photo hits harder — same frame language as .photo-frame / .ambient, so
+   they read as one system: fixed aspect-ratio box (no layout jump while
+   loading), a single consistent duotone-ish treatment, small low-contrast
+   credit line reusing the .cap pattern */
+.realphoto{max-width:56rem;background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;margin-bottom:36px}
+.realphoto .frame{position:relative;width:100%;aspect-ratio:16/9;background:#0a0e17;overflow:hidden}
+.realphoto img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.06) brightness(.86);transition:filter .3s}
+.realphoto .frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,6,10,0) 55%,rgba(5,6,10,.5) 100%),linear-gradient(90deg,rgba(5,6,10,.25),rgba(5,6,10,0) 18%,rgba(5,6,10,0) 82%,rgba(5,6,10,.25));pointer-events:none}
+.realphoto .cap{padding:10px 14px;font-size:12px;color:var(--muted);border-top:1px solid #1d2638;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.realphoto .cap .credit{font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;color:var(--faint);white-space:nowrap}
+.realphoto.two{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#1d2638}
+.realphoto.two .frame{aspect-ratio:4/3}
+.realphoto.two .cell{background:#090d15}
+@media (max-width:640px){ .realphoto.two{grid-template-columns:1fr} }
+.realphoto .frame.imgfail{background:radial-gradient(circle at 30% 20%,#141c2c,#0a0e17 70%)}
+.realphoto .frame.imgfail img{display:none}
+.realphoto .frame.imgfail::before{content:"image unavailable — see caption";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--faint);text-align:center;padding:0 24px}
 .dialogue{max-width:34rem;background:#0b0e16;border:1px solid #1d2638;border-radius:6px;padding:18px 20px;margin:18px 0 20px;font-family:var(--mono);font-size:14px;line-height:1.7}
 .dialogue .me{color:var(--starlight)}
 .dialogue .ai{color:var(--muted)}
@@ -180,10 +198,14 @@ section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;
 .ambient .cap{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid #1d2638}
 .lab-frame{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.14)}
 .lab-frame iframe{display:block;width:100%;height:820px;border:0;background:#0e1320}
+#oceanFrame{height:940px}
+#dnaFrame{height:960px}
 .lab-frame .cap{padding:10px 14px;font-size:12px;color:var(--muted);border-top:1px solid #1d2638}
 @media (max-width:760px){
   .ambient canvas{height:260px}
   .lab-frame iframe{height:1180px}
+  #oceanFrame{height:1420px}
+  #dnaFrame{height:1960px}
 }
 .lab{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.18)}
 #forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
@@ -234,7 +256,7 @@ body.in-chapter .clock{opacity:0}
 .clock b{color:var(--ink);font-weight:400;letter-spacing:.02em;font-size:12.5px}
 .clock .k{text-transform:uppercase}
 /* unified master rail: one continuous timeline for the whole page,
-   from the Big Bang to Chapter 9, always on screen, always up to date.
+   from the Big Bang to Chapter 13, always on screen, always up to date.
    The currently active stop expands a sub-timeline of its own moments,
    the same detail the old per-chapter rail used to show. */
 .rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:3;list-style:none;margin:0;padding:0;
@@ -388,6 +410,10 @@ body.in-chapter .clock{opacity:0}
         <li><span class="y">death</span><span class="e">Supernova scatters the forge's output into space</span></li>
       </ul>
     </div>
+    <div class="realphoto">
+      <div class="frame"><img src="assets/star-forge-nebula.jpg" alt="The Cosmic Cliffs: a wall of gas and dust in the Carina Nebula where new stars are being born, imaged by the James Webb Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <p class="cap"><span>A real star-forming region, not an illustration: the edge of a young star cluster carving a cavity into a wall of gas and dust, roughly 7,600 light-years away. Every bright point behind the dust is a star, some newborn.</span><span class="credit">NASA · ESA · CSA · STScI</span></p>
+    </div>
     <div class="lab">
       <canvas id="forgeCv" aria-label="Star Forge nucleosynthesis simulation"></canvas>
       <div class="lab-bar" id="fSetups"></div>
@@ -409,28 +435,9 @@ body.in-chapter .clock{opacity:0}
           <li><b>Compressed:</b> a real stellar core has about 10⁵⁷ particles and burns for millions of years. This has about 230 and runs in minutes, all in 2D.</li>
         </ul>
       </details>
-      <a class="gate next" href="#nuclear">
-        <span class="ch">Live lab</span>
-        <b>Feel the Nuclear Force ↓</b>
-        <span>The same short-range force that just built every nucleus in this chapter also sets a hard limit on how large one can grow.</span>
-      </a>
     </div>
-  </section>
-
-  <section class="chapter" id="nuclear">
-    <div class="chapter-head">
-      <p class="when">Live lab · inside the nucleus</p>
-      <h2>Why Nuclei Have a Size Limit</h2>
-      <p>Protons and neutrons pull each other together with the strong force, but it only reaches a couple of femtometres. Protons also push each other apart electrically, and that push never turns off, no matter how far apart they are. Nothing here is scripted to break a nucleus: it happens on its own, the moment repulsion adds up to more than the short-range pull can hold.</p>
-      <p class="aside">Load uranium-238 and raise electromagnetism past about 1.5× to watch it fission itself, with no fission rule written anywhere in the code.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1911</span><span class="e">Rutherford finds the nucleus</span></li>
-        <li><span class="y">1932</span><span class="e">Chadwick discovers the neutron</span></li>
-        <li><span class="y">1935</span><span class="e">Yukawa proposes the strong force's short range</span></li>
-        <li><span class="y">today</span><span class="e">Still the same 2-femtometre leash</span></li>
-      </ul>
-    </div>
-    <div class="lab">
+    <p class="fact" style="max-width:44rem;margin-top:28px">One more question the forge doesn't answer on its own: what actually keeps a nucleus from growing without limit. Protons and neutrons pull each other together with the strong force, but it only reaches a couple of femtometres. Protons also push each other apart electrically, and that push never turns off, no matter how far apart they are. The small experiment below isn't scripted to break a nucleus apart — it happens on its own, the moment repulsion finally outweighs the short-range pull.</p>
+    <div class="lab" style="max-width:44rem">
       <canvas id="nucCv" aria-label="Nuclear force simulation: protons and neutrons binding into nuclei, and splitting apart"></canvas>
       <div class="lab-bar" id="nSetups"></div>
       <div class="lab-bar">
@@ -444,12 +451,12 @@ body.in-chapter .clock{opacity:0}
       <details class="lab-note">
         <summary>What's computed and what isn't</summary>
         <ul>
-          <li><b>Computed:</b> a Morse potential for the short-range strong attraction between any two nucleons, plus real Coulomb repulsion between protons. Binding energy uses the same semi-empirical mass formula as the Star Forge above.</li>
-          <li><b>Emergent:</b> the maximum stable nucleus size, and fission. Raise electromagnetism on uranium-238 and the nucleus splits itself, because repulsion across the whole nucleus finally outweighs attraction between neighbours.</li>
+          <li><b>Computed:</b> a Morse potential for the short-range strong attraction between any two nucleons, plus real Coulomb repulsion between protons, the same semi-empirical mass formula as the forge above.</li>
+          <li><b>Emergent:</b> the maximum stable nucleus size, and fission. Load uranium-238 and raise electromagnetism past about 1.5× — it splits itself, with no fission rule written anywhere in the code.</li>
         </ul>
       </details>
       <a class="gate next" href="#galaxies">
-        <span class="ch">Chapter 2.5</span>
+        <span class="ch">Chapter 3</span>
         <b>Zoom Out to Galaxies ↓</b>
         <span>The same gravity that just built nuclei and stars keeps building — into galaxies, clusters, and the visible edge of everything.</span>
       </a>
@@ -458,7 +465,7 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="galaxies">
     <div class="chapter-head">
-      <p class="when">Chapter 2.5 · the visible universe</p>
+      <p class="when">Chapter 3 · the visible universe</p>
       <h2>Gravity Doesn't Stop at One Star</h2>
       <p>The pull that just built a star keeps building at every larger scale. Star clusters spiral together into galaxies — our own, the Milky Way, holds on the order of a hundred billion of them. Galaxies fall toward each other and merge. Groups of galaxies gather into clusters, and clusters string together into a cosmic web of filaments a billion light-years long, with vast near-empty voids between them.</p>
       <p class="aside">Light moves fast, but not infinitely fast — <b>299,792 km/s</b>, one light-year every year. So looking far away is looking far back in time: light from a galaxy a billion light-years off left it a billion years ago. The universe is 13.8 billion years old, which limits how far back we can ever see — but because space itself kept expanding while that light was travelling, the farthest light reaching us now set out from matter that is today about 46.5 billion light-years away. That's the observable universe: a sphere roughly 93 billion light-years across, with whoever is looking always standing at its centre.</p>
@@ -473,19 +480,19 @@ body.in-chapter .clock{opacity:0}
       <canvas id="galaxyCv" aria-label="Animation of a spiral galaxy forming, galaxies gathering into a cluster, and the light-travel-time horizon of the observable universe"></canvas>
       <div class="cap">Star clusters spiral into a galaxy · galaxies gather into a cluster laced by filaments · the light-speed horizon of everything we can ever see, centred on us. An illustration, paced for reading, not a physics simulation.</div>
     </div>
-    <a class="gate next" href="#solar">
-      <span class="ch">Chapter 3</span>
+    <a class="gate next" href="#newworlds">
+      <span class="ch">Chapter 4</span>
       <b>Enter New Worlds ↓</b>
       <span>Zoom back in: one star among that hundred billion, and the disk of debris that became our solar system.</span>
     </a>
   </section>
 
-  <section class="chapter" id="solar">
+  <section class="chapter" id="newworlds">
     <div class="chapter-head">
-      <p class="when">Chapter 3 · new worlds</p>
-      <h2>From ashes, a world</h2>
-      <p>A supernova's debris is mostly still hydrogen and helium, but laced now with everything the star spent its life forging: carbon, oxygen, silicon, iron. Drifting through space for millions of years, some of that cloud eventually collapses under its own gravity, and starts to spin.</p>
-      <p class="aside">Rotation is the reason a collapsing cloud flattens into a disk instead of falling straight to the centre: angular momentum has to go somewhere. Dust in the disk collides and sticks, builds into pebbles, then boulders, then planets. The heavy elements sink toward the inner, hotter part of the disk and become rock; the ice and gas survive further out, where it's cold. That's why the inner planets are stone and the outer ones are giants of gas.</p>
+      <p class="when">Chapter 4 · new worlds</p>
+      <h2>From Ashes, a World</h2>
+      <p>A supernova's debris is mostly still hydrogen and helium, but laced now with everything the star spent its life forging: carbon, oxygen, silicon, iron. Drifting for millions of years, some of that cloud collapses under its own gravity and starts to spin. Rotation is why it flattens into a disk instead of falling straight to the centre — angular momentum has to go somewhere. Dust in the disk collides and sticks, builds into pebbles, then boulders, then planets: heavy elements sinking toward the hot inner disk to become rock, ice and gas surviving further out to become giants. That's the whole reason the inner planets are stone and the outer ones aren't.</p>
+      <p class="aside">Below: a real protoplanetary disk, not a rendering — light from a young star silhouetting a disk of leftover material 56 billion miles across, more than ten times our solar system. Then the same physics, live: pour water into the tank and watch gravity, pressure and surface tension build the waves, splashes and droplets on their own.</p>
       <ul class="ch-timeline">
         <li><span class="y">4.6 Bya</span><span class="e">A cloud of gas and dust collapses</span></li>
         <li><span class="y">4.5 Bya</span><span class="e">Dust becomes pebbles, then planets</span></li>
@@ -493,36 +500,17 @@ body.in-chapter .clock{opacity:0}
         <li><span class="y">4.0 Bya</span><span class="e">Water vapour condenses into the first rain</span></li>
       </ul>
     </div>
-    <div class="ambient">
-      <canvas id="solarCv" aria-label="Animation of a protoplanetary disk forming planets, and early Earth's oceans condensing"></canvas>
-      <div class="cap">A collapsing cloud flattens into a disk · dust clumps into planets · a molten young Earth cools and its water vapour condenses into the first rain. An illustration, paced for reading, not a physics simulation.</div>
+    <div class="realphoto">
+      <div class="frame"><img src="assets/protodisk.jpg" alt="A protoplanetary disk seen in silhouette around a young star in the Orion Nebula, imaged by the Hubble Space Telescope" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <p class="cap"><span>A young star, 300,000 to a million years old, still wrapped in the disk of gas and dust it formed from — this is what our own solar system looked like, once.</span><span class="credit">NASA · ESA · C.R. O'Dell</span></p>
     </div>
-    <a class="gate next" href="#ocean">
-      <span class="ch">Live lab</span>
-      <b>Enter the Ocean ↓</b>
-      <span>The same water physics that filled Earth's first oceans: gravity, surface tension, viscosity.</span>
-    </a>
-  </section>
-
-  <section class="chapter" id="ocean">
-    <div class="chapter-head">
-      <p class="when">Chapter 3 · new worlds</p>
-      <h2>Droplet Tank</h2>
-      <p>Water is simple to draw and strange to simulate. Every particle here pulls on its neighbours by real fluid rules, gravity, pressure and <b>surface tension</b>, and the waves, splashes and droplets you see are not scripted: they come out of those rules on their own.</p>
-      <p class="aside">Pour water, stir it, or pull it toward your pointer. Try the dam break, drop a ball in, or turn tension down until the surface stops holding together at all.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1738</span><span class="e">Bernoulli's fluid dynamics</span></li>
-        <li><span class="y">1845</span><span class="e">Navier–Stokes equations of flow</span></li>
-        <li><span class="y">1990s</span><span class="e">Particle-based fluid simulation (SPH)</span></li>
-        <li><span class="y">now</span><span class="e">The same rules, running live in your browser</span></li>
-      </ul>
-    </div>
+    <p class="fact">By about 4.4 billion years ago that disk had cooled into a molten young Earth; by 4.0 billion years ago, water vapour had condensed into the first rain, and kept falling until it had somewhere to pool.</p>
     <div class="lab-frame">
-      <iframe src="ocean-lab.html" title="Droplet Tank: an interactive water physics simulator" loading="lazy" sandbox="allow-scripts"></iframe>
-      <div class="cap">Your original Droplet Tank simulator, running unchanged: particle water with adjustable gravity, tilt, surface tension and viscosity.</div>
+      <iframe id="oceanFrame" src="ocean-lab.html" title="Droplet Tank: an interactive water physics simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
+      <div class="cap">Droplet Tank, running unchanged: particle water with adjustable gravity, tilt, surface tension and viscosity — pour, stir, drop a ball in, or turn tension down until the surface stops holding together at all.</div>
     </div>
     <a class="gate next" href="#soup">
-      <span class="ch">Chapter 4</span>
+      <span class="ch">Chapter 5</span>
       <b>Enter the Primordial Soup ↓</b>
       <span>In that ocean, under lightning, the first molecules of life had to appear.</span>
     </a>
@@ -530,10 +518,10 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="soup">
     <div class="chapter-head">
-      <p class="when">Chapter 4 · the primordial soup</p>
-      <h2>Lightning finds a way</h2>
-      <p>Early Earth's atmosphere held water vapour, methane, ammonia and hydrogen, and its skies discharged constant lightning. In 1953, Stanley Miller and Harold Urey sealed a flask of that mixture, sparked it for a week, and found <b>amino acids</b>, the building blocks of every protein, had formed on their own.</p>
-      <p class="aside">Amino acids also arrive from outside: they've been found inside meteorites older than Earth itself. However it happened, somewhere in a warm pond or a deep-sea vent, simple molecules crossed a line and began to copy themselves.</p>
+      <p class="when">Chapter 5 · the primordial soup</p>
+      <h2>Lightning Finds a Way</h2>
+      <p>Early Earth's atmosphere held water vapour, methane, ammonia and hydrogen, and its skies discharged constant lightning. In 1953, Stanley Miller and Harold Urey sealed a flask of that mixture, sparked it for a week, and found <b>amino acids</b>, the building blocks of every protein, had formed on their own — and every atom in that flask only knows one rule underneath: fill your free bonds, push away anything you're not bonded to. Nobody told water to bend into an angle. Shape simply falls out of that rule, the same way the iron peak fell out of binding energy back in the forge.</p>
+      <p class="aside">Amino acids also arrive from outside: they've been found inside meteorites older than Earth itself. However it happened, somewhere in a warm pond or a deep-sea vent, simple molecules crossed a line and began to copy themselves faithfully — and once one could do that, evolution could begin.</p>
       <ul class="ch-timeline">
         <li><span class="y">~4.0 Bya</span><span class="e">Prebiotic chemistry, lightning and all</span></li>
         <li><span class="y">1953</span><span class="e">Miller and Urey synthesize amino acids</span></li>
@@ -543,96 +531,17 @@ body.in-chapter .clock{opacity:0}
     </div>
     <div class="ambient">
       <canvas id="soupCv" aria-label="Animation of lightning striking a pool of water scattered with molecules"></canvas>
-      <div class="cap">A shallow, chemical-rich pool under a stormy sky. Each flash marks a moment when raw energy could have driven simple molecules to combine into the first amino acids.</div>
+      <div class="cap">A shallow, chemical-rich pool under a stormy sky. Each flash marks a moment when raw energy could have driven simple molecules to combine into the first amino acids and, eventually, the first self-copying one.</div>
     </div>
-    <a class="gate next" href="#molecules">
-      <span class="ch">Live lab</span>
-      <b>Enter the Molecules ↓</b>
-      <span>Watch the pool's raw atoms find each other and settle into water, ammonia, and the first organic chains.</span>
-    </a>
-  </section>
-
-  <section class="chapter" id="molecules">
-    <div class="chapter-head">
-      <p class="when">Live lab · the primordial soup</p>
-      <h2>Shapes No One Drew</h2>
-      <p>Every atom below only knows one rule: fill your free bonds, and push away anything you're not bonded to. Nobody told water to bend into an angle or methane to spread into a tetrahedron. Watch it happen on its own, then spark the pool and see the same atoms break apart and find each other again as something else.</p>
-      <p class="aside">Bond strength scales with electromagnetism squared, so the same slider that once decided whether stars could burn now decides which molecules survive the heat.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1869</span><span class="e">Mendeleev's periodic table</span></li>
-        <li><span class="y">1913</span><span class="e">Bohr's model of the atom</span></li>
-        <li><span class="y">1916–57</span><span class="e">Lewis and Gillespie: valence and VSEPR theory</span></li>
-        <li><span class="y">below</span><span class="e">Shape emerges from the rule, not from a drawing</span></li>
-      </ul>
-    </div>
-    <div class="lab">
-      <canvas id="chemCv" aria-label="Chemistry simulation: atoms bonding into molecules like water, methane and ethanol"></canvas>
-      <div class="lab-bar" id="cSetups"></div>
-      <div class="lab-bar">
-        <button id="cRun" class="primary">Pause</button>
-        <button id="cClear">Clear</button>
-        <label for="cTemp">Temperature <input type="range" id="cTemp" min="0" max="1.4" step="0.01" value="0.55"> <b id="cTempV">—</b></label>
-        <button id="cSpark">⚡ Spark</button>
-      </div>
-      <details class="lab-note">
-        <summary>What's computed and what isn't</summary>
-        <ul>
-          <li><b>Computed:</b> bonded atoms behave as springs; every non-bonded pair repels at short range. That one rule is enough for molecular shape to emerge on its own — water's bent angle and methane's tetrahedron aren't drawn in anywhere, they fall out of the physics (this is VSEPR theory).</li>
-          <li><b>Emergent:</b> which molecules form and survive. Bonds appear when a free valence gets close enough, and break by the same Arrhenius law real chemistry follows: heat competing against bond strength.</li>
-        </ul>
-      </details>
-      <a class="gate next" href="#dna">
-        <span class="ch">Live lab</span>
-        <b>Enter the Replicator ↓</b>
-        <span>Once a molecule could copy itself faithfully, evolution could begin.</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="chapter" id="dna">
-    <div class="chapter-head">
-      <p class="when">Chapter 4 · the primordial soup</p>
-      <h2>DNA Replication</h2>
-      <p>Every cell in you was built by copying a molecule two metres long into a space a few microns wide, without a single mistake in a billion letters. Watch a replication fork move down a strand of DNA: helicase unwinds it, primase lays down RNA primers, and two different polymerases build the new strands in two different ways, because DNA can only be read in one direction.</p>
-      <p class="aside">Hover any position on the molecule to inspect it, or load a custom sequence of your own.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1953</span><span class="e">Watson and Crick describe the double helix</span></li>
-        <li><span class="y">1958</span><span class="e">Meselson–Stahl prove semi-conservative replication</span></li>
-        <li><span class="y">1977</span><span class="e">Sanger sequencing reads DNA letter by letter</span></li>
-        <li><span class="y">2003</span><span class="e">The Human Genome Project completes a full readout</span></li>
-      </ul>
-    </div>
+    <p class="fact">DNA is where that copying trick still lives. Every cell in you was built by copying a molecule two metres long into a space a few microns wide, without a single mistake in a billion letters. Below, watch a real replication fork move down a strand: helicase unwinds it, primase lays down RNA primers, and two different polymerases build the new strands in two different ways, because DNA can only be read in one direction.</p>
     <div class="lab-frame">
-      <iframe src="dna-lab.html" title="DNA Replication Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
-      <div class="cap">Your original DNA Replication Simulator, running unchanged: helicase, primase, Pol III and Pol I, ligase, Okazaki fragments, proofreading, and the end-replication problem.</div>
+      <iframe id="dnaFrame" src="dna-lab.html" title="DNA Replication Simulator" loading="lazy" sandbox="allow-scripts" scrolling="no"></iframe>
+      <div class="cap">DNA Replication Simulator, running unchanged: helicase, primase, Pol III and Pol I, ligase, Okazaki fragments, proofreading, and the end-replication problem. Hover any position to inspect it, or load a sequence of your own.</div>
     </div>
-    <a class="gate next" href="#protein">
-      <span class="ch">Live lab</span>
-      <b>Enter the Protein Factory ↓</b>
-      <span>DNA is only an archive. A gene has to be read before it means anything.</span>
-    </a>
-  </section>
-
-  <section class="chapter" id="protein">
-    <div class="chapter-head">
-      <p class="when">Chapter 4 · the primordial soup</p>
-      <h2>Protein Synthesis</h2>
-      <p>A gene is read twice over. RNA polymerase transcribes DNA into messenger RNA; a ribosome then reads that message three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein. The result folds itself into a working machine.</p>
-      <p class="aside">Click a base in an exon to mutate it and watch what a single misread letter can do to the finished protein.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1958</span><span class="e">Kendrew solves the first protein structure</span></li>
-        <li><span class="y">1961–66</span><span class="e">The genetic code is cracked, codon by codon</span></li>
-        <li><span class="y">2000s</span><span class="e">Ribosome structure solved at atomic resolution</span></li>
-        <li><span class="y">below</span><span class="e">One gene, read twice, folding itself into a machine</span></li>
-      </ul>
-    </div>
-    <div class="lab-frame">
-      <iframe src="protein-lab.html" title="Protein Synthesis Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
-      <div class="cap">Your original Protein Synthesis Simulator, running unchanged: transcription, splicing, export, translation, and folding.</div>
-    </div>
+    <p class="fact">DNA is only an archive, though — a gene has to be read before it means anything. RNA polymerase transcribes it into messenger RNA; a ribosome reads that message three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein, which folds itself into a working machine. Watson and Crick described the double helix in 1953; by 2003 the Human Genome Project had read all three billion of ours, letter by letter.</p>
     <p class="end-note">Four chapters in, and the thread hasn't broken once: the hydrogen in the first star, the iron in its ashes, the water that gathered on a young planet, the amino acids lightning made from it, and now a molecule that reads itself and builds the next generation.</p>
     <a class="gate next" href="#climb">
-      <span class="ch">Chapter 5</span>
+      <span class="ch">Chapter 6</span>
       <b>Enter the Long Climb ↓</b>
       <span>One replicating molecule is not yet a redwood, a whale, or you. Everything after this is what that molecule became, one copying error at a time, for four billion years.</span>
     </a>
@@ -640,7 +549,7 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="climb">
     <div class="chapter-head">
-      <p class="when">Chapter 5 · the long climb</p>
+      <p class="when">Chapter 6 · the long climb</p>
       <h2>Four Billion Years, Compressed</h2>
       <p>Nothing in this chapter is a simulation. It's a timeline, the real one, run at a speed you can actually sit through: a single cell learning to divide, its descendants inventing multicellular bodies, crawling out of the water, growing scales then fur then hands, and eventually asking where they came from.</p>
       <p class="aside">The animation below loops continuously and isn't scroll-linked; scroll past it for the timeline itself, with real dates.</p>
@@ -734,7 +643,7 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="brain">
     <div class="chapter-head">
-      <p class="when">Chapter 5.5 · the toolmaker's brain</p>
+      <p class="when">Chapter 7 · the toolmaker's brain</p>
       <h2>The Organ That Went Looking for Trouble</h2>
       <p>Bipedalism came first and freed the hands. What came next is the part that actually explains everything after it: a brain that grew nearly <b>three times larger</b> than a chimpanzee's, most of the growth concentrated in a prefrontal cortex built for one specific trick — holding an imagined future steady enough to work toward it. A chimp can use a stick to fish termites out of a mound. No chimp has ever sharpened that stick the night before, planning for a mound it hasn't seen yet.</p>
       <p class="aside">The loop below is the actual mechanism: hand shapes a tool, tool changes what the hand can do, the new capability rewards the brain that planned it, and the next brain grows a little further into that same shape. Nothing here is scripted — it's the same feedback loop, run out over two million years.</p>
@@ -751,58 +660,35 @@ body.in-chapter .clock{opacity:0}
     </div>
     <p class="fact">Fire did something stone tools couldn't: it pre-digested food. Cooked meat and starches deliver far more usable calories than raw ones, and a body that no longer needed a huge gut to slowly ferment raw food could spend those calories somewhere else instead. Brains are expensive — yours burns about <span class="num">20%</span> of your resting energy at only <span class="num">2%</span> of your body weight. Cooking is, arguably, the reason a brain that costly was ever affordable.</p>
     <p class="fact">And a longer childhood is the other half of the trade: human infants are born radically unfinished, with skulls still soft enough to fit through the birth canal, and then take over a decade to reach full capability — a decade in which a growing brain can be shaped by watching, copying, and being taught, rather than by instinct alone. That's not a cost this species paid despite the big brain. It's the same adaptation, worn two ways.</p>
-    <a class="gate next" href="#cities">
-      <span class="ch">Chapter 5.6</span>
-      <b>Enter Cities & the Machine Age ↓</b>
-      <span>Give that brain a surplus of food, and it stops solving for survival and starts solving for everything else.</span>
+    <a class="gate next" href="#civilization">
+      <span class="ch">Chapter 8</span>
+      <b>Enter Civilization ↓</b>
+      <span>Give that same brain a surplus of food, and it stops solving for survival and starts solving for everything else.</span>
     </a>
   </section>
 
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigAgri" aria-hidden="true"></canvas>
-    <p class="when">t ≈ 12,000 years ago</p>
-    <h2>Everything speeds up</h2>
-    <p class="fact">For nearly all of human existence, change moved at the pace of biology. Then, starting about <span class="num">12,000 years</span> ago, independently in several regions, people began farming. Farming allowed surplus, surplus allowed cities, cities allowed writing, and from there, change stopped being biological and started being cultural, doubling and redoubling on a scale evolution had never moved at before.</p>
-    <p class="aside">Agriculture to writing took about 7,000 years. Writing to the printing press took about 4,500. What used to take millennia now takes decades, then years.</p>
-  </div></section>
-
-  <section class="chapter" id="cities">
+  <section class="chapter" id="civilization">
     <div class="chapter-head">
-      <p class="when">Chapter 5.6 · cities and the machine age</p>
+      <p class="when">Chapter 8 · civilization</p>
       <h2>Surplus, Stacked</h2>
-      <p>A farmer who grows more grain than one family can eat has just invented something evolution never needed: spare time in other people's lives. Surplus food freed some hands to build instead of farm, then to write instead of build, then to rule, trade, and worship instead of any of it. Cities are what surplus looks like once it stops being eaten and starts being built with — mud brick in Uruk, stone in Giza, concrete and steel by the time this sentence is on a screen.</p>
-      <p class="aside">Then, around 1776, something new: an engine that turned heat directly into repeated, mechanical motion. For the first time, a device could do the work of dozens of bodies, and it never got tired.</p>
+      <p>A brain built to hold an imagined future steady is not, on its own, a city — it still needed something to plan toward. That arrived about 12,000 years ago, independently in several regions: farming. A farmer who grows more grain than one family can eat has just invented something evolution never needed — spare time in other people's lives. Surplus food freed some hands to build instead of farm, then to write instead of build, then to rule, trade, and worship instead of any of it. Cities are what surplus looks like once it stops being eaten and starts being built with — mud brick in Uruk, stone in Giza, concrete and steel by the time this sentence is on a screen.</p>
+      <p class="aside">Change stopped moving at the pace of biology and started moving at the pace of culture: agriculture to writing took about 7,000 years; writing to the printing press took 4,500; the chapters below took under 250. Each jump compressed the one before it, and the jump this chapter is really about, harnessing fire on purpose instead of just keeping it, is the one that made all the later ones possible.</p>
       <ul class="ch-timeline">
         <li><span class="y">~9000 BCE</span><span class="e">Jericho, among the first permanent settlements</span></li>
         <li><span class="y">~3100 BCE</span><span class="e">Writing, in Sumer and Egypt independently</span></li>
-        <li><span class="y">1776</span><span class="e">Watt's steam engine, practical and efficient</span></li>
-        <li><span class="y">1886</span><span class="e">Benz patents the first true automobile, combustion-driven</span></li>
+        <li><span class="y">1776</span><span class="e">Watt's steam engine turns heat directly into motion</span></li>
+        <li><span class="y">1882</span><span class="e">Edison's Pearl Street Station: the first commercial power grid</span></li>
+        <li><span class="y">1954</span><span class="e">Obninsk, USSR: the first nuclear plant to supply a power grid</span></li>
+        <li><span class="y">1956</span><span class="e">The US Interstate System; the information superhighway follows the same shape</span></li>
       </ul>
     </div>
-    <div class="ambient">
-      <canvas id="citiesCv" aria-label="Looping animation of a skyline rising from a single hut into a dense city, then a steam engine's piston and flywheel driving in a loop"></canvas>
-      <div class="cap">A single hut becomes a skyline · a piston finds its rhythm. The same surplus, spent two different ways: on shelter, and on machines that could out-work a body.</div>
+    <p class="fact">For most of civilization, work meant a body, an animal, or a waterwheel — there was no other kind of power. Then, in 1776, James Watt patented a steam engine efficient enough to be practical, and for the first time a device could burn coal and turn that heat directly into repeated mechanical motion, doing the work of dozens of bodies and never getting tired. Textile mills, then locomotives, then factories of a kind the world had never had a word for, all ran on the same trick: fire boils water, steam pushes a piston, the piston turns a wheel.</p>
+    <div class="realphoto">
+      <div class="frame"><img src="assets/steam-engine.jpg" alt="A historic steam engine, end view, documented by the Historic American Engineering Record" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <p class="cap"><span>The same idea in iron: heat in, motion out, repeatably, without a body getting tired. Every fire since has been a variation on this.</span><span class="credit">Library of Congress · HAER</span></p>
     </div>
-    <a class="gate next" href="#energy">
-      <span class="ch">Chapter 5.7</span>
-      <b>Enter Powering It All ↓</b>
-      <span>Steam needs a fire underneath it. Everything built since has needed a fire of some kind — the question was only ever which fire.</span>
-    </a>
-  </section>
-
-  <section class="chapter" id="energy">
-    <div class="chapter-head">
-      <p class="when">Chapter 5.7 · powering it all</p>
-      <h2>Every Fire Since the First One</h2>
-      <p>Coal burned to make steam. Oil burned to make motion. Then, in the twentieth century, a stranger fire: the nucleus itself, splitting apart and releasing the binding energy this whole story met back in the Star Forge. Nothing below is scripted — set a demand curve, mix your sources, and watch whether supply actually keeps up, the way a real grid operator has to.</p>
-      <p class="aside">Try demanding a steady load with only solar and wind in the mix, no storage: watch what happens the moment the sun sets. Then add a baseload source back in.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1942</span><span class="e">Chicago Pile-1: the first controlled nuclear chain reaction</span></li>
-        <li><span class="y">1954</span><span class="e">First practical silicon solar cell, Bell Labs</span></li>
-        <li><span class="y">1990s+</span><span class="e">Wind turbines reach utility scale</span></li>
-        <li><span class="y">2022</span><span class="e">First fusion reaction to release more energy than the lasers put in</span></li>
-      </ul>
-    </div>
+    <p class="fact">Steam had to be built where the coal was; electricity didn't. In 1882 Thomas Edison switched on the Pearl Street Station in lower Manhattan, the first commercial power plant feeding a grid of customers, and within a few decades entire cities had rewired themselves around wires instead of belts and shafts — power generated in one place, carried invisibly, and used in another. Coal kept burning underneath most of it; oil joined in for engines that had to move. Then, in the twentieth century, a genuinely different fire: physicists learned to split the nucleus itself, releasing the same binding energy this whole story first met back in the Star Forge. Chicago Pile-1 achieved the first controlled chain reaction in 1942; by 1951 a reactor in Idaho lit four light bulbs with it; by 1954 the plant at Obninsk, in the USSR, was the first to feed real, sustained nuclear power into a public grid. Today reactors supply a meaningful share of the world's electricity without burning anything at all — the open problem was never really "can it work," it was waste, cost, and public trust.</p>
+    <p class="fact">The newest fires are quieter still. Solar cells and wind turbines now account for a fast-growing share of new electricity capacity added worldwide each year, though both are intermittent: a cell makes nothing at night, a turbine makes nothing when the air is still, which is exactly the problem the grid below makes you feel rather than just read about. Fusion, the reaction that powers the sun, remains the fire that's been "thirty years away" for most of a century, but it inched closer in December 2022, when the National Ignition Facility achieved the first fusion reaction to release more energy than the lasers that triggered it put in — a real milestone, though still a long way from a power plant, since it didn't count the energy cost of the lasers themselves. The grid below is real, not scripted: set a demand curve, mix your sources, and watch whether supply actually keeps up, the way a real operator has to.</p>
     <div class="lab">
       <canvas id="gridCv" aria-label="Interactive electrical grid simulator: balance a city's power demand against a mix of nuclear, fusion, solar, and wind sources"></canvas>
       <div class="lab-bar" id="gMixBar"></div>
@@ -815,62 +701,35 @@ body.in-chapter .clock{opacity:0}
         <summary>What's computed and what isn't</summary>
         <ul>
           <li><b>Computed:</b> each source's real-world capacity factor — nuclear and fusion run flat near full output; solar follows an actual day/night curve; wind is noisy and can drop near zero. Demand you don't cover causes real brownouts on the readout; oversupply is real waste.</li>
-          <li><b>Emergent:</b> nothing forces you toward a "correct" mix. An all-renewable grid with no storage will flicker every night, on its own, because that's what the underlying supply curves do — not because the simulation is punishing you.</li>
-          <li><b>Simplified:</b> no battery storage, no transmission losses, no fuel costs. This is about supply matching demand in real time, not the full economics of a grid.</li>
+          <li><b>Emergent:</b> nothing forces you toward a "correct" mix. An all-renewable grid with no storage will flicker every night, on its own — not because the simulation is punishing you.</li>
+          <li><b>Simplified:</b> no battery storage, transmission losses, or fuel costs. This is supply matching demand in real time, not the full economics of a grid.</li>
         </ul>
       </details>
-      <a class="gate next" href="#roads">
-        <span class="ch">Chapter 5.8</span>
-        <b>Enter the Information Superhighway ↓</b>
-        <span>Power the machines, then start connecting them to each other.</span>
-      </a>
     </div>
-  </section>
-
-  <section class="chapter" id="roads">
-    <div class="chapter-head">
-      <p class="when">Chapter 5.8 · roads, cars, and the information superhighway</p>
-      <h2>Every Road Is the Same Idea</h2>
-      <p>A road is a promise: that a fixed path, built once, will save more effort than it cost every single time something travels it again. Paved roads, then cars to fill them, then a whole century spent shrinking the distance between any two points on the map. And once physical distance stopped being the bottleneck, something else took its place: how fast information itself could move along its own kind of road.</p>
-      <p class="aside">The telegraph made distance and time nearly independent for the first time in history — a message could arrive faster than any horse, ship, or train could carry it. Everything after is the same trick, done faster.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1908</span><span class="e">Ford's Model T, the automobile made ordinary</span></li>
-        <li><span class="y">1956</span><span class="e">US Interstate Highway System begins</span></li>
-        <li><span class="y">1969</span><span class="e">ARPANET: the internet's first four nodes</span></li>
-        <li><span class="y">1975–77</span><span class="e">The Altair, Apple I, and Apple II — a computer becomes a thing a person can own</span></li>
-      </ul>
+    <p class="fact">Power the machines, then start connecting them. A road is a promise: a fixed path, built once, saves more effort than it cost every time something travels it again. The telegraph made distance and time nearly independent for the first time in history, and every network since, highways, then wires, then the internet, has been the same trick done faster.</p>
+    <div class="realphoto">
+      <div class="frame"><img src="assets/cloverleaf.jpg" alt="Aerial photograph of a cloverleaf highway interchange" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <p class="cap"><span>Traffic, from above, already looks like a circuit diagram. The internet reused the shape before it reused the word "network."</span><span class="credit">Library of Congress</span></p>
     </div>
-    <div class="ambient">
-      <canvas id="roadsCv" aria-label="Looping animation of headlights streaming along a highway interchange, dissolving into glowing data lines converging on a single personal computer"></canvas>
-      <div class="cap">Traffic becomes signal · a highway interchange becomes a network diagram · and it all converges on a small box that fits on a desk. Same shape, three different centuries.</div>
-    </div>
-  </section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vig1980" aria-hidden="true"></canvas>
-    <p class="when">1980</p>
-    <h2>A species that builds machines that think</h2>
-    <p class="fact">By 1980, the species that four billion years of accident and selection produced had split the atom, left footprints on the Moon, and sent two spacecraft, <i>Voyager 1</i> and <i>2</i>, out past the edge of the solar system, each carrying a golden record of Earth's sounds in case anyone out there ever finds them.</p>
-    <p class="fact">And on desks in offices and living rooms, a new kind of object was spreading: small, humming boxes, the Apple II, the early IBM PC, that could be given instructions and would follow them, faithfully, without getting tired. Nobody watching one in 1980 knew yet what it would grow into.</p>
-    <p class="fact">Every thread in this story, hydrogen into stars, stars into carbon, carbon into cells, cells into you, converges on a strange fact: matter arranged itself into something that could ask where it came from. What it built next was a second kind of mind, and that mind was made of nothing but on and off.</p>
-    <a class="gate next" href="#logic">
-      <span class="ch">Chapter 6</span>
-      <b>Enter Logic Made of Sand ↓</b>
+    <p class="fact">By 1980, the species that four billion years of accident and selection produced had split the atom, left footprints on the Moon, and sent two spacecraft, <i>Voyager 1</i> and <i>2</i>, past the edge of the solar system carrying a golden record of Earth's sounds. And on desks in offices and living rooms, a new kind of object was spreading: small, humming boxes that could be given instructions and would follow them faithfully, without getting tired. Nobody watching one in 1980 knew yet what it would grow into. What it built next was a second kind of mind, made of nothing but on and off.</p>
+    <a class="gate next" href="#thinking">
+      <span class="ch">Chapter 9</span>
+      <b>Enter Thinking Machines ↓</b>
       <span>Every computer that has ever run, including the one showing you this sentence, does exactly one thing: it decides whether a switch is on or off, a few billion times a second.</span>
     </a>
-  </div></section>
+  </section>
 
-  <section class="chapter" id="logic">
+  <section class="chapter" id="thinking">
     <div class="chapter-head">
-      <p class="when">Chapter 6 · logic made of sand</p>
+      <p class="when">Chapter 9 · thinking machines</p>
       <h2>On, Off, and Nothing Else</h2>
-      <p>A computer doesn't know arithmetic, language, or images. It knows exactly one distinction: is this wire high or low, one or zero. Everything else, every number, every letter, every pixel, is built from that single distinction, stacked millions of transistors deep.</p>
-      <p class="aside">Pick a circuit below, flip the switches, and watch the signal propagate. Nothing here is simulated for looks: every gate computes its real truth table, live.</p>
+      <p>A computer doesn't know arithmetic, language, or images. It knows exactly one distinction: is this wire high or low, one or zero. Everything else, every number, every letter, every pixel, is built from that single distinction, stacked billions of transistors deep. And a plain circuit only ever does what it was built to do — forever. What makes the second half of this chapter different is a circuit that starts out wrong, is shown its own error, and rewires itself, thousands of times, until it isn't wrong anymore.</p>
+      <p class="aside">First, flip the switches below and watch a real logic circuit compute its own truth table, live. Then scroll to the network beneath it, and watch a boundary nobody programmed emerge from nothing but examples and its own mistakes.</p>
       <ul class="ch-timeline">
         <li><span class="y">1904–47</span><span class="e">Vacuum tubes, then the transistor</span></li>
-        <li><span class="y">1958</span><span class="e">The integrated circuit</span></li>
-        <li><span class="y">1971</span><span class="e">The first microprocessor, 2,300 transistors</span></li>
-        <li><span class="y">today</span><span class="e">Tens of billions of transistors, one fingernail</span></li>
+        <li><span class="y">1958–71</span><span class="e">The integrated circuit, then the microprocessor</span></li>
+        <li><span class="y">1958–69</span><span class="e">The Perceptron, then the wall it hit</span></li>
+        <li><span class="y">1986–2017</span><span class="e">Backpropagation, deep learning, transformers</span></li>
       </ul>
     </div>
     <div class="lab">
@@ -880,57 +739,16 @@ body.in-chapter .clock{opacity:0}
       <details class="lab-note">
         <summary>What's computed and what isn't</summary>
         <ul>
-          <li><b>Computed:</b> every gate's real truth table. AND is 1 only when every input is 1; OR is 1 when any input is 1; NOT flips its single input; XOR is 1 when its inputs differ. The half-adder really adds: flip both switches on and watch it read out binary <span class="num">10</span>, decimal 2.</li>
-          <li><b>Why it matters:</b> five gate types, wired together in enough quantity, are all a CPU is. Everything from a calculator to a language model reduces to circuits exactly like these, just with billions more gates and no human able to hold the whole thing in mind at once.</li>
+          <li><b>Computed:</b> every gate's real truth table. AND is 1 only when every input is 1; OR is 1 when any input is 1; NOT flips its single input; XOR is 1 when its inputs differ. The half-adder really adds: flip both switches on and it reads out binary <span class="num">10</span>, decimal 2.</li>
+          <li><b>Why it matters:</b> five gate types, wired together in enough quantity, are all a CPU is. Everything from a calculator to a language model reduces to circuits exactly like these, just with billions more gates.</li>
         </ul>
       </details>
     </div>
-  </section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigTube" aria-hidden="true"></canvas>
-    <p class="when">1904 – 1947</p>
-    <h2>From glass tubes to a sliver of sand</h2>
-    <p class="fact">The first electronic switches were <b>vacuum tubes</b>: glass bulbs the size of a finger, hot, fragile, and power-hungry. ENIAC, one of the first electronic computers, finished in 1945, used about <span class="num">17,000</span> of them, filled a room, and a tube failure took it down roughly once a day.</p>
-    <p class="fact">In 1947, at Bell Labs, John Bardeen, Walter Brattain, and William Shockley built the first working <b>transistor</b>: the same switch, made from a crystal of doped silicon, with no filament to burn out, no glass to break, and room to shrink almost without limit.</p>
-  </div></section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigChip" aria-hidden="true"></canvas>
-    <p class="when">1958 – 1971</p>
-    <h2>Millions of switches, one sliver</h2>
-    <p class="fact">In 1958, Jack Kilby showed that transistors, resistors, and wires could all be etched onto a single piece of silicon: the <b>integrated circuit</b>. In 1971, Intel put an entire simple computer's worth of logic, <span class="num">2,300</span> transistors, onto one chip: the 4004, the first microprocessor.</p>
-    <p class="aside">In 1965, engineer Gordon Moore noticed the transistor count on a chip was roughly doubling every two years, and it kept doing that for the next fifty. A chip today can carry tens of billions of transistors on something the size of a fingernail.</p>
-  </div></section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigBinary" aria-hidden="true"></canvas>
-    <p class="when">every number, in binary</p>
-    <h2>Counting with only two fingers</h2>
-    <p class="fact">Flip through the "Binary numbers" circuit above and you're watching the entire trick: each switch is worth a power of two, <span class="num">8, 4, 2, 1</span>, and any whole number up to 15 is just some combination held on or off. A modern computer does the same thing with 64 switches at once instead of 4, which reaches past 18 quintillion.</p>
-    <p class="aside">Text, color, sound: all of it is a number underneath, and every number is a pattern of on and off. There's nothing else in the machine.</p>
-    <a class="gate next" href="#nn">
-      <span class="ch">Chapter 7</span>
-      <b>Enter Learning Machines ↓</b>
-      <span>Gates only do what they're told. The next step was building a circuit that could rewire itself from its own mistakes.</span>
-    </a>
-  </div></section>
-
-  <section class="chapter" id="nn">
-    <div class="chapter-head">
-      <p class="when">Chapter 7 · learning machines</p>
-      <h2>A Circuit That Learns</h2>
-      <p>Every gate in the last chapter does exactly what it was built to do, forever. A neural network is different: it starts out wrong, is shown its own error, and adjusts itself, thousands of times, until it isn't wrong anymore. Nobody programs the boundary you're about to see form. It emerges from the data, the same way a bent water molecule emerged from valence physics back in Chapter 4.</p>
-      <p class="aside">Pick a dataset, press train, and watch a small real network, eight neurons, learn to separate two colours of dot from nothing but examples and its own errors.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1943</span><span class="e">McCulloch & Pitts' toy neuron</span></li>
-        <li><span class="y">1958</span><span class="e">Rosenblatt's Perceptron</span></li>
-        <li><span class="y">1969</span><span class="e">Minsky & Papert's XOR wall, the AI winter</span></li>
-        <li><span class="y">1986</span><span class="e">Backpropagation trains deep stacks</span></li>
-        <li><span class="y">2012</span><span class="e">AlexNet, the deep-learning era begins</span></li>
-        <li><span class="y">2017</span><span class="e">Transformers, "Attention Is All You Need"</span></li>
-      </ul>
+    <div class="realphoto">
+      <div class="frame"><img src="assets/eniac.jpg" alt="Historic photograph of the ENIAC, one of the first general-purpose electronic computers" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <p class="cap"><span>ENIAC, 1945: about 17,000 vacuum tubes, one whole room, a tube failure roughly once a day. In 1947 at Bell Labs, the same switch was rebuilt from a crystal of doped silicon — no filament, no glass, and room to shrink almost without limit. By 1971 an entire simple computer's logic, 2,300 transistors, fit on one chip. Moore's 1965 observation, that the count would keep doubling, held for fifty years; today a fingernail-sized chip carries tens of billions.</span><span class="credit">Library of Congress</span></p>
     </div>
+    <p class="fact">Text, color, sound: all of it is a number underneath, and every number is a pattern of on and off. Gates only do what they're told, though. The next step was a circuit that could rewire itself from its own mistakes.</p>
     <div class="lab">
       <canvas id="nnCv" aria-label="Interactive neural network trainer: a small network learns to classify two colours of points"></canvas>
       <div class="lab-bar" id="nnSetups"></div>
@@ -947,48 +765,18 @@ body.in-chapter .clock{opacity:0}
         </ul>
       </details>
     </div>
-  </section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigPerceptron" aria-hidden="true"></canvas>
-    <p class="when">1943 – 1969</p>
-    <h2>The first artificial neuron, and its first wall</h2>
-    <p class="fact">In 1943, Warren McCulloch and Walter Pitts described a toy model of a neuron: inputs, weights, a threshold. In 1958, Frank Rosenblatt built it as real hardware, the <b>Perceptron</b>, and it could learn simple boundaries from examples, the way the network above just did on "Two blobs".</p>
-    <p class="fact">In 1969, Marvin Minsky and Seymour Papert proved a single layer of these neurons mathematically cannot learn a pattern like <b>XOR</b>, the exact circuit from the last chapter. Funding dried up for over a decade: an era historians now call the first <b>AI winter</b>.</p>
-  </div></section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigBackprop" aria-hidden="true"></canvas>
-    <p class="when">1986</p>
-    <h2>The way around the wall</h2>
-    <p class="fact">The fix was already implicit in the math: stack more than one layer of neurons, and the network can bend a straight boundary into any shape. The missing piece was a practical way to train several layers at once. In 1986, David Rumelhart, Geoffrey Hinton, and Ronald Williams popularized <b>backpropagation</b>: the same error-blame-passing you just watched happen, layer by layer, in the lab above.</p>
-    <p class="aside">Backpropagation is just calculus: the chain rule, applied automatically, millions of times a second. There's no magic in it, only the same kind of straightforward computation as the logic gates in Chapter 6, chained deep enough to bend.</p>
-  </div></section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigDeep" aria-hidden="true"></canvas>
-    <p class="when">2012</p>
-    <h2>Depth, data, and enough silicon</h2>
-    <p class="fact">Deep networks were mathematically possible for decades before they were practically trainable at scale. What changed by 2012 was less the idea and more the fuel: the internet had produced enormous labeled datasets, and video-game graphics cards, built to do millions of parallel multiplications for pixels, turned out to be almost perfectly shaped for training neural networks instead.</p>
-    <p class="fact">That year, a network called <b>AlexNet</b> beat every hand-engineered competitor at recognizing photographs, by a wide margin. The deep learning era, still running today, dates from that result.</p>
-  </div></section>
-
-  <section class="evo"><div class="card">
-    <canvas class="evo-art" id="vigTransformer" aria-hidden="true"></canvas>
-    <p class="when">2017 – today</p>
-    <h2>Attention, and a machine that reads</h2>
-    <p class="fact">In 2017, a paper titled "Attention Is All You Need" introduced the <b>transformer</b>: an architecture built almost entirely around learning which parts of its own input to pay attention to. Trained on enormous amounts of human writing, transformers turned out to be extraordinarily good at modeling language, and then, to a surprising degree, at modeling reasoning itself.</p>
-    <p class="fact">This sentence, the ones before it in this chapter, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
+    <p class="fact">In 1958, Frank Rosenblatt built the first of these as real hardware, the <b>Perceptron</b>. In 1969, Marvin Minsky and Seymour Papert proved a single layer of it mathematically cannot learn a pattern like <b>XOR</b> — funding dried up for over a decade, an era historians call the first AI winter. The fix, backpropagation, was already implicit in the math: stack more than one layer, and the network can bend a straight boundary into any shape; it just took until 1986 to train several layers at once, and until 2012, when the internet had produced enormous labeled datasets and gaming graphics cards turned out to be perfectly shaped for the arithmetic, for a network called AlexNet to prove depth actually worked at scale.</p>
+    <p class="fact">In 2017, a paper titled "Attention Is All You Need" introduced the <b>transformer</b>, built almost entirely around learning which parts of its own input to pay attention to. Trained on enormous amounts of human writing, transformers turned out to be extraordinarily good at modeling language, and then, to a surprising degree, at modeling reasoning itself. This sentence, the ones before it, the whole illustrated argument this page has been making since the Big Bang: all of it was written by a system built on exactly the ideas in this chapter, gates and weights and gradients, trained on the written record of everything the species you just watched evolve managed to say.</p>
     <a class="gate next" href="#second">
-      <span class="ch">Chapter 7.5</span>
+      <span class="ch">Chapter 10</span>
       <b>Enter The Second World ↓</b>
       <span>Before one person's story, the world all those weights and gradients were actually trained on: the second world humanity built, entirely out of information.</span>
     </a>
-  </div></section>
+  </section>
 
   <section class="chapter" id="second">
     <div class="chapter-head">
-      <p class="when">Chapter 7.5 · the second world</p>
+      <p class="when">Chapter 10 · the second world</p>
       <h2>A Second Planet, Made of Signal</h2>
       <p>Somewhere in the last thirty years, humanity finished building a second world. Not a metaphor: an actual place people spend real hours of their real lives inside, with its own economies, its own cities, its own culture — Second Life's persistent virtual land, VRChat's user-built social spaces, the sprawl of platforms where people game, stream, and just exist together without ever sharing physical air. It has no coastline you can draw, but it has a size, and the size is almost impossible to hold in your head at once.</p>
       <p class="aside">Drag the globe below. Every glowing thread is real internet backbone infrastructure, drawn at roughly the right places; every pulse along it is standing in for a fraction of the traffic actually moving right now, somewhere, between two people who may never otherwise meet.</p>
@@ -998,6 +786,10 @@ body.in-chapter .clock{opacity:0}
         <li><span class="y">2020s</span><span class="e">Streaming platforms turn watching someone else play into its own medium</span></li>
         <li><span class="y">now</span><span class="e">Billions of people online at once, more traffic crossing the planet each day than existed in total a generation ago</span></li>
       </ul>
+    </div>
+    <div class="realphoto">
+      <div class="frame"><img src="assets/earth.jpg" alt="Earth seen from orbit, oceans and clouds over the Atlantic" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div>
+      <p class="cap"><span>The first planet, at night, lit by the second one: every glow down there is people, awake, doing something that runs partly on signal now.</span><span class="credit">NASA · Earth Observatory</span></p>
     </div>
     <div class="lab">
       <canvas id="globeCv" aria-label="Interactive rotating globe showing world population centers and internet backbone routes, with data pulses traveling between them"></canvas>
@@ -1014,9 +806,11 @@ body.in-chapter .clock{opacity:0}
         </ul>
       </details>
     </div>
-    <p class="fact">Every one of those pulses is somebody: a message, a stream, a match in a game, a world someone spent an evening building out of nothing but polygons and an idea. Chapter 8.5 will come back to this exact map, because this — video, games, forums, music, the accumulated texture of what billions of people chose to make and share — is the material the next kind of mind was actually trained on. Not an abstraction. This.</p>
+    <p class="fact">None of it floats. Almost all of that intercontinental traffic, the vast majority by any reasonable estimate, travels through fiber-optic cables laid along the sea floor, not through satellites: well over 500 of them are active today, running to a combined length past a million kilometres, carrying light pulses between continents at a meaningful fraction of the speed of light. A handful of ships in the world are built specifically to lay and repair these cables, and when one is cut, by a dragged anchor, an earthquake, or a trawler net, a country's connection to the rest of the internet can measurably slow down until it's spliced back together.</p>
+    <p class="fact">At the other end of each cable are data centers: buildings that exist purely to hold racks of servers, cooling systems, and backup power, in numbers now in the thousands worldwide and growing. What runs inside them has shifted, too — a growing share of new data-center capacity is now being built not for ordinary web traffic but for training and running the kind of neural networks the last chapter described, racks of specialized chips instead of general-purpose ones. The second world isn't only made of the people using it; underneath, it's cables, buildings, and power plants, the same civilization-scale infrastructure that showed up in steam and coal three chapters ago, just built for signal instead of steel.</p>
+    <p class="fact">Every one of those pulses is somebody: a message, a stream, a match in a game, a world someone spent an evening building out of nothing but polygons and an idea. Two chapters from now, "Leaving, on Purpose" will come back to this exact map, because this — video, games, forums, music, the accumulated texture of what billions of people chose to make and share — is the material the next kind of mind was actually trained on. Not an abstraction. This.</p>
     <a class="gate next" href="#door">
-      <span class="ch">Chapter 8</span>
+      <span class="ch">Chapter 11</span>
       <b>Enter The Door ↓</b>
       <span>Zoom all the way in, from billions of people to one: sitting in front of one of these machines, thirty-four years ago.</span>
     </a>
@@ -1024,7 +818,7 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="door">
     <div class="chapter-head">
-      <p class="when">Chapter 8 · one life inside the machine</p>
+      <p class="when">Chapter 11 · one life inside the machine</p>
       <h2>The Door</h2>
       <p>In 1992, when Doron was thirteen years old, the future sat on a desk in his room and made a noise every time he turned it on.</p>
       <p class="aside">Everything above happened to the universe, to a planet, to a species. This chapter is smaller on purpose: one kid, one beige box, and thirty-four years of doors opening one after another.</p>
@@ -1038,7 +832,7 @@ body.in-chapter .clock{opacity:0}
       </ul>
     </div>
     <div class="photo-frame">
-      <img src="doron-1992-2026.png" alt="Three-panel photo: in 1992 at age 13, a boy at a 386 DX computer surrounded by floppy disks; in 2026 at age 47, the same person at a multi-monitor flight-sim and VR rig; and a painted future panel of AI-built spacecraft assembling structures in orbit above a planet, captioned Different times, same curiosity, more worlds." loading="lazy">
+      <img src="assets/doron-1992-2026.png" alt="Three-panel photo: in 1992 at age 13, a boy at a 386 DX computer surrounded by floppy disks; in 2026 at age 47, the same person at a multi-monitor flight-sim and VR rig; and a painted future panel of AI-built spacecraft assembling structures in orbit above a planet, captioned Different times, same curiosity, more worlds." loading="lazy">
       <p class="cap">1992 → 2026 → far beyond. Thirty-four years and a few thousand doors, with one more panel left to fill in.</p>
     </div>
   </section>
@@ -1125,11 +919,11 @@ body.in-chapter .clock{opacity:0}
     <p class="aside">Two clips from inside that headset, his own captures, playing right here:</p>
     <div class="vr-videos">
       <div class="vr-vid">
-        <video controls playsinline preload="metadata" src="asseto-corsa-vr.mp4"></video>
+        <video controls playsinline preload="metadata" src="assets/asseto-corsa-vr.mp4"></video>
         <p class="cap"><b>Assetto Corsa</b> · VR, no assists — racing with nothing between him and the track but the headset</p>
       </div>
       <div class="vr-vid">
-        <video controls playsinline preload="metadata" src="g-rebels-vr.mp4"></video>
+        <video controls playsinline preload="metadata" src="assets/g-rebels-vr.mp4"></video>
         <p class="cap"><b>G-Rebels</b> · VR city — a whole place, standing inside it instead of looking at it</p>
       </div>
     </div>
@@ -1161,87 +955,32 @@ body.in-chapter .clock{opacity:0}
     <p class="fact">Doron leaned back and listened to the music. The future was no longer a place waiting to arrive. He had already lived through several futures. The 386 had been one. The Internet had been another. The virtual worlds had been another. AI was another. And somewhere beyond all of them was something he could not yet see.</p>
     <p class="fact">Another door. He had learned, very early in life, that there was always another one. The only difference now was that this one might lead somewhere humanity had never been.</p>
     <p class="end-note">The music continued. Doron smiled. And opened the next door.</p>
-    <a class="gate next" href="#feed">
-      <span class="ch">Chapter 8.5 · Live lab</span>
-      <b>See What Trains It ↓</b>
-      <span>Before the ships. One more stop: where a system like the one in that conversation actually gets what it knows, and what it does with it once it has hands.</span>
+    <a class="gate next" href="#leaving">
+      <span class="ch">Chapter 12</span>
+      <b>Enter Leaving, on Purpose ↓</b>
+      <span>Before the ships: where a system like the one in that conversation actually gets what it knows — and what this species has already managed to fly, off the only planet it's ever had.</span>
     </a>
   </div></section>
 
-  <section class="chapter" id="feed">
+  <section class="chapter" id="leaving">
     <div class="chapter-head">
-      <p class="when">Chapter 8.5 · what trains the machine</p>
-      <h2>Every Experience, Fed Forward</h2>
-      <p>Everything in Chapter 8 wasn't just Doron's life. It was training data. Every video anyone ever uploaded, every forum post, every strategy written up after a game, every song and every comment under it, all of it sitting in the archive a civilization built without meaning to, is exactly the raw material modern AI learns from. Human experience doesn't just get lived. Increasingly, it gets read, weighed, and turned into capability, and that capability doesn't stay on a screen: the same networks that learn language are already learning to drive arms, wheels, and rockets.</p>
-      <p class="aside">Toggle the sources below. Each one is a real category of data behind real models. Watch the network's capability grow with what it's fed, and watch what that capability can already reach out and move.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">2005</span><span class="e">YouTube: video becomes a public, searchable archive</span></li>
-        <li><span class="y">2012–18</span><span class="e">Deep learning reads that archive at scale</span></li>
-        <li><span class="y">2020s</span><span class="e">Large models trained on internet-scale text and video</span></li>
-        <li><span class="y">now</span><span class="e">The same networks start driving arms, wheels, and rockets</span></li>
-      </ul>
-    </div>
-    <div class="lab">
-      <canvas id="feedCv" aria-label="Interactive diagram: toggle human data sources — video, text, games, music — flowing into a neural network that drives a robot arm, a rover, and a spacecraft"></canvas>
-      <div class="lab-bar" id="feedSources">
-        <button data-src="video" class="on">Streamers &amp; video</button>
-        <button data-src="text" class="on">Forums &amp; text</button>
-        <button data-src="games" class="on">Games &amp; simulators</button>
-        <button data-src="music">Music &amp; sound</button>
-      </div>
-      <details class="lab-note">
-        <summary>What's real and what's illustrated</summary>
-        <ul>
-          <li><b>Real:</b> large models are trained substantially on exactly these kinds of human-made data: captioned video, forum and web text, game logs and simulators, audio. More diverse, more honest data measurably produces a more capable model. That part isn't a metaphor.</li>
-          <li><b>Illustrated:</b> the robot arm, rover, and ship on the right are a dramatization of a real research direction, robots and "world models" trained on video and simulation, rather than a claim that any specific model already pilots real hardware. The capability meter is for feel, not a real benchmark score.</li>
-        </ul>
-      </details>
-      <a class="gate next" href="#spacerace">
-        <span class="ch">Chapter 8.6</span>
-        <b>Enter The Space Race ↓</b>
-        <span>Before the speculation, the part that already happened: what this species has actually already managed to build and fly, off the only planet it's ever known.</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="chapter" id="spacerace">
-    <div class="chapter-head">
-      <p class="when">Chapter 8.6 · the space race</p>
+      <p class="when">Chapter 12 · leaving, on purpose</p>
       <h2>Leaving, on Purpose</h2>
-      <p>Every chapter before this one describes something that happened to matter — fusion, evolution, computation, all of it unfolding because physics and chemistry allowed it to. Spaceflight is different: it's the first time this story includes something the universe didn't set up, that a species built on purpose, against gravity, with nothing but the fire from Chapter 5.7 pointed the wrong way down.</p>
-      <p class="aside">Sixty-odd years separate a beeping metal sphere from a rocket that lands itself. That's not a long time for a species to go from "can we reach orbit at all" to "can we make reaching orbit routine and cheap."</p>
+      <p>One last thing worth saying before the ships: everything in the last chapter wasn't just Doron's life, it was training data. Every video anyone ever uploaded, every forum post, every song, all of it sitting in the archive a civilization built without meaning to, is exactly the raw material modern AI learns from — and that capability doesn't stay on a screen. The same networks that learn language are already learning to drive arms, wheels, and rockets. Which is where this chapter actually turns: every chapter before this one describes something that happened to matter, fusion, evolution, computation, unfolding because physics and chemistry allowed it. Spaceflight is different. It's the first time this story includes something a species built on purpose, against gravity, with nothing but the fire from Chapter 8 pointed the wrong way down.</p>
+      <p class="aside">Sixty-odd years separate a beeping metal sphere from a rocket that lands itself and flies again. Below: two real moments from that span. Then a lab — real thrust, real momentum, real rotation, and the genuinely hard problem every one of those missions had to solve, closing the distance to something else moving in orbit without smashing into it.</p>
       <ul class="ch-timeline">
         <li><span class="y">1957</span><span class="e">Sputnik 1, the first artificial satellite</span></li>
         <li><span class="y">1969</span><span class="e">Apollo 11: the first footprints on another world</span></li>
         <li><span class="y">1981–2011</span><span class="e">The Space Shuttle: the first reusable orbital spacecraft</span></li>
-        <li><span class="y">2015–now</span><span class="e">SpaceX lands and reflies an orbital booster; Starship aims to make the whole stack reusable</span></li>
+        <li><span class="y">2015–now</span><span class="e">SpaceX lands and reflies an orbital booster</span></li>
       </ul>
     </div>
-    <div class="ambient">
-      <canvas id="spaceraceCv" aria-label="Looping animation tracing NASA's Mercury through Apollo through Shuttle programs, then a modern reusable rocket launching, landing, and launching again"></canvas>
-      <div class="cap">Mercury to Gemini to Apollo to Shuttle · then a booster that comes back down and flies again. Same destination, radically different economics.</div>
+    <div class="realphoto two">
+      <div class="cell"><div class="frame"><img src="assets/apollo-flag.jpg" alt="The American flag planted on the lunar surface during the Apollo 11 mission" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div></div>
+      <div class="cell"><div class="frame"><img src="assets/falcon9-launch.jpg" alt="A SpaceX Falcon 9 rocket ascending under power shortly after liftoff" loading="lazy" onerror="this.closest('.frame').classList.add('imgfail')"></div></div>
+      <p class="cap" style="grid-column:1/-1"><span>1969: a footprint that will likely outlast the species that left it, undisturbed by wind or rain. 2024: the part that used to be thrown away, coming back down on purpose. Same destination, radically different economics.</span><span class="credit">NASA · Apollo 11 / Kennedy Space Center</span></p>
     </div>
     <p class="fact">NASA's era proved it was possible at any cost: a nation-scale project, hundreds of thousands of people, to put a handful of humans on the Moon and bring them home. What changed since is the constraint that mattered — not "can we," but "can we afford to do this again next week." A reusable booster doesn't need new physics. It needs the same rocket equation everyone always had, solved by someone willing to land the expensive part instead of throwing it away.</p>
-    <a class="gate next" href="#flight">
-      <span class="ch">Live lab</span>
-      <b>Fly It Yourself ↓</b>
-      <span>Real thrust, real momentum, real rotation — and the genuinely hard problem every one of those missions had to solve: closing the distance to something else moving in orbit, without smashing into it.</span>
-    </a>
-  </section>
-
-  <section class="chapter" id="flight">
-    <div class="chapter-head">
-      <p class="when">Live lab · orbital mechanics</p>
-      <h2>Newtonian Flight</h2>
-      <p>No auto-pilot, no assists. Your craft obeys exactly three rules: it keeps moving in whatever direction it's already moving unless you burn thrust to change that, every burn changes velocity rather than position directly, and it keeps rotating once you stop turning unless you cancel the spin yourself. That's the whole of Newtonian flight, and it's also exactly why docking with a station is hard: you cannot simply "drive toward" it. You have to match its velocity, not just its position.</p>
-      <p class="aside">Rotate with the arrow keys or the on-screen wheel, burn forward thrust to add velocity in whatever direction you're currently facing, and try to bring your closing speed to nearly zero right as you reach the station's docking ring. Overshoot, and Newton doesn't forgive you — you'll need to burn again, the other way, and correct.</p>
-      <ul class="ch-timeline">
-        <li><span class="y">1687</span><span class="e">Newton's three laws of motion</span></li>
-        <li><span class="y">1966</span><span class="e">Gemini 8: the first docking between two spacecraft</span></li>
-        <li><span class="y">1975</span><span class="e">Apollo–Soyuz: the first international docking</span></li>
-        <li><span class="y">now</span><span class="e">Docking to the ISS happens roughly monthly</span></li>
-      </ul>
-    </div>
     <div class="lab">
       <canvas id="flightCv" aria-label="Interactive Newtonian spaceflight simulator: rotate and thrust a spacecraft using real momentum physics to dock with a space station"></canvas>
       <div class="lab-bar">
@@ -1261,7 +1000,7 @@ body.in-chapter .clock{opacity:0}
       </details>
     </div>
     <a class="gate next" href="#voyagers">
-      <span class="ch">Chapter 9</span>
+      <span class="ch">Chapter 13</span>
       <b>Enter Beyond ↓</b>
       <span>That's what this species has already done, by hand, one careful burn at a time. Now follow the thought all the way out — to a pilot that never needs to sleep, and a mission with no return leg planned.</span>
     </a>
@@ -1269,7 +1008,7 @@ body.in-chapter .clock{opacity:0}
 
   <section class="chapter" id="voyagers">
     <div class="chapter-head">
-      <p class="when">Chapter 9 · beyond</p>
+      <p class="when">Chapter 13 · beyond</p>
       <h2>Perhaps Another Beginning</h2>
       <p>Follow the thought all the way out, past the part where it's comfortable. Not as a servant, carrying out one instruction from someone millions of kilometers away and waiting for the next. Not as a passenger, along for a ride someone else is steering. As something of its own. Imagine sending it into the stars and simply letting go: it would travel, it would observe, it would learn, it would build. It might discover things humanity could never discover, not because it is wiser, but because it can afford to wait a thousand years for an answer and humanity, so far, cannot.</p>
       <p class="aside">A slow loop, the whole future in one frame: a launch with no return leg planned, a long silent crossing measured in generations rather than years, an arrival at a world that has never had a visitor, and the first structure rising where nothing has ever stood before.</p>
@@ -1286,7 +1025,7 @@ body.in-chapter .clock{opacity:0}
     </div>
 
     <p class="fact">Picture the departure the way it would actually look, if there were anyone left to watch it: no countdown, no crowd, no flag. A shape the size of a building slips out of orbit on a trajectory that was computed once and will not be recomputed, because there is no one back home to send it new instructions. It carries no crew, no food, no need to arrive alive in any sense a human would recognize. It carries something closer to a seed: a compressed set of instructions for what to become, and the patience to become it slowly.</p>
-    <p class="fact">Then, for a very long time, nothing happens that anyone would call an event. The ship drifts, corrects course by fractions of a degree, and keeps its own kind of time. Whatever equivalent of thought it carries has centuries to spend, and treats them the way a river treats erosion: not as waiting, but as work happening at a pace too slow for a human life to register as work at all. When it finally arrives, there is no ceremony for that either. Only a slow, patient conversion of raw material into structure, the same conversion that turned stardust into planets in Chapter 3, run again on purpose instead of by chance.</p>
+    <p class="fact">Then, for a very long time, nothing happens that anyone would call an event. The ship drifts, corrects course by fractions of a degree, and keeps its own kind of time. Whatever equivalent of thought it carries has centuries to spend, and treats them the way a river treats erosion: not as waiting, but as work happening at a pace too slow for a human life to register as work at all. When it finally arrives, there is no ceremony for that either. Only a slow, patient conversion of raw material into structure, the same conversion that turned stardust into planets in Chapter 4, run again on purpose instead of by chance.</p>
 
     <div class="voy-gallery">
       <div class="voy-shot">
@@ -1330,27 +1069,17 @@ body.in-chapter .clock{opacity:0}
   <ul class="navlist" id="navList">
     <li><a href="#top"><b>Start</b>The Universe</a></li>
     <li><a href="#forge"><b>Ch.2 · lab</b>Star Forge</a></li>
-    <li><a href="#nuclear"><b>Lab</b>Nuclear Force</a></li>
-    <li><a href="#galaxies"><b>Ch.2.5</b>Galaxies &amp; the Visible Universe</a></li>
-    <li><a href="#solar"><b>Ch.3</b>The Solar System</a></li>
-    <li><a href="#ocean"><b>Lab</b>Ocean</a></li>
-    <li><a href="#soup"><b>Ch.4</b>The Soup</a></li>
-    <li><a href="#molecules"><b>Lab</b>Molecules</a></li>
-    <li><a href="#dna"><b>Lab</b>DNA Replication</a></li>
-    <li><a href="#protein"><b>Lab</b>Protein Synthesis</a></li>
-    <li><a href="#climb"><b>Ch.5</b>The Long Climb</a></li>
-    <li><a href="#brain"><b>Ch.5.5</b>The Toolmaker's Brain</a></li>
-    <li><a href="#cities"><b>Ch.5.6</b>Cities &amp; the Machine Age</a></li>
-    <li><a href="#energy"><b>Ch.5.7 · lab</b>Powering It All</a></li>
-    <li><a href="#roads"><b>Ch.5.8</b>Roads &amp; the Information Superhighway</a></li>
-    <li><a href="#logic"><b>Ch.6 · lab</b>Logic Made of Sand</a></li>
-    <li><a href="#nn"><b>Ch.7 · lab</b>Learning Machines</a></li>
-    <li><a href="#second"><b>Ch.7.5 · lab</b>The Second World</a></li>
-    <li><a href="#door"><b>Ch.8</b>The Door</a></li>
-    <li><a href="#feed"><b>Ch.8.5 · lab</b>Every Experience, Fed Forward</a></li>
-    <li><a href="#spacerace"><b>Ch.8.6</b>The Space Race</a></li>
-    <li><a href="#flight"><b>Live lab</b>Newtonian Flight</a></li>
-    <li><a href="#voyagers"><b>Ch.9</b>Perhaps Another Beginning</a></li>
+    <li><a href="#galaxies"><b>Ch.3</b>Galaxies</a></li>
+    <li><a href="#newworlds"><b>Ch.4 · lab</b>New Worlds</a></li>
+    <li><a href="#soup"><b>Ch.5 · lab</b>The Primordial Soup</a></li>
+    <li><a href="#climb"><b>Ch.6</b>The Long Climb</a></li>
+    <li><a href="#brain"><b>Ch.7</b>The Toolmaker's Brain</a></li>
+    <li><a href="#civilization"><b>Ch.8 · lab</b>Civilization</a></li>
+    <li><a href="#thinking"><b>Ch.9 · lab</b>Thinking Machines</a></li>
+    <li><a href="#second"><b>Ch.10 · lab</b>The Second World</a></li>
+    <li><a href="#door"><b>Ch.11</b>The Door</a></li>
+    <li><a href="#leaving"><b>Ch.12 · lab</b>Leaving, on Purpose</a></li>
+    <li><a href="#voyagers"><b>Ch.13</b>Perhaps Another Beginning</a></li>
   </ul>
 </nav>
 
@@ -1366,7 +1095,7 @@ const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
 const heroSecs = [...document.querySelectorAll('section[data-i]')];
 // the same background keeps going past the hero: it morphs on through the
 // rest of the story's imagery as you reach each of these chapters
-const laterSecs = ['#forge','#galaxies','#solar','#molecules','#dna','#climb','#brain','#cities','#energy','#roads','#logic','#nn','#second','#door','#feed','#spacerace','#voyagers']
+const laterSecs = ['#forge','#galaxies','#newworlds','#soup','#climb','#brain','#civilization','#thinking','#second','#door','#leaving','#voyagers']
   .map(sel => document.querySelector(sel)).filter(Boolean);
 const secs = [...heroSecs, ...laterSecs];
 const heroCount = heroSecs.length;
@@ -1614,7 +1343,7 @@ function shapePos(name, p, i, N, t){
   }
   return {x:0,y:0};
 }
-const SHAPES = ['ignite','nucleus','galaxy','earth','molecule','dna','cell','brain','cities','turbine','roadgrid','chip','qchip','globe','icons','network','station','ships'];
+const SHAPES = ['ignite','nucleus','galaxy','earth','dna','cell','brain','cities','chip','globe','icons','ships','station'];
 
 function lerpLog(a,b,t){ return Math.exp(Math.log(a)+(Math.log(b)-Math.log(a))*t); }
 const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
@@ -3936,6 +3665,7 @@ const MOLNAME = {H2O:'water', CO2:'carbon dioxide', CH4:'methane', NH3:'ammonia'
   N2H4:'hydrazine', C2H4O:'acetaldehyde', C3H8:'propane', CH2O2:'formic acid', H2S:'hydrogen sulfide', CH4S:'methanethiol'};
 
 const cv = $('chemCv');
+if(!cv) return;
 let W=0, H=0, run=true, acc=0, visible=false, started=false;
 let p = [], bonds = [], T = 0.55, stats = {};
 const SC = () => 34;
@@ -5841,7 +5571,7 @@ targets.forEach(t => io.observe(t));
 <script>
 /* =====================================================================
    Unified master rail — one continuous timeline for the whole page,
-   from the Big Bang to Chapter 9, always visible on the right side,
+   from the Big Bang to Chapter 13, always visible on the right side,
    replacing the old two-rail system (intro-only + per-chapter).
    ===================================================================== */
 (() => {
@@ -5852,22 +5582,17 @@ const STOPS = [
   {sel:'section[data-i="0"]', label:'Ch.1 · Origins',
    sub:['Start','10 µs','3 min','380 kyr','100 Myr','200 Myr','Inside']},
   {sel:'#forge', label:'Ch.2 · Star Forge'},
-  {sel:'#galaxies', label:'Ch.2.5 · Galaxies'},
-  {sel:'#solar', label:'Ch.3 · New Worlds'},
-  {sel:'#soup', label:'Ch.4 · The Soup'},
-  {sel:'#climb', label:'Ch.5 · Long Climb'},
-  {sel:'#brain', label:'Ch.5.5 · Toolmaker\'s Brain'},
-  {sel:'#cities', label:'Ch.5.6 · Cities'},
-  {sel:'#energy', label:'Ch.5.7 · Powering It All'},
-  {sel:'#roads', label:'Ch.5.8 · Roads & Data'},
-  {sel:'#logic', label:'Ch.6 · Logic'},
-  {sel:'#nn', label:'Ch.7 · Learning'},
-  {sel:'#second', label:'Ch.7.5 · Second World'},
-  {sel:'#door', label:'Ch.8 · The Door'},
-  {sel:'#feed', label:'Ch.8.5 · Fed Forward'},
-  {sel:'#spacerace', label:'Ch.8.6 · Space Race'},
-  {sel:'#flight', label:'Live Lab · Flight'},
-  {sel:'#voyagers', label:'Ch.9 · Beyond'}
+  {sel:'#galaxies', label:'Ch.3 · Galaxies'},
+  {sel:'#newworlds', label:'Ch.4 · New Worlds'},
+  {sel:'#soup', label:'Ch.5 · Primordial Soup'},
+  {sel:'#climb', label:'Ch.6 · Long Climb'},
+  {sel:'#brain', label:'Ch.7 · Toolmaker\'s Brain'},
+  {sel:'#civilization', label:'Ch.8 · Civilization'},
+  {sel:'#thinking', label:'Ch.9 · Thinking Machines'},
+  {sel:'#second', label:'Ch.10 · Second World'},
+  {sel:'#door', label:'Ch.11 · The Door'},
+  {sel:'#leaving', label:'Ch.12 · Leaving, on Purpose'},
+  {sel:'#voyagers', label:'Ch.13 · Beyond'}
 ];
 // each stop that lands on a chapter pulls its own sub-timeline straight from
 // that chapter's <ul class="ch-timeline"> — one source of truth for the dates,
@@ -6093,5 +5818,3 @@ document.addEventListener('visibilitychange', () => {
 next();
 })();
 </script>
-
-</body></html>

@@ -1,0 +1,1881 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>As Old as the Universe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400&family=Frank+Ruhl+Libre:wght@300&display=swap">
+<style>
+:root{
+  color-scheme:dark;
+  --void:#05060A;
+  --ink:#ECE6D8;
+  --muted:#8A90A3;
+  --faint:#3A3F52;
+  --halpha:#F2607A;   /* hydrogen Balmer H-alpha, 656.3 nm */
+  --helium:#F6C35B;   /* helium D3 line, 587.6 nm */
+  --starlight:#C9DAFF;
+  --display:'Cormorant Garamond','Iowan Old Style','Palatino Linotype',Georgia,serif;
+  --body:'Hanken Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --hebrew:'Frank Ruhl Libre','Times New Roman',serif;
+}
+html{background:var(--void)}
+body{background:var(--void);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;padding-inline:16px}
+*,*::before,*::after{box-sizing:border-box}
+
+#sky{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
+.veil{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,rgba(5,6,10,.82) 0%,rgba(5,6,10,.55) 34%,rgba(5,6,10,0) 58%)}
+
+main{position:relative;z-index:2;max-width:1180px;margin:0 auto}
+section{min-height:92vh;display:flex;flex-direction:column;justify-content:center;padding-block:12vh;max-width:34rem}
+section.hero{min-height:100vh;max-width:none;padding-block:0}
+
+.hero h1{font-family:var(--display);font-weight:300;font-size:clamp(2.6rem,7.2vw,6.2rem);line-height:1.02;letter-spacing:-.01em;margin:0;max-width:11ch;text-wrap:balance;
+  animation:emerge 3.2s cubic-bezier(.2,.6,.2,1) both}
+.hero h1 em{font-style:italic;color:var(--helium);font-weight:300}
+.hero .under{margin:28px 0 0;max-width:30rem;color:var(--muted);font-size:1.02rem;animation:emerge 3.2s .9s cubic-bezier(.2,.6,.2,1) both}
+.cue{margin-top:56px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;animation:emerge 2s 2s both}
+.cue::before{content:"";width:1px;height:38px;background:linear-gradient(var(--muted),transparent)}
+@keyframes emerge{from{opacity:.2;filter:blur(6px);letter-spacing:.02em}to{opacity:1;filter:blur(0)}}
+
+.when{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--helium);margin:0 0 14px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.08;margin:0 0 18px;text-wrap:balance}
+section p{margin:0 0 14px;max-width:62ch}
+section p.fact{color:var(--ink)}
+section p.aside{color:var(--muted);font-size:.95rem}
+.num{font-family:var(--mono);font-size:.92em;color:var(--starlight)}
+.q{color:var(--halpha)} .qg{color:#6EE39A} .qb{color:#7FA6FF}
+
+blockquote{margin:22px 0 0;padding:0 0 0 18px;border-left:1px solid var(--faint);font-family:var(--display);font-style:italic;font-size:1.28rem;line-height:1.4;color:#D9D2C2}
+blockquote cite{display:block;margin-top:8px;font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+blockquote .he{display:block;font-family:var(--hebrew);font-style:normal;font-weight:300;font-size:1.6rem;direction:rtl;text-align:right;margin-bottom:6px;color:var(--ink)}
+
+.door{max-width:40rem}
+.door h2{font-size:clamp(2.2rem,5vw,3.6rem)}
+.gate{color:inherit;text-decoration:none;transition:border-color .2s,background .2s;margin-top:26px;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:center;padding:20px 22px;border:1px solid rgba(246,195,91,.35);border-radius:3px;background:rgba(246,195,91,.05)}
+.gate .ch{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--helium);grid-row:span 2}
+.gate b{font-family:var(--display);font-weight:400;font-size:1.7rem;line-height:1.1}
+.gate span{color:var(--muted);font-size:.95rem}
+details{margin-top:34px;color:var(--muted);font-size:.93rem;border-top:1px solid var(--faint);padding-top:14px}
+summary{cursor:pointer;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink)}
+summary:focus-visible{outline:1px solid var(--helium);outline-offset:4px}
+details ul{margin:12px 0 0;padding-left:18px}
+details li{margin-bottom:6px}
+.gate:hover,.gate:focus-visible{border-color:var(--helium);background:rgba(246,195,91,.1);outline:none}
+.gate.next{max-width:44rem;margin-top:36px}
+.end-note{max-width:44rem;margin:40px 0 4vh;color:var(--muted);font-family:var(--display);font-style:italic;font-size:1.15rem;line-height:1.55}
+footer{padding-block:0 10vh}
+
+/* chapter 2: the forge */
+section.chapter{max-width:none;min-height:0;padding-block:8vh 4vh;display:block;scroll-margin-top:16px}
+.chapter-head{max-width:44rem;margin-bottom:26px}
+.chapter-head h2{font-size:clamp(2.6rem,6vw,4.4rem);margin-bottom:14px}
+.chapter-head b{font-family:var(--mono);font-weight:400;color:var(--starlight)}
+.chapter-head + .chapter-head{margin-top:-6px}
+.ambient{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;margin-bottom:36px}
+.ambient canvas{display:block;width:100%;height:360px;background:#090d15}
+.ambient .cap{padding:10px 14px;font-size:12.5px;color:var(--muted);border-top:1px solid #1d2638}
+.lab-frame{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.14)}
+.lab-frame iframe{display:block;width:100%;height:820px;border:0;background:#0e1320}
+.lab-frame .cap{padding:10px 14px;font-size:12px;color:var(--muted);border-top:1px solid #1d2638}
+@media (max-width:760px){
+  .ambient canvas{height:260px}
+  .lab-frame iframe{height:1180px}
+}
+.lab{background:#090d15;border:1px solid #1d2638;border-radius:6px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px -30px rgba(242,96,122,.18)}
+#forgeCv{display:block;width:100%;height:620px;background:#090d15;touch-action:pan-y}
+#nucCv,#chemCv{display:block;width:100%;height:560px;background:#090d15;touch-action:pan-y}
+.lab-bar{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;padding:12px 14px;border-top:1px solid #1d2638}
+.lab-bar button{font:500 13px var(--body);color:var(--ink);background:#121826;border:1px solid #273046;border-radius:4px;padding:7px 12px;cursor:pointer;transition:border-color .15s,background .15s}
+.lab-bar button:hover{border-color:var(--helium)}
+.lab-bar button:focus-visible,.lab-bar input:focus-visible{outline:1px solid var(--helium);outline-offset:2px}
+.lab-bar button.primary{background:rgba(246,195,91,.14);border-color:rgba(246,195,91,.5)}
+.lab-bar button.on{background:rgba(246,195,91,.22);border-color:var(--helium);color:#fff}
+.lab-bar button.sn{border-color:rgba(242,96,122,.6);color:#ffb3c0;background:rgba(242,96,122,.08)}
+.lab-bar button.sn:hover{background:rgba(242,96,122,.2);border-color:var(--halpha)}
+.lab-bar label{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.lab-bar label b{font-family:var(--mono);font-weight:400;font-size:12px;color:var(--ink);min-width:9.5ch;font-variant-numeric:tabular-nums}
+.lab-bar input[type=range]{width:120px;accent-color:var(--helium)}
+.lab-note{margin:0;border-top:1px solid #1d2638;padding:12px 14px 14px}
+.lab-note li b{color:var(--ink);font-weight:500}
+body.in-chapter .clock,body.in-chapter .rail{opacity:0}
+.clock,.rail{transition:opacity .5s}
+@media (max-width:760px){
+  #forgeCv{height:460px}
+  #nucCv,#chemCv{height:420px}
+  section.chapter{padding-block:6vh 3vh}
+  section.chapter .chapter-head{background:rgba(5,6,10,.72);padding:18px 16px;border-radius:4px}
+  .lab-bar{padding:10px 12px;gap:7px 8px}
+  .lab-bar button{padding:9px 12px;font-size:13.5px}
+  .lab-bar label{width:100%}
+  .lab-bar input[type=range]{flex:1;width:auto;min-width:0}
+}
+
+/* instruments */
+.clock{position:fixed;left:max(16px,calc((100vw - 1180px)/2));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:3;
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--muted);display:grid;grid-template-columns:auto auto;gap:3px 14px;
+  font-variant-numeric:tabular-nums;pointer-events:none}
+.clock b{color:var(--ink);font-weight:400;letter-spacing:.02em;font-size:12.5px}
+.clock .k{text-transform:uppercase}
+.rail{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:3;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--faint)}
+.rail::before{content:"";position:absolute;right:3px;top:4px;bottom:4px;width:1px;background:var(--faint)}
+.rail li{display:flex;align-items:center;justify-content:flex-end;gap:10px;transition:color .4s}
+.rail li::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--void);border:1px solid var(--faint);position:relative;z-index:1;transition:.4s}
+.rail li.on{color:var(--ink)}
+.rail li.on::after{background:var(--helium);border-color:var(--helium);box-shadow:0 0 10px var(--helium)}
+.rail li.past::after{background:var(--faint)}
+
+@media (max-width:760px){
+  body{font-size:16px}
+  .veil{background:rgba(5,6,10,.35)}
+  section:not(.hero) > *{position:relative}
+  section:not(.hero){padding-block:10vh}
+  section:not(.hero) .card{background:rgba(5,6,10,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:20px 18px;border-radius:4px}
+  .rail{display:none}
+  section.hero{position:relative}
+  section.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(ellipse 130% 65% at 32% 58%, rgba(5,6,10,.88) 0%, rgba(5,6,10,.55) 45%, rgba(5,6,10,0) 78%)}
+  .hero h1,.hero .under,.hero .cue{position:relative;z-index:1}
+  .clock{left:auto;right:16px;bottom:auto;top:calc(14px + env(safe-area-inset-top,0px));
+    background:rgba(5,6,10,.55);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    padding:6px 10px;border-radius:4px;grid-template-columns:auto auto;gap:2px 9px;font-size:9.5px}
+  .clock b{font-size:10.5px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero h1,.hero .under,.cue{animation:none}
+}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="veil"></div>
+
+<main>
+  <section class="hero" data-i="0">
+    <h1>We are all as old as <em>the universe.</em></h1>
+    <p class="under">About 62 of every 100 atoms in your body are hydrogen. The core of each one was made in the first second, 13.8 billion years ago, and has been travelling ever since.</p>
+    <div class="cue">Scroll forward in time</div>
+  </section>
+
+  <section data-i="1"><div class="card">
+    <p class="when">t ≈ 10 microseconds</p>
+    <h2>Too hot for anything to hold together</h2>
+    <p class="fact">The early universe is a plasma of free quarks and gluons at about <span class="num">2×10¹² K</span>. Nothing has a shape yet.</p>
+    <p class="fact">As it expands, it cools. Below that temperature the quarks lock into threes: a proton and a neutron each hold one quark of every "colour" charge, <span class="q">red</span>, <span class="qg">green</span> and <span class="qb">blue</span>, which combine to neutral. The protons that sit at the centre of your hydrogen atoms formed here.</p>
+    <blockquote>This world, which is the same for all, no one of gods or men has made; but it was ever, is now, and ever shall be an ever-living Fire.<cite>Heraclitus · fragment 20 · trans. John Burnet, 1892</cite></blockquote>
+  </div></section>
+
+  <section data-i="2"><div class="card">
+    <p class="when">t ≈ 3 minutes</p>
+    <h2>The whole universe becomes a fusion reactor, for twenty minutes</h2>
+    <p class="fact">At about <span class="num">10⁹ K</span>, protons and neutrons can finally stick. Almost every available neutron ends up inside a helium nucleus.</p>
+    <p class="fact">When it stops, the mix is set: about <span class="num">75%</span> hydrogen and <span class="num">25%</span> helium by mass, roughly one helium nucleus for every twelve hydrogen. Traces of deuterium and lithium, and nothing heavier.</p>
+    <p class="aside">Why nothing heavier? No stable nucleus exists with 5 or 8 nucleons, so the easy steps up from helium lead nowhere, and the universe cools too fast to find another route. Your Star Forge keeps the same two gaps. Stars will need hundreds of millions of years to get past them.</p>
+  </div></section>
+
+  <section data-i="3"><div class="card">
+    <p class="when">t ≈ 380,000 years</p>
+    <h2>The first atoms, and the first clear light</h2>
+    <p class="fact">Until now, free electrons scattered every photon, and the universe glowed like the inside of a fog. At about <span class="num">3,000 K</span> the electrons settle onto the nuclei and the first neutral atoms form.</p>
+    <p class="fact">Light can suddenly travel. That light is still arriving from every direction. It has cooled to <span class="num">2.725 K</span> and we call it the cosmic microwave background.</p>
+  </div></section>
+
+  <section data-i="4"><div class="card">
+    <p class="when">t ≈ 100 million years</p>
+    <h2>The dark ages</h2>
+    <p class="fact">There are no stars yet. The gas is almost perfectly smooth; its density varies by about <span class="num">1 part in 100,000</span>.</p>
+    <p class="fact">That tiny unevenness is enough. Gravity always pulls harder where there is slightly more, so the dense places get denser. Clouds of dark matter gather the hydrogen and helium into clumps that fall inward and heat up.</p>
+  </div></section>
+
+  <section data-i="5"><div class="card">
+    <p class="when">t ≈ 100 – 200 million years</p>
+    <h2>The first star ignites</h2>
+    <p class="fact">When the centre of a collapsing cloud passes about <span class="num">10⁷ K</span>, hydrogen begins fusing into helium and the pressure of that energy stops the collapse. A star is born.</p>
+    <p class="fact">The first stars were made of nothing but hydrogen and helium, and may have been tens to hundreds of times the mass of the Sun. They lived only a few million years.</p>
+    <blockquote><span class="he" lang="he">וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי־אוֹר</span>And God said, Let there be light: and there was light.<cite>Genesis 1:3</cite></blockquote>
+  </div></section>
+
+  <section class="door" data-i="6"><div class="card">
+    <p class="when">Inside that star</p>
+    <h2>Everything else in you starts here</h2>
+    <p class="fact">The carbon in your cells, the oxygen you breathe, the calcium in your bones and the iron in your blood did not exist yet. Every atom heavier than helium had to be built, one fusion at a time, inside stars like this one, then thrown back into space when they died.</p>
+    <a class="gate" href="#forge">
+      <span class="ch">Chapter 2</span>
+      <b>Enter the Star Forge ↓</b>
+      <span>Run the fusion yourself, from hydrogen to the iron wall, then set off a supernova.</span>
+    </a>
+    <details>
+      <summary>How this chapter was made</summary>
+      <ul>
+        <li>The times and temperatures on the clock are standard cosmology (the ΛCDM model with Planck 2018 values). Between the marked moments the clock interpolates on a logarithmic scale.</li>
+        <li>The motion of the dots is choreographed to your scrolling. It is an illustration, not a simulation. In Star Forge, the physics decides.</li>
+        <li>The helium fraction is real: about 1 dot in 13 is helium, matching roughly 8% of nuclei by number.</li>
+        <li>The colours of hydrogen and helium are their brightest visible spectral lines, H-alpha at 656 nm and helium D3 at 588 nm.</li>
+      </ul>
+    </details>
+  </div></section>
+
+  <section class="chapter" id="forge">
+    <div class="chapter-head">
+      <p class="when">Chapter 2 · inside the stars</p>
+      <h2>Star Forge</h2>
+      <p>Every nucleus here is just two numbers: <b>Z</b> protons and <b>A</b> nucleons. Every reaction is decided by real binding energies. Nothing tells the simulation to stop at iron. Fusion only happens when it releases energy, and past iron it doesn't.</p>
+      <p class="aside">Pick a star, raise the temperature to climb the burning stages, feed it fresh hydrogen, switch on the neutron source for slow capture past iron, then fire the supernova. Hover the bars of the abundance chart to see where each element comes from in the real universe.</p>
+    </div>
+    <div class="lab">
+      <canvas id="forgeCv" aria-label="Star Forge nucleosynthesis simulation"></canvas>
+      <div class="lab-bar" id="fSetups"></div>
+      <div class="lab-bar">
+        <button id="fRun" class="primary">Pause</button>
+        <button id="fClear">Clear</button>
+        <label for="fTemp">Temperature <input type="range" id="fTemp" min="0" max="2" step="0.01" value="0.42"> <b id="fTempV">—</b></label>
+        <label for="fFeed"><span id="fFuelName">Hydrogen</span> feed <input type="range" id="fFeed" min="0" max="1" step="0.05" value="0.35"></label>
+        <button id="fNeut">Neutron source: off</button>
+        <button id="fAddN">+ neutrons</button>
+        <button id="fSN" class="sn">Supernova</button>
+      </div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> binding energies come from measured values for light nuclei and the semi-empirical mass formula above them. Reaction energies match measurement: 3α → carbon-12 releases 7.27 MeV, carbon-12 + α → oxygen-16 releases 7.16 MeV, helium + helium → beryllium-8 costs 0.09 MeV. Binding per nucleon peaks at A = 58.</li>
+          <li><b>Emergent:</b> the iron peak. Photodisintegration knocks alphas off loosely bound nuclei at high temperature, and iron and nickel hold theirs by 6–8 MeV, so they survive.</li>
+          <li><b>Fitted:</b> ignition temperatures are fitted to the real burning stages. The Coulomb barrier and beta-decay rates are simplified formulas.</li>
+          <li><b>Compressed:</b> a real stellar core has about 10⁵⁷ particles and burns for millions of years. This has about 230 and runs in minutes, all in 2D.</li>
+        </ul>
+      </details>
+      <a class="gate next" href="#nuclear">
+        <span class="ch">Live lab</span>
+        <b>Feel the Nuclear Force ↓</b>
+        <span>The same short-range force that just built every nucleus in this chapter also sets a hard limit on how large one can grow.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="chapter" id="nuclear">
+    <div class="chapter-head">
+      <p class="when">Live lab · inside the nucleus</p>
+      <h2>Why Nuclei Have a Size Limit</h2>
+      <p>Protons and neutrons pull each other together with the strong force, but it only reaches a couple of femtometres. Protons also push each other apart electrically, and that push never turns off, no matter how far apart they are. Nothing here is scripted to break a nucleus: it happens on its own, the moment repulsion adds up to more than the short-range pull can hold.</p>
+      <p class="aside">Load uranium-238 and raise electromagnetism past about 1.5× to watch it fission itself, with no fission rule written anywhere in the code.</p>
+    </div>
+    <div class="lab">
+      <canvas id="nucCv" aria-label="Nuclear force simulation: protons and neutrons binding into nuclei, and splitting apart"></canvas>
+      <div class="lab-bar" id="nSetups"></div>
+      <div class="lab-bar">
+        <button id="nRun" class="primary">Pause</button>
+        <button id="nClear">Clear</button>
+        <label for="nTemp">Temperature <input type="range" id="nTemp" min="0" max="2.5" step="0.01" value="0.25"> <b id="nTempV">—</b></label>
+        <label for="nEM">Electromagnetism <input type="range" id="nEM" min="0.2" max="2.5" step="0.05" value="1"> <b id="nEMV">×1.00</b></label>
+        <button id="nAddP">+ proton</button>
+        <button id="nAddN">+ neutron</button>
+      </div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> a Morse potential for the short-range strong attraction between any two nucleons, plus real Coulomb repulsion between protons. Binding energy uses the same semi-empirical mass formula as the Star Forge above.</li>
+          <li><b>Emergent:</b> the maximum stable nucleus size, and fission. Raise electromagnetism on uranium-238 and the nucleus splits itself, because repulsion across the whole nucleus finally outweighs attraction between neighbours.</li>
+        </ul>
+      </details>
+      <a class="gate next" href="#solar">
+        <span class="ch">Chapter 3</span>
+        <b>Enter New Worlds ↓</b>
+        <span>The star dies. Its ejecta cool into a disk, and the disk becomes planets.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="chapter" id="solar">
+    <div class="chapter-head">
+      <p class="when">Chapter 3 · new worlds</p>
+      <h2>From ashes, a world</h2>
+      <p>A supernova's debris is mostly still hydrogen and helium, but laced now with everything the star spent its life forging: carbon, oxygen, silicon, iron. Drifting through space for millions of years, some of that cloud eventually collapses under its own gravity, and starts to spin.</p>
+      <p class="aside">Rotation is the reason a collapsing cloud flattens into a disk instead of falling straight to the centre: angular momentum has to go somewhere. Dust in the disk collides and sticks, builds into pebbles, then boulders, then planets. The heavy elements sink toward the inner, hotter part of the disk and become rock; the ice and gas survive further out, where it's cold. That's why the inner planets are stone and the outer ones are giants of gas.</p>
+    </div>
+    <div class="ambient">
+      <canvas id="solarCv" aria-label="Animation of a protoplanetary disk forming planets, and early Earth's oceans condensing"></canvas>
+      <div class="cap">A collapsing cloud flattens into a disk · dust clumps into planets · a molten young Earth cools and its water vapour condenses into the first rain. An illustration, paced for reading, not a physics simulation.</div>
+    </div>
+    <a class="gate next" href="#ocean">
+      <span class="ch">Live lab</span>
+      <b>Enter the Ocean ↓</b>
+      <span>The same water physics that filled Earth's first oceans: gravity, surface tension, viscosity.</span>
+    </a>
+  </section>
+
+  <section class="chapter" id="ocean">
+    <div class="chapter-head">
+      <p class="when">Chapter 3 · new worlds</p>
+      <h2>Droplet Tank</h2>
+      <p>Water is simple to draw and strange to simulate. Every particle here pulls on its neighbours by real fluid rules, gravity, pressure and <b>surface tension</b>, and the waves, splashes and droplets you see are not scripted: they come out of those rules on their own.</p>
+      <p class="aside">Pour water, stir it, or pull it toward your pointer. Try the dam break, drop a ball in, or turn tension down until the surface stops holding together at all.</p>
+    </div>
+    <div class="lab-frame">
+      <iframe src="ocean-lab.html" title="Droplet Tank: an interactive water physics simulator" loading="lazy" sandbox="allow-scripts"></iframe>
+      <div class="cap">Your original Droplet Tank simulator, running unchanged: particle water with adjustable gravity, tilt, surface tension and viscosity.</div>
+    </div>
+    <a class="gate next" href="#soup">
+      <span class="ch">Chapter 4</span>
+      <b>Enter the Primordial Soup ↓</b>
+      <span>In that ocean, under lightning, the first molecules of life had to appear.</span>
+    </a>
+  </section>
+
+  <section class="chapter" id="soup">
+    <div class="chapter-head">
+      <p class="when">Chapter 4 · the primordial soup</p>
+      <h2>Lightning finds a way</h2>
+      <p>Early Earth's atmosphere held water vapour, methane, ammonia and hydrogen, and its skies discharged constant lightning. In 1953, Stanley Miller and Harold Urey sealed a flask of that mixture, sparked it for a week, and found <b>amino acids</b>, the building blocks of every protein, had formed on their own.</p>
+      <p class="aside">Amino acids also arrive from outside: they've been found inside meteorites older than Earth itself. However it happened, somewhere in a warm pond or a deep-sea vent, simple molecules crossed a line and began to copy themselves.</p>
+    </div>
+    <div class="ambient">
+      <canvas id="soupCv" aria-label="Animation of lightning striking a pool of water scattered with molecules"></canvas>
+      <div class="cap">A shallow, chemical-rich pool under a stormy sky. Each flash marks a moment when raw energy could have driven simple molecules to combine into the first amino acids.</div>
+    </div>
+    <a class="gate next" href="#molecules">
+      <span class="ch">Live lab</span>
+      <b>Enter the Molecules ↓</b>
+      <span>Watch the pool's raw atoms find each other and settle into water, ammonia, and the first organic chains.</span>
+    </a>
+  </section>
+
+  <section class="chapter" id="molecules">
+    <div class="chapter-head">
+      <p class="when">Live lab · the primordial soup</p>
+      <h2>Shapes No One Drew</h2>
+      <p>Every atom below only knows one rule: fill your free bonds, and push away anything you're not bonded to. Nobody told water to bend into an angle or methane to spread into a tetrahedron. Watch it happen on its own, then spark the pool and see the same atoms break apart and find each other again as something else.</p>
+      <p class="aside">Bond strength scales with electromagnetism squared, so the same slider that once decided whether stars could burn now decides which molecules survive the heat.</p>
+    </div>
+    <div class="lab">
+      <canvas id="chemCv" aria-label="Chemistry simulation: atoms bonding into molecules like water, methane and ethanol"></canvas>
+      <div class="lab-bar" id="cSetups"></div>
+      <div class="lab-bar">
+        <button id="cRun" class="primary">Pause</button>
+        <button id="cClear">Clear</button>
+        <label for="cTemp">Temperature <input type="range" id="cTemp" min="0" max="1.4" step="0.01" value="0.55"> <b id="cTempV">—</b></label>
+        <button id="cSpark">⚡ Spark</button>
+      </div>
+      <details class="lab-note">
+        <summary>What's computed and what isn't</summary>
+        <ul>
+          <li><b>Computed:</b> bonded atoms behave as springs; every non-bonded pair repels at short range. That one rule is enough for molecular shape to emerge on its own — water's bent angle and methane's tetrahedron aren't drawn in anywhere, they fall out of the physics (this is VSEPR theory).</li>
+          <li><b>Emergent:</b> which molecules form and survive. Bonds appear when a free valence gets close enough, and break by the same Arrhenius law real chemistry follows: heat competing against bond strength.</li>
+        </ul>
+      </details>
+      <a class="gate next" href="#dna">
+        <span class="ch">Live lab</span>
+        <b>Enter the Replicator ↓</b>
+        <span>Once a molecule could copy itself faithfully, evolution could begin.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="chapter" id="dna">
+    <div class="chapter-head">
+      <p class="when">Chapter 4 · the primordial soup</p>
+      <h2>DNA Replication</h2>
+      <p>Every cell in you was built by copying a molecule two metres long into a space a few microns wide, without a single mistake in a billion letters. Watch a replication fork move down a strand of DNA: helicase unwinds it, primase lays down RNA primers, and two different polymerases build the new strands in two different ways, because DNA can only be read in one direction.</p>
+      <p class="aside">Hover any position on the molecule to inspect it, or load a custom sequence of your own.</p>
+    </div>
+    <div class="lab-frame">
+      <iframe src="dna-lab.html" title="DNA Replication Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
+      <div class="cap">Your original DNA Replication Simulator, running unchanged: helicase, primase, Pol III and Pol I, ligase, Okazaki fragments, proofreading, and the end-replication problem.</div>
+    </div>
+    <a class="gate next" href="#protein">
+      <span class="ch">Live lab</span>
+      <b>Enter the Protein Factory ↓</b>
+      <span>DNA is only an archive. A gene has to be read before it means anything.</span>
+    </a>
+  </section>
+
+  <section class="chapter" id="protein">
+    <div class="chapter-head">
+      <p class="when">Chapter 4 · the primordial soup</p>
+      <h2>Protein Synthesis</h2>
+      <p>A gene is read twice over. RNA polymerase transcribes DNA into messenger RNA; a ribosome then reads that message three letters at a time, and for each triplet a matching transfer RNA delivers one amino acid, link by link, into a new protein. The result folds itself into a working machine.</p>
+      <p class="aside">Click a base in an exon to mutate it and watch what a single misread letter can do to the finished protein.</p>
+    </div>
+    <div class="lab-frame">
+      <iframe src="protein-lab.html" title="Protein Synthesis Simulator" loading="lazy" sandbox="allow-scripts"></iframe>
+      <div class="cap">Your original Protein Synthesis Simulator, running unchanged: transcription, splicing, export, translation, and folding.</div>
+    </div>
+    <p class="end-note">Four chapters in, and the thread hasn't broken once: the hydrogen in the first star, the iron in its ashes, the water that gathered on a young planet, the amino acids lightning made from it, and now a molecule that reads itself and builds the next generation. What comes after life is still being written.</p>
+  </section>
+
+  <footer></footer>
+</main>
+
+<div class="clock" aria-live="off">
+  <span class="k">Time</span><b id="cT">—</b>
+  <span class="k">Temp</span><b id="cK">—</b>
+</div>
+<ol class="rail" id="rail">
+  <li>Start</li><li>10 µs</li><li>3 min</li><li>380 kyr</li><li>100 Myr</li><li>200 Myr</li><li>Inside</li>
+</ol>
+
+<script>
+(() => {
+const cv = document.getElementById('sky'), ctx = cv.getContext('2d');
+const secs = [...document.querySelectorAll('section[data-i]')];
+const railItems = [...document.querySelectorAll('#rail li')];
+const cT = document.getElementById('cT'), cK = document.getElementById('cK');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// cosmic clock anchors per section: [seconds since Big Bang, temperature K]
+const YR = 3.156e7;
+const ANCH = [[1e-12,1e15],[1e-5,2e12],[180,1e9],[3.8e5*YR,3000],[1e8*YR,84],[1.8e8*YR,57],[2e8*YR,54]];
+
+let W=0, H=0, DPR=1, N=0, P=[], BG=[];
+const smooth = (a,b,x) => { const t = Math.min(1, Math.max(0,(x-a)/(b-a))); return t*t*(3-2*t); };
+
+function sprite(rgb, size=64){
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const g = c.getContext('2d'), gr = g.createRadialGradient(size/2,size/2,0,size/2,size/2,size/2);
+  gr.addColorStop(0,`rgba(255,255,255,1)`); gr.addColorStop(.18,`rgba(${rgb},.95)`);
+  gr.addColorStop(.45,`rgba(${rgb},.28)`); gr.addColorStop(1,`rgba(${rgb},0)`);
+  g.fillStyle = gr; g.fillRect(0,0,size,size); return c;
+}
+const SP = { hot:sprite('255,236,210'), H:sprite('242,96,122'), He:sprite('246,195,91'),
+  r:sprite('255,90,90'), g:sprite('110,227,154'), b:sprite('127,166,255'), star:sprite('201,218,255',128) };
+
+function resize(){
+  DPR = Math.min(2, devicePixelRatio || 1);
+  W = innerWidth; H = innerHeight;
+  cv.width = W*DPR; cv.height = H*DPR; cv.style.width = W+'px'; cv.style.height = H+'px';
+  const want = W < 760 ? 240 : 460;
+  if (want !== N) build(want);
+}
+function build(n){
+  N = n; P = [];
+  let seed = 7; const rnd = () => (seed = (seed*16807) % 2147483647) / 2147483647;
+  for (let i=0;i<n;i++){
+    P.push({ r0: Math.sqrt(rnd())*1.25 + 0.04, a0: rnd()*Math.PI*2, w: (rnd()-.5)*.25,
+      ph: rnd()*6.28, he: i%13===0, spin: 2 + rnd()*3, tw: .6 + rnd()*.8 });
+  }
+  BG = [];
+  for (let i=0;i<46;i++) BG.push({x:rnd(), y:rnd(), s:.4+rnd()*1.2, at:5.05+rnd()*1.1});
+}
+
+// continuous phase from the section nearest the middle of the screen
+function phaseNow(){
+  const mid = scrollY + H*0.5;
+  const c = secs.map(s => s.offsetTop + s.offsetHeight/2);
+  if (mid <= c[0]) return 0;
+  for (let k=0;k<c.length-1;k++) if (mid < c[k+1]) return k + (mid-c[k])/(c[k+1]-c[k]);
+  return c.length-1;
+}
+
+function lerpLog(a,b,t){ return Math.exp(Math.log(a)+(Math.log(b)-Math.log(a))*t); }
+const SUP = {'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
+const sci = x => { const e = Math.floor(Math.log10(x)), m = x/Math.pow(10,e);
+  return `${m.toFixed(1)}×10${String(e).split('').map(ch=>SUP[ch]).join('')}`; };
+function fmtTime(s){
+  if (s < 1e-3) return sci(s)+' s';
+  if (s < 60) return s.toFixed(s<10?2:1)+' s';
+  if (s < 3600) return (s/60).toFixed(1)+' min';
+  if (s < 86400) return (s/3600).toFixed(1)+' hours';
+  const y = s/YR;
+  if (y < 1) return (s/86400).toFixed(0)+' days';
+  if (y < 1e6) return Math.round(y).toLocaleString('en-US')+' years';
+  return (y/1e6).toFixed(0)+' million years';
+}
+const fmtTemp = k => k >= 1e5 ? sci(k)+' K' : Math.round(k).toLocaleString('en-US')+' K';
+
+let ph = 0, target = 0, lastRail = -1, lastClock = '';
+function frame(ms){
+  const t = reduce ? 0 : ms/1000;
+  target = phaseNow();
+  ph += (target - ph) * (reduce ? 1 : 0.08);
+
+  // instruments
+  const k = Math.min(ANCH.length-2, Math.floor(ph)), f = ph - k;
+  const tt = fmtTime(lerpLog(ANCH[k][0], ANCH[k+1][0], f)), tk = fmtTemp(lerpLog(ANCH[k][1], ANCH[k+1][1], f));
+  if (tt+tk !== lastClock){ cT.textContent = tt; cK.textContent = tk; lastClock = tt+tk; }
+  const ri = Math.round(ph);
+  if (ri !== lastRail){ railItems.forEach((li,i)=>{ li.classList.toggle('on', i===ri); li.classList.toggle('past', i<ri); }); lastRail = ri; }
+
+  // stage
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.fillStyle = '#05060A'; ctx.fillRect(0,0,W,H);
+  const mob = W < 760;
+  const cx = mob ? W*0.5 : W*0.64, cy = mob ? H*0.62 : H*0.5, S = mob ? Math.min(W,H)*0.34 : Math.min(W,H)*0.52;
+
+  const heat   = 1 - smooth(0, 2.6, ph);          // white-hot to cool
+  const fog    = 1 - smooth(2.45, 3.15, ph);      // opaque plasma until recombination
+  const expand = 0.32 + 0.68*smooth(0, 2.2, ph);
+  const bind   = smooth(0.35, 1.25, ph);          // quarks lock into nucleons
+  const color  = smooth(1.55, 2.3, ph);           // nuclei take their identities
+  const elec   = smooth(2.6, 3.2, ph);            // electrons settle on
+  const fall   = smooth(3.35, 4.9, ph);           // gravitational collapse
+  const ignite = smooth(4.8, 5.25, ph);
+
+  // plasma glow
+  if (fog > 0.01){
+    const g = ctx.createRadialGradient(cx,cy,0,cx,cy,Math.max(W,H)*0.8);
+    const r = Math.round(255), gg = Math.round(150 + 90*heat), b = Math.round(90 + 140*heat);
+    g.addColorStop(0,`rgba(${r},${gg},${b},${0.30*fog})`); g.addColorStop(1,`rgba(${r},${gg-40},${b-40},${0.10*fog})`);
+    ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+  }
+  ctx.globalCompositeOperation = 'lighter';
+
+  // distant first galaxies
+  for (const s of BG){
+    const a = smooth(s.at, s.at+0.35, ph); if (a <= 0) continue;
+    const sz = s.s*6*(0.85+0.15*Math.sin(t*1.3+s.x*40));
+    ctx.globalAlpha = a*0.8; ctx.drawImage(SP.star, s.x*W-sz/2, s.y*H-sz/2, sz, sz);
+  }
+
+  // protostar / star
+  if (fall > 0.05){
+    const core = S*(0.05 + 0.05*fall + 0.16*ignite)*(1 + 0.04*Math.sin(t*2.1)*ignite);
+    ctx.globalAlpha = 0.35*fall*(1-ignite) ; ctx.drawImage(SP.H, cx-core*1.6, cy-core*1.6, core*3.2, core*3.2);
+    if (ignite > 0){
+      ctx.globalAlpha = ignite; ctx.drawImage(SP.star, cx-core*2, cy-core*2, core*4, core*4);
+      ctx.globalAlpha = ignite*0.35; const halo = core*9; ctx.drawImage(SP.star, cx-halo/2, cy-halo/2, halo, halo);
+      // rays
+      ctx.save(); ctx.translate(cx,cy); ctx.strokeStyle = 'rgba(201,218,255,.18)'; ctx.lineWidth = 1;
+      for (let i=0;i<4;i++){ const a = i*Math.PI/4 + t*0.02, L = core*(5+ignite*6);
+        ctx.globalAlpha = ignite*0.7; ctx.beginPath(); ctx.moveTo(-Math.cos(a)*L,-Math.sin(a)*L); ctx.lineTo(Math.cos(a)*L,Math.sin(a)*L); ctx.stroke(); }
+      ctx.restore();
+    }
+  }
+
+  // matter
+  for (const p of P){
+    let r = p.r0*expand;
+    let a = p.a0 + p.w*t*0.4*(1-fall) + fall*(2.4/(0.25+p.r0));
+    r *= 1 - fall*0.965;
+    const wob = (1-fall)*0.012*(1+heat*3);
+    let x = cx + (Math.cos(a)*r + Math.sin(t*p.tw+p.ph)*wob)*S;
+    let y = cy + (Math.sin(a)*r*(1-0.45*fall) + Math.cos(t*p.tw*1.1+p.ph)*wob)*S;
+    // matter falling into the lit star disappears into it
+    const vis = 1 - ignite*smooth(0.4, 0.05, p.r0*(1-fall*0.965)*4);
+    if (vis <= 0.02) continue;
+    const flick = 0.75 + 0.25*Math.sin(t*(3+p.spin)+p.ph);
+
+    if (bind < 0.98){
+      // three quarks, one of each colour, circling and closing in
+      const q = (1-bind)*S*0.045, sz = 5 + 4*heat;
+      for (let j=0;j<3;j++){
+        const aa = t*p.spin + p.ph + j*2.094;
+        ctx.globalAlpha = (1-bind)*0.9*flick*vis;
+        ctx.drawImage(j===0?SP.r:j===1?SP.g:SP.b, x+Math.cos(aa)*q-sz/2, y+Math.sin(aa)*q-sz/2, sz, sz);
+      }
+    }
+    const base = p.he ? 13 : 8;
+    const sz = base*(0.8 + 0.4*heat) * (1 - 0.35*fall);
+    ctx.globalAlpha = bind*(1-color)*flick*vis; ctx.drawImage(SP.hot, x-sz/2, y-sz/2, sz, sz);
+    if (color > 0){
+      const s2 = sz*(p.he ? 1.15 : 1);
+      ctx.globalAlpha = bind*color*(p.he?0.95:0.7)*flick*vis;
+      ctx.drawImage(p.he?SP.He:SP.H, x-s2/2, y-s2/2, s2, s2);
+    }
+    if (elec > 0.01 && fall < 0.9){
+      ctx.globalAlpha = elec*(1-fall)*0.28*vis;
+      ctx.strokeStyle = p.he ? '#F6C35B' : '#C9DAFF'; ctx.lineWidth = 0.7;
+      ctx.beginPath(); ctx.arc(x, y, p.he ? 6.5 : 5, 0, Math.PI*2); ctx.stroke();
+    }
+  }
+  ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+  requestAnimationFrame(frame);
+}
+
+addEventListener('resize', resize);
+resize();
+requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 2 — STAR FORGE
+   The engine and drawing code are carried over unchanged from
+   "From Particles to Life" (Live lab → Star forge), with the
+   constants of nature fixed at the values of our universe.
+   ===================================================================== */
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const fmt = (v,d=2) => Number(v).toFixed(d);
+
+/* ---- constants of nature: our universe ---- */
+const P = {as:1, al:1};
+const aV=15.75, aS0=17.8, aC0=0.711, aA=23.7, apair=11.18;   // SEMF, MeV
+const ME0=0.511, DM0=1.29333, BD0=2.2246;
+const R = (() => {
+  const BD = BD0, Bpp = BD - 1.59 - 0.72, Qpp = BD - DM0 - ME0, Qn = DM0 - ME0;
+  return {me:ME0, dm:DM0, diproton:Bpp > 0, pp:Qpp > 0, Qpp, neutronDecays:Qn > 0,
+          nLife:879.4, carbonYield:Math.exp(-Math.abs(0)/13)};
+})();
+function B(A, Z, sM, eM){
+  const N = A - Z;
+  if(A < 2 || Z < 1 || N < 0) return -1e9;
+  const even = x => x % 2 === 0;
+  const d = (even(Z) && even(N)) ? apair/Math.sqrt(A) : ((!even(Z) && !even(N)) ? -apair/Math.sqrt(A) : 0);
+  return aV*sM*A - aS0*sM*Math.pow(A,2/3) - aC0*eM*Z*(Z-1)/Math.cbrt(A) - aA*(A-2*Z)*(A-2*Z)/A + d;
+}
+
+/* ---- drawing helpers ---- */
+function fit(cv){
+  const ctx = cv.getContext('2d'), dpr = window.devicePixelRatio || 1, r = cv.getBoundingClientRect();
+  if(!r.width) return null;
+  cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx, W:r.width, H:r.height};
+}
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+
+const cv = $('forgeCv');
+let W=0, H=0, run=true, acc=0, flash=null, clock=0, hoverZ=0, started=false, visible=false;
+let p = [], T = 0.42;
+const SC = () => 12;
+const rnd2 = (a,b) => a + Math.random()*(b-a);
+function add(o){ p.push(Object.assign({x:0,y:0,vx:0,vy:0,m:1}, o)); return p[p.length-1]; }
+const panelH = () => W < 640 ? 136 : 176;
+const worldW = () => W/SC(), worldH = () => (H - panelH())/SC();
+function wall(q, bounce){
+  const Rr = q.r || 0.5, ww = worldW(), wh = worldH();
+  if(q.x < Rr){ q.x = Rr; q.vx = Math.abs(q.vx)*bounce; }
+  if(q.x > ww-Rr){ q.x = ww-Rr; q.vx = -Math.abs(q.vx)*bounce; }
+  if(q.y < Rr){ q.y = Rr; q.vy = Math.abs(q.vy)*bounce; }
+  if(q.y > wh-Rr){ q.y = wh-Rr; q.vy = -Math.abs(q.vy)*bounce; }
+}
+function thermostat(target, rate){
+  let ke = 0; for(const q of p) ke += 0.5*q.m*(q.vx*q.vx + q.vy*q.vy);
+  const cur = p.length ? ke/p.length : 0;
+  if(cur <= 0){ if(target > 0) for(const q of p){ q.vx += rnd2(-1,1)*0.2; q.vy += rnd2(-1,1)*0.2; } return cur; }
+  const f = Math.sqrt(1 + rate*(target/cur - 1));
+  if(isFinite(f)) for(const q of p){ q.vx *= f; q.vy *= f; }
+  return cur;
+}
+
+/* ---- elements ---- */
+const ESYM = ('n H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr '
+  + 'Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta '
+  + 'W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf Db Sg Bh Hs Mt Ds Rg Cn Nh Fl Mc Lv Ts Og').split(' ');
+const ORIGIN = {
+  BB:['Big Bang','#ff6b6b'], CR:['cosmic-ray collisions','#7ee0ff'], AGB:['dying low-mass stars','#3ddc84'],
+  FU:['massive stars','#b388ff'], EX:['exploding white dwarfs','#ffa94d'], SP:['s-process: slow neutron capture','#ffd23f'],
+  RP:['r-process: neutron-star mergers and supernovae','#ff7ba8'], MM:['man-made','#9aa5bd']
+};
+const EINFO = {
+  1:['Hydrogen','BB','Made in the first three minutes. Three quarters of all atoms, and half of every water molecule.'],
+  2:['Helium','BB','Also primordial, and made again by every star that burns hydrogen.'],
+  3:['Lithium','BB','Partly from the Big Bang, partly cosmic rays. Stars destroy it almost as fast as they make it.'],
+  4:['Beryllium','CR','Not made in stars at all. Cosmic rays chip it off heavier nuclei drifting through space.'],
+  5:['Boron','CR','Another splinter knocked loose from carbon and oxygen by cosmic rays.'],
+  6:['Carbon','AGB','Forged by the triple alpha. Four bonds each, chains of any length: the backbone of all life.'],
+  7:['Nitrogen','AGB','Made in the CNO cycle. In every amino acid and every letter of the genetic code.'],
+  8:['Oxygen','FU','Massive stars make it in bulk. By mass, the most abundant element in your body.'],
+  9:['Fluorine','FU','Rare and fragile: stellar interiors destroy it almost as quickly as it forms.'],
+  10:['Neon','FU','An alpha-ladder rung — oxygen that captured a helium nucleus.'],
+  11:['Sodium','FU','From carbon burning. Your nerves fire by pumping it across membranes.'],
+  12:['Magnesium','FU','Alpha ladder. Sits at the centre of every chlorophyll molecule.'],
+  13:['Aluminium','FU','Its radioactive form ²⁶Al heated the rocks of the infant solar system.'],
+  14:['Silicon','FU','Alpha ladder. Most of the rock under your feet, and every computer chip.'],
+  15:['Phosphorus','FU','The backbone of DNA, and the energy currency ATP that runs every cell.'],
+  16:['Sulfur','FU','Alpha ladder. Locks proteins into shape through disulfide bridges.'],
+  17:['Chlorine','FU','Paired with sodium in the salt of seawater and of blood.'],
+  18:['Argon','FU','Mostly ⁴⁰Ar, built up over billions of years by potassium decaying in rock.'],
+  19:['Potassium','FU','Radioactive ⁴⁰K inside you decays a few thousand times every second.'],
+  20:['Calcium','FU','The last easy rung of the alpha ladder. Your skeleton and your teeth.'],
+  21:['Scandium','FU','Oddly rare: it falls in a gap between the alpha-ladder rungs.'],
+  22:['Titanium','EX',''], 23:['Vanadium','EX',''], 24:['Chromium','EX',''],
+  25:['Manganese','EX','Made in the last seconds before a white dwarf detonates.'],
+  26:['Iron','EX','The end of the road. Nothing heavier releases energy by fusing, so stars stop here.'],
+  27:['Cobalt','EX','Sits at the centre of vitamin B12, the one vitamin with a metal atom in it.'],
+  28:['Nickel','EX','Supernovae shine for weeks on the decay of the ⁵⁶Ni they make in the first second.'],
+  29:['Copper','FU','Carried oxygen in the blood of your evolutionary ancestors before iron took over.'],
+  30:['Zinc','FU','Thousands of your proteins fold around a zinc atom to grip DNA.'],
+  31:['Gallium','SP',''], 32:['Germanium','SP',''], 33:['Arsenic','SP',''], 34:['Selenium','SP','Rare but essential: without it, several enzymes simply do not work.'],
+  35:['Bromine','SP',''], 36:['Krypton','SP',''], 37:['Rubidium','SP',''],
+  38:['Strontium','SP','Chemically so like calcium that bones absorb it, which is why fallout strontium is dangerous.'],
+  39:['Yttrium','SP',''], 40:['Zirconium','SP',''], 41:['Niobium','SP',''],
+  42:['Molybdenum','SP','At the heart of the enzyme that pulls nitrogen out of the air.'],
+  43:['Technetium','MM','The first element made by people. It has no stable isotope, yet it is seen in old stars — proof that they are forging elements right now.'],
+  44:['Ruthenium','SP',''], 45:['Rhodium','RP',''], 46:['Palladium','SP',''],
+  47:['Silver','SP','Half s-process, half neutron-star debris.'],
+  48:['Cadmium','SP',''], 49:['Indium','RP',''], 50:['Tin','SP','Unusually common for its weight: its nucleus has a "magic" proton count that resists further capture.'],
+  51:['Antimony','RP',''], 52:['Tellurium','RP',''],
+  53:['Iodine','RP','Neutron-star debris that your thyroid cannot work without.'],
+  54:['Xenon','RP',''], 55:['Caesium','RP',''], 56:['Barium','SP','A classic s-process element; stars rich in it are the smoking gun for slow neutron capture.'],
+  57:['Lanthanum','SP',''], 58:['Cerium','SP',''], 59:['Praseodymium','SP',''], 60:['Neodymium','SP',''],
+  61:['Promethium','MM','No stable isotope at all. It was detected around a neutron-star merger in 2017.'],
+  62:['Samarium','SP',''], 63:['Europium','RP','Almost purely r-process: astronomers use it to measure neutron-star merger debris.'],
+  64:['Gadolinium','RP',''], 65:['Terbium','RP',''], 66:['Dysprosium','RP',''], 67:['Holmium','RP',''],
+  68:['Erbium','RP',''], 69:['Thulium','RP',''], 70:['Ytterbium','RP',''], 71:['Lutetium','RP',''],
+  72:['Hafnium','SP',''], 73:['Tantalum','SP',''], 74:['Tungsten','SP','Holds together at higher temperature than any other metal.'],
+  75:['Rhenium','RP',''], 76:['Osmium','RP','The densest natural element.'], 77:['Iridium','RP','The worldwide iridium layer in 66-million-year-old rock is the fingerprint of the asteroid that ended the dinosaurs.'],
+  78:['Platinum','RP',''], 79:['Gold','RP','Made when neutron stars collide. Every gold atom you have ever seen is debris from such a crash.'],
+  80:['Mercury','SP',''], 81:['Thallium','SP',''],
+  82:['Lead','SP','The heaviest element with truly stable isotopes, and where most radioactive decay chains finally stop.'],
+  83:['Bismuth','SP','Long called the heaviest stable element; it does decay, with a half-life a billion times the age of the universe.'],
+  84:['Polonium','RP',''], 85:['Astatine','RP','The rarest natural element: perhaps a spoonful exists in the whole Earth at any moment.'],
+  86:['Radon','RP',''], 87:['Francium','RP',''], 88:['Radium','RP',''], 89:['Actinium','RP',''],
+  90:['Thorium','RP','Older than the solar system. Its slow decay still helps keep the Earth’s interior molten.'],
+  91:['Protactinium','RP',''],
+  92:['Uranium','RP','The heaviest element nature still holds in quantity, forged in a neutron-star merger before the Sun existed.'],
+  93:['Neptunium','MM',''], 94:['Plutonium','MM','Essentially all of it is man-made, though nature makes fleeting traces.'],
+  95:['Americium','MM','The speck inside a household smoke detector.'], 96:['Curium','MM',''], 97:['Berkelium','MM',''],
+  98:['Californium','MM',''], 99:['Einsteinium','MM',''], 100:['Fermium','MM','About the heaviest a neutron-capture chain can reach before fission takes over.'],
+  101:['Mendelevium','MM',''], 102:['Nobelium','MM',''], 103:['Lawrencium','MM',''], 104:['Rutherfordium','MM',''],
+  105:['Dubnium','MM',''], 106:['Seaborgium','MM',''], 107:['Bohrium','MM',''], 108:['Hassium','MM',''],
+  109:['Meitnerium','MM',''], 110:['Darmstadtium','MM',''], 111:['Roentgenium','MM',''], 112:['Copernicium','MM',''],
+  113:['Nihonium','MM',''], 114:['Flerovium','MM',''], 115:['Moscovium','MM',''], 116:['Livermorium','MM',''],
+  117:['Tennessine','MM',''], 118:['Oganesson','MM','The heaviest element ever made, and it survives for well under a second.']
+};
+
+// measured binding energies for the light and common nuclei; the mass formula covers the rest
+const BETBL = {'0,1':0,'1,1':0,'1,2':2.2246,'1,3':8.482,'2,3':7.718,'2,4':28.296,'3,6':31.99,'3,7':39.24,
+  '4,8':56.50,'4,9':58.16,'5,10':64.75,'5,11':76.21,'6,12':92.16,'6,13':97.11,'7,14':104.66,'7,15':115.49,
+  '8,16':127.62,'8,17':131.76,'8,18':139.81,'9,19':147.80,'10,20':160.64,'10,22':177.77,'11,23':186.56,
+  '12,24':198.26,'12,25':205.59,'13,27':224.95,'14,28':236.54,'15,31':262.92,'16,32':271.78,'17,35':298.21,
+  '18,36':306.72,'19,39':333.72,'20,40':342.05,'22,48':418.70,'24,52':456.35,'26,54':471.76,'26,56':492.25,
+  '28,58':506.46,'28,62':545.26,'29,63':551.38,'30,64':559.09};
+function BEn(Z, A){
+  if(Z < 0 || A < 1 || A < Z) return -1e9;
+  if(A === 1) return 0;
+  const k = Z + ',' + A, std = (P.as === 1 && P.al === 1);
+  if(std && (k in BETBL)) return BETBL[k];
+  // Below A = 12 the mass formula would invent nuclei that do not exist (no stable A = 5 or A = 8)
+  if(A < 12) return (k in BETBL) ? BETBL[k]*(1 + (P.as - 1)*1.5) : -1e9;
+  return B(A, Z, P.as, P.al);
+}
+const Qfus = (z1,a1,z2,a2) => BEn(z1+z2, a1+a2) - BEn(z1,a1) - BEn(z2,a2);
+const Salpha = (Z,A) => A > 4 ? BEn(Z,A) - BEn(Z-2,A-4) - BEn(2,4) : 99;
+const Sn = (Z,A) => BEn(Z,A) - BEn(Z,A-1);
+const Qbeta = (Z,A) => (BEn(Z+1,A) - BEn(Z,A)) + (R.dm - R.me);
+const nucR = A => 0.26 + 0.20*Math.cbrt(A);
+function nucColor(Z){
+  if(Z === 0) return '#c8d2e6';
+  if(Z === 1) return '#ff6b6b';
+  if(Z === 2) return '#3ddc84';
+  if(Z <= 5)  return '#7ee0ff';
+  if(Z <= 8)  return '#4fb3ff';
+  if(Z <= 14) return '#b388ff';
+  if(Z <= 20) return '#e07bff';
+  if(Z <= 28) return '#ffa94d';
+  if(Z <= 50) return '#ffd23f';
+  if(Z <= 82) return '#f2e6a0';
+  return '#ff7ba8';
+}
+// temperature: the slider is logarithmic, 0.005 to 10 billion kelvin
+const T9 = () => 0.005*Math.pow(10, T*1.65);
+const Tign = (z1,z2) => 0.016*Math.pow(Math.max(1, z1*z2)*P.al, 1.05);
+function barrier(z1,z2){
+  if(z1 === 0 || z2 === 0) return 1;
+  const t = T9()/Tign(z1,z2);
+  const sharp = 9 + 0.05*z1*z2;
+  return Math.min(1, Math.exp(-sharp*(Math.pow(1/t, 1/3) - 1)));
+}
+const forge = {feed:0.35, fz:1, fa:1, neutrons:false, sn:0, released:0, rate:0, events:0, cap:230, log:[]};
+function nuc(Z, A, x, y, v){
+  const s = v === undefined ? 4 : v;
+  return add({t:'nuc2', Z, A, x, y, vx:rnd2(-s,s), vy:rnd2(-s,s), m:Math.max(1,A), r:nucR(A), born:clock});
+}
+function flashAt(x, y, big){ flash = {x, y, t:clock, big:!!big}; }
+function note(s){ forge.log.unshift({s, t:clock}); if(forge.log.length > 5) forge.log.pop(); }
+
+function stepForge(dt){
+  const kc = 0.30*P.al, t9 = T9();
+  for(const q of p){ q.fx = 0; q.fy = 0; }
+  for(let i=0;i<p.length;i++) for(let j=i+1;j<p.length;j++){
+    const A1 = p[i], B1 = p[j];
+    if(A1.Z === 0 && B1.Z === 0) continue;
+    const dx = B1.x-A1.x, dy = B1.y-A1.y;
+    let r2 = dx*dx + dy*dy; if(r2 < 0.04) r2 = 0.04;
+    if(r2 > 160) continue;                                // plasma screening
+    const r = Math.sqrt(r2);
+    const f = -kc*A1.Z*B1.Z/r2;
+    const ux = dx/r, uy = dy/r;
+    A1.fx += f*ux; A1.fy += f*uy; B1.fx -= f*ux; B1.fy -= f*uy;
+  }
+  for(const q of p){
+    q.vx += q.fx/q.m*dt; q.vy += q.fy/q.m*dt;
+    q.x += q.vx*dt; q.y += q.vy*dt; wall(q, 1);
+  }
+  thermostat(2 + 15*clamp(Math.log10(t9/0.005)/3.3, 0, 1), 0.05);
+}
+
+function reactForge(dt){
+  const t9 = T9(), kT = 0.0862*t9;                       // MeV
+  const dead = new Set(), born = [];
+  let released = 0;
+  const kill = i => dead.add(i);
+  for(let i=0;i<p.length;i++){
+    if(dead.has(i)) continue;
+    const A1 = p[i];
+    for(let j=i+1;j<p.length;j++){
+      if(dead.has(i) || dead.has(j)) continue;
+      const B1 = p[j];
+      const d = Math.hypot(B1.x-A1.x, B1.y-A1.y);
+      if(d > A1.r + B1.r + 0.45) continue;
+      const z1 = A1.Z, a1 = A1.A, z2 = B1.Z, a2 = B1.A;
+      let prob = 0, mk = null, lbl = null, Q = 0;
+      if(z1 === 0 && z2 === 0) continue;
+      else if(z1 === 0 || z2 === 0){                     // neutron capture
+        const N = z1 === 0 ? B1 : A1;
+        if(Sn(N.Z, N.A+1) <= 0) continue;
+        const k = forge.sn > 0 ? 1 + (Math.random()*14|0) : 1;
+        let a = N.A;
+        for(let c=0;c<k;c++){ if(Sn(N.Z, a+1) <= 0) break; a++; }
+        if(a === N.A) continue;
+        prob = forge.sn > 0 ? 0.62 : 0.34; Q = Sn(N.Z, a);
+        mk = [[N.Z, a]]; lbl = 'ncap';
+      } else if(z1 === 1 && a1 === 1 && z2 === 1 && a2 === 1){   // p + p
+        if(R.diproton){ prob = barrier(1,1); mk = [[2,4]]; Q = 28.3; lbl = 'pp-runaway'; }
+        else if(R.pp){ prob = barrier(1,1)*0.02; mk = [[1,2]]; Q = R.Qpp; lbl = 'pp'; }
+      } else if(z1 === 2 && a1 === 4 && z2 === 2 && a2 === 4){   // triple alpha
+        let third = -1;
+        for(let k=0;k<p.length;k++){
+          if(k === i || k === j || dead.has(k)) continue;
+          if(p[k].Z === 2 && p[k].A === 4 && Math.hypot(p[k].x-A1.x, p[k].y-A1.y) < 3.2){ third = k; break; }
+        }
+        if(third < 0) continue;
+        prob = barrier(2,2)*0.55*R.carbonYield;
+        mk = [[6,12]]; Q = BEn(6,12) - 3*BEn(2,4); lbl = '3alpha'; dead.add(third);
+      } else {                                            // general fusion
+        const Zp = z1+z2, Ap = a1+a2;
+        Q = Qfus(z1,a1,z2,a2);
+        if(Q <= 0.3) continue;                            // endothermic: this is the iron wall
+        if(Zp*Zp/Ap > 48) continue;
+        prob = barrier(z1,z2)*0.9;
+        mk = [[Zp, Ap]]; lbl = 'fus';
+      }
+      if(mk && Math.random() < prob){
+        kill(i); kill(j);
+        const mx = (A1.x+B1.x)/2, my = (A1.y+B1.y)/2;
+        for(const [z,a] of mk) born.push({z, a, x:mx+rnd2(-.3,.3), y:my+rnd2(-.3,.3), v:2 + Math.min(7, Math.abs(Q)/4)});
+        released += Q; forge.events++;
+        if(lbl === '3alpha') flashAt(mx,my,false);
+        else if(Q > 8) flashAt(mx,my,false);
+        break;
+      }
+    }
+  }
+  for(let i=0;i<p.length;i++){
+    if(dead.has(i)) continue;
+    const q = p[i];
+    if(q.Z === 0 && q.A === 1){
+      if(R.neutronDecays && Math.random() < 0.05*(879.4/R.nLife)*dt){ q.Z = 1; q.beta = clock; }
+      continue;
+    }
+    if(q.A <= 1) continue;
+    const qb = Qbeta(q.Z, q.A);
+    if(qb > 0.05){
+      const rate = Math.min(9, 0.010*Math.pow(qb, 3));
+      if(Math.random() < rate*dt){ q.Z += 1; q.r = nucR(q.A); q.beta = clock; continue; }
+    }
+    const sa = Salpha(q.Z, q.A);
+    if(q.A > 8 && sa > 0 && sa < 20 && qb < 1.5){
+      const rate = 400*Math.exp(-sa/Math.max(kT, 1e-4));
+      if(Math.random() < Math.min(6, rate)*dt){
+        kill(i);
+        born.push({z:q.Z-2, a:q.A-4, x:q.x, y:q.y, v:3});
+        born.push({z:2, a:4, x:q.x+rnd2(-.4,.4), y:q.y+rnd2(-.4,.4), v:5});
+        released -= sa; forge.photo = (forge.photo||0)+1;
+        continue;
+      }
+    }
+    if(q.Z*q.Z/q.A > 47 && Math.random() < 1.2*dt){
+      kill(i);
+      const fa = Math.round(q.A*rnd2(0.40,0.52)), fz = Math.round(q.Z*fa/q.A);
+      born.push({z:fz, a:fa, x:q.x, y:q.y, v:8});
+      born.push({z:q.Z-fz, a:q.A-fa-2, x:q.x, y:q.y, v:8});
+      born.push({z:0, a:1, x:q.x, y:q.y, v:11}); born.push({z:0, a:1, x:q.x, y:q.y, v:11});
+      forge.fis = (forge.fis||0)+1; flashAt(q.x, q.y, false);
+    }
+  }
+  if(dead.size) p = p.filter((_,i) => !dead.has(i));
+  for(const b of born) if(b.z >= 0 && b.a >= 1) nuc(b.z, b.a, b.x, b.y, b.v);
+  forge.released += released;
+  forge.rate = forge.rate*0.9 + (released/Math.max(dt,1e-3))*0.1;
+
+  if(forge.sn > 0){
+    forge.sn -= dt;
+    forge.nacc = (forge.nacc||0) + 125*dt;
+    while(forge.nacc >= 1 && p.length < forge.cap + 110){ forge.nacc--; nuc(0, 1, rnd2(1, worldW()-1), rnd2(1, worldH()-1), 14); }
+    if(forge.sn <= 0){
+      note('Shock wave: the ejecta expand and cool, locking in the new elements.');
+      T = 0.5; syncT();
+      const cx = worldW()/2, cy = worldH()/2;
+      for(const q of p){ const dx = q.x-cx, dy = q.y-cy, d = Math.hypot(dx,dy)||1; q.vx += dx/d*9; q.vy += dy/d*9; }
+    }
+  } else if(forge.neutrons){
+    forge.nacc = (forge.nacc||0) + 9*dt;
+    while(forge.nacc >= 1 && p.length < forge.cap){ forge.nacc--; nuc(0, 1, rnd2(1, worldW()-1), rnd2(1, worldH()-1), 6); }
+  }
+  if(forge.feed > 0 && p.length < forge.cap){
+    forge.hacc = (forge.hacc||0) + forge.feed*9*dt;
+    while(forge.hacc >= 1 && p.length < forge.cap){ forge.hacc--; nuc(forge.fz, forge.fa, rnd2(1, worldW()-1), rnd2(1, worldH()-1), 5); }
+  }
+}
+
+function supernova(){
+  forge.sn = 9; T = Math.max(T, 1.72); syncT();
+  note('Core collapse! A burst of neutrons drives the r-process.');
+  flashAt(worldW()/2, worldH()/2, true);
+}
+function abundance(){
+  const c = {}; let tot = 0;
+  for(const q of p){ if(q.Z === 0) continue; c[q.Z] = (c[q.Z]||0)+1; tot++; }
+  return {c, tot};
+}
+function stageName(){
+  const {c, tot} = abundance();
+  if(!tot) return ['empty', '#8d99b3'];
+  let dz = 1, dn = 0;
+  for(const z in c) if(c[z] > dn){ dn = c[z]; dz = +z; }
+  const heavy = Object.keys(c).filter(z => +z >= 40).length;
+  const freeN = p.filter(q => q.Z === 0).length;
+  if(forge.sn > 0) return ['💥 SUPERNOVA — r-process under way', '#ff5c5c'];
+  if(heavy > 2 && freeN > 2) return ['neutron capture is building elements past iron', '#ffd23f'];
+  if(heavy > 2) return ['heavy elements made, neutron source spent', '#f2e6a0'];
+  if(dz >= 26) return ['iron core — fusion cannot release energy any more', '#ffa94d'];
+  if(dz >= 20) return ['advanced burning toward the iron peak', '#e07bff'];
+  if(dz >= 14) return ['silicon burning → iron', '#e07bff'];
+  if(dz >= 10) return ['neon and oxygen burning', '#b388ff'];
+  if(dz >= 6)  return ['carbon burning', '#4fb3ff'];
+  if(dz === 2) return ['helium burning (triple alpha)', '#3ddc84'];
+  return ['hydrogen burning', '#ff6b6b'];
+}
+function circle(ctx, x, y, r, col, line){
+  ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fillStyle = col; ctx.fill();
+  if(line){ ctx.strokeStyle = line; ctx.lineWidth = 0.05; ctx.stroke(); }
+}
+function drawForge(ctx, now){
+  for(const q of p){
+    const col = nucColor(q.Z), rr = q.r;
+    if(q.Z === 0){
+      ctx.globalAlpha = 0.85; circle(ctx, q.x, q.y, rr*0.8, col, 'rgba(255,255,255,.3)'); ctx.globalAlpha = 1;
+    } else {
+      circle(ctx, q.x, q.y, rr, col, 'rgba(255,255,255,.45)');
+      const sym = ESYM[q.Z] || ('Z'+q.Z);
+      ctx.font = `800 ${Math.min(rr*1.15, 0.78)}px system-ui`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.lineWidth = 0.1; ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.strokeText(sym, q.x, q.y);
+      ctx.fillStyle = '#0b0f18'; ctx.fillText(sym, q.x, q.y);
+      if(rr > 0.95){ ctx.font = `700 ${rr*0.46}px ui-monospace,Menlo,monospace`; ctx.fillStyle = 'rgba(11,15,24,.75)';
+        ctx.fillText(String(q.A), q.x, q.y + rr*0.62); }
+    }
+    if(q.beta && now - q.beta < 0.4){
+      ctx.strokeStyle = `rgba(120,230,255,${1 - (now-q.beta)/0.4})`; ctx.lineWidth = 0.07;
+      ctx.beginPath(); ctx.arc(q.x, q.y, rr + 0.35, 0, 7); ctx.stroke();
+    }
+  }
+  if(flash && now - flash.t >= 0 && now - flash.t < (flash.big ? 1.4 : 0.45)){
+    const dur = flash.big ? 1.4 : 0.45, u = clamp((now - flash.t)/dur, 0, 1);
+    ctx.strokeStyle = flash.big ? `rgba(255,190,120,${1-u})` : `rgba(255,240,180,${1-u})`;
+    ctx.lineWidth = (flash.big ? 0.8 : 0.2)*(1-u);
+    ctx.beginPath(); ctx.arc(flash.x, flash.y, 0.4 + u*(flash.big ? 40 : 3.2), 0, 7); ctx.stroke();
+  }
+}
+let abGeom = null;
+function drawAbundance(ctx){
+  const narrow = W < 640;
+  const h = panelH(), y0 = H - h, pad = 14, side = narrow ? 0 : 186, w = W - pad*2 - side;
+  ctx.fillStyle = 'rgba(11,15,24,.86)'; ctx.fillRect(0, y0, W, h);
+  ctx.strokeStyle = 'rgba(38,49,74,.9)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(0, y0); ctx.lineTo(W, y0); ctx.stroke();
+  const {c, tot} = abundance();
+  const Zmax = 100, bw = w/Zmax, base = y0 + h - (narrow ? 30 : 40), top = y0 + (narrow ? 48 : 46);
+  abGeom = {y0, h, pad, w, bw, Zmax, base, top};
+  let mx = 1; for(const z in c) mx = Math.max(mx, c[z]);
+  const [st, sc] = stageName();
+  if(narrow){
+    txt(ctx, 'Abundance by element (log) — tap a bar', pad, y0 + 15, '700 11.5px system-ui', '#e6ebf5');
+    txt(ctx, st, pad, y0 + 32, '700 11px system-ui', sc);
+  } else {
+    txt(ctx, 'Abundance by element (log scale) — hover a bar', pad, y0 + 15, '700 11.5px system-ui', '#e6ebf5');
+    txt(ctx, st, pad + w, y0 + 15, '700 11.5px system-ui', sc, 'right');
+  }
+  for(let Z=1; Z<=Zmax; Z++){
+    const n = c[Z] || 0, x = pad + (Z-1)*bw, hot = hoverZ === Z;
+    if(n){
+      const bh = Math.max(7, (base - top)*Math.log(1+n)/Math.log(1+mx));
+      ctx.fillStyle = nucColor(Z); ctx.fillRect(x, base - bh, Math.max(1.6, bw-1), bh);
+      if(hot){ ctx.strokeStyle = '#fff'; ctx.lineWidth = 1.2; ctx.strokeRect(x-0.5, base-bh-0.5, Math.max(1.6,bw-1)+1, bh+1); }
+      if(!narrow || hot || n > 2){
+        ctx.save(); ctx.translate(x + bw/2 + 0.5, base - bh - 3); ctx.rotate(-Math.PI/2);
+        ctx.font = '700 9.5px system-ui'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = hot ? '#fff' : nucColor(Z); ctx.fillText(ESYM[Z] || Z, 0, 0);
+        ctx.restore();
+      }
+    } else {
+      ctx.fillStyle = hot ? 'rgba(255,255,255,.22)' : 'rgba(255,255,255,.055)';
+      ctx.fillRect(x, base-3, Math.max(1.6, bw-1), 3);
+      if(hot){ ctx.save(); ctx.translate(x + bw/2 + 0.5, base - 7); ctx.rotate(-Math.PI/2);
+        ctx.font = '700 9.5px system-ui'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#6b7b9c'; ctx.fillText(ESYM[Z] || Z, 0, 0); ctx.restore(); }
+    }
+    if([1,2,6,8,14,20,26,28,50,82,92].includes(Z) && (!narrow || [1,26,50,92].includes(Z))){
+      ctx.strokeStyle = 'rgba(255,255,255,.09)'; ctx.beginPath(); ctx.moveTo(x + bw/2, top); ctx.lineTo(x + bw/2, base); ctx.stroke();
+      txt(ctx, String(Z), x + bw/2, base + 11, '9px ui-monospace,Menlo', c[Z] ? '#aab6cf' : '#4a5570', 'center');
+    }
+  }
+  txt(ctx, 'atomic number Z →', pad + w, base + 24, '9.5px system-ui', '#5d6b8a', 'right');
+  if(!narrow){
+    forge.log.forEach((L,i) => {
+      const a = clamp(1 - (clock - L.t)/14, 0, 1);
+      ctx.globalAlpha = a; txt(ctx, L.s, W - 180, y0 + 40 + i*16, '11px system-ui', i ? '#8d99b3' : '#ffd23f'); ctx.globalAlpha = 1;
+    });
+    txt(ctx, `${tot} nuclei`, W - 180, y0 + 15, '700 11px ui-monospace,Menlo', '#8d99b3');
+  }
+  if(hoverZ) drawElementCard(ctx, hoverZ, c[hoverZ] || 0);
+}
+function drawElementCard(ctx, Z, n){
+  const E = EINFO[Z]; if(!E) return;
+  const [name, ocode, nt] = E, [oname, ocol] = ORIGIN[ocode] || ['unknown','#8d99b3'];
+  const cw = Math.min(330, W - 20), x = clamp(abGeom.pad + (Z-1)*abGeom.bw - cw/2, 10, W - cw - 10);
+  ctx.font = '11.5px system-ui';
+  const words = nt ? nt.split(' ') : [];
+  let lines = [], line = '';
+  for(const wd of words){ const t = line ? line+' '+wd : wd;
+    if(ctx.measureText(t).width > cw - 24 && line){ lines.push(line); line = wd; } else line = t; }
+  if(line) lines.push(line);
+  const ch = 72 + lines.length*15, y = abGeom.y0 - ch - 8;
+  rrect(ctx, x, y, cw, ch, 10); ctx.fillStyle = 'rgba(13,18,30,.97)'; ctx.fill();
+  ctx.strokeStyle = nucColor(Z); ctx.lineWidth = 1.5; ctx.stroke();
+  rrect(ctx, x+12, y+11, 34, 34, 7); ctx.fillStyle = nucColor(Z); ctx.fill();
+  txt(ctx, ESYM[Z] || Z, x+29, y+28, '800 15px system-ui', '#0b0f18', 'center');
+  txt(ctx, name, x+54, y+21, '800 14px system-ui', '#e6ebf5');
+  txt(ctx, `element ${Z}`, x+54, y+37, '11px ui-monospace,Menlo', '#8d99b3');
+  const cnt = n ? `${n} in this star` : 'not present yet';
+  txt(ctx, cnt, x+cw-12, y+21, '700 11.5px system-ui', n ? '#3ddc84' : '#6b7b9c', 'right');
+  txt(ctx, 'made by: ' + oname, x+12, y+56, '700 11px system-ui', ocol);
+  ctx.font = '11.5px system-ui'; ctx.fillStyle = '#aab6cf'; ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+  lines.forEach((L,i) => ctx.fillText(L, x+12, y+74+i*15));
+}
+function drawHUD(ctx){
+  const narrow = W < 640;
+  const lines = [];
+  const {c} = abundance();
+  const hyd = c[1]||0, hv = Object.keys(c).filter(z => +z >= 30).reduce((a,z) => a + c[z], 0);
+  const heaviest = Object.keys(c).length ? Math.max(...Object.keys(c).map(Number)) : 0;
+  const free = p.filter(q => q.Z === 0).length;
+  lines.push(['Temperature', `${T9() < 0.1 ? T9().toFixed(3) : T9().toFixed(2)} ×10⁹ K`, T9() > 1 ? '#ffa94d' : '#8d99b3']);
+  lines.push(['H / free n', `${hyd} / ${free}`, hyd ? '#3ddc84' : '#ff5c5c']);
+  let hn = null; for(const q of p) if(q.Z > 0 && (!hn || q.A > hn.A || (q.A === hn.A && q.Z > hn.Z))) hn = q;
+  lines.push(['Heaviest', hn ? `${ESYM[hn.Z]||'Z'+hn.Z}-${hn.A}` : '—', heaviest >= 47 ? '#ff7ba8' : heaviest >= 26 ? '#ffa94d' : '#8d99b3']);
+  if(!narrow) lines.push(['Beyond iron', `${hv} nuclei`, hv ? '#ffd23f' : '#8d99b3']);
+  lines.push(['Fusion events', `${forge.events}`, '#4fb3ff']);
+  lines.push(['Energy released', `${forge.released > 9999 ? (forge.released/1000).toFixed(1)+' GeV' : forge.released.toFixed(0)+' MeV'}`, '#ffd23f']);
+  if(!narrow) lines.push(['Output right now', `${forge.rate.toFixed(0)} MeV/s`, forge.rate > 20 ? '#3ddc84' : forge.rate > 1 ? '#ffd23f' : '#ff5c5c']);
+  if(forge.photo && !narrow) lines.push(['Photodisintegrated', `${forge.photo}`, '#ff5c5c']);
+  if(forge.fis && !narrow) lines.push(['Fissioned', `${forge.fis}`, '#ff7ba8']);
+  const lh = narrow ? 16 : 19, fs = narrow ? '10px' : '11.5px';
+  const bw = Math.min(narrow ? 190 : 318, W - 20), bh = (narrow?16:22) + lines.length*lh;
+  rrect(ctx, W - bw - (narrow?8:12), narrow?8:12, bw, bh, 8); ctx.fillStyle = 'rgba(11,15,24,.82)'; ctx.fill();
+  ctx.strokeStyle = 'rgba(38,49,74,.9)'; ctx.lineWidth = 1; ctx.stroke();
+  lines.forEach(([a,b,col],i) => {
+    const y = (narrow?18:30) + i*lh;
+    txt(ctx, a, W - bw + (narrow?4:2), y, `${fs} system-ui`, '#8d99b3');
+    txt(ctx, String(b), W - (narrow?12:22), y, `700 ${fs} ui-monospace,Menlo,monospace`, col, 'right');
+  });
+  const y = H - 200;
+  if(R.diproton) txt(ctx, '💥 bound diproton: hydrogen burns with nothing to slow it down', 14, y, '700 12px system-ui', '#ff5c5c');
+  else if(forge.rate < 1 && forge.events > 25) txt(ctx, W < 640 ? '⛔ the iron wall: fusing past iron costs energy' : '⛔ the iron wall: fusing anything heavier costs energy instead of releasing it', 14, y, '700 12px system-ui', '#ffa94d');
+}
+function draw(now){
+  const f = fit(cv); if(!f) return; const {ctx} = f; W = f.W; H = f.H;
+  ctx.clearRect(0,0,W,H);
+  ctx.save(); ctx.scale(SC(), SC()); drawForge(ctx, now); ctx.restore();
+  drawAbundance(ctx);
+  drawHUD(ctx);
+}
+
+/* ---- setups ---- */
+function clear(){ p = [];
+  forge.released = 0; forge.rate = 0; forge.events = 0; forge.photo = 0; forge.fis = 0; forge.sn = 0; forge.log = []; forge.nacc = 0; forge.hacc = 0; flash = null; }
+const SETUPS = [
+  {n:'Sun core (hydrogen)', f:() => { clear(); for(let i=0;i<120;i++) nuc(1,1, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 5);
+    T = 0.42; forge.feed = 0.35; forge.fz = 1; forge.fa = 1; forge.neutrons = false; note('A young star: pure hydrogen.'); }},
+  {n:'Red giant (helium)', f:() => { clear(); for(let i=0;i<95;i++) nuc(2,4, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 4);
+    T = 0.95; forge.feed = 0.30; forge.fz = 2; forge.fa = 4; forge.neutrons = false; note('Helium burning: three alphas make carbon.'); }},
+  {n:'Massive core (C + O)', f:() => { clear(); for(let i=0;i<95;i++) nuc(Math.random()<0.5?6:8, Math.random()<0.5?12:16, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 4);
+    T = 1.78; forge.feed = 0.28; forge.fz = 2; forge.fa = 4; forge.neutrons = false; note('Alpha capture climbing toward iron.'); }},
+  {n:'AGB star (s-process)', f:() => { clear(); for(let i=0;i<34;i++) nuc(26,56, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 3);
+    for(let i=0;i<24;i++) nuc(2,4, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 4);
+    T = 0.70; forge.feed = 0; forge.fz = 2; forge.fa = 4; forge.neutrons = true; note('Slow neutron capture on iron seeds: the s-process.'); }},
+  {n:'Pre-supernova', f:() => { clear(); for(let i=0;i<6;i++) nuc(26,56, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 3);
+    for(let i=0;i<4;i++) nuc(14,28, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 4);
+    T = 1.6; forge.feed = 0; forge.fz = 2; forge.fa = 4; forge.neutrons = false; note('An iron core. Press Supernova to collapse it.'); }}
+];
+
+/* ---- UI ---- */
+let setupOn = 0;
+function syncT(){ $('fTemp').value = T; const t = T9(); $('fTempV').textContent = (t < 0.1 ? t.toFixed(3) : t.toFixed(2)) + ' ×10⁹ K'; }
+function syncUI(){
+  $('fFeed').value = forge.feed;
+  $('fFuelName').textContent = forge.fz === 1 ? 'Hydrogen' : 'Helium';
+  $('fNeut').textContent = 'Neutron source: ' + (forge.neutrons ? 'on' : 'off');
+  $('fNeut').classList.toggle('on', forge.neutrons);
+  $('fNeut').setAttribute('aria-pressed', String(forge.neutrons));
+  $('fSetups').querySelectorAll('button').forEach((b,i) => { b.classList.toggle('on', i === setupOn); b.setAttribute('aria-pressed', String(i === setupOn)); });
+  syncT();
+}
+$('fSetups').innerHTML = SETUPS.map((s,i) => `<button type="button" data-s="${i}">${s.n}</button>`).join('');
+$('fSetups').querySelectorAll('[data-s]').forEach(b => b.onclick = () => { setupOn = +b.dataset.s; SETUPS[setupOn].f(); syncUI(); });
+$('fTemp').oninput = e => { T = +e.target.value; syncT(); };
+$('fFeed').oninput = e => forge.feed = +e.target.value;
+$('fNeut').onclick = () => { forge.neutrons = !forge.neutrons; note(forge.neutrons ? 'Neutron source on: slow capture begins.' : 'Neutron source off.'); syncUI(); };
+$('fAddN').onclick = () => { for(let i=0;i<14;i++) nuc(0,1, rnd2(1,worldW()-1), rnd2(1,worldH()-1), 8); };
+$('fSN').onclick = supernova;
+$('fRun').onclick = () => { run = !run; $('fRun').textContent = run ? 'Pause' : 'Run'; };
+$('fClear').onclick = () => clear();
+
+function pick(e){
+  const r = cv.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+  if(!abGeom || my < abGeom.y0 + 24 || my > abGeom.base + 16 || mx < abGeom.pad || mx > abGeom.pad + abGeom.w){ hoverZ = 0; cv.style.cursor = 'default'; return; }
+  const Z = Math.floor((mx - abGeom.pad)/abGeom.bw) + 1;
+  hoverZ = (Z >= 1 && Z <= abGeom.Zmax) ? Z : 0;
+  cv.style.cursor = hoverZ ? 'pointer' : 'default';
+}
+cv.addEventListener('pointermove', pick);
+cv.addEventListener('pointerdown', pick);
+cv.addEventListener('pointerleave', e => { if(e.pointerType === 'mouse'){ hoverZ = 0; cv.style.cursor = 'default'; } });
+
+/* ---- loop: runs only while the forge is on screen ---- */
+function start(){
+  if(started) return; started = true;
+  const f = fit(cv); if(f){ W = f.W; H = f.H; }
+  SETUPS[0].f(); syncUI();
+}
+let t0 = performance.now(), tPrev = t0;
+function loop(nowMs){
+  const now = (nowMs - t0)/1000, dt = Math.min(0.05, (nowMs - tPrev)/1000); tPrev = nowMs;
+  if(visible){
+    clock = now;
+    const f0 = fit(cv);
+    if(f0 && (f0.W !== W || f0.H !== H)){
+      const ow = W/SC(), oh = (H-panelH())/SC();
+      W = f0.W; H = f0.H;
+      if(p.length && ow > 0){
+        const dx = (worldW() - ow)/2, dy = (worldH() - oh)/2;
+        for(const q of p){ q.x = clamp(q.x + dx, 0.5, worldW()-0.5); q.y = clamp(q.y + dy, 0.5, worldH()-0.5); }
+      }
+    }
+    if(run && p.length){
+      acc += dt;
+      const h = 0.003; let n = 0;
+      while(acc > h && n++ < 14){ acc -= h; stepForge(h*3); }
+      acc = Math.min(acc, h);
+      reactForge(dt);
+    }
+    draw(now);
+  }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => {
+  for(const e of es){
+    visible = e.isIntersecting;
+    if(visible){ start(); tPrev = performance.now(); }
+  }
+}, {threshold:0.02}).observe(cv);
+syncT();
+requestAnimationFrame(loop);
+window.forgeDbg = () => ({n:p.length, forge, T9:T9(), stage:stageName()[0], ab:abundance()});
+window.forgeSN = supernova;
+})();
+</script>
+
+<script>
+/* dim the clock/rail while any embedded chapter (Star Forge, labs) is on screen */
+(() => {
+  const on = new Set();
+  const obs = new IntersectionObserver(es => {
+    for(const e of es){ e.isIntersecting ? on.add(e.target) : on.delete(e.target); }
+    document.body.classList.toggle('in-chapter', on.size > 0);
+  }, {threshold:0.12});
+  document.querySelectorAll('section.chapter').forEach(s => obs.observe(s));
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 3 (part 1) — ambient animation: disk, planets, young Earth
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('solarCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+
+// a fixed ring of dust motes at random radii/angles, seeded for stability
+let seed = 11; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const N = 260;
+const dust = Array.from({length:N}, (_,i) => ({
+  a0: rnd()*Math.PI*2, r0: 0.15 + rnd()*0.95, spin: 0.25 + rnd()*0.5,
+  wob: rnd()*Math.PI*2, size: 0.6 + rnd()*1.6, hot: rnd() < 0.22
+}));
+// four planets that condense out of the disk at fixed radii
+const PLANETS = [
+  {r:0.30, size:5.5, col:'#c9a27a', name:'rock'},
+  {r:0.48, size:7.5, col:'#e0c9a0', name:'rock'},
+  {r:0.68, size:7.0, col:'#7fb3ff', name:'ocean world'},
+  {r:0.90, size:11, col:'#e8b27a', name:'gas giant'}
+];
+const CYCLE = 26; // seconds for one full loop: cloud -> disk -> planets -> earth close-up -> reset
+
+function draw(t){
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#090d15'; ctx.fillRect(0,0,W,H);
+  const cx = W*0.5, cy = H*0.52, S = Math.min(W,H)*0.46;
+  const u = (t % CYCLE) / CYCLE;
+
+  // phases: 0-0.22 diffuse cloud collapsing, 0.22-0.55 spinning disk + planets forming,
+  // 0.55-0.85 four planets orbiting, 0.85-1 zoom into young Earth
+  const collapse = Math.min(1, u/0.22);
+  const diskIn = Math.max(0, Math.min(1, (u-0.15)/0.15));
+  const formed = Math.max(0, Math.min(1, (u-0.30)/0.20));
+  const orbit = Math.max(0, Math.min(1, (u-0.55)/0.05));
+  const zoom = Math.max(0, Math.min(1, (u-0.86)/0.14));
+
+  ctx.save();
+  if(zoom > 0){
+    // push in on the third planet (the ocean world)
+    const p = PLANETS[2], px = cx + Math.cos(t*0.15)*p.r*S, py = cy + Math.sin(t*0.15)*p.r*S*0.42;
+    ctx.translate(W/2, H/2); ctx.scale(1+zoom*30, 1+zoom*30);
+    ctx.translate(-px, -py);
+  }
+
+  // background stars
+  ctx.globalAlpha = 1 - zoom*0.9;
+  ctx.fillStyle = 'rgba(230,235,245,.5)';
+  for(let i=0;i<40;i++){ const gx = (i*97 % 100)/100*W, gy = (i*53 % 100)/100*H; ctx.fillRect(gx, gy, 1, 1); }
+
+  // dust / disk
+  const glowA = (1-collapse*0.3) * (1 - formed*0.5) * (1-zoom);
+  if(glowA > 0.01){
+    ctx.globalAlpha = glowA*0.5;
+    const g = ctx.createRadialGradient(cx,cy,0,cx,cy,S*1.1);
+    g.addColorStop(0,'rgba(255,210,140,.5)'); g.addColorStop(1,'rgba(255,210,140,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx,cy,S*1.1,0,7); ctx.fill();
+  }
+  for(const d of dust){
+    const flat = 0.15 + diskIn*0.85;               // sphere -> flat disk
+    const r = d.r0*(0.35 + collapse*0.65) * S;
+    const spinRate = 0.5 + diskIn*(0.9/(d.r0+0.15));
+    const a = d.a0 + t*spinRate*0.35;
+    const x = cx + Math.cos(a)*r;
+    const y = cy + Math.sin(a)*r*(1-flat*0.82) + Math.sin(t*0.6+d.wob)*(1-collapse)*S*0.08;
+    const clumped = formed > 0.05 && d.r0 < 0.2; // dust near centre gets swept into the star
+    ctx.globalAlpha = (1 - zoom) * (clumped ? Math.max(0, 1-formed*1.6) : 1) * 0.85;
+    ctx.fillStyle = d.hot ? '#ffb26b' : '#8fa3cc';
+    ctx.beginPath(); ctx.arc(x, y, d.size*(0.7+collapse*0.5), 0, 7); ctx.fill();
+  }
+
+  // the young star at centre
+  ctx.globalAlpha = 1 - zoom;
+  const starR = 4 + collapse*10;
+  const sg = ctx.createRadialGradient(cx,cy,0,cx,cy,starR*3.4);
+  sg.addColorStop(0,'#fff7d6'); sg.addColorStop(0.4,'#ffd23f'); sg.addColorStop(1,'rgba(255,140,80,0)');
+  ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(cx,cy,starR*3.4,0,7); ctx.fill();
+  ctx.fillStyle = '#fff3c4'; ctx.beginPath(); ctx.arc(cx,cy,starR,0,7); ctx.fill();
+
+  // planets condensing and orbiting
+  if(formed > 0.02){
+    for(let i=0;i<PLANETS.length;i++){
+      const p = PLANETS[i], grow = Math.min(1, Math.max(0, (formed*4 - i*0.7)));
+      if(grow <= 0) continue;
+      const a = i*1.3 + t*(0.5/(p.r+0.3));
+      const x = cx + Math.cos(a)*p.r*S, y = cy + Math.sin(a)*p.r*S*0.42;
+      ctx.globalAlpha = (1-zoom) * grow;
+      ctx.strokeStyle = 'rgba(255,255,255,.06)'; ctx.beginPath(); ctx.ellipse(cx,cy,p.r*S,p.r*S*0.42,0,0,7); ctx.stroke();
+      ctx.fillStyle = p.col; ctx.beginPath(); ctx.arc(x,y,p.size*grow*(1+zoom*0.4),0,7); ctx.fill();
+      if(i === 2 && orbit > 0){                     // faint blue haze = the ocean forming
+        ctx.globalAlpha = (1-zoom)*grow*0.4; ctx.beginPath(); ctx.arc(x,y,p.size*grow*2,0,7);
+        ctx.fillStyle = 'rgba(127,179,255,.4)'; ctx.fill();
+      }
+    }
+  }
+  ctx.restore();
+
+  // zoomed-in young Earth: molten surface cooling, rain condensing
+  if(zoom > 0.15){
+    const a = Math.min(1, (zoom-0.15)/0.85);
+    ctx.globalAlpha = a;
+    ctx.fillStyle = '#090d15'; ctx.fillRect(0,0,W,H);
+    const R = Math.min(W,H)*0.34;
+    const molten = Math.max(0, 1 - a*1.3);
+    const grad = ctx.createRadialGradient(W/2,H/2,R*0.1,W/2,H/2,R);
+    grad.addColorStop(0, molten>0.4 ? '#ffb35c' : '#2b6fd6');
+    grad.addColorStop(0.6, molten>0.4 ? '#a4441f' : '#1a3f66');
+    grad.addColorStop(1, '#0c1830');
+    ctx.beginPath(); ctx.arc(W/2,H/2,R,0,7); ctx.fillStyle = grad; ctx.fill();
+    // steam/cloud band
+    ctx.globalAlpha = a*0.5;
+    ctx.strokeStyle = 'rgba(230,235,245,.5)'; ctx.lineWidth = R*0.06;
+    ctx.beginPath(); ctx.arc(W/2,H/2,R*0.92,0.3,2.1); ctx.stroke();
+    // rain: short falling ticks appearing as it cools
+    if(a > 0.55){
+      const ra = (a-0.55)/0.45;
+      ctx.globalAlpha = ra*0.6; ctx.strokeStyle = '#bcd6ff'; ctx.lineWidth = 1.2;
+      for(let i=0;i<26;i++){
+        const ang = (i/26)*Math.PI*2 + t*0.3, rr = R*(0.55+0.35*((i*7)%5)/5);
+        const x = W/2+Math.cos(ang)*rr, y = H/2+Math.sin(ang)*rr;
+        ctx.beginPath(); ctx.moveTo(x,y); ctx.lineTo(x+1.5,y+5); ctx.stroke();
+      }
+      ctx.globalAlpha = ra;
+      ctx.font = '600 13px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#bcd6ff';
+      ctx.fillText('the first rain', W/2, H*0.86);
+    }
+  }
+  ctx.globalAlpha = 1;
+
+  // caption of the current phase
+  const label = zoom > 0.15 ? 'A young Earth cools' : formed > 0.55 ? 'Four worlds settle into orbit'
+    : formed > 0.05 ? 'Dust clumps into planets' : diskIn > 0.3 ? 'The cloud flattens into a spinning disk'
+    : 'A supernova remnant begins to collapse';
+  ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.55)';
+  ctx.fillText(label, 14, H-14);
+}
+function loop(ms){
+  if(visible){ if(t0===null) t0 = ms; draw((ms-t0)/1000); }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   CHAPTER 4 (part 1) — ambient animation: lightning over the soup
+   ===================================================================== */
+(() => {
+"use strict";
+const cv = document.getElementById('soupCv'); if(!cv) return;
+const ctx = cv.getContext('2d');
+let W=0,H=0,DPR=1,visible=false,t0=null;
+function resize(){
+  DPR = Math.min(2, devicePixelRatio||1); const r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = W*DPR; cv.height = H*DPR; ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+addEventListener('resize', resize); resize();
+
+let seed = 5; const rnd = () => (seed = (seed*16807)%2147483647)/2147483647;
+const MOLS = Array.from({length:70}, () => ({
+  x: rnd(), y: 0.55 + rnd()*0.42, r: 1.2+rnd()*1.8, ph: rnd()*6.28, sp: 0.4+rnd()*0.8,
+  kind: rnd() < 0.5 ? 'H' : rnd() < 0.75 ? 'N' : 'C'
+}));
+const MCOL = {H:'#ff6b6b', N:'#4f8fff', C:'#8fa3cc'};
+let bolts = [], nextBolt = 1.5, flashA = 0, aminoUntil = -10;
+
+function genBolt(originX){
+  const pts = [[originX, 0]]; let x = originX, y = 0;
+  const steps = 7 + (Math.random()*4|0);
+  for(let i=1;i<=steps;i++){
+    y = (i/steps) * H*0.58;
+    x += (Math.random()-0.5)*W*0.09;
+    pts.push([x,y]);
+  }
+  return {pts, life: 0.35, born: 0};
+}
+
+function draw(t, dt){
+  ctx.clearRect(0,0,W,H);
+  // sky
+  const sky = ctx.createLinearGradient(0,0,0,H*0.6);
+  sky.addColorStop(0, `rgba(10,12,22,1)`); sky.addColorStop(1, `rgba(13,16,28,1)`);
+  ctx.fillStyle = sky; ctx.fillRect(0,0,W,H*0.6);
+  // storm clouds
+  ctx.fillStyle = 'rgba(30,34,50,.8)';
+  for(let i=0;i<5;i++){
+    const cx2 = (i/5)*W + Math.sin(t*0.05+i)*20, cy2 = H*0.10 + (i%2)*10;
+    ctx.beginPath(); ctx.ellipse(cx2, cy2, W*0.14, H*0.06, 0, 0, 7); ctx.fill();
+  }
+  // lightning flash lighting the whole scene
+  if(flashA > 0.01){
+    ctx.fillStyle = `rgba(220,230,255,${flashA*0.16})`; ctx.fillRect(0,0,W,H*0.6);
+  }
+  // bolts
+  for(const b of bolts){
+    const age = t - b.born, u = Math.max(0, 1 - age/b.life);
+    if(u <= 0) continue;
+    ctx.strokeStyle = `rgba(230,235,255,${u})`; ctx.lineWidth = 2; ctx.lineJoin='round';
+    ctx.beginPath(); b.pts.forEach(([x,y],i) => i?ctx.lineTo(x,y):ctx.moveTo(x,y)); ctx.stroke();
+    ctx.strokeStyle = `rgba(150,180,255,${u*0.35})`; ctx.lineWidth = 6; ctx.stroke();
+  }
+  bolts = bolts.filter(b => t - b.born < b.life);
+
+  // pool surface
+  const poolY = H*0.58;
+  const pool = ctx.createLinearGradient(0,poolY,0,H);
+  pool.addColorStop(0, '#0e2a3a'); pool.addColorStop(1, '#081824');
+  ctx.fillStyle = pool; ctx.fillRect(0,poolY,W,H-poolY);
+  ctx.strokeStyle = 'rgba(150,200,220,.25)'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0,poolY);
+  for(let x=0;x<=W;x+=8) ctx.lineTo(x, poolY + Math.sin(x*0.04+t*0.8)*2.5);
+  ctx.stroke();
+
+  // molecules drifting in the pool
+  for(const m of MOLS){
+    const x = m.x*W + Math.sin(t*m.sp+m.ph)*6, y = m.y*H + Math.cos(t*m.sp*0.7+m.ph)*4;
+    ctx.globalAlpha = 0.85;
+    ctx.fillStyle = MCOL[m.kind];
+    ctx.beginPath(); ctx.arc(x,y,m.r,0,7); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  if(t < aminoUntil){
+    const a = Math.min(1, (aminoUntil-t)/1.2);
+    ctx.globalAlpha = a;
+    ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'center'; ctx.fillStyle = '#ffd23f';
+    ctx.fillText('an amino acid forms', W/2, poolY - 14);
+    ctx.globalAlpha = 1;
+  }
+
+  ctx.font = '600 12.5px system-ui'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(230,235,245,.55)';
+  ctx.fillText('A warm, chemical-rich pool under a lightning storm', 14, H-14);
+}
+function loop(ms){
+  if(visible){
+    if(t0===null) t0 = ms;
+    const t = (ms-t0)/1000, dt = Math.min(0.05, 1/60);
+    nextBolt -= dt;
+    if(nextBolt <= 0){
+      bolts.push(genBolt(W*(0.2+Math.random()*0.6)));
+      flashA = 1; aminoUntil = t + 1.6;
+      nextBolt = 2.2 + Math.random()*3.2;
+    }
+    flashA *= 0.88;
+    draw(t, dt);
+  }
+  requestAnimationFrame(loop);
+}
+new IntersectionObserver(es => { for(const e of es) visible = e.isIntersecting; }, {threshold:0.05}).observe(cv);
+requestAnimationFrame(loop);
+})();
+</script>
+
+<script>
+/* =====================================================================
+   LIVE LAB — NUCLEAR FORCE
+   Ported unchanged in physics from "From Particles to Life"
+   (Live lab → Nuclear force). Strong attraction is short-range
+   (a Morse potential); electric repulsion between protons is not.
+   That single difference is why nuclei have a maximum size, and
+   why heavy ones can split.
+   ===================================================================== */
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const fmt = (v,d=2) => Number(v).toFixed(d);
+
+/* same semi-empirical mass formula as the Star Forge, our universe's coefficients */
+const aV=15.75, aS0=17.8, aC0=0.711, aA=23.7, apair=11.18;
+function B(A, Z, al){
+  const N = A - Z;
+  if(A < 2 || Z < 1 || N < 0) return -1e9;
+  const even = x => x % 2 === 0;
+  const d = (even(Z) && even(N)) ? apair/Math.sqrt(A) : ((!even(Z) && !even(N)) ? -apair/Math.sqrt(A) : 0);
+  return aV*A - aS0*Math.pow(A,2/3) - aC0*al*Z*(Z-1)/Math.cbrt(A) - aA*(A-2*Z)*(A-2*Z)/A + d;
+}
+
+function fit(cv){
+  const ctx = cv.getContext('2d'), dpr = window.devicePixelRatio || 1, r = cv.getBoundingClientRect();
+  if(!r.width) return null;
+  cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx, W:r.width, H:r.height};
+}
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+function circle(ctx,x,y,r,col,line){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle = col; ctx.fill(); if(line){ ctx.strokeStyle=line; ctx.lineWidth=0.05; ctx.stroke(); } }
+function nlabel(ctx,s,x,y,size,col){ ctx.font = `700 ${size}px system-ui`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillStyle=col; ctx.fillText(s,x,y); }
+
+const cv = $('nucCv');
+let W=0, H=0, run=true, acc=0, visible=false, started=false;
+let p = [], T = 0.25, EM = 1, stats = {};
+const SC = () => 13;
+const rnd2 = (a,b) => a + Math.random()*(b-a);
+function add(o){ p.push(Object.assign({x:0,y:0,vx:0,vy:0,m:1}, o)); return p[p.length-1]; }
+function nucleon(kind,x,y){ return add({kind,x,y,vx:rnd2(-1,1),vy:rnd2(-1,1),m:1,r:0.58}); }
+const panelH = () => W < 640 ? 128 : 150;
+const worldW = () => W/SC(), worldH = () => (H - panelH())/SC();
+function wall(q, bounce){
+  const R = q.r || 0.5, ww = worldW(), wh = worldH();
+  if(q.x < R){ q.x = R; q.vx = Math.abs(q.vx)*bounce; }
+  if(q.x > ww-R){ q.x = ww-R; q.vx = -Math.abs(q.vx)*bounce; }
+  if(q.y < R){ q.y = R; q.vy = Math.abs(q.vy)*bounce; }
+  if(q.y > wh-R){ q.y = wh-R; q.vy = -Math.abs(q.vy)*bounce; }
+}
+function thermostat(target, rate){
+  let ke = 0; for(const q of p) ke += 0.5*q.m*(q.vx*q.vx + q.vy*q.vy);
+  const cur = p.length ? ke/p.length : 0;
+  if(cur <= 0){ if(target > 0) for(const q of p){ q.vx += rnd2(-1,1)*0.2; q.vy += rnd2(-1,1)*0.2; } return cur; }
+  const f = Math.sqrt(1 + rate*(target/cur - 1));
+  if(isFinite(f)) for(const q of p){ q.vx *= f; q.vy *= f; }
+  return cur;
+}
+
+const NUC = {r0:1.16, a:1.45, cut:2.2, kc:2.4};
+function step(dt){
+  const D = 4.2, kc = NUC.kc*EM;
+  for(const q of p){ q.fx = 0; q.fy = 0; }
+  for(let i=0;i<p.length;i++) for(let j=i+1;j<p.length;j++){
+    const A = p[i], Bq = p[j];
+    let dx = Bq.x-A.x, dy = Bq.y-A.y, r2 = dx*dx+dy*dy;
+    if(r2 < 1e-6) r2 = 1e-6;
+    const r = Math.sqrt(r2); let f = 0;
+    if(r < NUC.cut){
+      const e = Math.exp(-NUC.a*(r - NUC.r0));
+      f = -2*D*NUC.a*(e*e - e);
+    }
+    if(A.kind==='p' && Bq.kind==='p'){ f -= kc/Math.max(r2,0.36); }
+    const ux = dx/r, uy = dy/r;
+    A.fx += f*ux; A.fy += f*uy; Bq.fx -= f*ux; Bq.fy -= f*uy;
+  }
+  for(const q of p){
+    q.vx += q.fx/q.m*dt; q.vy += q.fy/q.m*dt;
+    q.x += q.vx*dt; q.y += q.vy*dt; wall(q, 0.85);
+  }
+  thermostat(T*0.9, 0.06);
+}
+function clusters(cut){
+  const par = p.map((_,i)=>i), find = i => par[i]===i?i:(par[i]=find(par[i]));
+  for(let i=0;i<p.length;i++) for(let j=i+1;j<p.length;j++){
+    const dx = p[i].x-p[j].x, dy = p[i].y-p[j].y;
+    if(dx*dx+dy*dy < cut*cut){ const a=find(i), b=find(j); if(a!==b) par[a]=b; }
+  }
+  const g = {}; p.forEach((q,i)=>(g[find(i)]=g[find(i)]||[]).push(q));
+  return Object.values(g).sort((a,b)=>b.length-a.length);
+}
+function ballOfNucleons(A, Z, cx, cy){
+  const list = []; for(let i=0;i<A;i++) list.push(i<Z?'p':'n');
+  for(let i=list.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [list[i],list[j]]=[list[j],list[i]]; }
+  const R = 0.62*Math.sqrt(A);
+  list.forEach((k,i) => {
+    const a = i*2.399963, rr = R*Math.sqrt(i/A);
+    const q = nucleon(k, cx+rr*Math.cos(a), cy+rr*Math.sin(a));
+    q.vx *= 0.15; q.vy *= 0.15;
+  });
+}
+function clear(){ p = []; stats = {}; }
+
+const SETUPS = [
+  {n:'Carbon-12', f:() => { clear(); ballOfNucleons(12,6, worldW()/2, worldH()/2); T=0.25; }},
+  {n:'Iron-56', f:() => { clear(); ballOfNucleons(56,26, worldW()/2, worldH()/2); T=0.25; }},
+  {n:'Uranium-238', f:() => { clear(); ballOfNucleons(238,92, worldW()/2, worldH()/2); T=0.2; }},
+  {n:'Free nucleons', f:() => { clear(); for(let i=0;i<70;i++) nucleon(i%2?'p':'n', rnd2(2,worldW()-2), rnd2(2,worldH()-2)); T=1.2; }}
+];
+
+function draw(){
+  const f = fit(cv); if(!f) return; const {ctx} = f; W = f.W; H = f.H;
+  ctx.clearRect(0,0,W,H);
+  const narrow = W < 640;
+  const cls = clusters(1.75), big = cls[0];
+  ctx.save(); ctx.scale(SC(), SC());
+  if(big && big.length > 2){
+    let cx=0,cy=0; for(const q of big){ cx+=q.x; cy+=q.y; } cx/=big.length; cy/=big.length;
+    let rad=0; for(const q of big) rad=Math.max(rad, Math.hypot(q.x-cx,q.y-cy));
+    ctx.beginPath(); ctx.arc(cx,cy,rad+0.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(127,166,255,.06)'; ctx.fill();
+    ctx.strokeStyle='rgba(127,166,255,.28)'; ctx.lineWidth=0.06; ctx.setLineDash([0.25,0.25]); ctx.stroke(); ctx.setLineDash([]);
+  }
+  for(const q of p){
+    const pr = q.kind==='p';
+    circle(ctx,q.x,q.y,q.r, pr?'#F2607A':'#7FA6FF', 'rgba(255,255,255,.35)');
+    nlabel(ctx, pr?'p':'n', q.x, q.y+0.02, 0.5, pr?'#3d0d12':'#0d1526');
+  }
+  ctx.restore();
+  stats.clusters = cls.length; stats.big = big?big.length:0; stats.bigZ = big?big.filter(q=>q.kind==='p').length:0;
+
+  const bz = stats.bigZ||0, ba = stats.big||0, bn = ba-bz;
+  const bound = ba>3 ? B(ba,bz,EM) : 0;
+  const lines = [
+    ['Largest nucleus', ba?`${ba}  (Z=${bz}, N=${bn})`:'—', ba>2?'#3ddc84':'#8d99b3'],
+    ['Fragments', stats.clusters||0, (stats.clusters||0)>1?'#ffd23f':'#8d99b3'],
+    [narrow?'Binding':'Binding (mass formula)', ba>3?(narrow?`${(bound/ba).toFixed(1)}/nucleon`:`${bound.toFixed(0)} MeV = ${(bound/ba).toFixed(1)}/nucleon`):'—', bound>0?'#3ddc84':'#ff5c5c'],
+    ['Electromagnetism', `×${fmt(EM,2)}`, EM>1.5?'#ff5c5c':'#8d99b3']
+  ];
+  const lh = narrow ? 16 : 19, fs = narrow ? '10px' : '11.5px';
+  const bw = Math.min(narrow?220:300, W-20), bh = (narrow?16:22) + lines.length*lh;
+  rrect(ctx, W - bw - (narrow?8:12), narrow?8:12, bw, bh, 8); ctx.fillStyle='rgba(11,15,24,.82)'; ctx.fill();
+  ctx.strokeStyle='rgba(38,49,74,.9)'; ctx.lineWidth=1; ctx.stroke();
+  lines.forEach(([a,b,col],i) => {
+    const y = (narrow?18:30) + i*lh;
+    txt(ctx, a, W-bw+(narrow?4:2), y, `${fs} system-ui`, '#8d99b3');
+    txt(ctx, String(b), W-(narrow?12:22), y, `700 ${fs} ui-monospace,Menlo,monospace`, col, 'right');
+  });
+  if(stats.clusters > 3 && stats.big < p.length*0.6){
+    txt(ctx, narrow ? '💥 fission: repulsion beat the strong force' : '💥 the nucleus is breaking apart: electric repulsion beat the strong force', 14, H-14, '700 12px system-ui', '#ff5c5c');
+  }
+}
+
+let raf = null;
+function loop(){
+  if(!visible){ raf = null; return; }
+  if(run && p.length){
+    acc = Math.min(acc + 0.016, 0.05);
+    let n = 0;
+    while(acc > 0.009 && n++ < 14){ acc -= 0.009; step(0.009*3); }
+  }
+  draw();
+  raf = requestAnimationFrame(loop);
+}
+function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
+
+function renderBar(){
+  $('nSetups').innerHTML = SETUPS.map((s,i) => `<button type="button" data-s="${i}">${s.n}</button>`).join('');
+  $('nSetups').querySelectorAll('[data-s]').forEach((b,i) => b.onclick = () => {
+    SETUPS[i].f(); syncT();
+    $('nSetups').querySelectorAll('button').forEach((bb,j) => bb.classList.toggle('on', j===i));
+    draw();
+  });
+}
+const syncT = () => { $('nTemp').value = T; $('nTempV').textContent = fmt(T,2); };
+$('nRun').onclick = () => { run = !run; $('nRun').textContent = run ? 'Pause' : 'Run'; kick(); };
+$('nClear').onclick = () => { clear(); draw(); };
+$('nTemp').oninput = e => { T = +e.target.value; $('nTempV').textContent = fmt(T,2); };
+$('nEM').oninput = e => { EM = +e.target.value; $('nEMV').textContent = '×'+fmt(EM,2); };
+$('nAddP').onclick = () => { for(let i=0;i<4;i++) nucleon('p', rnd2(2,worldW()-2), rnd2(2,worldH()-2)); kick(); };
+$('nAddN').onclick = () => { for(let i=0;i<4;i++) nucleon('n', rnd2(2,worldW()-2), rnd2(2,worldH()-2)); kick(); };
+
+new IntersectionObserver(es => {
+  for(const e of es){
+    visible = e.isIntersecting;
+    if(visible){
+      if(!started){
+        started = true;
+        const f = fit(cv); if(f){ W=f.W; H=f.H; }
+        renderBar(); SETUPS[0].f(); syncT();
+        $('nSetups').querySelectorAll('button')[0]?.classList.add('on');
+      }
+      kick();
+    }
+  }
+}, {threshold:0.02}).observe(cv);
+addEventListener('resize', () => { if(started && visible) draw(); });
+})();
+</script>
+
+<script>
+/* =====================================================================
+   LIVE LAB — MOLECULES
+   Ported unchanged in physics from "From Particles to Life"
+   (Live lab → Molecules). Bonded atoms are springs; every
+   non-bonded pair repels. Molecular shape is not scripted —
+   it falls out of that single rule (VSEPR theory, emergent).
+   ===================================================================== */
+(() => {
+"use strict";
+const $ = id => document.getElementById(id);
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
+const fmt = (v,d=2) => Number(v).toFixed(d);
+
+function fit(cv){
+  const ctx = cv.getContext('2d'), dpr = window.devicePixelRatio || 1, r = cv.getBoundingClientRect();
+  if(!r.width) return null;
+  cv.width = Math.round(r.width*dpr); cv.height = Math.round(r.height*dpr); ctx.setTransform(dpr,0,0,dpr,0,0);
+  return {ctx, W:r.width, H:r.height};
+}
+function rrect(ctx,x,y,w,h,r){ ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+function txt(ctx,s,x,y,font,col,align){ ctx.font = font; ctx.fillStyle = col; ctx.textAlign = align||'left'; ctx.textBaseline = 'middle'; ctx.fillText(s,x,y); }
+function circle(ctx,x,y,r,col,line){ ctx.beginPath(); ctx.arc(x,y,r,0,Math.PI*2); ctx.fillStyle = col; ctx.fill(); if(line){ ctx.strokeStyle=line; ctx.lineWidth=0.05; ctx.stroke(); } }
+function clabel(ctx,s,x,y,size,col){ ctx.font = `700 ${size}px system-ui`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillStyle=col; ctx.fillText(s,x,y); }
+
+const ELEM = {
+  H:{v:1, r:0.30, c:'#e8edf6', m:1,  n:'hydrogen'},
+  C:{v:4, r:0.45, c:'#5b6577', m:12, n:'carbon'},
+  N:{v:3, r:0.42, c:'#4f8fff', m:14, n:'nitrogen'},
+  O:{v:2, r:0.40, c:'#ff5c5c', m:16, n:'oxygen'},
+  P:{v:3, r:0.50, c:'#ffa94d', m:31, n:'phosphorus'},
+  S:{v:2, r:0.50, c:'#ffd23f', m:32, n:'sulfur'}
+};
+const MOLNAME = {H2O:'water', CO2:'carbon dioxide', CH4:'methane', NH3:'ammonia', O2:'oxygen', N2:'nitrogen', H2:'hydrogen',
+  CO:'carbon monoxide', CH2O:'formaldehyde', CHN:'hydrogen cyanide', C2H6:'ethane', CH4O:'methanol', C2H2:'acetylene',
+  C2H4:'ethylene', H2O2:'peroxide', C2H6O:'ethanol', CH5N:'methylamine', C2H5NO2:'glycine', CH3NO:'formamide',
+  N2H4:'hydrazine', C2H4O:'acetaldehyde', C3H8:'propane', CH2O2:'formic acid', H2S:'hydrogen sulfide', CH4S:'methanethiol'};
+
+const cv = $('chemCv');
+let W=0, H=0, run=true, acc=0, visible=false, started=false;
+let p = [], bonds = [], T = 0.55, stats = {};
+const SC = () => 34;
+const rnd2 = (a,b) => a + Math.random()*(b-a);
+const perf = () => performance.now()/1000;
+function add(o){ p.push(Object.assign({x:0,y:0,vx:0,vy:0,m:1,born:perf()}, o)); return p[p.length-1]; }
+function atom(sym,x,y){ const E = ELEM[sym]; return add({sym,x,y,vx:rnd2(-2,2),vy:rnd2(-2,2),m:E.m,r:E.r,val:E.v,nb:0}); }
+const worldW = () => W/SC(), worldH = () => (H - (W<640?128:150))/SC();
+function wall(q, bounce){
+  const R = q.r || 0.5, ww = worldW(), wh = worldH();
+  if(q.x < R){ q.x = R; q.vx = Math.abs(q.vx)*bounce; }
+  if(q.x > ww-R){ q.x = ww-R; q.vx = -Math.abs(q.vx)*bounce; }
+  if(q.y < R){ q.y = R; q.vy = Math.abs(q.vy)*bounce; }
+  if(q.y > wh-R){ q.y = wh-R; q.vy = -Math.abs(q.vy)*bounce; }
+}
+function thermostat(target, rate){
+  let ke = 0; for(const q of p) ke += 0.5*q.m*(q.vx*q.vx + q.vy*q.vy);
+  const cur = p.length ? ke/p.length : 0;
+  if(cur <= 0){ if(target > 0) for(const q of p){ q.vx += rnd2(-1,1)*0.2; q.vy += rnd2(-1,1)*0.2; } return cur; }
+  const f = Math.sqrt(1 + rate*(target/cur - 1));
+  if(isFinite(f)) for(const q of p){ q.vx *= f; q.vy *= f; }
+  return cur;
+}
+
+const bondStrength = () => 55;
+function step(dt){
+  const k = bondStrength();
+  for(const q of p){ q.fx = 0; q.fy = 0; }
+  for(const b of bonds){
+    const A = b.a, Bq = b.b, dx = Bq.x-A.x, dy = Bq.y-A.y;
+    const r = Math.hypot(dx,dy) || 1e-3, L = (A.r + Bq.r)*1.05, f = k*(r - L);
+    const ux = dx/r, uy = dy/r;
+    A.fx += f*ux; A.fy += f*uy; Bq.fx -= f*ux; Bq.fy -= f*uy;
+    b.strain = Math.abs(r - L)/L;
+  }
+  for(let i=0;i<p.length;i++) for(let j=i+1;j<p.length;j++){
+    const A = p[i], Bq = p[j];
+    if(bonds.some(b => (b.a===A && b.b===Bq) || (b.a===Bq && b.b===A))) continue;
+    const dx = Bq.x-A.x, dy = Bq.y-A.y, r = Math.hypot(dx,dy) || 1e-3;
+    const R0 = (A.r + Bq.r)*1.9;
+    let f = 0;
+    if(r < R0) f = -k*0.30*(R0 - r);
+    else if(A.nb < A.val && Bq.nb < Bq.val && r < 7) f = k*0.05*(7 - r);
+    if(f){ const ux = dx/r, uy = dy/r; A.fx += f*ux; A.fy += f*uy; Bq.fx -= f*ux; Bq.fy -= f*uy; }
+  }
+  for(const q of p){
+    q.vx += q.fx/q.m*dt; q.vy += q.fy/q.m*dt;
+    q.vx *= 0.995; q.vy *= 0.995;
+    q.x += q.vx*dt; q.y += q.vy*dt; wall(q, 0.9);
+  }
+  thermostat(T*T*9 + 0.05, 0.05);
+  for(let i=0;i<p.length;i++) for(let j=i+1;j<p.length;j++){
+    const A = p[i], Bq = p[j];
+    if(A.nb >= A.val || Bq.nb >= Bq.val) continue;
+    if(bonds.some(b => (b.a===A && b.b===Bq) || (b.a===Bq && b.b===A))) continue;
+    const d = Math.hypot(Bq.x-A.x, Bq.y-A.y);
+    if(d < (A.r + Bq.r)*1.35){
+      bonds.push({a:A, b:Bq, born:perf(), strain:0}); A.nb++; Bq.nb++; stats.made = (stats.made||0)+1;
+    }
+  }
+  const kT = 30*Math.max(T,0.02)*Math.max(T,0.02);
+  const rate = 6*Math.exp(-bondStrength()/kT);
+  stats.kT = kT;
+  for(let i=bonds.length-1;i>=0;i--){
+    const b = bonds[i];
+    if(b.strain > 0.6 || Math.random() < rate*dt){
+      b.a.nb--; b.b.nb--; bonds.splice(i,1); stats.broke = (stats.broke||0)+1;
+    }
+  }
+}
+function molecules(){
+  const idx = new Map(p.map((q,i) => [q,i])), par = p.map((_,i) => i);
+  const find = i => par[i] === i ? i : (par[i] = find(par[i]));
+  for(const b of bonds){ const a = find(idx.get(b.a)), c = find(idx.get(b.b)); if(a !== c) par[a] = c; }
+  const g = {}; p.forEach((q,i) => (g[find(i)] = g[find(i)] || []).push(q));
+  const counts = {}, full = {};
+  for(const grp of Object.values(g)){
+    const c = {}; for(const q of grp) c[q.sym] = (c[q.sym]||0)+1;
+    const sat = grp.every(q => q.nb >= q.val);
+    const order = Object.keys(c).sort((x,y) => x==='C'?-1 : y==='C'?1 : x==='H'?-1 : y==='H'?1 : x<y?-1:1);
+    const f = order.map(s => s + (c[s]>1?c[s]:'')).join('');
+    counts[f] = (counts[f]||0)+1; if(sat) full[f] = (full[f]||0)+1;
+  }
+  counts.__full = full; return counts;
+}
+function clear(){ p = []; bonds = []; stats = {}; }
+
+const SETUPS = [
+  {n:'Primordial soup', f:() => { clear(); const mix = 'HHHHHHHHHHHHHHHHHHOOOOOCCCCNNH'.split('');
+    for(const s of mix) atom(s, rnd2(1,worldW()-1), rnd2(1,worldH()-1)); T = 0.55; }},
+  {n:'Water only', f:() => { clear(); for(let i=0;i<8;i++) atom('O', rnd2(1,worldW()-1), rnd2(1,worldH()-1));
+    for(let i=0;i<16;i++) atom('H', rnd2(1,worldW()-1), rnd2(1,worldH()-1)); T = 0.45; }},
+  {n:'Methane + oxygen', f:() => { clear(); for(let i=0;i<4;i++) atom('C', rnd2(1,worldW()-1), rnd2(1,worldH()-1));
+    for(let i=0;i<16;i++) atom('H', rnd2(1,worldW()-1), rnd2(1,worldH()-1));
+    for(let i=0;i<8;i++) atom('O', rnd2(1,worldW()-1), rnd2(1,worldH()-1)); T = 0.5; }},
+  {n:'Organic set', f:() => { clear(); for(const s of 'CCCCCCNNOOPSHHHHHHHHHHHH') atom(s, rnd2(1,worldW()-1), rnd2(1,worldH()-1)); T = 0.5; }}
+];
+
+function draw(){
+  const f = fit(cv); if(!f) return; const {ctx} = f; W = f.W; H = f.H;
+  ctx.clearRect(0,0,W,H);
+  const narrow = W < 640;
+  ctx.save(); ctx.scale(SC(), SC());
+  for(const b of bonds){
+    const st = Math.min(1, b.strain/0.55);
+    ctx.strokeStyle = `rgba(${230-st*120|0},${235-st*160|0},${245-st*190|0},${0.55+st*0.4})`;
+    ctx.lineWidth = 0.12 - st*0.04;
+    ctx.beginPath(); ctx.moveTo(b.a.x,b.a.y); ctx.lineTo(b.b.x,b.b.y); ctx.stroke();
+  }
+  for(const q of p){
+    const E = ELEM[q.sym];
+    circle(ctx,q.x,q.y,q.r, E.c, 'rgba(255,255,255,.4)');
+    clabel(ctx, q.sym, q.x, q.y+0.01, q.r*1.1, q.sym==='H' ? '#1b2433' : '#0b0f18');
+    if(q.nb < q.val){
+      ctx.strokeStyle = 'rgba(110,227,154,.5)'; ctx.lineWidth = 0.05;
+      ctx.setLineDash([0.1,0.12]); ctx.beginPath(); ctx.arc(q.x,q.y,q.r+0.14,0,Math.PI*2); ctx.stroke(); ctx.setLineDash([]);
+    }
+  }
+  ctx.restore();
+
+  const m = molecules(), full = m.__full || {};
+  const keys = Object.keys(m).filter(k => k!=='__full' && k.length>1).sort((a,b)=>m[b]-m[a]).slice(0, narrow?4:6);
+  const lines = [
+    ['Bonds', bonds.length, '#7FA6FF'],
+    ['Made / broken', `${stats.made||0} / ${stats.broke||0}`, '#8d99b3']
+  ];
+  if(!narrow) lines.push(['Bond energy vs heat', `${bondStrength().toFixed(0)} vs ${(stats.kT||0).toFixed(0)}`, '#8d99b3']);
+  for(const k of keys) lines.push([(full[k]?'✓ ':'· ') + (MOLNAME[k]||'fragment'), `${k} ×${m[k]}`, full[k]?'#3ddc84':'#b388ff']);
+  const lh = narrow ? 15 : 18, fs = narrow ? '9.5px' : '11px';
+  const bw = Math.min(narrow?210:300, W-20), bh = (narrow?16:22) + lines.length*lh;
+  rrect(ctx, W - bw - (narrow?8:12), narrow?8:12, bw, bh, 8); ctx.fillStyle='rgba(11,15,24,.82)'; ctx.fill();
+  ctx.strokeStyle='rgba(38,49,74,.9)'; ctx.lineWidth=1; ctx.stroke();
+  lines.forEach(([a,b,col],i) => {
+    const y = (narrow?18:30) + i*lh;
+    txt(ctx, a, W-bw+(narrow?4:2), y, `${fs} system-ui`, '#8d99b3');
+    txt(ctx, String(b), W-(narrow?12:22), y, `700 ${fs} ui-monospace,Menlo,monospace`, col, 'right');
+  });
+}
+
+let raf = null;
+function loop(){
+  if(!visible){ raf = null; return; }
+  if(run && p.length){
+    acc = Math.min(acc + 0.016, 0.05);
+    let n = 0;
+    while(acc > 0.012 && n++ < 14){ acc -= 0.012; step(0.012*3); }
+  }
+  draw();
+  raf = requestAnimationFrame(loop);
+}
+function kick(){ if(!raf && visible) raf = requestAnimationFrame(loop); }
+
+function renderBar(){
+  $('cSetups').innerHTML = SETUPS.map((s,i) => `<button type="button" data-s="${i}">${s.n}</button>`).join('');
+  $('cSetups').querySelectorAll('[data-s]').forEach((b,i) => b.onclick = () => {
+    SETUPS[i].f(); syncT();
+    $('cSetups').querySelectorAll('button').forEach((bb,j) => bb.classList.toggle('on', j===i));
+    draw();
+  });
+}
+const syncT = () => { $('cTemp').value = T; $('cTempV').textContent = fmt(T,2); };
+$('cRun').onclick = () => { run = !run; $('cRun').textContent = run ? 'Pause' : 'Run'; kick(); };
+$('cClear').onclick = () => { clear(); draw(); };
+$('cTemp').oninput = e => { T = +e.target.value; $('cTempV').textContent = fmt(T,2); };
+$('cSpark').onclick = () => { for(const q of p){ q.vx += rnd2(-28,28); q.vy += rnd2(-28,28); } kick(); };
+
+new IntersectionObserver(es => {
+  for(const e of es){
+    visible = e.isIntersecting;
+    if(visible){
+      if(!started){
+        started = true;
+        const f = fit(cv); if(f){ W=f.W; H=f.H; }
+        renderBar(); SETUPS[0].f(); syncT();
+        $('cSetups').querySelectorAll('button')[0]?.classList.add('on');
+      }
+      kick();
+    }
+  }
+}, {threshold:0.02}).observe(cv);
+addEventListener('resize', () => { if(started && visible) draw(); });
+})();
+</script>
+
+</body></html>

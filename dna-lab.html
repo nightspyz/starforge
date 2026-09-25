@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DNA Replication Simulator</title>
+<style>
+:root{--bg:#0f1420;--panel:#171e2e;--panel2:#1d2538;--line:#2a3550;--text:#e6ebf5;--muted:#8d99b3;--accent:#4fb3ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:14px 20px 4px}
+h1{margin:0;font-size:20px;letter-spacing:.2px}
+header p{margin:4px 0 0;color:var(--muted);font-size:13px;max-width:900px}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:14px;padding:10px 20px 20px}
+@media(max-width:1050px){.wrap{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px}
+canvas{display:block;width:100%;height:500px;border-radius:10px 10px 0 0;background:radial-gradient(ellipse at 50% 50%,#141b2b 0%,#0e1320 100%);cursor:crosshair}
+#hover{padding:7px 14px;font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted);border-top:1px solid var(--line);min-height:32px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:12px 14px;border-top:1px solid var(--line)}
+.group{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button{background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 13px;font:inherit;font-weight:600;cursor:pointer;transition:.15s}
+button:hover{border-color:var(--accent)}
+button.primary{background:#2b6fd6;border-color:#2b6fd6}
+button.primary:hover{background:#3a80ea}
+label{color:var(--muted);font-size:12.5px;display:flex;align-items:center;gap:6px}
+label b{color:var(--text);font-weight:600;min-width:34px;display:inline-block}
+input[type=range]{width:110px;accent-color:var(--accent)}
+input[type=text]{background:#0f1420;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 9px;font:12px ui-monospace,Menlo,Consolas,monospace;width:260px;text-transform:uppercase}
+input[type=checkbox]{accent-color:var(--accent)}
+.side{display:flex;flex-direction:column;gap:14px}
+.side .card{padding:12px 14px}
+.side h2{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted)}
+#now{margin:0;padding:0;list-style:none}
+#now li{padding:4px 0 4px 10px;border-left:3px solid var(--c,#4fb3ff);margin-bottom:5px;font-size:13px;background:rgba(255,255,255,.02)}
+.stats{display:grid;grid-template-columns:1fr auto;gap:3px 10px;font-size:13px}
+.stats span:nth-child(odd){color:var(--muted)}
+.stats span:nth-child(even){text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+.bar{height:6px;background:#0f1420;border-radius:4px;overflow:hidden;margin:8px 0 2px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#2b6fd6,#4fb3ff);width:0}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;font-size:12px}
+.legend div{display:flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid rgba(255,255,255,.25)}
+#log{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto;font-size:12.5px}
+#log li{padding:6px 0;border-bottom:1px solid var(--line)}
+#log li em{font-style:normal;font-size:10.5px;color:var(--muted);font-family:ui-monospace,Menlo,monospace;margin-right:6px}
+#log li b{font-size:10.5px;padding:1px 6px;border-radius:9px;margin-right:6px;color:#0f1420}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧬 DNA Replication Simulator</h1>
+  <p>Watch a replication fork move along a DNA molecule: helicase unwinds, primase lays RNA primers, DNA polymerase III builds the continuous leading strand and the discontinuous lagging strand (Okazaki fragments), polymerase I swaps primers for DNA, and ligase seals the nicks. Hover over the molecule to inspect any base pair.</p>
+</header>
+
+<div class="wrap">
+  <div class="card">
+    <canvas id="cv"></canvas>
+    <div id="hover">Hover over the DNA to inspect a position.</div>
+    <div class="controls">
+      <div class="group">
+        <button id="play" class="primary">⏸ Pause</button>
+        <button id="step">Step ▸</button>
+        <button id="reset">↺ Reset</button>
+      </div>
+      <label>Speed <input type="range" id="speed" min="0.25" max="5" step="0.25" value="1"><b id="speedV">1×</b></label>
+      <label>Okazaki length <input type="range" id="okLen" min="6" max="16" step="1" value="8"><b id="okLenV">8 nt</b></label>
+      <label>Error rate <input type="range" id="err" min="0" max="0.1" step="0.005" value="0.02"><b id="errV">2%</b></label>
+      <label><input type="checkbox" id="letters" checked> Base letters</label>
+      <label><input type="checkbox" id="labels" checked> Enzyme labels</label>
+    </div>
+    <div class="controls">
+      <div class="group">
+        <input type="text" id="seq" spellcheck="false" placeholder="Custom sequence (A/C/G/T, 10–140 nt)">
+        <button id="apply">Use sequence</button>
+      </div>
+      <label>Random length <input type="range" id="len" min="20" max="120" step="2" value="48"><b id="lenV">48</b></label>
+      <button id="rand">🎲 Random DNA</button>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="card">
+      <h2>Happening now</h2>
+      <ul id="now"></ul>
+    </div>
+    <div class="card">
+      <h2>Progress</h2>
+      <div class="bar"><i id="prog"></i></div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="card">
+      <h2>Legend</h2>
+      <div class="legend">
+        <div><span class="sw" style="background:#ff6b6b"></span>A (adenine)</div>
+        <div><span class="sw" style="background:#ffd23f"></span>T / U</div>
+        <div><span class="sw" style="background:#3ddc84"></span>G (guanine)</div>
+        <div><span class="sw" style="background:#4fb3ff"></span>C (cytosine)</div>
+        <div><span class="sw" style="background:#7f93b8"></span>Parental strand</div>
+        <div><span class="sw" style="background:#ffa94d"></span>New DNA</div>
+        <div><span class="sw" style="background:#ffd08a"></span>Alt. Okazaki frag.</div>
+        <div><span class="sw" style="background:#ff5fa8"></span>RNA primer</div>
+        <div><span class="sw" style="background:#c8d2e6"></span>SSB proteins</div>
+        <div><span class="sw" style="background:transparent;border:2px solid #ff3b3b"></span>Mismatch</div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Event log</h2>
+      <ul id="log"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+"use strict";
+const COMP = {A:'T', T:'A', G:'C', C:'G'};
+const BASECOL = {A:'#ff6b6b', T:'#ffd23f', U:'#ffd23f', G:'#3ddc84', C:'#4fb3ff'};
+const RATE = {hel:3, lead:6, lag:9, polI:5};      // nucleotides per second at 1x
+const PRIME_TIME = 0.8, LIGATE_TIME = 0.7, FIX_TIME = 0.5, OVERSHOOT = 5;
+const ECOL = {hel:'#ff6b6b', topo:'#f7a440', prim:'#1abc9c', pol3:'#3b82f6', polI:'#22c55e', lig:'#a855f7', ssb:'#c8d2e6', err:'#ff3b3b'};
+
+const cfg = {speed:1, okLen:8, err:0.02, letters:true, labels:true};
+const $ = id => document.getElementById(id);
+const cv = $('cv'), ctx = cv.getContext('2d');
+let W = 0, H = 0, N = 0, S = null, g = null, running = true, hoverI = -1;
+
+/* ---------------- state ---------------- */
+function randomSeq(n){ let s=''; for(let i=0;i<n;i++) s += 'ACGT'[Math.random()*4|0]; return s; }
+
+function init(seq){
+  N = seq.length;
+  const top = seq.split('');
+  S = {
+    seq, top, bot: top.map(b => COMP[b]),
+    fork: 0, t: 0,
+    lead: Array(N).fill(null), lag: Array(N).fill(null), sealed: Array(N+1).fill(false),
+    leadPrimed: false, leadPos: 0, leadDone: false, helDone: false,
+    lastPrimeAt: -1, frags: [], lagQueue: [], fragCount: 0,
+    primase: {state:'idle'},
+    polLead: {acc:0, fix:null},
+    polLag: {state:'idle', acc:0, fix:null},
+    polI: {queue:[], job:null, acc:0, pos:0},
+    ligase: {queue:[], job:null, timer:0},
+    errors: 0, fixed: 0, sealedCount: 0, finishing: false, done: false
+  };
+  $('log').innerHTML = '';
+  log('start', `New template loaded (${N} bp). Helicase binds at the origin (ori) and starts unwinding the double helix by breaking the hydrogen bonds between base pairs.`);
+  log('topo', 'Topoisomerase works just ahead of the fork, relieving the supercoiling tension that unwinding creates.');
+}
+
+/* ---------------- log ---------------- */
+const TAGS = {start:['ORI','#8d99b3'], hel:['HEL',ECOL.hel], topo:['TOPO',ECOL.topo], prim:['PRIM',ECOL.prim],
+  pol3:['POL III',ECOL.pol3], polI:['POL I',ECOL.polI], lig:['LIG',ECOL.lig], err:['ERROR',ECOL.err], fix:['FIX','#ffd23f'], done:['DONE','#ffffff']};
+function log(kind, msg){
+  const [tag,col] = TAGS[kind] || ['•','#888'];
+  const li = document.createElement('li');
+  li.innerHTML = `<em>${(S?S.t:0).toFixed(1)}s</em><b style="background:${col}">${tag}</b>${msg}`;
+  const ul = $('log'); ul.prepend(li);
+  while(ul.children.length > 80) ul.lastChild.remove();
+}
+
+/* ---------------- simulation ---------------- */
+function other(b){ const o = 'ACGT'.replace(b,''); return o[Math.random()*3|0]; }
+
+function placeBase(strand, i, frag, poly){
+  const arr = strand === 'lead' ? S.lead : S.lag;
+  const tmpl = strand === 'lead' ? S.bot[i] : S.top[i];
+  const correct = COMP[tmpl];
+  let b = correct, err = false;
+  if(poly && Math.random() < cfg.err){
+    b = other(correct); err = true; S.errors++;
+    poly.fix = {idx:i, strand, timer:FIX_TIME};
+    log('err', `Pol III (${strand === 'lead' ? 'leading' : 'lagging'}) mis-inserted <b style="background:${BASECOL[b]}">${b}</b> opposite template ${tmpl} at position ${i}.`);
+  }
+  arr[i] = {b, t:'dna', frag, err, born:S.t};
+}
+
+function runFix(poly, dt){
+  if(!poly.fix) return false;
+  poly.fix.timer -= dt;
+  if(poly.fix.timer <= 0){
+    const f = poly.fix, arr = f.strand === 'lead' ? S.lead : S.lag;
+    const tmpl = f.strand === 'lead' ? S.bot[f.idx] : S.top[f.idx];
+    arr[f.idx].b = COMP[tmpl]; arr[f.idx].err = false; arr[f.idx].born = S.t;
+    S.fixed++; poly.fix = null;
+    log('fix', `Proofreading: Pol III's 3'→5' exonuclease removed the wrong base at position ${f.idx} and inserted the correct ${COMP[tmpl]}.`);
+  }
+  return true;
+}
+
+function startPrime(kind, a, b){
+  S.primase = {state:'priming', kind, a, b, timer:PRIME_TIME};
+}
+
+function finishPrime(){
+  const p = S.primase;
+  if(p.kind === 'lead'){
+    for(let j=p.a;j<=p.b;j++) S.lead[j] = {b:COMP[S.bot[j]], t:'rna', frag:0, err:false, born:S.t};
+    S.leadPrimed = true; S.leadPos = p.b + 1;
+    log('prim', `Primase lays an RNA primer (positions ${p.a}–${p.b}) on the leading-strand template. DNA polymerase can't start a strand from scratch; it needs a 3'-OH to extend.`);
+    log('pol3', "DNA polymerase III (held on by its sliding clamp) starts the <b style='background:#ffa94d'>leading strand</b>, adding nucleotides 5'→3' continuously, following the fork.");
+  } else {
+    const id = ++S.fragCount;
+    for(let j=p.a;j<=p.b;j++) S.lag[j] = {b:COMP[S.top[j]], t:'rna', frag:id, err:false, born:S.t};
+    const fr = {id, s:p.b, pStart:p.a, left:S.lastPrimeAt+1, prev:S.frags[S.frags.length-1] || null};
+    S.frags.push(fr); S.lagQueue.push(fr); S.lastPrimeAt = p.b;
+    log('prim', `Primase lays RNA primer #${id} on the lagging template (positions ${p.a}–${p.b}). RNA uses U instead of T.`);
+  }
+  S.primase = {state:'idle'};
+}
+
+function update(dt){
+  S.t += dt;
+  // Helicase
+  if(S.fork < N + OVERSHOOT){
+    S.fork = Math.min(N + OVERSHOOT, S.fork + RATE.hel*dt);
+    if(!S.helDone && S.fork >= N){ S.helDone = true; log('hel', 'Helicase reaches the end of the template. The whole molecule is now unwound.'); }
+  }
+  const f = Math.floor(Math.min(S.fork, N));
+
+  // Primase
+  if(S.primase.state === 'idle'){
+    if(!S.leadPrimed){
+      if(S.fork >= 4) startPrime('lead', 0, 2);
+    } else if(S.lastPrimeAt < N-1){
+      const s = S.fork >= N ? N-1 : f-2;
+      const need = S.fork >= N ? 1 : cfg.okLen;
+      if(s >= 0 && s - S.lastPrimeAt >= need) startPrime('lag', Math.max(S.lastPrimeAt+1, s-2), s);
+    }
+  } else {
+    S.primase.timer -= dt;
+    if(S.primase.timer <= 0) finishPrime();
+  }
+
+  // Leading-strand Pol III
+  const pl = S.polLead;
+  if(S.leadPrimed && !S.leadDone && !runFix(pl, dt)){
+    const limit = Math.min(N, Math.floor(S.fork) - 1);
+    pl.acc += RATE.lead*dt;
+    while(pl.acc >= 1 && S.leadPos < limit && !pl.fix){ pl.acc -= 1; placeBase('lead', S.leadPos, 0, pl); S.leadPos++; }
+    if(S.leadPos >= limit) pl.acc = Math.min(pl.acc, 1);
+    if(S.leadPos >= N && !pl.fix){ S.leadDone = true; log('pol3', 'Leading strand finished: one continuous new strand, synthesized without interruption.'); }
+  }
+
+  // Lagging-strand Pol III
+  const pg = S.polLag;
+  if(!runFix(pg, dt)){
+    if(pg.state === 'idle' && S.lagQueue.length){
+      const fr = S.lagQueue.shift();
+      pg.frag = fr; pg.pos = fr.pStart - 1; pg.state = 'ext'; pg.acc = 0;
+      if(pg.pos >= fr.left) log('pol3', `Pol III extends primer #${fr.id} into <b style="background:${fr.id%2?'#ffa94d':'#ffd08a'}">Okazaki fragment #${fr.id}</b>, working 5'→3', i.e. <i>away</i> from the fork.`);
+    }
+    if(pg.state === 'ext'){
+      const fr = pg.frag;
+      pg.acc += RATE.lag*dt;
+      while(pg.acc >= 1 && pg.pos >= fr.left && !pg.fix){ pg.acc -= 1; placeBase('lag', pg.pos, fr.id, pg); pg.pos--; }
+      if(pg.pos < fr.left && !pg.fix){
+        const len = fr.pStart - fr.left;
+        if(len > 0) log('pol3', `Okazaki fragment #${fr.id} complete (${len} nt of DNA). Pol III lets go and recycles back toward the fork.`);
+        if(fr.prev){
+          const prev = fr.prev;
+          S.polI.queue.push({strand:'lag', from:prev.s, to:prev.pStart, dir:-1, action:'replace', fragId:fr.id,
+            startMsg:`DNA polymerase I uses its 5'→3' exonuclease to remove primer #${prev.id}, replacing the RNA with DNA as it extends fragment #${fr.id}.`,
+            onDone:() => { if(prev.pStart > 0) S.ligase.queue.push({b:prev.pStart, a:prev.id, c:fr.id}); }});
+        }
+        pg.state = 'idle'; pg.frag = null;
+      }
+    }
+  }
+
+  // Pol I
+  const p1 = S.polI;
+  if(!p1.job && p1.queue.length){ p1.job = p1.queue.shift(); p1.pos = p1.job.from; p1.acc = 0; if(p1.job.startMsg) log('polI', p1.job.startMsg); }
+  if(p1.job){
+    p1.acc += RATE.polI*dt;
+    while(p1.acc >= 1 && p1.job){
+      p1.acc -= 1;
+      const j = p1.job, arr = j.strand === 'lead' ? S.lead : S.lag;
+      const tmpl = j.strand === 'lead' ? S.bot[p1.pos] : S.top[p1.pos];
+      arr[p1.pos] = j.action === 'replace' ? {b:COMP[tmpl], t:'dna', frag:j.fragId, err:false, born:S.t} : null;
+      if(p1.pos === j.to){ const cb = j.onDone; p1.job = null; if(cb) cb(); }
+      else p1.pos += j.dir;
+    }
+  }
+
+  // Ligase
+  const lg = S.ligase;
+  if(!lg.job && lg.queue.length){ lg.job = lg.queue.shift(); lg.timer = LIGATE_TIME; }
+  if(lg.job){
+    lg.timer -= dt;
+    if(lg.timer <= 0){
+      S.sealed[lg.job.b] = true; S.sealedCount++;
+      log('lig', `DNA ligase seals the nick between fragments #${lg.job.a} and #${lg.job.c}, forming the missing phosphodiester bond in the sugar-phosphate backbone.`);
+      lg.job = null;
+    }
+  }
+
+  // Finishing
+  const idle = S.primase.state === 'idle' && pg.state === 'idle' && !pg.fix && !S.lagQueue.length &&
+               !p1.job && !p1.queue.length && !lg.job && !lg.queue.length;
+  if(!S.finishing && S.fork >= N && S.leadDone && S.lastPrimeAt >= N-1 && idle){
+    S.finishing = true;
+    const last = S.frags[S.frags.length-1];
+    p1.queue.push({strand:'lead', from:0, to:2, dir:1, action:'replace', fragId:0,
+      startMsg:"Pol I replaces the leading-strand primer at the origin. (In a real chromosome, it extends from the DNA made by the second fork going the other way.)"});
+    p1.queue.push({strand:'lag', from:last.pStart, to:last.s, dir:1, action:'remove',
+      startMsg:`The last lagging-strand primer (#${last.id}) at the very end of the template is removed...`,
+      onDone:() => {
+        log('err', "...but nothing can fill the gap. No upstream 3'-OH exists for a polymerase to extend. This is the <b style='background:#ffd23f'>end-replication problem</b>: linear chromosomes shorten a little each round, which is why eukaryotes use <i>telomerase</i> to extend telomeres.");
+        S.done = true;
+        log('done', 'Replication complete! Each daughter duplex is one parental strand plus one new strand: <b style="background:#ffa94d">semiconservative replication</b>.');
+      }});
+  }
+}
+
+/* ---------------- geometry ---------------- */
+function geom(){
+  const m = 46, dx = (W - 2*m) / N, yc = H/2 + 8;
+  const hg = Math.max(10, Math.min(19, H*0.036)), Sp = Math.min(118, H*0.23);
+  return {m, dx, yc, hg, Sp};
+}
+const X = t => g.m + (t + 0.5)*g.dx;
+function sep(t){ const d = S.fork - t - 0.5; if(d <= 0) return 0; const u = Math.min(1, d/4.5); return u*u*(3-2*u); }
+const topY  = t => g.yc - g.hg - sep(t)*g.Sp;
+const botY  = t => g.yc + g.hg + sep(t)*g.Sp;
+const lagY  = t => topY(t) + 2*g.hg;
+const leadY = t => botY(t) - 2*g.hg;
+
+/* ---------------- drawing ---------------- */
+function resize(){
+  const dpr = window.devicePixelRatio || 1, r = cv.getBoundingClientRect();
+  W = r.width; H = r.height; cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener('resize', resize);
+
+function line(x1,y1,x2,y2,col,w){ ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); }
+
+function tag(txt, x, y, col){
+  if(!cfg.labels) return;
+  ctx.font = '600 11px system-ui,sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.lineWidth = 4; ctx.strokeStyle = '#0f1420'; ctx.strokeText(txt, x, y);
+  ctx.fillStyle = col || '#fff'; ctx.fillText(txt, x, y);
+}
+
+function blob(x, y, rx, ry, col, alpha){
+  ctx.save();
+  ctx.globalAlpha = alpha ?? 0.82;
+  const gr = ctx.createRadialGradient(x - rx*0.3, y - ry*0.4, 1, x, y, Math.max(rx,ry));
+  gr.addColorStop(0, '#ffffff'); gr.addColorStop(0.15, col); gr.addColorStop(1, col);
+  ctx.fillStyle = gr; ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI*2); ctx.fill();
+  ctx.globalAlpha = Math.min(1, (alpha ?? 0.82) + 0.15);
+  ctx.strokeStyle = 'rgba(255,255,255,.75)'; ctx.lineWidth = 1.5; ctx.stroke();
+  ctx.restore();
+}
+
+function strandPath(fy, col, w){
+  ctx.strokeStyle = col; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.beginPath();
+  for(let t = -0.5; t <= N - 0.5 + 1e-6; t += 0.25){ const x = X(t), y = fy(t); t === -0.5 ? ctx.moveTo(x,y) : ctx.lineTo(x,y); }
+  ctx.stroke();
+}
+
+function newStrand(arr, fy, isLag){
+  const trim = Math.min(0.35, 5/g.dx);
+  ctx.lineCap = 'round'; ctx.lineWidth = 4.5;
+  for(let i=0;i<N;i++){
+    const b = arr[i]; if(!b) continue;
+    const jl = i > 0 && arr[i-1] && (!isLag || arr[i-1].frag === b.frag || S.sealed[i]);
+    const jr = i < N-1 && arr[i+1] && (!isLag || arr[i+1].frag === b.frag || S.sealed[i+1]);
+    const t0 = i - 0.5 + (jl ? 0 : trim), t1 = i + 0.5 - (jr ? 0 : trim);
+    ctx.strokeStyle = b.t === 'rna' ? '#ff5fa8' : (isLag ? (b.frag % 2 ? '#ffa94d' : '#ffd08a') : '#ffa94d');
+    ctx.beginPath();
+    for(let k=0;k<=4;k++){ const t = t0 + (t1-t0)*k/4; k ? ctx.lineTo(X(t), fy(t)) : ctx.moveTo(X(t), fy(t)); }
+    ctx.stroke();
+  }
+}
+
+function draw(){
+  g = geom();
+  ctx.clearRect(0,0,W,H);
+  const letters = [], rw = Math.max(1.5, Math.min(8, g.dx*0.5));
+  const showL = cfg.letters && g.dx >= 10;
+  const disp = (b, rna) => (rna && b === 'T') ? 'U' : b;
+  ctx.lineCap = 'butt';
+
+  // origin + direction
+  ctx.setLineDash([4,5]); line(X(-0.5), 30, X(-0.5), H-22, 'rgba(141,153,179,.4)', 1); ctx.setLineDash([]);
+  tag('ori (origin)', X(-0.5)+8, H-12, '#8d99b3');
+  tag('Fork movement  →', W - 80, 18, '#8d99b3');
+
+  // rungs
+  for(let i=0;i<N;i++){
+    const x = X(i), s = sep(i), ty = topY(i), by = botY(i), tb = S.top[i], bb = S.bot[i];
+    if(s < 0.03){
+      const m = (ty+by)/2;
+      line(x, ty, x, m-1, BASECOL[tb], rw); line(x, by, x, m+1, BASECOL[bb], rw);
+      if(showL){ letters.push([x,(ty+m)/2,tb]); letters.push([x,(by+m)/2,bb]); }
+      continue;
+    }
+    // top template with lagging strand
+    const L = S.lag[i];
+    if(L){
+      const ly = lagY(i), m = (ty+ly)/2, gap = L.err ? 4 : 1;
+      line(x, ty, x, m-gap, BASECOL[tb], rw); line(x, ly, x, m+gap, BASECOL[disp(L.b, L.t==='rna')], rw);
+      if(L.err) mismatchMark(x, m);
+      if(showL){ letters.push([x,(ty+m)/2,tb]); letters.push([x,(ly+m)/2,disp(L.b, L.t==='rna')]); }
+      if(S.t - L.born < 0.6) glow(x, ly, 1 - (S.t - L.born)/0.6);
+    } else {
+      line(x, ty, x, ty + g.hg*0.9, BASECOL[tb], rw);
+      if(showL) letters.push([x, ty + g.hg*0.5, tb]);
+    }
+    // bottom template with leading strand
+    const D = S.lead[i];
+    if(D){
+      const ly = leadY(i), m = (by+ly)/2, gap = D.err ? 4 : 1;
+      line(x, by, x, m+gap, BASECOL[bb], rw); line(x, ly, x, m-gap, BASECOL[disp(D.b, D.t==='rna')], rw);
+      if(D.err) mismatchMark(x, m);
+      if(showL){ letters.push([x,(by+m)/2,bb]); letters.push([x,(ly+m)/2,disp(D.b, D.t==='rna')]); }
+      if(S.t - D.born < 0.6) glow(x, ly, 1 - (S.t - D.born)/0.6);
+    } else {
+      line(x, by, x, by - g.hg*0.9, BASECOL[bb], rw);
+      if(showL) letters.push([x, by - g.hg*0.5, bb]);
+    }
+  }
+
+  // hover highlight
+  if(hoverI >= 0){
+    ctx.fillStyle = 'rgba(255,255,255,.06)';
+    ctx.fillRect(X(hoverI) - g.dx/2, 24, g.dx, H - 48);
+  }
+
+  // backbones
+  strandPath(topY, '#7f93b8', 4.5); strandPath(botY, '#7f93b8', 4.5);
+  newStrand(S.lag, lagY, true); newStrand(S.lead, leadY, false);
+
+  // letters
+  if(showL){
+    ctx.font = `700 ${Math.min(11, g.dx*0.72)|0}px ui-monospace,Menlo,Consolas,monospace`;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineWidth = 3; ctx.strokeStyle = 'rgba(10,14,24,.9)';
+    for(const [x,y,c] of letters){ ctx.strokeText(c,x,y); ctx.fillStyle = '#fff'; ctx.fillText(c,x,y); }
+  }
+
+  // strand end labels
+  ctx.font = '600 12px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#9fb0d0';
+  ctx.fillText("5'", X(-0.5)-16, topY(-0.5)); ctx.fillText("3'", X(N-0.5)+16, topY(N-0.5));
+  ctx.fillText("3'", X(-0.5)-16, botY(-0.5)); ctx.fillText("5'", X(N-0.5)+16, botY(N-0.5));
+  if(S.lead[0]){ ctx.fillStyle = '#ffa94d'; ctx.fillText("5'", X(-0.5)-16, leadY(-0.5)); }
+  if(S.lag[0]) { ctx.fillStyle = '#ffa94d'; ctx.fillText("3'", X(-0.5)-16, lagY(-0.5)); }
+  if(sep(0) > 0.9){
+    tag('Parental template  +  lagging strand (Okazaki fragments, built ← away from fork)', X(-0.5) + 240, topY(0) - 16, '#aab6cf');
+    tag('Parental template  +  leading strand (continuous, built → toward fork)', X(-0.5) + 215, botY(0) + 18, '#aab6cf');
+  }
+
+  // SSB proteins on exposed single strands
+  if(!S.done){
+    ctx.fillStyle = 'rgba(200,210,230,.5)'; ctx.strokeStyle = 'rgba(255,255,255,.5)'; ctx.lineWidth = 1;
+    const fmax = Math.min(Math.floor(S.fork), N);
+    for(let i=0;i<fmax;i++){
+      if(sep(i) < 0.6 || i % 2) continue;
+      if(!S.lag[i]){ ctx.beginPath(); ctx.ellipse(X(i)+g.dx/2, topY(i)+g.hg*0.55, Math.max(4,g.dx*0.85), 5, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke(); }
+      if(!S.lead[i]){ ctx.beginPath(); ctx.ellipse(X(i)+g.dx/2, botY(i)-g.hg*0.55, Math.max(4,g.dx*0.85), 5, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke(); }
+    }
+    if(cfg.labels){
+      for(let i=fmax-1;i>=0;i--) if(!S.lag[i] && sep(i) >= 0.6 && i%2===0){ tag('SSB', X(i)+g.dx/2, topY(i)+g.hg*0.55+13, '#c8d2e6'); break; }
+    }
+  }
+
+  drawEnzymes();
+
+  if(S.done){
+    ctx.font = '700 15px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillStyle = '#3ddc84'; ctx.fillText('✔ Replication complete: two semiconservative daughter duplexes', W/2, 22);
+    tag("end-replication gap →", X(N-4), lagY(N-1) + 20, '#ffd23f');
+  }
+}
+
+function mismatchMark(x, y){
+  const pulse = 0.5 + 0.5*Math.sin(S.t*14);
+  ctx.strokeStyle = `rgba(255,59,59,${0.5+0.5*pulse})`; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(x, y, Math.max(7, g.dx*0.6), 0, Math.PI*2); ctx.stroke();
+}
+function glow(x, y, a){
+  ctx.fillStyle = `rgba(255,220,150,${0.45*a})`;
+  ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI*2); ctx.fill();
+}
+
+function drawEnzymes(){
+  const hg = g.hg, t = S.t;
+  // Topoisomerase
+  const tf = S.fork - 0.5 + 5;
+  if(tf < N - 0.5){
+    const x = X(tf), y = g.yc, r = hg + 9;
+    blob(x, y, r*0.75, r, ECOL.topo, 0.35);
+    ctx.save(); ctx.strokeStyle = ECOL.topo; ctx.lineWidth = 3; ctx.setLineDash([6,5]); ctx.lineDashOffset = -t*25;
+    ctx.beginPath(); ctx.ellipse(x, y, r*0.75, r, 0, 0, Math.PI*2); ctx.stroke(); ctx.restore();
+    tag('Topoisomerase', x, y - r - 12, ECOL.topo);
+  }
+  // Helicase (hexameric ring)
+  if(S.fork < N + OVERSHOOT){
+    const x = X(S.fork - 0.5), y = g.yc, a = S.fork > N ? Math.max(0, 1 - (S.fork - N)/OVERSHOOT) : 1;
+    ctx.save(); ctx.globalAlpha = a;
+    for(let k=0;k<6;k++){
+      const ang = t*2.5 + k*Math.PI/3;
+      blob(x + Math.cos(ang)*14, y + Math.sin(ang)*14, 8, 8, ECOL.hel, 0.85*a);
+    }
+    ctx.restore();
+    if(a > 0.3) tag('Helicase', x + 34, y + 30, ECOL.hel);
+  }
+  // Primase
+  const p = S.primase;
+  if(p.state === 'priming'){
+    const tm = (p.a + p.b)/2, x = X(tm);
+    const y = p.kind === 'lead' ? (botY(tm)+leadY(tm))/2 : (topY(tm)+lagY(tm))/2;
+    blob(x, y, Math.max(12, g.dx*1.5), hg*0.9, ECOL.prim);
+    const prog = 1 - p.timer/PRIME_TIME;
+    ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(x, y, 5, -Math.PI/2, -Math.PI/2 + prog*Math.PI*2); ctx.stroke();
+    tag('Primase', x, p.kind === 'lead' ? y + hg + 16 : y - hg - 14, ECOL.prim);
+  }
+  // Pol III leading
+  if(S.leadPrimed && !S.leadDone){
+    const tm = S.leadPos - 0.5, x = X(tm), y = (botY(tm)+leadY(tm))/2;
+    blob(x, y, Math.max(17, g.dx*1.7), hg*1.35, ECOL.pol3);
+    ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x - g.dx*0.6, y, 5, hg*1.05, 0, 0, Math.PI*2); ctx.stroke();
+    tag(S.polLead.fix ? 'Pol III: proofreading!' : 'DNA Pol III →', x, y + hg*1.35 + 13, S.polLead.fix ? ECOL.err : '#8ab8ff');
+  }
+  // Pol III lagging
+  const pg = S.polLag;
+  if(pg.state === 'ext'){
+    const tm = pg.pos + 0.5, x = X(tm), y = (topY(tm)+lagY(tm))/2;
+    blob(x, y, Math.max(17, g.dx*1.7), hg*1.35, ECOL.pol3);
+    ctx.strokeStyle = 'rgba(255,255,255,.55)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(x + g.dx*0.6, y, 5, hg*1.05, 0, 0, Math.PI*2); ctx.stroke();
+    tag(pg.fix ? 'Pol III: proofreading!' : '← DNA Pol III', x, y - hg*1.35 - 12, pg.fix ? ECOL.err : '#8ab8ff');
+  }
+  // Pol I
+  const p1 = S.polI;
+  if(p1.job){
+    const lead = p1.job.strand === 'lead', tm = p1.pos, x = X(tm);
+    const y = lead ? (botY(tm)+leadY(tm))/2 : (topY(tm)+lagY(tm))/2;
+    blob(x, y, Math.max(13, g.dx*1.3), hg*1.1, ECOL.polI);
+    tag('DNA Pol I', x, lead ? y + hg*1.1 + 13 : y - hg*1.1 - 26, ECOL.polI);
+  }
+  // Ligase
+  const lg = S.ligase;
+  if(lg.job){
+    const tm = lg.job.b - 0.5, x = X(tm), y = lagY(tm), pulse = 1 + 0.12*Math.sin(t*12);
+    blob(x, y, 11*pulse, 11*pulse, ECOL.lig);
+    tag('Ligase', x, y + 22, ECOL.lig);
+  }
+}
+
+/* ---------------- panels ---------------- */
+function nowItems(){
+  const it = [];
+  if(S.done) return [['Replication finished. Press Reset or load a new sequence.', '#3ddc84']];
+  if(S.fork < N) it.push([`Helicase unwinding at position ${Math.floor(S.fork)}`, ECOL.hel]);
+  if(S.fork + 5 < N) it.push(['Topoisomerase relieving supercoils ahead of the fork', ECOL.topo]);
+  if(S.primase.state === 'priming') it.push([`Primase building an RNA primer (${S.primase.kind === 'lead' ? 'leading' : 'lagging'} strand)`, ECOL.prim]);
+  if(S.polLead.fix) it.push(['Pol III (leading) proofreading a mismatch', ECOL.err]);
+  else if(S.leadPrimed && !S.leadDone) it.push([`Pol III extending the leading strand (pos ${S.leadPos})`, ECOL.pol3]);
+  if(S.polLag.fix) it.push(['Pol III (lagging) proofreading a mismatch', ECOL.err]);
+  else if(S.polLag.state === 'ext') it.push([`Pol III building Okazaki fragment #${S.polLag.frag.id}`, ECOL.pol3]);
+  if(S.polI.job) it.push([S.polI.job.action === 'replace' ? 'Pol I replacing an RNA primer with DNA' : 'Removing the final RNA primer', ECOL.polI]);
+  if(S.ligase.job) it.push([`Ligase sealing the nick at position ${S.ligase.job.b}`, ECOL.lig]);
+  if(!it.length) it.push(['Waiting…', '#8d99b3']);
+  return it;
+}
+let lastPanel = 0;
+function updatePanels(now){
+  if(now - lastPanel < 150) return; lastPanel = now;
+  $('now').innerHTML = nowItems().map(([s,c]) => `<li style="--c:${c}">${s}</li>`).join('');
+  let leadD=0, lagD=0, rna=0;
+  for(let i=0;i<N;i++){
+    if(S.lead[i]) S.lead[i].t === 'dna' ? leadD++ : rna++;
+    if(S.lag[i])  S.lag[i].t  === 'dna' ? lagD++  : rna++;
+  }
+  const pct = Math.round(100*(leadD + lagD)/(2*N));
+  $('prog').style.width = pct + '%';
+  const rows = [
+    ['New DNA synthesized', pct + '%'],
+    ['Template unwound', Math.round(100*Math.min(S.fork,N)/N) + '%'],
+    ['Leading strand', `${leadD} / ${N} nt`],
+    ['Lagging strand', `${lagD} / ${N} nt`],
+    ['RNA primer bases present', rna],
+    ['Okazaki fragments', S.fragCount],
+    ['Nicks sealed by ligase', S.sealedCount],
+    ['Mismatches made / fixed', `${S.errors} / ${S.fixed}`],
+    ['Simulated time', S.t.toFixed(1) + ' s']
+  ];
+  $('stats').innerHTML = rows.map(([a,b]) => `<span>${a}</span><span>${b}</span>`).join('');
+  updateHover();
+}
+
+function updateHover(){
+  const el = $('hover');
+  if(hoverI < 0){ el.textContent = 'Hover over the DNA to inspect a position.'; return; }
+  const i = hoverI, fmt = (b) => b ? `${b.t === 'rna' && b.b === 'T' ? 'U' : b.b}${b.t === 'rna' ? ' (RNA)' : ''}${b.err ? ' ✗MISMATCH' : ''}` : '—';
+  const L = S.lag[i];
+  el.textContent = `Pos ${i} │ top template 5'→3': ${S.top[i]} │ bottom template 3'→5': ${S.bot[i]} │ ` +
+    `${i < Math.min(S.fork,N) ? 'unwound' : 'still paired'} │ lagging new: ${fmt(L)}${L ? ' [frag #' + L.frag + ']' : ''} │ leading new: ${fmt(S.lead[i])}`;
+}
+
+cv.addEventListener('mousemove', e => {
+  const r = cv.getBoundingClientRect(), mx = e.clientX - r.left;
+  const i = Math.floor((mx - g.m)/g.dx);
+  hoverI = (i >= 0 && i < N) ? i : -1; updateHover();
+});
+cv.addEventListener('mouseleave', () => { hoverI = -1; updateHover(); });
+
+/* ---------------- controls ---------------- */
+$('play').onclick = () => { running = !running; $('play').textContent = running ? '⏸ Pause' : '▶ Play'; };
+$('step').onclick = () => {
+  running = false; $('play').textContent = '▶ Play';
+  for(let k=0;k<20 && !S.done;k++) update(0.02);
+};
+$('reset').onclick = () => init(S.seq);
+$('speed').oninput = e => { cfg.speed = +e.target.value; $('speedV').textContent = cfg.speed + '×'; };
+$('okLen').oninput = e => { cfg.okLen = +e.target.value; $('okLenV').textContent = cfg.okLen + ' nt'; };
+$('err').oninput = e => { cfg.err = +e.target.value; $('errV').textContent = (cfg.err*100).toFixed(1).replace(/\.0$/,'') + '%'; };
+$('letters').onchange = e => cfg.letters = e.target.checked;
+$('labels').onchange = e => cfg.labels = e.target.checked;
+$('len').oninput = e => $('lenV').textContent = e.target.value;
+$('rand').onclick = () => { const s = randomSeq(+$('len').value); $('seq').value = s; init(s); };
+$('apply').onclick = () => {
+  const s = $('seq').value.toUpperCase().replace(/[^ACGT]/g, '');
+  if(s.length < 10 || s.length > 140){ alert('Please enter 10–140 bases using only A, C, G, T.'); return; }
+  $('seq').value = s; init(s);
+};
+
+/* ---------------- loop ---------------- */
+let last = performance.now();
+function frame(now){
+  const real = Math.min(0.05, (now - last)/1000); last = now;
+  if(running && !S.done){ let dt = real*cfg.speed; while(dt > 1e-6){ const h = Math.min(0.02, dt); update(h); dt -= h; } }
+  draw(); updatePanels(now);
+  requestAnimationFrame(frame);
+}
+
+resize();
+const first = randomSeq(48); $('seq').value = first; init(first);
+requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

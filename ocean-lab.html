@@ -1,0 +1,531 @@
+<title>Droplet Tank</title>
+<script>document.documentElement.setAttribute('data-theme','dark')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#E4E8E6; --panel:#F3F5F4; --ink:#16211F; --muted:#5E6D6A; --line:#C8D1CE;
+  --accent:#0E6BA8; --accent-ink:#FFFFFF; --chip:#E9EEEC;
+  --tank:#F7F9F8; --grid:#E0E7E5; --tick:#9AA9A5;
+  --water-deep:#0B4F7C; --water-surf:#2E9BD6; --water-rim:#7CC6EA; --foam:#BFE3F5;
+  --obstacle:#3A4744; --obstacle-edge:#16211F; --arrow:#C0392B;
+  --sans:'Familjen Grotesk',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1413; --panel:#151D1C; --ink:#DCE5E3; --muted:#8A9A97; --line:#26312F;
+    --accent:#5DB5E8; --accent-ink:#06121A; --chip:#1B2524;
+    --tank:#0A100F; --grid:#141D1C; --tick:#3D4B48;
+    --water-deep:#0D3F63; --water-surf:#2B8FCB; --water-rim:#86D0F0; --foam:#E6F6FD;
+    --obstacle:#3C4A47; --obstacle-edge:#9FB0AC; --arrow:#F07A5E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1413; --panel:#151D1C; --ink:#DCE5E3; --muted:#8A9A97; --line:#26312F;
+  --accent:#5DB5E8; --accent-ink:#06121A; --chip:#1B2524;
+  --tank:#0A100F; --grid:#141D1C; --tick:#3D4B48;
+  --water-deep:#0D3F63; --water-surf:#2B8FCB; --water-rim:#86D0F0; --foam:#E6F6FD;
+  --obstacle:#3C4A47; --obstacle-edge:#9FB0AC; --arrow:#F07A5E;
+}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:14px;padding-inline:16px;box-sizing:border-box;}
+*,*::before,*::after{box-sizing:border-box}
+.app{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:16px;padding-block:16px}
+.stage{position:relative;min-height:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--tank)}
+#tank{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.hud{position:absolute;left:10px;top:10px;font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  background:color-mix(in srgb,var(--tank) 80%,transparent);padding:4px 8px;border-radius:4px;
+  font-variant-numeric:tabular-nums;pointer-events:none;letter-spacing:.02em}
+.hud b{color:var(--ink);font-weight:500}
+.panel{min-height:0;overflow:auto;display:flex;flex-direction:column;gap:20px;background:var(--panel);
+  border:1px solid var(--line);border-radius:6px;padding:18px 16px}
+h1{font-size:24px;font-weight:700;letter-spacing:-.01em;margin:0;text-wrap:balance;line-height:1.1}
+.lede{margin:6px 0 0;color:var(--muted);line-height:1.45}
+.label{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--chip);border:1px solid var(--line);border-radius:6px;padding:3px;gap:3px}
+.seg button{font:inherit;font-weight:500;border:0;background:transparent;color:var(--ink);padding:7px 0;border-radius:4px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.seg.two{grid-template-columns:repeat(2,1fr)}
+.tool-hint{font-size:12.5px;color:var(--muted);margin:8px 0 0;line-height:1.4;min-height:2.8em}
+.ctl{display:flex;flex-direction:column;gap:14px}
+.row{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:4px 8px}
+.row label{font-weight:500}
+.row output{font-family:var(--mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.row input{grid-column:1/-1;width:100%;accent-color:var(--accent);margin:2px 0 0}
+.btns{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.btn{font:inherit;font-weight:500;padding:8px 10px;border:1px solid var(--line);background:var(--tank);color:var(--ink);border-radius:5px;cursor:pointer;text-align:left}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.keys{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+kbd{font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;background:var(--tank);color:var(--ink)}
+@media (max-width:760px){
+  html,body{height:auto}
+  .app{grid-template-columns:1fr;grid-template-rows:62svh auto;height:auto}
+  .panel{overflow:visible}
+}
+</style>
+
+<div class="app">
+  <div class="stage" id="stage">
+    <canvas id="tank" aria-label="Water particle tank. Drag to interact."></canvas>
+    <div class="hud" id="hud"></div>
+  </div>
+  <aside class="panel">
+    <div>
+      <h1>Droplet Tank</h1>
+      <p class="lede">Particle water with gravity, surface tension and collisions. Drag inside the tank to play with it.</p>
+    </div>
+
+    <div>
+      <p class="label">Pointer tool</p>
+      <div class="seg" role="group" aria-label="Pointer tool">
+        <button id="t-pour" aria-pressed="true">Pour</button>
+        <button id="t-stir" aria-pressed="false">Stir</button>
+        <button id="t-pull" aria-pressed="false">Pull</button>
+      </div>
+      <p class="tool-hint" id="toolHint"></p>
+    </div>
+
+    <div class="ctl">
+      <p class="label" style="margin-bottom:-6px">Physics</p>
+      <div class="row"><label for="g">Gravity</label><output id="gOut"></output>
+        <input id="g" type="range" min="0" max="3" step="0.05" value="1"></div>
+      <div class="row"><label for="tilt">Tilt</label><output id="tiltOut"></output>
+        <input id="tilt" type="range" min="-60" max="60" step="1" value="0"></div>
+      <div class="row"><label for="ten">Surface tension</label><output id="tenOut"></output>
+        <input id="ten" type="range" min="0" max="3" step="0.05" value="1"></div>
+      <div class="row"><label for="visc">Viscosity</label><output id="viscOut"></output>
+        <input id="visc" type="range" min="0" max="5" step="0.1" value="1"></div>
+    </div>
+
+    <div>
+      <p class="label">Scenes</p>
+      <div class="btns">
+        <button class="btn primary" id="b-dam">Dam break</button>
+        <button class="btn" id="b-drop">Drop a blob</button>
+        <button class="btn" id="b-ball">Add a ball</button>
+        <button class="btn" id="b-shake">Shake</button>
+        <button class="btn" id="b-clear">Empty tank</button>
+        <button class="btn" id="b-pause">Pause</button>
+      </div>
+    </div>
+
+    <div>
+      <p class="label">Render</p>
+      <div class="seg two" role="group" aria-label="Render mode">
+        <button id="r-liquid" aria-pressed="true">Liquid</button>
+        <button id="r-dots" aria-pressed="false">Particles</button>
+      </div>
+    </div>
+
+    <p class="keys"><kbd>Space</kbd> pause · <kbd>R</kbd> dam break · <kbd>←</kbd><kbd>→</kbd> tilt · <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> tools. Drag a ball to move it, double-click it to remove it.</p>
+  </aside>
+</div>
+
+<script>
+(() => {
+// ---------- simulation constants (units: px, one substep = one time unit) ----------
+const H = 20, H2 = H * H;          // interaction radius
+const REST = 3.0;                   // rest density
+const K = 0.45, KN = 1.6;           // pressure / near-pressure stiffness
+const MAX = 2600, SUB = 2, VMAX = 9;
+const G0 = 0.11, SIG0 = 0.16, VISC0 = 0.1, BETA = 0.015;
+const PR = 3;                        // particle collision radius
+
+const S = { g: 1, tilt: 0, tension: 1, visc: 1, tool: 'pour', render: 'liquid', paused: false };
+
+// particle arrays
+const x = new Float32Array(MAX), y = new Float32Array(MAX), px = new Float32Array(MAX), py = new Float32Array(MAX);
+const vx = new Float32Array(MAX), vy = new Float32Array(MAX);
+const rho = new Float32Array(MAX), rhoN = new Float32Array(MAX), P = new Float32Array(MAX), PN = new Float32Array(MAX);
+const dxA = new Float32Array(MAX), dyA = new Float32Array(MAX);
+const cell = new Int32Array(MAX), sorted = new Int32Array(MAX);
+let n = 0;
+
+// neighbour pairs
+const PC = MAX * 32;
+const pi = new Int32Array(PC), pj = new Int32Array(PC), pq = new Float32Array(PC), pnx = new Float32Array(PC), pny = new Float32Array(PC);
+let np = 0;
+
+// grid
+let cols = 0, rows = 0, cellStart = new Int32Array(1), cursor = new Int32Array(1);
+
+// world
+let W = 800, Hh = 600, DPR = 1;
+const obstacles = [];
+
+// ---------- canvas ----------
+const stage = document.getElementById('stage');
+const cv = document.getElementById('tank'), ctx = cv.getContext('2d');
+const field = document.createElement('canvas');
+const fctx = field.getContext('2d', { willReadFrequently: true });
+const FS = 0.5;               // field resolution relative to world px
+const BLOB = 12;              // metaball radius in world px
+let fw = 1, fh = 1, img = null;
+
+function resize() {
+  const r = stage.getBoundingClientRect();
+  const nw = Math.max(200, Math.floor(r.width)), nh = Math.max(200, Math.floor(r.height));
+  DPR = Math.min(2, window.devicePixelRatio || 1);
+  cv.width = Math.round(nw * DPR); cv.height = Math.round(nh * DPR);
+  const first = n === 0 && W === 800;
+  W = nw; Hh = nh;
+  cols = Math.ceil(W / H) + 3; rows = Math.ceil(Hh / H) + 3;
+  cellStart = new Int32Array(cols * rows + 1); cursor = new Int32Array(cols * rows);
+  fw = Math.ceil(W * FS); fh = Math.ceil(Hh * FS);
+  field.width = fw; field.height = fh; img = null;
+  for (let i = 0; i < n; i++) { x[i] = Math.min(Math.max(x[i], PR), W - PR); y[i] = Math.min(Math.max(y[i], PR), Hh - PR); }
+  for (const o of obstacles) { o.x = Math.min(Math.max(o.x, o.r), W - o.r); o.y = Math.min(Math.max(o.y, o.r), Hh - o.r); }
+  return first;
+}
+
+// ---------- sprites for the metaball field (R = density, G = density × speed) ----------
+const SPR = Math.ceil(BLOB * FS), SPD = SPR * 2 + 1, BUCKETS = 8, PEAK = 70;
+const sprites = [];
+for (let b = 0; b < BUCKETS; b++) {
+  const c = document.createElement('canvas'); c.width = c.height = SPD;
+  const g = c.getContext('2d'); const id = g.createImageData(SPD, SPD);
+  const s = b / (BUCKETS - 1);
+  for (let j = 0; j < SPD; j++) for (let i = 0; i < SPD; i++) {
+    const dx = (i - SPR) / SPR, dy = (j - SPR) / SPR, d2 = dx * dx + dy * dy;
+    const w = d2 < 1 ? (1 - d2) * (1 - d2) : 0, k = (j * SPD + i) * 4;
+    id.data[k] = Math.round(PEAK * w); id.data[k + 1] = Math.round(PEAK * w * s); id.data[k + 2] = 0; id.data[k + 3] = 255;
+  }
+  g.putImageData(id, 0, 0); sprites.push(c);
+}
+
+// ---------- theme colours ----------
+let C = {};
+function hex(v) { v = v.trim().replace('#', ''); if (v.length === 3) v = v.split('').map(c => c + c).join(''); const n = parseInt(v, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function readTheme() {
+  const cs = getComputedStyle(document.documentElement), g = k => cs.getPropertyValue(k).trim();
+  C = { tank: g('--tank'), grid: g('--grid'), tick: g('--tick'), obstacle: g('--obstacle'), edge: g('--obstacle-edge'),
+        arrow: g('--arrow'), muted: g('--muted'),
+        deep: hex(g('--water-deep')), surf: hex(g('--water-surf')), rim: hex(g('--water-rim')), foam: hex(g('--foam')),
+        surfS: g('--water-surf'), foamS: g('--foam') };
+}
+readTheme();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readTheme);
+new MutationObserver(readTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'class', 'style'] });
+
+// ---------- particles ----------
+function add(x0, y0, vx0 = 0, vy0 = 0) {
+  if (n >= MAX) return false;
+  x[n] = x0; y[n] = y0; vx[n] = vx0; vy[n] = vy0; px[n] = x0 - vx0; py[n] = y0 - vy0; n++; return true;
+}
+function fillRect(x0, y0, w, h, sp) {
+  for (let yy = y0 + h; yy > y0; yy -= sp)
+    for (let xx = x0; xx < x0 + w; xx += sp) add(xx + (Math.random() - .5) * .5, yy);
+}
+function damBreak() {
+  n = 0; np = 0;
+  obstacles.length = 0;
+  obstacles.push({ x: W * 0.64, y: Hh * 0.74, r: Math.max(18, Math.min(W, Hh) * 0.07) });
+  let sp = 8.5, bw = W * 0.34, bh = Hh * 0.62;
+  while ((bw / sp) * (bh / sp) > 1700) sp += 0.25;
+  fillRect(PR + 2, Hh - bh - PR, bw, bh, sp);
+}
+function dropBlob() {
+  const r = Math.min(60, Math.min(W, Hh) * 0.12), cx = W * (0.3 + Math.random() * 0.4), cy = r + 20;
+  for (let yy = -r; yy <= r; yy += 8.5) for (let xx = -r; xx <= r; xx += 8.5)
+    if (xx * xx + yy * yy <= r * r) add(cx + xx, cy + yy, 0, 1);
+}
+function addBall() {
+  if (obstacles.length >= 6) obstacles.shift();
+  const r = Math.max(16, Math.min(W, Hh) * (0.04 + Math.random() * 0.04));
+  obstacles.push({ x: W * (0.2 + Math.random() * 0.6), y: Hh * (0.25 + Math.random() * 0.3), r });
+}
+function shake() {
+  for (let i = 0; i < n; i++) { const vxx = (Math.random() - .5) * 6, vyy = -2 - Math.random() * 5; px[i] = x[i] - vxx; py[i] = y[i] - vyy; }
+}
+
+// ---------- pointer ----------
+const ptr = { down: false, x: 0, y: 0, lx: 0, ly: 0, vx: 0, vy: 0, inside: false, drag: null };
+function local(e) { const r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+function hitObstacle(mx, my) { for (let k = obstacles.length - 1; k >= 0; k--) { const o = obstacles[k]; if ((mx - o.x) ** 2 + (my - o.y) ** 2 <= o.r * o.r) return o; } return null; }
+cv.addEventListener('pointerdown', e => {
+  const [mx, my] = local(e); cv.setPointerCapture(e.pointerId);
+  ptr.down = true; ptr.x = ptr.lx = mx; ptr.y = ptr.ly = my; ptr.vx = ptr.vy = 0;
+  const o = hitObstacle(mx, my); ptr.drag = o ? { o, ox: mx - o.x, oy: my - o.y } : null;
+});
+cv.addEventListener('pointermove', e => { const [mx, my] = local(e); ptr.x = mx; ptr.y = my; ptr.inside = true;
+  cv.style.cursor = (ptr.drag || hitObstacle(mx, my)) ? 'grab' : 'crosshair'; });
+const up = () => { ptr.down = false; ptr.drag = null; };
+cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+cv.addEventListener('pointerleave', () => { ptr.inside = false; });
+cv.addEventListener('dblclick', e => { const [mx, my] = local(e); const o = hitObstacle(mx, my); if (o) obstacles.splice(obstacles.indexOf(o), 1); });
+
+// ---------- grid & neighbours ----------
+function buildGrid() {
+  const nc = cols * rows;
+  cellStart.fill(0);
+  for (let i = 0; i < n; i++) {
+    let cx = (x[i] / H | 0) + 1, cy = (y[i] / H | 0) + 1;
+    if (cx < 1) cx = 1; else if (cx > cols - 2) cx = cols - 2;
+    if (cy < 1) cy = 1; else if (cy > rows - 2) cy = rows - 2;
+    const c = cy * cols + cx; cell[i] = c; cellStart[c + 1]++;
+  }
+  for (let c = 0; c < nc; c++) { cellStart[c + 1] += cellStart[c]; cursor[c] = cellStart[c]; }
+  for (let i = 0; i < n; i++) sorted[cursor[cell[i]]++] = i;
+}
+function findPairs() {
+  np = 0;
+  for (let i = 0; i < n; i++) {
+    const c = cell[i], xi = x[i], yi = y[i];
+    for (let oy = -cols; oy <= cols; oy += cols) for (let ox = -1; ox <= 1; ox++) {
+      const nc = c + oy + ox, e = cellStart[nc + 1];
+      for (let s = cellStart[nc]; s < e; s++) {
+        const j = sorted[s]; if (j <= i) continue;
+        const dx = x[j] - xi, dy = y[j] - yi, r2 = dx * dx + dy * dy;
+        if (r2 >= H2 || r2 < 1e-8) continue;
+        if (np >= PC) return;
+        const r = Math.sqrt(r2);
+        pi[np] = i; pj[np] = j; pq[np] = 1 - r / H; pnx[np] = dx / r; pny[np] = dy / r; np++;
+      }
+    }
+  }
+}
+
+// ---------- one substep ----------
+function step() {
+  const ang = S.tilt * Math.PI / 180, g = G0 * S.g;
+  const gx = g * Math.sin(ang), gy = g * Math.cos(ang);
+  for (let i = 0; i < n; i++) { vx[i] += gx; vy[i] += gy; }
+
+  // pointer forces
+  if (ptr.down && !ptr.drag && S.tool !== 'pour') {
+    const R = 70, R2 = R * R, tvx = ptr.vx / SUB, tvy = ptr.vy / SUB;
+    for (let i = 0; i < n; i++) {
+      const dx = ptr.x - x[i], dy = ptr.y - y[i], d2 = dx * dx + dy * dy;
+      if (d2 > R2) continue;
+      const d = Math.sqrt(d2) + 1e-4, f = 1 - d / R;
+      if (S.tool === 'stir') { vx[i] += (tvx - vx[i]) * 0.25 * f; vy[i] += (tvy - vy[i]) * 0.25 * f; }
+      else { vx[i] += dx / d * 0.45 * f - vx[i] * 0.06 * f; vy[i] += dy / d * 0.45 * f - vy[i] * 0.06 * f; }
+    }
+  }
+
+  // viscosity impulses (pairs from the previous substep)
+  const sv = VISC0 * S.visc, bv = BETA * S.visc;
+  if (sv > 0) for (let p = 0; p < np; p++) {
+    const i = pi[p], j = pj[p], nx = pnx[p], ny = pny[p];
+    const u = (vx[i] - vx[j]) * nx + (vy[i] - vy[j]) * ny;
+    if (u > 0) {
+      const I = 0.5 * pq[p] * (sv * u + bv * u * u), ix = I * nx, iy = I * ny;
+      vx[i] -= ix; vy[i] -= iy; vx[j] += ix; vy[j] += iy;
+    }
+  }
+
+  // predict
+  for (let i = 0; i < n; i++) {
+    let sp = vx[i] * vx[i] + vy[i] * vy[i];
+    if (sp > VMAX * VMAX) { sp = VMAX / Math.sqrt(sp); vx[i] *= sp; vy[i] *= sp; }
+    px[i] = x[i]; py[i] = y[i]; x[i] += vx[i]; y[i] += vy[i];
+  }
+
+  buildGrid(); findPairs();
+
+  // double density relaxation + cohesion (surface tension)
+  rho.fill(0, 0, n); rhoN.fill(0, 0, n);
+  for (let p = 0; p < np; p++) {
+    const q = pq[p], q2 = q * q, q3 = q2 * q, i = pi[p], j = pj[p];
+    rho[i] += q2; rho[j] += q2; rhoN[i] += q3; rhoN[j] += q3;
+  }
+  for (let i = 0; i < n; i++) { const pr = K * (rho[i] - REST); P[i] = pr > 0 ? pr : pr * 0.15; PN[i] = KN * rhoN[i]; dxA[i] = 0; dyA[i] = 0; }
+  const sig = SIG0 * S.tension;
+  for (let p = 0; p < np; p++) {
+    const i = pi[p], j = pj[p], q = pq[p];
+    let D = 0.5 * (P[i] + P[j]) * q + 0.5 * (PN[i] + PN[j]) * q * q - sig * q * (1 - q);
+    D *= 0.5;
+    const ddx = D * pnx[p], ddy = D * pny[p];
+    dxA[i] -= ddx; dyA[i] -= ddy; dxA[j] += ddx; dyA[j] += ddy;
+  }
+
+  // apply + collisions
+  const rt = W - PR, bt = Hh - PR;
+  for (let i = 0; i < n; i++) {
+    let xi = x[i] + dxA[i], yi = y[i] + dyA[i];
+    for (let k = 0; k < obstacles.length; k++) {
+      const o = obstacles[k], dx = xi - o.x, dy = yi - o.y, rr = o.r + PR, d2 = dx * dx + dy * dy;
+      if (d2 < rr * rr) {
+        const d = Math.sqrt(d2) || 1e-3, nx = dx / d, ny = dy / d;
+        xi = o.x + nx * rr; yi = o.y + ny * rr;
+        // tangential friction on the ball surface
+        const tx = -ny, ty = nx, vt = (xi - px[i]) * tx + (yi - py[i]) * ty;
+        px[i] += vt * 0.05 * tx; py[i] += vt * 0.05 * ty;
+      }
+    }
+    if (xi < PR) { xi = PR; py[i] += (yi - py[i]) * 0.05; } else if (xi > rt) { xi = rt; py[i] += (yi - py[i]) * 0.05; }
+    if (yi < PR) { yi = PR; px[i] += (xi - px[i]) * 0.05; } else if (yi > bt) { yi = bt; px[i] += (xi - px[i]) * 0.05; }
+    x[i] = xi; y[i] = yi;
+    vx[i] = xi - px[i]; vy[i] = yi - py[i];
+  }
+}
+
+// ---------- rendering ----------
+function drawTank() {
+  ctx.fillStyle = C.tank; ctx.fillRect(0, 0, W, Hh);
+  ctx.strokeStyle = C.grid; ctx.lineWidth = 1; ctx.beginPath();
+  for (let gx = 40; gx < W; gx += 40) { ctx.moveTo(gx + .5, 0); ctx.lineTo(gx + .5, Hh); }
+  for (let gy = Hh - 40; gy > 0; gy -= 40) { ctx.moveTo(0, gy + .5); ctx.lineTo(W, gy + .5); }
+  ctx.stroke();
+  // graduation ticks on the right wall, counted up from the floor
+  ctx.strokeStyle = C.tick; ctx.beginPath();
+  for (let k = 1, gy = Hh - 20; gy > 30; gy -= 20, k++) { const len = k % 5 === 0 ? 14 : 7; ctx.moveTo(W, gy + .5); ctx.lineTo(W - len, gy + .5); }
+  ctx.stroke();
+  ctx.fillStyle = C.tick; ctx.font = '10px "IBM Plex Mono", monospace'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  for (let k = 5, gy = Hh - 100; gy > 30; gy -= 100, k += 5) ctx.fillText(String(k * 20), W - 18, gy);
+}
+function drawLiquid() {
+  fctx.globalCompositeOperation = 'source-over'; fctx.fillStyle = '#000'; fctx.fillRect(0, 0, fw, fh);
+  fctx.globalCompositeOperation = 'lighter';
+  const vs = 1 / (VMAX * 0.55);
+  for (let i = 0; i < n; i++) {
+    let s = Math.hypot(vx[i], vy[i]) * vs; if (s > 1) s = 1;
+    fctx.drawImage(sprites[(s * (BUCKETS - 1) + .5) | 0], x[i] * FS - SPR, y[i] * FS - SPR);
+  }
+  img = fctx.getImageData(0, 0, fw, fh);
+  const d = img.data, dp = C.deep, sf = C.surf, rm = C.rim, fm = C.foam, T0 = 30, T1 = 44;
+  for (let k = 0, L = d.length; k < L; k += 4) {
+    const r = d[k];
+    if (r < T0) { d[k + 3] = 0; continue; }
+    const g = d[k + 1];
+    let t = (r - T1) / 170; if (t < 0) t = 0; else if (t > 1) t = 1;
+    t = Math.sqrt(t);
+    let cr = sf[0] + (dp[0] - sf[0]) * t, cg = sf[1] + (dp[1] - sf[1]) * t, cb = sf[2] + (dp[2] - sf[2]) * t;
+    if (r < 62) { const e = 1 - (r - T0) / 32; cr += (rm[0] - cr) * e * .8; cg += (rm[1] - cg) * e * .8; cb += (rm[2] - cb) * e * .8; }
+    const s = g / r;
+    if (s > 0.45) { const f = Math.min(0.75, (s - 0.45) * 2.2); cr += (fm[0] - cr) * f; cg += (fm[1] - cg) * f; cb += (fm[2] - cb) * f; }
+    d[k] = cr; d[k + 1] = cg; d[k + 2] = cb;
+    d[k + 3] = r < T1 ? ((r - T0) / (T1 - T0)) * 235 : 235;
+  }
+  fctx.globalCompositeOperation = 'source-over';
+  fctx.putImageData(img, 0, 0);
+  ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(field, 0, 0, fw, fh, 0, 0, fw / FS, fh / FS);
+}
+function drawDots() {
+  const vs = 1 / (VMAX * 0.55), sf = C.surf, fm = C.foam;
+  for (let b = 0; b < 6; b++) {
+    const t = b / 5;
+    ctx.fillStyle = `rgb(${sf[0] + (fm[0] - sf[0]) * t | 0},${sf[1] + (fm[1] - sf[1]) * t | 0},${sf[2] + (fm[2] - sf[2]) * t | 0})`;
+    ctx.beginPath();
+    for (let i = 0; i < n; i++) {
+      let s = Math.hypot(vx[i], vy[i]) * vs; if (s > 1) s = 1;
+      if (((s * 5 + .5) | 0) !== b) continue;
+      ctx.moveTo(x[i] + 3.4, y[i]); ctx.arc(x[i], y[i], 3.4, 0, Math.PI * 2);
+    }
+    ctx.fill();
+  }
+}
+function drawObstacles() {
+  for (const o of obstacles) {
+    ctx.beginPath(); ctx.arc(o.x, o.y, o.r, 0, Math.PI * 2);
+    ctx.fillStyle = C.obstacle; ctx.fill();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = C.edge; ctx.stroke();
+    ctx.beginPath(); ctx.arc(o.x - o.r * .3, o.y - o.r * .3, o.r * .22, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(255,255,255,.12)'; ctx.fill();
+  }
+}
+function drawGravity() {
+  const cx = W - 44, cy = 30, ang = S.tilt * Math.PI / 180, len = 8 + 12 * Math.min(S.g, 3) / 1.5;
+  const ex = cx + Math.sin(ang) * len, ey = cy + Math.cos(ang) * len;
+  ctx.strokeStyle = C.arrow; ctx.fillStyle = C.arrow; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.arc(cx, cy, 2.5, 0, Math.PI * 2); ctx.fill();
+  if (S.g <= 0) return;
+  ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(ex, ey); ctx.stroke();
+  const a = Math.atan2(ey - cy, ex - cx);
+  ctx.beginPath(); ctx.moveTo(ex + Math.cos(a) * 4, ey + Math.sin(a) * 4);
+  ctx.lineTo(ex + Math.cos(a + 2.4) * 7, ey + Math.sin(a + 2.4) * 7);
+  ctx.lineTo(ex + Math.cos(a - 2.4) * 7, ey + Math.sin(a - 2.4) * 7); ctx.fill();
+  ctx.fillStyle = C.muted; ctx.font = '10px "IBM Plex Mono", monospace'; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+  ctx.fillText('g', cx - 10, cy);
+}
+function drawPointer() {
+  if (!ptr.inside || ptr.drag) return;
+  ctx.strokeStyle = C.tick; ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
+  ctx.beginPath(); ctx.arc(ptr.x, ptr.y, S.tool === 'pour' ? 10 : 70, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+}
+
+// ---------- loop ----------
+const hud = document.getElementById('hud');
+let last = performance.now(), fps = 60, hudT = 0;
+function frame(now) {
+  const dt = now - last; last = now; fps += ((1000 / Math.max(dt, 1)) - fps) * 0.08;
+
+  // pointer velocity & obstacle dragging
+  ptr.vx = ptr.x - ptr.lx; ptr.vy = ptr.y - ptr.ly; ptr.lx = ptr.x; ptr.ly = ptr.y;
+  if (ptr.drag) {
+    const o = ptr.drag.o;
+    o.x = Math.min(Math.max(ptr.x - ptr.drag.ox, o.r), W - o.r);
+    o.y = Math.min(Math.max(ptr.y - ptr.drag.oy, o.r), Hh - o.r);
+  } else if (ptr.down && S.tool === 'pour' && !S.paused) {
+    for (let k = 0; k < 4; k++) {
+      const a = Math.random() * Math.PI * 2, r = Math.random() * 7;
+      const sx = ptr.x + Math.cos(a) * r, sy = ptr.y + Math.sin(a) * r;
+      if (!hitObstacle(sx, sy)) add(Math.min(Math.max(sx, PR), W - PR), Math.min(Math.max(sy, PR), Hh - PR), ptr.vx * .25 / SUB, ptr.vy * .25 / SUB + .5);
+    }
+  }
+
+  if (!S.paused) for (let s = 0; s < SUB; s++) step();
+
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  drawTank();
+  if (S.render === 'liquid') drawLiquid(); else drawDots();
+  drawObstacles(); drawGravity(); drawPointer();
+
+  if (now - hudT > 250) {
+    hudT = now;
+    hud.innerHTML = `<b>${n.toLocaleString()}</b> / ${MAX.toLocaleString()} particles · <b>${Math.round(fps)}</b> fps${S.paused ? ' · <b>paused</b>' : ''}${n >= MAX ? ' · tank full' : ''}`;
+  }
+  requestAnimationFrame(frame);
+}
+
+// ---------- UI ----------
+const $ = id => document.getElementById(id);
+const hints = {
+  pour: 'Hold and drag to pour water. Flick while pouring to throw it.',
+  stir: 'Drag through the water to push it along with the pointer.',
+  pull: 'Hold to draw nearby water toward the pointer, like a suction nozzle.'
+};
+function setTool(t) {
+  S.tool = t;
+  for (const k of ['pour', 'stir', 'pull']) $('t-' + k).setAttribute('aria-pressed', String(k === t));
+  $('toolHint').textContent = hints[t];
+}
+function setRender(r) { S.render = r; $('r-liquid').setAttribute('aria-pressed', String(r === 'liquid')); $('r-dots').setAttribute('aria-pressed', String(r === 'dots')); }
+function setPaused(p) { S.paused = p; $('b-pause').textContent = p ? 'Resume' : 'Pause'; }
+function syncOutputs() {
+  S.g = +$('g').value; S.tilt = +$('tilt').value; S.tension = +$('ten').value; S.visc = +$('visc').value;
+  $('gOut').textContent = (9.81 * S.g).toFixed(2) + ' m/s²';
+  $('tiltOut').textContent = (S.tilt > 0 ? '+' : '') + S.tilt + '°';
+  $('tenOut').textContent = (72.8 * S.tension).toFixed(1) + ' mN/m';
+  $('viscOut').textContent = (1.0 * S.visc).toFixed(1) + ' mPa·s';
+}
+for (const id of ['g', 'tilt', 'ten', 'visc']) $(id).addEventListener('input', syncOutputs);
+$('t-pour').onclick = () => setTool('pour'); $('t-stir').onclick = () => setTool('stir'); $('t-pull').onclick = () => setTool('pull');
+$('r-liquid').onclick = () => setRender('liquid'); $('r-dots').onclick = () => setRender('dots');
+$('b-dam').onclick = damBreak; $('b-drop').onclick = dropBlob; $('b-ball').onclick = addBall;
+$('b-shake').onclick = shake; $('b-clear').onclick = () => { n = 0; np = 0; };
+$('b-pause').onclick = () => setPaused(!S.paused);
+window.addEventListener('keydown', e => {
+  if (e.target instanceof HTMLInputElement || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === ' ') { e.preventDefault(); setPaused(!S.paused); }
+  else if (e.key === 'r' || e.key === 'R') damBreak();
+  else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+    const t = $('tilt'); t.value = Math.max(-60, Math.min(60, +t.value + (e.key === 'ArrowLeft' ? -5 : 5))); syncOutputs();
+  }
+  else if (e.key === '1') setTool('pour'); else if (e.key === '2') setTool('stir'); else if (e.key === '3') setTool('pull');
+});
+
+new ResizeObserver(() => resize()).observe(stage);
+resize();
+setTool('pour'); syncOutputs();
+damBreak();
+requestAnimationFrame(t => { last = t; requestAnimationFrame(frame); });
+})();
+</script>

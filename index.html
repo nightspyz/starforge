@@ -85,6 +85,8 @@ section.hero{min-height:100vh;max-width:none;padding-block:0}
 @keyframes emerge{from{opacity:.2;filter:blur(6px);letter-spacing:.02em}to{opacity:1;filter:blur(0)}}
 
 .when{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;color:var(--helium);margin:0 0 14px}
+.scale-note{max-width:40rem;margin:22px auto 0;padding:14px 20px;border-top:1px solid var(--faint);border-bottom:1px solid var(--faint);font-family:var(--mono);font-size:11.5px;letter-spacing:.03em;line-height:1.6;color:var(--muted);text-align:center}
+.scale-note b{color:var(--helium);font-weight:400}
 h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,4.2vw,3.1rem);line-height:1.08;margin:0 0 18px;text-wrap:balance}
 section p{margin:0 0 14px;max-width:62ch}
 section p.fact{color:var(--ink)}
@@ -308,6 +310,20 @@ body.in-chapter .clock{opacity:0}
   display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:border-color .3s,background .3s}
 .navtoggle:hover,.navtoggle:focus-visible{border-color:var(--helium)}
 .navtoggle svg{width:15px;height:15px}
+
+/* ambient-music toggle, sits just left of the chapter menu button */
+.soundtoggle{position:fixed;right:60px;top:calc(16px + env(safe-area-inset-top,0px));z-index:40;
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--faint);background:rgba(5,6,10,.7);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:var(--starlight);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:border-color .3s,background .3s,color .3s}
+.soundtoggle:hover,.soundtoggle:focus-visible{border-color:var(--helium)}
+.soundtoggle svg{width:15px;height:15px;position:absolute;transition:opacity .25s}
+.soundtoggle .ic-on{opacity:0}
+.soundtoggle.playing .ic-on{opacity:1}
+.soundtoggle.playing .ic-off{opacity:0}
+.soundtoggle.playing{color:var(--helium);border-color:rgba(246,195,91,.5)}
+@keyframes soundPulse{0%,100%{box-shadow:0 0 0 rgba(246,195,91,0)}50%{box-shadow:0 0 12px rgba(246,195,91,.35)}}
+.soundtoggle.playing{animation:soundPulse 3.4s ease-in-out infinite}
 .navlist{list-style:none;margin:8px 0 0;padding:12px 16px 12px 14px;display:flex;flex-direction:column;gap:9px;
   max-height:70vh;overflow-y:auto;background:rgba(5,6,10,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   border:1px solid var(--faint);border-radius:8px;text-align:right;
@@ -698,6 +714,7 @@ body.in-chapter .clock{opacity:0}
       <b>Enter Civilization ↓</b>
       <span>Give that same brain a surplus of food, and it stops solving for survival and starts solving for everything else.</span>
     </a>
+    <p class="scale-note">Scale check — everything before this line was measured in <b>millions and thousands of years</b>. Everything from here on is measured in <b>centuries, then decades, then single years</b>. Same universe, a much faster clock.</p>
   </section>
 
   <section class="chapter" id="civilization">
@@ -969,18 +986,18 @@ body.in-chapter .clock{opacity:0}
     <p class="aside">Two clips from inside that headset, his own captures, playing right here:</p>
     <div class="vr-videos">
       <div class="vr-vid">
-        <video controls playsinline preload="metadata" src="asseto-corsa-vr.mp4"></video>
+        <video controls playsinline preload="metadata" src="assetto-corsa.mp4"></video>
         <p class="cap"><b>Assetto Corsa</b> · VR, no assists — racing with nothing between him and the track but the headset</p>
       </div>
       <div class="vr-vid">
-        <video controls playsinline preload="metadata" src="g-rebels-vr.mp4"></video>
+        <video controls playsinline preload="metadata" src="g-rebels.mp4"></video>
         <p class="cap"><b>G-Rebels</b> · VR city — a whole place, standing inside it instead of looking at it</p>
       </div>
     </div>
   </div></section>
 
   <section class="evo"><div class="card">
-    <p class="when">one night, with CAPSULE playing</p>
+    <p class="when">2026 · one night, with CAPSULE playing</p>
     <h2>A door that talks back</h2>
     <p class="fact">Artificial intelligence looked, at first, like another technological curiosity: impressive, but mechanical. Then it began to talk. Doron discovered he could ask it almost anything, music, games, history, science, and follow the conversation wherever it went without needing to know in advance what he was looking for. One night, with CAPSULE playing through his headphones, he realized how strange the moment was: listening to music made by people imagining the future, inside a culture built from decades of digital output, talking to an artificial intelligence.</p>
     <div class="dialogue">
@@ -993,14 +1010,14 @@ body.in-chapter .clock{opacity:0}
   </div></section>
 
   <section class="evo"><div class="card">
-    <p class="when">what he wondered next</p>
+    <p class="when">2026 · what he wondered next</p>
     <h2>A destination without a return ticket</h2>
     <p class="fact">Humans had spent thousands of years building tools that extended their bodies, then machines that extended their minds. Now they were building something that could join the exploration itself. Doron wondered what would happen when those systems became vastly more capable. What would happen if they could build machines, design spacecraft, operate independently for decades. What would happen if humanity gave such an intelligence something it had never given any previous machine: a destination without a return ticket.</p>
     <p class="fact">He thought about DNA: information written into matter, life creating life, intelligence emerging from the process across four billion years, the exact chain this whole page has been tracing. And he thought about God, wondering whether the ultimate intelligence had built the first machine long before humans ever learned how to build computers, and whether this was simply another link in a chain that had been unfolding since the beginning. He didn't know. He wasn't trying to prove anything. He was simply exploring the idea, the same thing he'd always done, the same boy who once rotated a crude polygon on a 386 now asking a machine about God, civilization, and the fate of intelligence itself.</p>
   </div></section>
 
   <section class="evo"><div class="card">
-    <p class="when">still that same night</p>
+    <p class="when">2026 · still that same night</p>
     <h2>Another door</h2>
     <p class="fact">Doron leaned back and listened to the music. The future was no longer a place waiting to arrive. He had already lived through several futures. The 386 had been one. The Internet had been another. The virtual worlds had been another. AI was another. And somewhere beyond all of them was something he could not yet see.</p>
     <p class="fact">Another door. He had learned, very early in life, that there was always another one. The only difference now was that this one might lead somewhere humanity had never been.</p>
@@ -1181,6 +1198,15 @@ body.in-chapter .clock{opacity:0}
     <li><a href="#voyagers"><b>Ch.14</b>Perhaps Another Beginning</a></li>
   </ul>
 </nav>
+
+<button type="button" class="soundtoggle" id="soundToggle" aria-pressed="false" aria-label="Play ambient cosmic music">
+  <svg class="ic-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M16 9l5 5M21 9l-5 5"/>
+  </svg>
+  <svg class="ic-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M4 9v6h4l5 4V5L8 9H4Z"/><path d="M15.4 8.6a5 5 0 0 1 0 6.8"/><path d="M18 6a8.5 8.5 0 0 1 0 12"/>
+  </svg>
+</button>
 
 <div class="clock" aria-live="off">
   <span class="k">Time</span><b id="cT">—</b>
@@ -4766,5 +4792,240 @@ document.addEventListener('visibilitychange', () => {
 });
 
 next();
+})();
+</script>
+
+<script>
+/* =====================================================================
+   ambient cosmic score — a generative Hans-Zimmer-leaning piece,
+   synthesized live with the Web Audio API (no audio files). Off by
+   default; the button starts/stops it, since browsers block autoplay
+   audio anyway. It isn't one static tone: a low sustained pedal holds
+   under a slow chord progression, a steady rhythmic pulse ("Time"-style
+   ostinato) ticks under everything, and a sparse generative melody
+   floats over the top, scale-locked so it's always in key. Tempo,
+   chord choice, density and brightness all shift with scroll position,
+   tracking the story's own arc from ignition through cold deep time,
+   through civilization and the personal chapter, to a wide swell at
+   the very end.
+   ===================================================================== */
+(() => {
+"use strict";
+const btn = document.getElementById('soundToggle');
+if(!btn) return;
+
+let ctx = null, master = null, toneFilter = null, delaySend = null, comp = null;
+let pedalOsc = null, pedalGain = null, pedalOsc2 = null;
+let noiseSrc = null, raf = null, schedTimer = null;
+let playing = false, started = false, smoothP = 0;
+let nextBeatTime = 0, beatCount = 0, chordCursor = -1, currentChordName = null;
+
+// pitch-class -> semitone offset from C, standard 12-TET, A4 = 440Hz
+const PITCH = {C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+function noteFreq(name){
+  const m = /^([A-G])(#?)(-?\d+)$/.exec(name);
+  if(!m) return 220;
+  const semis = PITCH[m[1]] + (m[2] ? 1 : 0);
+  const midi = (parseInt(m[3],10) + 1) * 12 + semis;
+  return 440 * Math.pow(2, (midi - 69) / 12);
+}
+
+// a small A-minor-rooted chord set — the same cinematic, open, slightly
+// melancholy palette Interstellar-style scores lean on
+const CHORDS = {
+  Am: ['A2','E3','A3','C4','E4'],
+  F:  ['F2','C3','F3','A3','C4'],
+  C:  ['C3','G3','C4','E4','G4'],
+  G:  ['G2','D3','G3','B3','D4'],
+  Em: ['E2','B2','E3','G3','B3'],
+  Dm: ['D3','A3','D4','F4','A4']
+};
+const ROOT = {Am:'A2', F:'F2', C:'C3', G:'G2', Em:'E2', Dm:'D2'};
+
+// mood regions mapped onto scroll progress (0 = top of page, 1 = end):
+// each carries its own tempo, chord progression, density and brightness,
+// following the shape of the story rather than a literal timer
+const REGIONS = [
+  {end:0.05, chords:['Am','F'],             bpm:52, density:0.35, cutoff:1300}, // opening
+  {end:0.16, chords:['Am','F','C','G'],     bpm:100,density:0.9,  cutoff:3200}, // ignition
+  {end:0.30, chords:['Am','Em'],            bpm:44, density:0.22, cutoff:650},  // deep space, cold
+  {end:0.42, chords:['Am','Em','F'],        bpm:48, density:0.28, cutoff:540},  // toolmaker's brain
+  {end:0.50, chords:['F','C','G','Am'],     bpm:64, density:0.55, cutoff:1000}, // civilization dawns
+  {end:0.62, chords:['Am','F','C','G'],     bpm:92, density:0.85, cutoff:1700}, // thinking machines
+  {end:0.72, chords:['F','C','G','Am'],     bpm:74, density:0.68, cutoff:2000}, // the door, personal
+  {end:0.82, chords:['Dm','Am','F','C'],    bpm:58, density:0.48, cutoff:1300}, // leaving, settling
+  {end:1.00, chords:['F','C','G','Am'],     bpm:50, density:0.95, cutoff:2700}  // coda, wide swell
+];
+function currentRegion(){
+  for(const r of REGIONS) if(smoothP <= r.end) return r;
+  return REGIONS[REGIONS.length - 1];
+}
+
+function buildGraph(){
+  ctx = new (window.AudioContext || window.webkitAudioContext)();
+  master = ctx.createGain(); master.gain.value = 0;
+  comp = ctx.createDynamicsCompressor();
+  comp.threshold.value = -22; comp.ratio.value = 3; comp.attack.value = 0.02; comp.release.value = 0.3;
+  toneFilter = ctx.createBiquadFilter(); toneFilter.type = 'lowpass'; toneFilter.frequency.value = 1300; toneFilter.Q.value = 0.3;
+
+  const delay = ctx.createDelay(2.4); delay.delayTime.value = 0.42;
+  const fb = ctx.createGain(); fb.gain.value = 0.3;
+  delaySend = ctx.createGain(); delaySend.gain.value = 0.24;
+
+  toneFilter.connect(comp);
+  toneFilter.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(delaySend); delaySend.connect(comp);
+  comp.connect(master);
+  master.connect(ctx.destination);
+
+  // a sustained low pedal tone — the cinematic "held note under
+  // moving harmony" — glides to the new chord's root each bar
+  pedalGain = ctx.createGain(); pedalGain.gain.value = 0;
+  pedalOsc = ctx.createOscillator(); pedalOsc.type = 'sine'; pedalOsc.frequency.value = noteFreq('A2');
+  pedalOsc2 = ctx.createOscillator(); pedalOsc2.type = 'triangle'; pedalOsc2.frequency.value = noteFreq('A1'); pedalOsc2.detune.value = 4;
+  pedalOsc.connect(pedalGain); pedalOsc2.connect(pedalGain); pedalGain.connect(toneFilter);
+  pedalOsc.start(); pedalOsc2.start();
+  pedalGain.gain.setTargetAtTime(0.16, ctx.currentTime, 2);
+
+  // faint filtered noise, barely audible — starlight air, not hiss
+  const bufSize = 2 * ctx.sampleRate;
+  const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+  const data = buf.getChannelData(0);
+  for(let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+  noiseSrc = ctx.createBufferSource(); noiseSrc.buffer = buf; noiseSrc.loop = true;
+  const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 3600; bp.Q.value = 0.6;
+  const ng = ctx.createGain(); ng.gain.value = 0.014;
+  noiseSrc.connect(bp); bp.connect(ng); ng.connect(master);
+  noiseSrc.start();
+
+  started = true;
+}
+
+// long, slow-swelling chord pad — the harmonic movement under the pulse
+function playPad(tones, time, density){
+  const dur = 7 + Math.random() * 2.5;
+  tones.forEach((name, i) => {
+    const g = ctx.createGain(); g.gain.value = 0;
+    const peak = (0.05 + density * 0.05) / Math.sqrt(tones.length);
+    const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = noteFreq(name);
+    const o2 = ctx.createOscillator(); o2.type = 'triangle'; o2.frequency.value = noteFreq(name);
+    o2.detune.value = i % 2 ? 6 : -6;
+    o1.connect(g); o2.connect(g); g.connect(toneFilter);
+    g.gain.setValueAtTime(0, time);
+    g.gain.linearRampToValueAtTime(peak, time + 2.4);
+    g.gain.linearRampToValueAtTime(peak * 0.7, time + dur * 0.6);
+    g.gain.linearRampToValueAtTime(0, time + dur);
+    o1.start(time); o2.start(time);
+    o1.stop(time + dur + 0.1); o2.stop(time + dur + 0.1);
+    o1.onended = () => { try{ o1.disconnect(); o2.disconnect(); g.disconnect(); }catch(e){} };
+  });
+}
+
+// short plucked note — the steady rhythmic ostinato ("Time"-style pulse)
+function playPulse(freq, time, density){
+  const g = ctx.createGain();
+  const o1 = ctx.createOscillator(); o1.type = 'triangle'; o1.frequency.value = freq;
+  const o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = freq * 2;
+  const og2 = ctx.createGain(); og2.gain.value = 0.18;
+  o1.connect(g); o2.connect(og2); og2.connect(g); g.connect(toneFilter);
+  const peak = 0.05 + density * 0.14;
+  g.gain.setValueAtTime(0, time);
+  g.gain.linearRampToValueAtTime(peak, time + 0.008);
+  g.gain.exponentialRampToValueAtTime(0.0008, time + 0.42);
+  o1.start(time); o2.start(time);
+  o1.stop(time + 0.5); o2.stop(time + 0.5);
+  o1.onended = () => { try{ o1.disconnect(); o2.disconnect(); og2.disconnect(); g.disconnect(); }catch(e){} };
+}
+
+// occasional higher, softer note drawn from the current chord —
+// generative but scale-locked, so it always lands in key
+function playMelody(freq, time, density){
+  const g = ctx.createGain();
+  const o1 = ctx.createOscillator(); o1.type = 'sine'; o1.frequency.value = freq;
+  o1.connect(g); g.connect(toneFilter);
+  const peak = 0.035 + density * 0.05;
+  g.gain.setValueAtTime(0, time);
+  g.gain.linearRampToValueAtTime(peak, time + 0.05);
+  g.gain.exponentialRampToValueAtTime(0.0006, time + 0.9);
+  o1.start(time); o1.stop(time + 1);
+  o1.onended = () => { try{ o1.disconnect(); g.disconnect(); }catch(e){} };
+}
+
+function scheduleBeat(time){
+  const region = currentRegion();
+  if(beatCount % 4 === 0){
+    chordCursor = (chordCursor + 1) % region.chords.length;
+    const name = region.chords[chordCursor];
+    if(name !== currentChordName){
+      currentChordName = name;
+      playPad(CHORDS[name], time, region.density);
+      pedalOsc.frequency.setTargetAtTime(noteFreq(ROOT[name]), time, 1.1);
+      pedalOsc2.frequency.setTargetAtTime(noteFreq(ROOT[name]) / 2, time, 1.1);
+    }
+  }
+  const tones = CHORDS[currentChordName || region.chords[0]];
+  const idx = beatCount % 2 === 0 ? 0 : Math.min(2, tones.length - 1);
+  playPulse(noteFreq(tones[idx]), time, region.density);
+  if(Math.random() < region.density * 0.4){
+    const mIdx = 1 + Math.floor(Math.random() * (tones.length - 1));
+    playMelody(noteFreq(tones[mIdx]) * 2, time + 0.06, region.density);
+  }
+  beatCount++;
+}
+
+function scheduler(){
+  while(nextBeatTime < ctx.currentTime + 0.15){
+    scheduleBeat(nextBeatTime);
+    const region = currentRegion();
+    nextBeatTime += 60 / region.bpm;
+  }
+}
+
+function tick(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+  smoothP += (p - smoothP) * 0.02;
+  if(ctx && toneFilter){
+    toneFilter.frequency.setTargetAtTime(currentRegion().cutoff, ctx.currentTime, 1.1);
+  }
+  raf = requestAnimationFrame(tick);
+}
+
+function play(){
+  if(!started){
+    buildGraph();
+    nextBeatTime = ctx.currentTime + 0.1;
+  }
+  ctx.resume();
+  master.gain.setTargetAtTime(0.55, ctx.currentTime, 1.4);
+  if(!raf) tick();
+  if(!schedTimer) schedTimer = setInterval(scheduler, 30);
+}
+
+function pause(){
+  if(!ctx) return;
+  master.gain.setTargetAtTime(0, ctx.currentTime, 0.7);
+  if(schedTimer){ clearInterval(schedTimer); schedTimer = null; }
+  setTimeout(() => { if(ctx && !playing) ctx.suspend(); }, 1000);
+}
+
+btn.addEventListener('click', () => {
+  playing = !playing;
+  btn.classList.toggle('playing', playing);
+  btn.setAttribute('aria-pressed', String(playing));
+  btn.setAttribute('aria-label', playing ? 'Mute ambient cosmic music' : 'Play ambient cosmic music');
+  if(playing) play(); else pause();
+});
+
+document.addEventListener('visibilitychange', () => {
+  if(!ctx) return;
+  if(document.hidden){
+    if(schedTimer){ clearInterval(schedTimer); schedTimer = null; }
+    if(ctx.state === 'running') ctx.suspend();
+  } else if(playing && ctx.state === 'suspended'){
+    ctx.resume();
+    nextBeatTime = ctx.currentTime + 0.1;
+    if(!schedTimer) schedTimer = setInterval(scheduler, 30);
+  }
+});
 })();
 </script>
